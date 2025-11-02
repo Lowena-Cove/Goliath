@@ -22,16 +22,25 @@ AC_PROG_MAKE_SET
 AC_PROG_RANLIB
 LT_INIT
 
-dnl Check for macOS build
+dnl Check for macOS host platform
 case $host in
     *-*-darwin*)
-        build_macos=yes
+        host_macos=yes
+        dnl Check for specific macOS versions if needed
+        case $host in
+            *-*-darwin1[[0-9]]*)
+                AC_MSG_NOTICE([Detected macOS 10.6 or later])
+                ;;
+            *-*-darwin2[[0-9]]*)
+                AC_MSG_NOTICE([Detected macOS 11.0 or later])
+                ;;
+        esac
         ;;
     *)
-        build_macos=no
+        host_macos=no
         ;;
 esac
-AM_CONDITIONAL([HAVE_MACOS], [test "x$build_macos" = "xyes"])
+AM_CONDITIONAL([HAVE_MACOS], [test "x$host_macos" = "xyes"])
 
 # Ensure pkg-config is available early
 PKG_PROG_PKG_CONFIG
