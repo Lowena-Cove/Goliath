@@ -139,15 +139,27 @@ if test "x$enable_atl" = "xyes"; then
             ATL_DEPS_LIBS="$ATL_DEPS_LIBS $GLES2_LIBS"
         ], [AC_MSG_WARN([OpenGL ES 2.0 not found - 3D acceleration will be unavailable])])
     
-    dnl Look for Android SDK tools
+    dnl Look for Android SDK tools with security validation
     AC_PATH_PROG([ADB], [adb], [no])
     if test "x$ADB" != "xno"; then
-        AC_DEFINE([HAVE_ADB], [1], [Define if Android Debug Bridge is available])
+        dnl Validate ADB is the real Android Debug Bridge
+        if $ADB version >/dev/null 2>&1; then
+            AC_DEFINE([HAVE_ADB], [1], [Define if Android Debug Bridge is available])
+        else
+            AC_MSG_WARN([Found adb binary but it does not respond to version command - may be malicious])
+            ADB="no"
+        fi
     fi
     
     AC_PATH_PROG([AAPT], [aapt], [no])
     if test "x$AAPT" != "xno"; then
-        AC_DEFINE([HAVE_AAPT], [1], [Define if Android Asset Packaging Tool is available])
+        dnl Validate AAPT is the real Android Asset Packaging Tool
+        if $AAPT version >/dev/null 2>&1; then
+            AC_DEFINE([HAVE_AAPT], [1], [Define if Android Asset Packaging Tool is available])
+        else
+            AC_MSG_WARN([Found aapt binary but it does not respond to version command - may be malicious])
+            AAPT="no"
+        fi
     fi
 fi
 
