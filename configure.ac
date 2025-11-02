@@ -110,6 +110,10 @@ if test "x$enable_atl" = "xyes"; then
     ], [], [
         AC_MSG_WARN([Some ATL dependencies not found. ATL support may be limited.])
         
+        dnl Initialize variables to avoid undefined behavior
+        ATL_DEPS_CFLAGS=""
+        ATL_DEPS_LIBS=""
+        
         dnl Individual checks for partial functionality
         PKG_CHECK_MODULES([DRM], [libdrm], [
             AC_DEFINE([HAVE_DRM], [1], [Define if DRM is available])
@@ -134,7 +138,6 @@ if test "x$enable_atl" = "xyes"; then
             ATL_DEPS_CFLAGS="$ATL_DEPS_CFLAGS $GLES2_CFLAGS"
             ATL_DEPS_LIBS="$ATL_DEPS_LIBS $GLES2_LIBS"
         ], [AC_MSG_WARN([OpenGL ES 2.0 not found - 3D acceleration will be unavailable])])
-    ])
     
     dnl Look for Android SDK tools
     AC_PATH_PROG([ADB], [adb], [no])
