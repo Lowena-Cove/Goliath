@@ -292,7 +292,7 @@ wine_srcdir=
 test "$srcdir" = . || wine_srcdir="$srcdir/"
 
 WINE_CONFIG_SYMLINK(wine,tools/winewrapper)
-WINE_CONFIG_SYMLINK(wine64,tools/winewrapper,["$wine_binary" = wine64 -o -n "$with_wine64"])
+WINE_CONFIG_SYMLINK(wine64,tools/winewrapper,[test "$wine_binary" = "wine64" -o -n "$with_wine64"])
 
 WINE_CONFIG_MAKEFILE(dlls/acledit)
 WINE_CONFIG_MAKEFILE(dlls/aclui)
@@ -1502,6 +1502,7 @@ WINE_IGNORE_FILE(include/config.h)
 WINE_IGNORE_FILE(include/stamp-h)
 test "$wine_binary" = wine || WINE_IGNORE_FILE(loader/wine)
 
+wine_makedep=tools/makedep
 if test "x$enable_tools" != xno
 then
     AC_CONFIG_COMMANDS([tools/makedep],[wine_fn_output_makedep || AS_EXIT],
