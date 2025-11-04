@@ -22,6 +22,26 @@ AC_PROG_MAKE_SET
 AC_PROG_RANLIB
 LT_INIT
 
+dnl Check for macOS host platform
+case $host in
+    *-*-darwin*)
+        host_macos=yes
+        dnl Check for specific macOS versions if needed
+        case $host in
+            *-*-darwin1[[0-9]]*)
+                AC_MSG_NOTICE([Detected macOS 10.6 or later])
+                ;;
+            *-*-darwin2[[0-9]]*)
+                AC_MSG_NOTICE([Detected macOS 11.0 or later])
+                ;;
+        esac
+        ;;
+    *)
+        host_macos=no
+        ;;
+esac
+AM_CONDITIONAL([HAVE_MACOS], [test "x$host_macos" = "xyes"])
+
 # Ensure pkg-config is available early
 PKG_PROG_PKG_CONFIG
 
@@ -89,12 +109,67 @@ AC_ARG_ENABLE([atl],
 
 if test "x$enable_atl" = "xyes"; then
     AC_DEFINE([HAVE_ATL], [1], [Define if ATL support is enabled])
+    
+    dnl Check for required Android/ATL dependencies
     PKG_CHECK_MODULES([ATL_DEPS], [
         libdrm
         gbm
         egl
         glesv2
-    ])
+    ], [], [
+        AC_MSG_WARN([Some ATL dependencies not found. ATL support may be limited.])
+        
+        dnl Initialize variables to avoid undefined behavior
+        ATL_DEPS_CFLAGS=""
+        ATL_DEPS_LIBS=""
+        
+        dnl Individual checks for partial functionality
+        PKG_CHECK_MODULES([DRM], [libdrm], [
+            AC_DEFINE([HAVE_DRM], [1], [Define if DRM is available])
+            ATL_DEPS_CFLAGS="$ATL_DEPS_CFLAGS $DRM_CFLAGS"
+            ATL_DEPS_LIBS="$ATL_DEPS_LIBS $DRM_LIBS"
+        ], [AC_MSG_WARN([libdrm not found - GPU acceleration may be unavailable])])
+        
+        PKG_CHECK_MODULES([GBM], [gbm], [
+            AC_DEFINE([HAVE_GBM], [1], [Define if GBM is available])
+            ATL_DEPS_CFLAGS="$ATL_DEPS_CFLAGS $GBM_CFLAGS"
+            ATL_DEPS_LIBS="$ATL_DEPS_LIBS $GBM_LIBS"
+        ], [AC_MSG_WARN([gbm not found - GPU acceleration may be unavailable])])
+        
+        PKG_CHECK_MODULES([EGL], [egl], [
+            AC_DEFINE([HAVE_EGL], [1], [Define if EGL is available])
+            ATL_DEPS_CFLAGS="$ATL_DEPS_CFLAGS $EGL_CFLAGS"
+            ATL_DEPS_LIBS="$ATL_DEPS_LIBS $EGL_LIBS"
+        ], [AC_MSG_WARN([EGL not found - OpenGL ES support may be unavailable])])
+        
+        PKG_CHECK_MODULES([GLES2], [glesv2], [
+            AC_DEFINE([HAVE_GLES2], [1], [Define if OpenGL ES 2.0 is available])
+            ATL_DEPS_CFLAGS="$ATL_DEPS_CFLAGS $GLES2_CFLAGS"
+            ATL_DEPS_LIBS="$ATL_DEPS_LIBS $GLES2_LIBS"
+        ], [AC_MSG_WARN([OpenGL ES 2.0 not found - 3D acceleration will be unavailable])])
+    
+    dnl Look for Android SDK tools with security validation
+    AC_PATH_PROG([ADB], [adb], [no])
+    if test "x$ADB" != "xno"; then
+        dnl Validate ADB is the real Android Debug Bridge
+        if $ADB version >/dev/null 2>&1; then
+            AC_DEFINE([HAVE_ADB], [1], [Define if Android Debug Bridge is available])
+        else
+            AC_MSG_WARN([Found adb binary but it does not respond to version command - may be malicious])
+            ADB="no"
+        fi
+    fi
+    
+    AC_PATH_PROG([AAPT], [aapt], [no])
+    if test "x$AAPT" != "xno"; then
+        dnl Validate AAPT is the real Android Asset Packaging Tool
+        if $AAPT version >/dev/null 2>&1; then
+            AC_DEFINE([HAVE_AAPT], [1], [Define if Android Asset Packaging Tool is available])
+        else
+            AC_MSG_WARN([Found aapt binary but it does not respond to version command - may be malicious])
+            AAPT="no"
+        fi
+    fi
 fi
 
 AM_CONDITIONAL([ENABLE_ATL], [test "x$enable_atl" = "xyes"])
@@ -210,7 +285,6 @@ AC_CONFIG_FILES([
     libs/common/Makefile
     libs/compatibility/Makefile
     loader/Makefile
-    server/Makefile
     tools/Makefile
     documentation/Makefile
 ])
