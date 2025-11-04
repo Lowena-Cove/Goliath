@@ -3813,9 +3813,9 @@ configure:14138: $? = 0
 configure:14147: result: yes
 configure:14198: gcc -c -g -O2  conftest.c >&5
 configure:14198: $? = 0
-configure:19348: checking that generated files are newer than configure
-configure:19354: result: done
-configure:19381: creating ./config.status
+configure:19360: checking that generated files are newer than configure
+configure:19366: result: done
+configure:19393: creating ./config.status
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -4855,6 +4855,7 @@ config.status:: creating dlls/xtajit64/Makefile
 config.status:: creating fonts/Makefile
 config.status:: creating include/Makefile
 config.status:: creating libs/adsiid/Makefile
+config.status:: creating libs/atl_android/Makefile
 config.status:: creating libs/capstone/Makefile
 config.status:: creating libs/darling/Makefile
 config.status:: creating libs/dmoguids/Makefile
@@ -4864,10 +4865,12 @@ config.status:: creating libs/dxguid/Makefile
 config.status:: creating libs/faudio/Makefile
 config.status:: creating libs/fluidsynth/Makefile
 config.status:: creating libs/gsm/Makefile
+config.status:: creating libs/ipasim/Makefile
 config.status:: creating libs/jpeg/Makefile
 config.status:: creating libs/jxr/Makefile
 config.status:: creating libs/lcms2/Makefile
 config.status:: creating libs/ldap/Makefile
+config.status:: creating libs/libretro/Makefile
 config.status:: creating libs/mfuuid/Makefile
 config.status:: creating libs/mpg123/Makefile
 config.status:: creating libs/musl/Makefile
@@ -4879,6 +4882,7 @@ config.status:: creating libs/uuid/Makefile
 config.status:: creating libs/vkd3d/Makefile
 config.status:: creating libs/wbemuuid/Makefile
 config.status:: creating libs/wmcodecdspuuid/Makefile
+config.status:: creating libs/wsl/Makefile
 config.status:: creating libs/xml2/Makefile
 config.status:: creating libs/xslt/Makefile
 config.status:: creating libs/zlib/Makefile
@@ -5025,7 +5029,6 @@ config.status:: creating tools/winegcc/Makefile
 config.status:: creating tools/winemaker/Makefile
 config.status:: creating tools/wmc/Makefile
 config.status:: creating tools/wrc/Makefile
-config.status:: creating libs/atl_android/Makefile
 config.status:: creating include/config.h
 config.status:: include/config.h is unchanged
 config.status:: executing depfiles commands
