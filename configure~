@@ -19118,6 +19118,7 @@ test "$srcdir" = . || wine_srcdir="$srcdir/"
 
 test "$wine_binary" = wine ||
 
+wine_makedep=tools/makedep
 if test "x$enable_tools" != xno
 then
     ac_config_commands="$ac_config_commands tools/makedep"

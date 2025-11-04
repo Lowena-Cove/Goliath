@@ -18423,6 +18423,10 @@ test "$srcdir" = . || wine_srcdir="$srcdir/"
 
 
 
+  ac_config_files="$ac_config_files libs/atl_android/Makefile"
+
+
+
   ac_config_files="$ac_config_files libs/capstone/Makefile"
 
 
@@ -18459,6 +18463,10 @@ test "$srcdir" = . || wine_srcdir="$srcdir/"
 
 
 
+  ac_config_files="$ac_config_files libs/ipasim/Makefile"
+
+
+
   ac_config_files="$ac_config_files libs/jpeg/Makefile"
 
 
@@ -18472,6 +18480,10 @@ test "$srcdir" = . || wine_srcdir="$srcdir/"
 
 
   ac_config_files="$ac_config_files libs/ldap/Makefile"
+
+
+
+  ac_config_files="$ac_config_files libs/libretro/Makefile"
 
 
 
@@ -18516,6 +18528,10 @@ test "$srcdir" = . || wine_srcdir="$srcdir/"
 
 
   ac_config_files="$ac_config_files libs/wmcodecdspuuid/Makefile"
+
+
+
+  ac_config_files="$ac_config_files libs/wsl/Makefile"
 
 
 
@@ -19100,10 +19116,6 @@ test "$srcdir" = . || wine_srcdir="$srcdir/"
 
 
   ac_config_files="$ac_config_files tools/wrc/Makefile"
-
-
-
-  ac_config_files="$ac_config_files libs/atl_android/Makefile"
 
 
 
@@ -21431,6 +21443,7 @@ do
     "fonts/Makefile") CONFIG_FILES="$CONFIG_FILES fonts/Makefile" ;;
     "include/Makefile") CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
     "libs/adsiid/Makefile") CONFIG_FILES="$CONFIG_FILES libs/adsiid/Makefile" ;;
+    "libs/atl_android/Makefile") CONFIG_FILES="$CONFIG_FILES libs/atl_android/Makefile" ;;
     "libs/capstone/Makefile") CONFIG_FILES="$CONFIG_FILES libs/capstone/Makefile" ;;
     "libs/darling/Makefile") CONFIG_FILES="$CONFIG_FILES libs/darling/Makefile" ;;
     "libs/dmoguids/Makefile") CONFIG_FILES="$CONFIG_FILES libs/dmoguids/Makefile" ;;
@@ -21440,10 +21453,12 @@ do
     "libs/faudio/Makefile") CONFIG_FILES="$CONFIG_FILES libs/faudio/Makefile" ;;
     "libs/fluidsynth/Makefile") CONFIG_FILES="$CONFIG_FILES libs/fluidsynth/Makefile" ;;
     "libs/gsm/Makefile") CONFIG_FILES="$CONFIG_FILES libs/gsm/Makefile" ;;
+    "libs/ipasim/Makefile") CONFIG_FILES="$CONFIG_FILES libs/ipasim/Makefile" ;;
     "libs/jpeg/Makefile") CONFIG_FILES="$CONFIG_FILES libs/jpeg/Makefile" ;;
     "libs/jxr/Makefile") CONFIG_FILES="$CONFIG_FILES libs/jxr/Makefile" ;;
     "libs/lcms2/Makefile") CONFIG_FILES="$CONFIG_FILES libs/lcms2/Makefile" ;;
     "libs/ldap/Makefile") CONFIG_FILES="$CONFIG_FILES libs/ldap/Makefile" ;;
+    "libs/libretro/Makefile") CONFIG_FILES="$CONFIG_FILES libs/libretro/Makefile" ;;
     "libs/mfuuid/Makefile") CONFIG_FILES="$CONFIG_FILES libs/mfuuid/Makefile" ;;
     "libs/mpg123/Makefile") CONFIG_FILES="$CONFIG_FILES libs/mpg123/Makefile" ;;
     "libs/musl/Makefile") CONFIG_FILES="$CONFIG_FILES libs/musl/Makefile" ;;
@@ -21455,6 +21470,7 @@ do
     "libs/vkd3d/Makefile") CONFIG_FILES="$CONFIG_FILES libs/vkd3d/Makefile" ;;
     "libs/wbemuuid/Makefile") CONFIG_FILES="$CONFIG_FILES libs/wbemuuid/Makefile" ;;
     "libs/wmcodecdspuuid/Makefile") CONFIG_FILES="$CONFIG_FILES libs/wmcodecdspuuid/Makefile" ;;
+    "libs/wsl/Makefile") CONFIG_FILES="$CONFIG_FILES libs/wsl/Makefile" ;;
     "libs/xml2/Makefile") CONFIG_FILES="$CONFIG_FILES libs/xml2/Makefile" ;;
     "libs/xslt/Makefile") CONFIG_FILES="$CONFIG_FILES libs/xslt/Makefile" ;;
     "libs/zlib/Makefile") CONFIG_FILES="$CONFIG_FILES libs/zlib/Makefile" ;;
@@ -21601,7 +21617,6 @@ do
     "tools/winemaker/Makefile") CONFIG_FILES="$CONFIG_FILES tools/winemaker/Makefile" ;;
     "tools/wmc/Makefile") CONFIG_FILES="$CONFIG_FILES tools/wmc/Makefile" ;;
     "tools/wrc/Makefile") CONFIG_FILES="$CONFIG_FILES tools/wrc/Makefile" ;;
-    "libs/atl_android/Makefile") CONFIG_FILES="$CONFIG_FILES libs/atl_android/Makefile" ;;
     "tools/makedep") CONFIG_COMMANDS="$CONFIG_COMMANDS tools/makedep" ;;
     "Makefile") CONFIG_COMMANDS="$CONFIG_COMMANDS Makefile" ;;
 
