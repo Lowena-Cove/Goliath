@@ -834,7 +834,6 @@ static void update_visible_region( struct dce *dce )
     size_t size = 256;
     RECT win_rect, top_rect;
     UINT raw_dpi_num, raw_dpi_den;
-    DWORD layered_flags;
     WND *win;
 
     /* don't clip siblings if using parent clip region */
@@ -876,8 +875,7 @@ static void update_visible_region( struct dce *dce )
                                         (flags & DCX_INTERSECTRGN) ? RGN_AND : RGN_DIFF );
 
     /* don't use a surface to paint the client area of OpenGL windows */
-    if (!(paint_flags & SET_WINPOS_PIXEL_FORMAT) || (flags & DCX_WINDOW)
-        || (NtUserGetLayeredWindowAttributes( dce->hwnd, NULL, NULL, &layered_flags ) && layered_flags & LWA_COLORKEY))
+    if (!(paint_flags & SET_WINPOS_PIXEL_FORMAT) || (flags & DCX_WINDOW))
     {
         win = get_win_ptr( top_win );
         if (win && win != WND_DESKTOP && win != WND_OTHER_PROCESS)

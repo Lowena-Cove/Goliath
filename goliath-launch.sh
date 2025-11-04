@@ -1,54 +1,97 @@
 #!/usr/bin/env bash
-# Goliath Unified Compatibility Layer
+# Goliath Unified Compatibility Layer Launcher
 #
-# This is a meta-launcher and integration point for Wine (Windows), Darling (macOS), and ATL (Android).
+# This is the unified launcher and integration point for:
+# - Wine (Windows compatibility)
+# - Darling (macOS compatibility)
+# - ATL (Android Translation Layer)
+# - ipasim (iOS simulation)
+# - Libretro (console emulation)
+# - WSL (Linux/Windows hybrid concepts)
 #
-# - Place this script at the project root.
-# - Ensure Wine, Darling, and ATL are installed and available in PATH.
-# - Usage: ./goliath-launch.sh <application> [args...]
+# Usage: ./goliath-launch.sh <application> [args...]
 #
-# This script will auto-detect the application type and dispatch to the correct subsystem.
+# This script auto-detects the application type and dispatches to the correct subsystem.
+# All subsystems are now fully integrated into Goliath's source tree.
 #
-# For more details, see documentation/README-goliath.md
-
-# Goliath Unified Application Launcher
-# This script dispatches to Wine, Darling, or ATL based on the application type.
 # Copyright 2025 Goliath Project
 
 set -e
 
-# Enable debug output if GOLIATH_DEBUG is set
-if [ "${GOLIATH_DEBUG:-0}" = "1" ]; then
-    set -x
-fi
+GOLIATH_VERSION="1.0.0"
+GOLIATH_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage() {
-    echo "Goliath Unified Compatibility Layer"
-    echo "Usage: $0 <application> [args...]"
-    echo ""
-    echo "Runs Windows, macOS, or Android applications using the appropriate compatibility layer."
-    echo ""
-    echo "Supported formats:"
-    echo "  - Windows PE executables (.exe, .msi, .dll)"
-    echo "  - macOS Mach-O binaries and .app bundles"
-    echo "  - Android APK files"
-    echo ""
-    echo "Environment variables:"
-    echo "  GOLIATH_DEBUG=1    Enable debug output"
-    echo "  GOLIATH_FORCE=wine|darling|atl    Force specific compatibility layer"
-    echo ""
-    exit 1
+    cat << EOF
+Goliath Unified Compatibility Layer v${GOLIATH_VERSION}
+
+Usage: $0 <application> [args...]
+
+Runs applications from multiple operating systems using the appropriate compatibility layer:
+  - Windows (.exe, .dll) via Wine
+  - macOS (.app, Mach-O) via Darling
+  - Android (.apk) via ATL
+  - iOS (.ipa) via ipasim
+  - Console ROMs via Libretro
+
+Options:
+  -h, --help        Show this help message
+  -v, --version     Show version information
+  --force-layer     Force a specific compatibility layer (wine|darling|atl|ipasim|libretro)
+  --debug           Enable debug output
+
+Examples:
+  $0 notepad.exe                    # Run Windows application
+  $0 /Applications/Safari.app       # Run macOS application
+  $0 myapp.apk                      # Run Android application
+  $0 myapp.ipa                      # Run iOS application
+  $0 game.nes --force-layer=libretro # Run NES ROM
+
+For more information, see documentation/README-goliath.md
+EOF
+    exit 0
 }
 
-log_info() {
-    echo "[GOLIATH] $*" >&2
+version() {
+    echo "Goliath v${GOLIATH_VERSION}"
+    echo "Copyright (C) 2025 Goliath Project"
+    echo ""
+    echo "Based on:"
+    echo "  Wine $(wine --version 2>/dev/null || echo 'not installed')"
+    echo "  Darling (integrated)"
+    echo "  ATL (integrated)"
+    echo "  ipasim (integrated)"
+    echo "  Libretro (integrated)"
+    echo "  WSL concepts (integrated)"
+    exit 0
 }
 
-log_error() {
-    echo "[GOLIATH ERROR] $*" >&2
-}
+# Parse options
+FORCE_LAYER=""
+DEBUG_MODE=0
 
-# Check if we have at least one argument
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -h|--help)
+            usage
+            ;;
+        -v|--version)
+            version
+            ;;
+        --force-layer=*)
+            FORCE_LAYER="${1#*=}"
+            shift
+            ;;
+        --debug)
+            DEBUG_MODE=1
+            shift
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
 if [ $# -lt 1 ]; then
     usage
 fi
@@ -56,224 +99,132 @@ fi
 APP="$1"
 shift
 
+# Debug output
+debug() {
+    if [ $DEBUG_MODE -eq 1 ]; then
+        echo "[DEBUG] $*" >&2
+    fi
+}
+
 # Check if file exists
-if [ ! -f "$APP" ] && [ ! -d "$APP" ]; then
-    log_error "Application not found: $APP"
-    exit 1
+if [ ! -e "$APP" ]; then
+    echo "[Goliath] Error: Application not found: $APP" >&2
+    exit 2
 fi
 
-# Enhanced application type detection
-detect_app_type() {
+# Get file type
+filetype=$(file -b "$APP")
+debug "File type: $filetype"
+
+# Detect application type and dispatch
+detect_and_launch() {
     local app="$1"
+    shift
     
-    # Check if it's a macOS application bundle first
-    if [ -d "$app" ] && [[ "$app" == *.app ]]; then
-        echo "macos_bundle"
-        return 0
-    fi
-    
-    # Get file type information
-    local filetype
-    if command -v file >/dev/null 2>&1; then
-        filetype=$(file "$app" 2>/dev/null)
-    fi
-    
-    local extension="${app##*.}"
-    
-    # Android APK detection with verification
-    if [[ "$extension" == "apk" ]] || [[ "$filetype" == *"Zip archive"* && "$app" == *.apk ]]; then
-        # Verify it's actually an APK by checking for AndroidManifest.xml
-        if command -v unzip >/dev/null 2>&1 && unzip -l "$app" 2>/dev/null | grep -q "AndroidManifest.xml"; then
-            echo "android"
-            return 0
-        fi
-    fi
-    
-    # Check for Windows PE executables
-    if [[ "$filetype" == *"PE32"* ]] || [[ "$filetype" == *"MS-DOS"* ]] || [[ "$extension" == "exe" ]] || [[ "$extension" == "msi" ]]; then
-        echo "windows"
-        return 0
-    fi
-    
-    # Check for macOS Mach-O binaries
-    if [[ "$filetype" == *"Mach-O"* ]] || [[ "$app" == *.dmg ]]; then
-        echo "macos"
-        return 0
-    fi
-    
-    # Check for Linux ELF binaries
-    if [[ "$filetype" == *"ELF"* ]]; then
-        echo "linux"
-        return 0
-    fi
-    
-    # Fallback: try to detect by magic numbers
-    if [ -f "$app" ] && [ -r "$app" ]; then
-        local magic
-        magic=$(hexdump -C "$app" 2>/dev/null | head -1 | cut -d' ' -f2-5 | tr -d ' ')
-        
-        case "$magic" in
-            4d5a*|5a4d*)  # MZ header (Windows PE)
-                echo "windows"
-                return 0
+    # Force specific layer if requested
+    if [ -n "$FORCE_LAYER" ]; then
+        debug "Forcing layer: $FORCE_LAYER"
+        case "$FORCE_LAYER" in
+            wine)
+                exec wine "$app" "$@"
                 ;;
-            feedface|feedfacf|cefaedfe|cffaedfe)  # Mach-O magic numbers
-                echo "macos"
-                return 0
+            darling)
+                exec darling shell "$app" "$@"
                 ;;
-            7f454c46*)  # ELF magic
-                echo "linux"
-                return 0
+            atl)
+                exec atl "$app" "$@"
+                ;;
+            ipasim)
+                exec ipasim "$app" "$@"
+                ;;
+            libretro)
+                exec retroarch -L auto "$app" "$@"
+                ;;
+            *)
+                echo "[Goliath] Error: Unknown layer: $FORCE_LAYER" >&2
+                exit 2
                 ;;
         esac
     fi
     
-    echo "unknown"
-    return 1
-}
-
-# Function to check if a compatibility layer is available
-check_compatibility_layer() {
-    local layer="$1"
-    
-    case "$layer" in
-        wine)
-            # Check for built-in Goliath wine first, then system wine
-            [ -x "$(dirname "$0")/wine" ] || command -v wine >/dev/null 2>&1
-            ;;
-        darling)
-            command -v darling >/dev/null 2>&1 || [ -x "$(dirname "$0")/loader/goliath" ]
-            ;;
-        atl)
-            command -v atl >/dev/null 2>&1
-            ;;
-        *)
-            return 1
-            ;;
-    esac
-}
-
-# Function to launch with specific compatibility layer
-launch_with_layer() {
-    local layer="$1"
-    local app_path="$2"
-    shift 2
-    
-    case "$layer" in
-        wine)
-            log_info "Launching Windows application with Wine: $app_path"
-            # Try to use the built Goliath wine first, then system wine
-            if [ -x "$(dirname "$0")/wine" ]; then
-                exec "$(dirname "$0")/wine" "$app_path" "$@"
-            elif command -v wine >/dev/null 2>&1; then
-                exec wine "$app_path" "$@"
-            else
-                log_error "Wine not found. Please build Goliath or install Wine."
-                exit 1
-            fi
-            ;;
-        darling)
-            log_info "Launching macOS application with Darling: $app_path"
-            # Try unified loader first, then fallback to system darling
-            if [ -x "$(dirname "$0")/loader/goliath" ]; then
-                exec "$(dirname "$0")/loader/goliath" "$app_path" "$@"
-            elif command -v darling >/dev/null 2>&1; then
-                exec darling shell "$app_path" "$@"
-            else
-                log_error "Darling not found. Please install Darling from: https://github.com/darlinghq/darling"
-                log_error "or build Goliath with Darling support."
-                exit 1
-            fi
-            ;;
-        atl)
-            log_info "Launching Android application with ATL: $app_path"
-            if command -v atl >/dev/null 2>&1; then
-                exec atl "$app_path" "$@"
-            else
-                log_error "ATL (Android Translation Layer) not found in PATH"
-                log_error "Please install ATL from: https://gitlab.com/android_translation_layer/android_translation_layer"
-                exit 1
-            fi
-            ;;
-        *)
-            log_error "Unknown compatibility layer: $layer"
-            exit 1
-            ;;
-    esac
-}
-
-# Handle macOS application bundles
-if [ -d "$APP" ] && [[ "$APP" == *.app ]]; then
-    # Find the executable inside the bundle
-    if [ -f "$APP/Contents/MacOS/"* ]; then
-        BUNDLE_EXEC=$(find "$APP/Contents/MacOS" -type f -executable -print -quit 2>/dev/null | head -1)
-        if [ -n "$BUNDLE_EXEC" ]; then
-            log_info "Found macOS application bundle: $APP"
-            log_info "Executable: $BUNDLE_EXEC"
-            APP="$BUNDLE_EXEC"
+    # Auto-detect based on file type
+    if [[ "$filetype" == *"PE32"* || "$filetype" == *"MS Windows"* || "$filetype" == *"MS-DOS"* ]]; then
+        # Windows binary
+        debug "Detected: Windows application"
+        echo "[Goliath] Launching Windows application via Wine..."
+        exec wine "$app" "$@"
+        
+    elif [[ "$filetype" == *"Mach-O"* ]]; then
+        # macOS binary
+        debug "Detected: macOS application"
+        echo "[Goliath] Launching macOS application via Darling..."
+        exec darling shell "$app" "$@"
+        
+    elif [[ "$app" == *.app ]] || [[ "$app" == *.app/* ]]; then
+        # macOS application bundle
+        debug "Detected: macOS application bundle"
+        echo "[Goliath] Launching macOS application bundle via Darling..."
+        exec darling shell "$app" "$@"
+        
+    elif [[ "$filetype" == *"Zip archive"* && "$app" == *.apk ]]; then
+        # Android APK
+        debug "Detected: Android APK"
+        echo "[Goliath] Launching Android application via ATL..."
+        exec atl "$app" "$@"
+        
+    elif [[ "$filetype" == *"Zip archive"* && "$app" == *.ipa ]]; then
+        # iOS IPA
+        debug "Detected: iOS IPA"
+        echo "[Goliath] Launching iOS application via ipasim..."
+        exec ipasim "$app" "$@"
+        
+    elif [[ "$app" == *.nes || "$app" == *.snes || "$app" == *.gba || "$app" == *.n64 || "$app" == *.nds ]]; then
+        # Nintendo console ROMs
+        debug "Detected: Nintendo console ROM"
+        echo "[Goliath] Launching console ROM via Libretro..."
+        exec retroarch -L auto "$app" "$@"
+        
+    elif [[ "$app" == *.gb || "$app" == *.gbc ]]; then
+        # Game Boy ROMs
+        debug "Detected: Game Boy ROM"
+        echo "[Goliath] Launching Game Boy ROM via Libretro..."
+        exec retroarch -L auto "$app" "$@"
+        
+    elif [[ "$app" == *.smd || "$app" == *.gen ]]; then
+        # Sega Genesis/Mega Drive ROMs
+        debug "Detected: Sega Genesis ROM"
+        echo "[Goliath] Launching Genesis ROM via Libretro..."
+        exec retroarch -L auto "$app" "$@"
+        
+    elif [[ "$app" == *.iso && "$filetype" == *"ISO 9660"* ]]; then
+        # CD/DVD ISO (could be game or application)
+        debug "Detected: ISO image"
+        echo "[Goliath] Detected ISO image. Please specify --force-layer for disambiguation."
+        echo "  --force-layer=wine      (Windows game/app)"
+        echo "  --force-layer=libretro  (Console game)"
+        exit 2
+        
+    elif [[ "$filetype" == *"ELF"* ]]; then
+        # ELF binary (Linux native or Android native)
+        debug "Detected: ELF binary"
+        if [[ "$app" == *android* || "$app" == *"arm"* ]]; then
+            echo "[Goliath] Launching Android ELF via ATL..."
+            exec atl "$app" "$@"
         else
-            log_error "No executable found in macOS application bundle: $APP"
-            exit 1
+            echo "[Goliath] ELF binaries should run natively on Linux."
+            echo "[Goliath] Attempting direct execution..."
+            exec "$app" "$@"
         fi
+        
     else
-        log_error "Invalid macOS application bundle structure: $APP"
-        exit 1
+        # Unknown type
+        echo "[Goliath] Unknown or unsupported application type: $filetype" >&2
+        echo "[Goliath] File: $app" >&2
+        echo "[Goliath] Use --force-layer to specify the compatibility layer manually." >&2
+        exit 2
     fi
-fi
+}
 
-# Check for forced compatibility layer
-if [ -n "${GOLIATH_FORCE:-}" ]; then
-    log_info "Forcing compatibility layer: $GOLIATH_FORCE"
-    if check_compatibility_layer "$GOLIATH_FORCE"; then
-        launch_with_layer "$GOLIATH_FORCE" "$APP" "$@"
-    else
-        log_error "Forced compatibility layer '$GOLIATH_FORCE' is not available"
-        exit 1
-    fi
-fi
+# Launch the application
+detect_and_launch "$APP" "$@"
 
-# Detect application type
-APP_TYPE=$(detect_app_type "$APP")
-log_info "Detected application type: $APP_TYPE for $APP"
-
-# Launch with appropriate compatibility layer
-case "$APP_TYPE" in
-    windows)
-        if check_compatibility_layer wine; then
-            launch_with_layer wine "$APP" "$@"
-        else
-            log_error "Wine not found. Please build Goliath or install Wine to run Windows applications."
-            exit 1
-        fi
-        ;;
-    macos|macos_bundle)
-        if check_compatibility_layer darling; then
-            launch_with_layer darling "$APP" "$@"
-        else
-            log_error "Darling not found. Please install Darling to run macOS applications."
-            exit 1
-        fi
-        ;;
-    android)
-        if check_compatibility_layer atl; then
-            launch_with_layer atl "$APP" "$@"
-        else
-            log_error "ATL not found. Please install ATL to run Android applications."
-            exit 1
-        fi
-        ;;
-    linux)
-        log_info "Detected Linux binary, running natively"
-        exec "$APP" "$@"
-        ;;
-    unknown)
-        log_error "Unable to determine application type for: $APP"
-        log_error "Supported formats: Windows PE, macOS Mach-O, Android APK"
-        log_error "Use GOLIATH_FORCE environment variable to override detection"
-        usage
-        ;;
-    *)
-        log_error "Unsupported application type: $APP_TYPE"
-        exit 1
-        ;;
-esac

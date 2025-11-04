@@ -16,6 +16,7 @@ SOURCES = \
 	fd.c \
 	file.c \
 	fsync.c \
+	goliath.c \
 	handle.c \
 	hook.c \
 	mach.c \

@@ -272,9 +272,6 @@ _FUNCTION_ {
                     }
                     l_prefix = 1;
                     break;
-		case 'j':
-		    I64_prefix = 1;
-		    break;
 		case 'w': w_prefix = 1; break;
 		case 'L': L_prefix = 1; break;
 		case 'I':

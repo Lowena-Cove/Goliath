@@ -1,260 +1,352 @@
 # Goliath Unified Compatibility Layer
 
-Goliath is a meta-compatibility layer that unifies Wine (Windows), Darling (macOS), ATL (Android), and ipasim (iOS) to run applications from all major operating systems on Linux.
+Goliath is a unified compatibility layer that extends Wine to support applications from multiple operating systems. Built on Wine's proven Windows compatibility infrastructure, Goliath integrates additional compatibility layers for macOS, Android, iOS, and console platforms.
 
-## Usage
+## Vision
 
-### Basic Usage
+Create a single, unified platform that can build for every major OS and run applications from nearly every OS, eliminating the need for multiple separate compatibility tools.
 
-```bash
-./goliath-launch.sh <application> [args...]
+## Supported Platforms
+
+### Currently Implemented
+- **Windows**: Full Wine compatibility for Windows applications (.exe, .dll)
+
+### In Development
+- **macOS**: Darling integration for macOS applications (.app, Mach-O binaries)
+- **Android**: ATL (Android Translation Layer) for Android apps (.apk)
+
+### Planned
+- **iOS**: ipasim integration for iOS applications (.ipa)
+- **Linux on Windows**: WSL-inspired compatibility concepts
+- **Console Systems**: Libretro integration for game console emulation
+
+## Architecture
+
+Goliath follows a **modular architecture**:
+
+```
+┌─────────────────────────────────────┐
+│      Goliath Unified Launcher       │
+│        (goliath-launch.sh)          │
+└──────────────┬──────────────────────┘
+               │
+       ┌───────┴───────┐
+       │  App Detection │
+       └───────┬────────┘
+               │
+    ┌──────────┴──────────┐
+    │                     │
+┌───▼────┐  ┌───────┐  ┌─▼─────┐
+│  Wine  │  │Darling│  │  ATL  │ ...
+└────────┘  └───────┘  └───────┘
+     │          │          │
+     └──────────┴──────────┘
+              │
+     ┌────────▼─────────┐
+     │ Shared Goliath   │
+     │  Infrastructure  │
+     └──────────────────┘
 ```
 
-The launcher will automatically detect the application type and dispatch to the correct subsystem.
+Each compatibility layer is:
+- **Optional**: Enable only what you need
+- **Isolated**: Maintains its own codebase
+- **Integrated**: Shares common infrastructure with Wine
 
-### Examples
-
-```bash
-# Run a Windows executable
-./goliath-launch.sh notepad.exe
-
-# Run a Linux binary
-./goliath-launch.sh /usr/bin/ls -la
-
-# Run a macOS application
-./goliath-launch.sh /Applications/Calculator.app
-
-# Run an Android APK
-./goliath-launch.sh myapp.apk
-```
-
-## WSL (Linux) Support
-
-Goliath includes a comprehensive WSL compatibility layer that provides Linux environment emulation similar to Microsoft's WSL.
-
-### Features
-
-- **Automatic path conversion**: Windows paths (C:\path) are converted to Linux paths (/mnt/c/path)
-- **Environment setup**: Proper Linux environment variables (PATH, HOME, USER, etc.)
-- **Signal handling**: Proper signal forwarding and process management
-- **File system structure**: Creates basic Linux directory structure (/tmp, /var, /proc, etc.)
-- **User management**: Integrates with system user accounts
-
-### WSL Configuration
-
-The WSL subsystem can be configured through environment variables:
-
-```bash
-export WSL_DISTRO_NAME="MyDistro"        # Set distribution name
-export WSL_ENABLE_INTEROP=1              # Enable Windows interoperability
-export WSL_ENABLE_DRIVE_MOUNTING=1       # Enable automatic drive mounting
-```
-
-### WSL API
-
-The WSL subsystem provides a C API for integration:
-
-```c
-#include "wsl.h"
-
-// Initialize WSL environment
-wsl_init_config();
-wsl_setup_environment();
-
-// Convert paths
-char *linux_path = wsl_convert_path("C:\\Windows\\System32");
-// Result: "/mnt/c/Windows/System32"
-
-// Launch Linux process
-pid_t pid = wsl_launch_process("/bin/bash", argv, envp);
-int status = wsl_wait_for_process(pid);
-```
-
-## Installation and Setup
+## Installation
 
 ### Prerequisites
 
-Ensure the following are installed and available in your `PATH`:
+- GCC or Clang compiler
+- GNU Make
+- Autoconf and Automake
+- X11 development files (xorg-dev or libX11-devel)
+- flex (>= 2.5.33) and bison
 
-- **wine**: For Windows application support
-- **darling**: For macOS application support (optional)
-- **atl**: For Android application support (optional)
-
-### Building Goliath
+### Building from Source
 
 ```bash
-./configure
+git clone https://github.com/charlieduzstuf/Goliath.git
+cd Goliath
+./autogen.sh
+./configure --prefix=/usr/local
 make
-make install
+sudo make install
 ```
 
-### Configuration
+### Configuration Options
 
-1. **Wine Configuration**: Run `winecfg` to configure Wine settings
-2. **WSL Configuration**: Set WSL environment variables as needed
-3. **Darling Setup**: Follow Darling installation instructions
-4. **ATL Setup**: Follow ATL installation instructions
+```bash
+# Enable specific components
+./configure --enable-darling --enable-atl
 
-## How It Works
+# Disable optional components
+./configure --disable-darling
+```
+
+## Usage
+
+### Unified Launcher
+
+The `goliath-launch.sh` script automatically detects the application type and uses the appropriate compatibility layer:
+
+```bash
+# Run any supported application
+./goliath-launch.sh myapp.exe      # Windows
+./goliath-launch.sh myapp.app      # macOS (when available)
+./goliath-launch.sh myapp.apk      # Android (when available)
+```
+
+### Direct Wine Usage
+
+You can still use Wine directly for Windows applications:
+
+```bash
+wine myapp.exe
+```
 
 ### Application Detection
 
-Goliath uses multiple methods to detect application types:
+Goliath detects application types using file signatures:
+- **PE32/PE32+**: Windows executables → Wine
+- **Mach-O**: macOS binaries → Darling
+- **APK**: Android packages → ATL
+- **IPA**: iOS packages → ipasim
 
-1. **File magic numbers**: Reads binary headers to identify format
-2. **File extensions**: Uses common extensions as fallback
-3. **File command**: Leverages system `file` command for detection
+## Components
 
-### Dispatch Logic
+### Wine (Base Layer)
+- Windows API implementation
+- Win32/Win64 application support
+- Direct3D to OpenGL/Vulkan translation
+- Windows driver support
+
+### Darling (macOS Compatibility)
+- Darwin system call translation
+- Mach-O binary loader
+- macOS frameworks (Cocoa, Foundation, etc.)
+- Status: **In development**
+
+### ATL (Android Translation Layer)
+- Android NDK API support
+- Native Android app execution
+- JNI bridge for Java interaction
+- Status: **Partial implementation**
+
+### WSL Integration
+- Hybrid Windows/Linux system calls
+- NT kernel emulation improvements
+- Status: **Planned**
+
+### Libretro (Console Emulation)
+- Unified console emulation frontend
+- Support for multiple console platforms
+- Status: **Planned**
+
+### ipasim (iOS Simulation)
+- iOS framework emulation
+- ARM to x86/x64 translation
+- Status: **Planned**
+
+## Development
+
+### Project Structure
 
 ```
-Input Application
-       ↓
-   File Detection
-       ↓
-┌─────────────────┐
-│  Windows PE?    │ → Wine
-├─────────────────┤
-│  macOS Mach-O?  │ → Darling  
-├─────────────────┤
-│  Linux ELF?     │ → WSL
-├─────────────────┤
-│  Android APK?   │ → ATL
-└─────────────────┘
+Goliath/
+├── dlls/                  # Wine DLLs
+├── libs/
+│   ├── darling/          # macOS compatibility
+│   ├── atl_android/      # Android compatibility
+│   └── ...               # Other components
+├── include/              # Headers
+├── tools/                # Build tools
+├── documentation/
+│   ├── ARCHITECTURE.md   # System architecture
+│   ├── INTEGRATION.md    # Integration guide
+│   └── README-goliath.md # This file
+├── goliath-launch.sh     # Unified launcher
+└── configure.ac          # Build configuration
 ```
 
-## Advanced Features
+### Contributing
 
-### Path Translation
+See [INTEGRATION.md](INTEGRATION.md) for how to integrate new compatibility layers.
 
-Goliath automatically handles path translation between different operating systems:
+See [ARCHITECTURE.md](ARCHITECTURE.md) for system architecture details.
 
-- Windows → Linux: `C:\path\file` → `/mnt/c/path/file`
-- Relative paths are preserved
-- Network paths are handled appropriately
+## Roadmap
 
-### Environment Integration
+### Phase 1: Foundation ✓
+- Fix Wine build system
+- Create integration framework
+- Implement unified launcher
 
-Each subsystem provides proper environment setup:
+### Phase 2: Darling Integration (In Progress)
+- Import Darling source
+- Integrate Mach-O loader
+- Test macOS applications
 
-- **Wine**: Windows-like environment with registry, DLLs, etc.
-- **WSL**: Linux environment with proper PATH, shell, locale
-- **Darling**: macOS environment with frameworks and libraries
-- **ATL**: Android runtime environment
+### Phase 3: Complete ATL Integration
+- Finish Android support
+- Add APK parsing
+- Implement JNI bridge
 
-### Process Management
+### Phase 4: Additional Layers
+- WSL compatibility concepts
+- Libretro integration
+- ipasim integration
 
-Goliath provides unified process management:
-- The launcher will auto-detect the application type and dispatch to the correct subsystem.
-- Ensure `wine`, `darling`, `atl`, and `ipasim` are installed and available in your `PATH`.
+### Phase 5: Optimization
+- Shared memory management
+- Unified process management
+- Cross-layer IPC
+- Performance tuning
 
-- Signal forwarding between host and guest processes
-- Proper exit code handling
-- Resource cleanup on termination
+## Configuration
 
-- **Windows apps**: Dispatched to Wine
-- **macOS apps**: Dispatched to Darling
-- **Android APKs**: Dispatched to ATL
-- **iOS apps**: Dispatched to ipasim
-
-## Running iOS Applications
-
-The best way to run iOS applications is with [ipasim](https://github.com/ipasimulator/ipasim), which is an emulator rather than a compatibility tool.
-
-### Prerequisites for iOS Support
-
-1. Install ipasim from https://github.com/ipasimulator/ipasim
-2. Ensure `ipasim` is available in your `PATH`
-3. Have iOS application files (.ipa) ready to run
-
-### Example Usage
+Goliath uses Wine's configuration system. You can configure it using:
 
 ```bash
-# Run an iOS application
-./goliath-launch.sh MyApp.ipa
-
-# Run with additional arguments
-./goliath-launch.sh MyApp.ipa --some-argument
+winecfg
 ```
 
-The launcher will automatically detect `.ipa` files and dispatch them to ipasim for execution.
+Additional Goliath-specific configuration will be added as more components are integrated.
 
-## Integration Notes
+## Troubleshooting
 
-- This is a pseudo-merge: each subsystem is kept separate, but the launcher provides a unified entry point.
-- You can add more sophisticated detection or configuration as needed.
-- ipasim provides iOS application emulation rather than translation, making it more reliable for complex iOS applications.
+### Build Issues
 
-To add support for additional operating systems:
+**Configure fails:**
+```bash
+# Regenerate build system
+./autogen.sh
+./configure
+```
 
-1. **Create subsystem directory**: `dlls/newsystem/`
-2. **Implement loader**: Following the WSL example
-3. **Update detection logic**: In `goliath-launch.sh`
-4. **Add configuration**: In configuration files
-5. **Update documentation**: Add usage examples
+**Missing dependencies:**
+```bash
+# On Debian/Ubuntu
+sudo apt-get install build-essential autoconf automake libtool \
+                     flex bison libx11-dev
 
-### Build System Integration
+# On Fedora/RHEL
+sudo dnf install gcc make autoconf automake libtool flex bison \
+                 libX11-devel
+```
 
-Goliath integrates with the existing Wine build system:
+### Runtime Issues
 
-- Uses autotools for configuration
-- Follows Wine DLL structure
-- Maintains compatibility with Wine APIs
+**Wine applications don't run:**
+- Ensure Wine is properly configured: `winecfg`
+- Check for missing 32-bit libraries on 64-bit systems
+- See Wine documentation: https://www.winehq.org/
 
-## Performance Considerations
+**Darling/ATL not available:**
+- These components are still in development
+- Check build configuration: `./configure --enable-darling --enable-atl`
 
-### Overhead
+## Technical Details
 
-Each compatibility layer adds some overhead:
+### How It Works
 
-- **Wine**: Moderate overhead for API translation
-- **WSL**: Minimal overhead for native Linux binaries
-- **Darling**: Higher overhead for framework emulation
-- **ATL**: Variable overhead depending on Android APIs used
+1. **Application Launch**: User runs `goliath-launch.sh <app>`
+2. **Detection**: Script detects application type using `file` command
+3. **Routing**: Application is routed to appropriate compatibility layer
+4. **Execution**: Compatibility layer loads and executes the application
 
-### Optimization Tips
+### File Type Detection
 
-1. **Use native binaries when possible**: Linux ELF binaries via WSL have minimal overhead
-2. **Configure Wine properly**: Disable unnecessary features
-3. **Limit debug output**: Disable verbose logging in production
-4. **Use appropriate subsystem**: Choose the most efficient compatibility layer
+```bash
+# Windows PE32
+file myapp.exe → PE32 executable
 
-## Security Considerations
+# macOS Mach-O
+file myapp.app/Contents/MacOS/myapp → Mach-O 64-bit executable
 
-### Sandboxing
+# Android APK
+file myapp.apk → Zip archive (APK)
+```
 
-Each subsystem provides different levels of sandboxing:
+## Comparison with Other Projects
 
-- **Wine**: Limited sandboxing, runs with user privileges
-- **WSL**: Namespace isolation available
-- **Darling**: Framework-level isolation
-- **ATL**: Android permission model
+### vs. Wine alone
+- **Wine**: Windows only
+- **Goliath**: Windows + macOS + Android + iOS + Consoles
 
-### File System Access
+### vs. Multiple separate tools
+- **Traditional**: Install Wine, Darling, ATL separately
+- **Goliath**: Single unified installation and launcher
 
-- Applications have access to user's home directory by default
-- WSL provides path translation but no additional restrictions
-- Consider using containers for additional isolation
+### vs. Proton
+- **Proton**: Wine + gaming enhancements (Steam-focused)
+- **Goliath**: Wine + multi-OS compatibility (general-purpose)
 
-## References
+## Performance
 
-- [Wine Project](https://www.winehq.org/) - Windows compatibility layer
-- [Darling Project](https://github.com/darlinghq/darling) - macOS compatibility layer
-- [Microsoft WSL](https://github.com/microsoft/WSL) - Windows Subsystem for Linux
-- [ATL Project](https://gitlab.com/android_translation_layer/android_translation_layer) - Android Translation Layer
+Performance depends on the compatibility layer:
+- **Wine**: Near-native for many applications
+- **Darling**: Overhead from system call translation
+- **ATL**: Depends on Android app complexity
 
-## Contributing
+Optimization is ongoing for all layers.
 
-Contributions are welcome! Please see the main project documentation for contribution guidelines.
+## Compatibility
 
-### Development Setup
+### Windows Applications
+- Excellent compatibility through Wine
+- See Wine AppDB: https://appdb.winehq.org/
 
-1. Clone the repository
-2. Install development dependencies
-3. Build with debug symbols: `./configure --enable-debug && make`
-4. Run tests: `make check`
-5. Submit pull requests with proper documentation
+### macOS Applications
+- In development, limited testing
+- Goal: Support major macOS frameworks
+
+### Android Applications
+- Partial support for native Android apps
+- JNI bridge in development
 
 ## License
 
-Goliath is released under the same license as Wine (LGPL). See the LICENSE file for details.
+Goliath is based on Wine and inherits its LGPL 2.1+ license.
+
+Each integrated component retains its original license:
+- **Wine**: LGPL 2.1+
+- **Darling**: GPL 3.0
+- **ATL**: Apache 2.0
+- **Libretro**: MIT
+- **ipasim**: MIT
+
+See LICENSE and component-specific license files for details.
+
+## References
+
+### Upstream Projects
+- [Wine](https://www.winehq.org/) - Windows compatibility
+- [Darling](https://github.com/darlinghq/darling) - macOS compatibility
+- [ATL](https://gitlab.com/android_translation_layer/android_translation_layer) - Android compatibility
+- [WSL](https://github.com/microsoft/WSL) - Windows Subsystem for Linux
+- [Libretro](https://github.com/libretro/libretro-common) - Console emulation
+- [ipasim](https://github.com/ipasimulator/ipasim) - iOS simulation
+
+### Documentation
+- [Wine Developer Guide](https://wiki.winehq.org/Developer_Guide)
+- [Darling Documentation](https://docs.darlinghq.org/)
+- [ATL Documentation](https://gitlab.com/android_translation_layer/android_translation_layer/-/wikis/home)
+
+## Community
+
+- **GitHub**: https://github.com/charlieduzstuf/Goliath
+- **Issues**: https://github.com/charlieduzstuf/Goliath/issues
+- **Wine Forums**: https://forum.winehq.org/
+- **IRC**: #WineHQ on libera.chat
+
+## Acknowledgments
+
+Goliath is built on the excellent work of:
+- The Wine project team
+- The Darling project team
+- The ATL project team
+- And many other open source projects
+
+Special thanks to all contributors who make cross-platform compatibility possible.
+

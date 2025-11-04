@@ -821,34 +821,31 @@ static void media_engine_get_frame_size(struct media_engine *engine)
     engine->video_frame.ratio.cx = 1;
     engine->video_frame.ratio.cy = 1;
 
-    if (engine->presentation.frame_sink &&
-                SUCCEEDED(video_frame_sink_query_iface(engine->presentation.frame_sink, &IID_IMFMediaTypeHandler, (void**)&handler)))
+    video_frame_sink_query_iface(engine->presentation.frame_sink, &IID_IMFMediaTypeHandler, (void**)&handler);
+    if (SUCCEEDED(IMFMediaTypeHandler_GetCurrentMediaType(handler, &media_type)))
     {
-        if (SUCCEEDED(IMFMediaTypeHandler_GetCurrentMediaType(handler, &media_type)))
+        UINT64 size;
+        HRESULT hr = IMFMediaType_GetUINT64(media_type, &MF_MT_FRAME_SIZE, &size);
+        if (SUCCEEDED(hr))
         {
-            UINT64 size;
-            HRESULT hr = IMFMediaType_GetUINT64(media_type, &MF_MT_FRAME_SIZE, &size);
-            if (SUCCEEDED(hr))
-            {
-                unsigned int gcd;
-                engine->video_frame.size.cx = size >> 32;
-                engine->video_frame.size.cy = size;
+            unsigned int gcd;
+            engine->video_frame.size.cx = size >> 32;
+            engine->video_frame.size.cy = size;
 
-                if ((gcd = get_gcd(engine->video_frame.size.cx, engine->video_frame.size.cy)))
-                {
-                    engine->video_frame.ratio.cx = engine->video_frame.size.cx / gcd;
-                    engine->video_frame.ratio.cy = engine->video_frame.size.cy / gcd;
-                }
-            }
-            else
+            if ((gcd = get_gcd(engine->video_frame.size.cx, engine->video_frame.size.cy)))
             {
-                WARN("Failed to get frame size %#lx.\n", hr);
+                engine->video_frame.ratio.cx = engine->video_frame.size.cx / gcd;
+                engine->video_frame.ratio.cy = engine->video_frame.size.cy / gcd;
             }
-
-            IMFMediaType_Release(media_type);
         }
-        IMFMediaTypeHandler_Release(handler);
+        else
+        {
+            WARN("Failed to get frame size %#lx.\n", hr);
+        }
+
+        IMFMediaType_Release(media_type);
     }
+    IMFMediaTypeHandler_Release(handler);
 }
 
 static void media_engine_apply_volume(const struct media_engine *engine)
