@@ -1,7 +1,7 @@
 MODULE    = darlingcore.dll
 IMPORTS   = kernel32 ntdll
 
-EXTRADLLFLAGS = -Wl,--subsystem,unixlib
+EXTRADLLFLAGS =
 
 SOURCES = \
 	main.c
