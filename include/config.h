@@ -1,53 +1,29 @@
 /* include/config.h.  Generated from config.h.in by configure.  */
 /* include/config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* Default LibRetro cores directory */
-#define DEFAULT_LIBRETRO_CORES_DIR "/usr/lib/libretro"
-
-/* Define if Android Asset Packaging Tool is available */
-/* #undef HAVE_AAPT */
-
-/* Define if Android Debug Bridge is available */
-/* #undef HAVE_ADB */
-
-/* Define if ATL support is enabled */
-/* #undef HAVE_ATL */
-
-/* Define if Darling support is enabled */
-/* #undef HAVE_DARLING */
+#ifndef __WINE_CONFIG_H
+#define __WINE_CONFIG_H
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #define HAVE_DLFCN_H 1
 
-/* Define if DRM is available */
-/* #undef HAVE_DRM */
-
-/* Define if EGL is available */
-/* #undef HAVE_EGL */
-
-/* Define to 1 if you have the <errno.h> header file. */
-#define HAVE_ERRNO_H 1
-
-/* Define to 1 if you have the <fcntl.h> header file. */
-#define HAVE_FCNTL_H 1
-
-/* Define if GBM is available */
-/* #undef HAVE_GBM */
-
-/* Define if OpenGL ES 2.0 is available */
-/* #undef HAVE_GLES2 */
-
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
-/* Define to 1 if you have the `dl' library (-ldl). */
-#define HAVE_LIBDL 1
+/* Define if Linux-style gethostbyname_r and gethostbyaddr_r are available */
+#define HAVE_LINUX_GETHOSTBYNAME_R_6 1
 
-/* Define if LibRetro support is enabled */
-#define HAVE_LIBRETRO 1
+/* Define to 1 if the system has the type `request_sense'. */
+/* #undef HAVE_REQUEST_SENSE */
 
-/* Define to 1 if you have the <linux/binfmts.h> header file. */
-/* #undef HAVE_LINUX_BINFMTS_H */
+/* Define to 1 if `cmd' is a member of `scsireq_t'. */
+/* #undef HAVE_SCSIREQ_T_CMD */
+
+/* Define to 1 if `interface_id' is a member of `sg_io_hdr_t'. */
+/* #undef HAVE_SG_IO_HDR_T_INTERFACE_ID */
+
+/* Define to 1 if `si_fd' is a member of `siginfo_t'. */
+#define HAVE_SIGINFO_T_SI_FD 1
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
@@ -64,6 +40,93 @@
 /* Define to 1 if you have the <string.h> header file. */
 #define HAVE_STRING_H 1
 
+/* Define to 1 if `icp6s_error' is a member of `struct icmp6stat'. */
+/* #undef HAVE_STRUCT_ICMP6STAT_ICP6S_ERROR */
+
+/* Define to 1 if `icps_error' is a member of `struct icmpstat'. */
+/* #undef HAVE_STRUCT_ICMPSTAT_ICPS_ERROR */
+
+/* Define to 1 if `ifr_hwaddr' is a member of `struct ifreq'. */
+/* #undef HAVE_STRUCT_IFREQ_IFR_HWADDR */
+
+/* Define to 1 if `ipi6_addr' is a member of `struct in6_pktinfo'. */
+/* #undef HAVE_STRUCT_IN6_PKTINFO_IPI6_ADDR */
+
+/* Define to 1 if `ip6s_total' is a member of `struct ip6stat'. */
+/* #undef HAVE_STRUCT_IP6STAT_IP6S_TOTAL */
+
+/* Define to 1 if `ips_total' is a member of `struct ipstat'. */
+/* #undef HAVE_STRUCT_IPSTAT_IPS_TOTAL */
+
+/* Define to 1 if `ips_total' is a member of `struct ip_stats'. */
+/* #undef HAVE_STRUCT_IP_STATS_IPS_TOTAL */
+
+/* Define to 1 if `mt_blkno' is a member of `struct mtget'. */
+/* #undef HAVE_STRUCT_MTGET_MT_BLKNO */
+
+/* Define to 1 if `mt_blksiz' is a member of `struct mtget'. */
+/* #undef HAVE_STRUCT_MTGET_MT_BLKSIZ */
+
+/* Define to 1 if `mt_gstat' is a member of `struct mtget'. */
+/* #undef HAVE_STRUCT_MTGET_MT_GSTAT */
+
+/* Define to 1 if `sin6_scope_id' is a member of `struct sockaddr_in6'. */
+/* #undef HAVE_STRUCT_SOCKADDR_IN6_SIN6_SCOPE_ID */
+
+/* Define to 1 if `sun_len' is a member of `struct sockaddr_un'. */
+/* #undef HAVE_STRUCT_SOCKADDR_UN_SUN_LEN */
+
+/* Define to 1 if `st_atim' is a member of `struct stat'. */
+#define HAVE_STRUCT_STAT_ST_ATIM 1
+
+/* Define to 1 if `st_atimespec' is a member of `struct stat'. */
+/* #undef HAVE_STRUCT_STAT_ST_ATIMESPEC */
+
+/* Define to 1 if `st_birthtim' is a member of `struct stat'. */
+/* #undef HAVE_STRUCT_STAT_ST_BIRTHTIM */
+
+/* Define to 1 if `st_birthtime' is a member of `struct stat'. */
+/* #undef HAVE_STRUCT_STAT_ST_BIRTHTIME */
+
+/* Define to 1 if `st_birthtimespec' is a member of `struct stat'. */
+/* #undef HAVE_STRUCT_STAT_ST_BIRTHTIMESPEC */
+
+/* Define to 1 if `st_ctim' is a member of `struct stat'. */
+#define HAVE_STRUCT_STAT_ST_CTIM 1
+
+/* Define to 1 if `st_ctimespec' is a member of `struct stat'. */
+/* #undef HAVE_STRUCT_STAT_ST_CTIMESPEC */
+
+/* Define to 1 if `st_mtim' is a member of `struct stat'. */
+#define HAVE_STRUCT_STAT_ST_MTIM 1
+
+/* Define to 1 if `st_mtimespec' is a member of `struct stat'. */
+/* #undef HAVE_STRUCT_STAT_ST_MTIMESPEC */
+
+/* Define to 1 if `__st_birthtim' is a member of `struct stat'. */
+/* #undef HAVE_STRUCT_STAT___ST_BIRTHTIM */
+
+/* Define to 1 if `__st_birthtime' is a member of `struct stat'. */
+/* #undef HAVE_STRUCT_STAT___ST_BIRTHTIME */
+
+/* Define to 1 if `mem_unit' is a member of `struct sysinfo'. */
+/* #undef HAVE_STRUCT_SYSINFO_MEM_UNIT */
+
+/* Define to 1 if `totalram' is a member of `struct sysinfo'. */
+/* #undef HAVE_STRUCT_SYSINFO_TOTALRAM */
+
+/* Define to 1 if `tcps_connattempt' is a member of `struct tcpstat'. */
+/* #undef HAVE_STRUCT_TCPSTAT_TCPS_CONNATTEMPT */
+
+/* Define to 1 if `tcps_connattempt' is a member of `struct tcp_stats'. */
+/* #undef HAVE_STRUCT_TCP_STATS_TCPS_CONNATTEMPT */
+
+/* Define to 1 if `udps_ipackets' is a member of `struct udpstat'. */
+/* #undef HAVE_STRUCT_UDPSTAT_UDPS_IPACKETS */
+
+/* Define to 1 if `_u._ext.nscount6' is a member of `struct __res_state'. */
+/* #undef HAVE_STRUCT___RES_STATE__U__EXT_NSCOUNT6 */
+
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
 
@@ -73,35 +136,36 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #define HAVE_UNISTD_H 1
 
-/* Define if Wine support is enabled */
-/* #undef HAVE_WINE */
+/* Define to 1 if you have the '__builtin_popcount' built-in function. */
+#define HAVE___BUILTIN_POPCOUNT 1
 
-/* Define if WSL support is enabled */
-/* #undef HAVE_WSL */
+/* Define to 1 if you have the '__clear_cache' (potentially built-in)
+   function. */
+#define HAVE___CLEAR_CACHE 1
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"
 
 /* Name of package */
-#define PACKAGE "goliath"
+#define PACKAGE "wine"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "goliath-devel@example.org"
+#define PACKAGE_BUGREPORT "wine-devel@winehq.org"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "Goliath"
+#define PACKAGE_NAME "Wine"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Goliath 1.0-beta"
+#define PACKAGE_STRING "Wine 10.0"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "goliath"
+#define PACKAGE_TARNAME "wine"
 
 /* Define to the home page for this package. */
-#define PACKAGE_URL "https://github.com/goliath-project/goliath"
+#define PACKAGE_URL "https://www.winehq.org"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.0-beta"
+#define PACKAGE_VERSION "10.0"
 
 /* Define to 1 if all of the C90 standard headers exist (not just the ones
    required in a freestanding environment). This macro is provided for
@@ -109,4 +173,21 @@
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "1.0-beta"
+#define VERSION "10.0"
+
+/* Define if __aarch64__ is available */
+/* #undef __aarch64__ */
+
+/* Define if __arm__ is available */
+/* #undef __arm__ */
+
+/* Define if __i386__ is available */
+/* #undef __i386__ */
+
+/* Define if __powerpc64__ is available */
+/* #undef __powerpc64__ */
+
+/* Define if __x86_64__ is available */
+#define __x86_64__ 1
+
+#endif /* __WINE_CONFIG_H */

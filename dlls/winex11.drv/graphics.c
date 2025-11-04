@@ -300,9 +300,8 @@ void X11DRV_SetDeviceClipping( PHYSDEV dev, HRGN rgn, HRGN monitor_rgn )
 {
     X11DRV_PDEVICE *physDev = get_x11drv_dev( dev );
 
-    if (physDev->region) NtGdiDeleteObjectApp( physDev->region );
-    physDev->region = clone_gdi_region( monitor_rgn );
-    update_x11_clipping( physDev, physDev->region );
+    physDev->region = monitor_rgn;
+    update_x11_clipping( physDev, monitor_rgn );
 }
 
 

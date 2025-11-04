@@ -1281,17 +1281,6 @@ BOOL WINAPI IsWindowVisible( HWND hwnd )
 }
 
 
-/***********************************************************************
- *		IsWindowArranged (USER32.@)
- */
-BOOL WINAPI IsWindowArranged( HWND hwnd )
-{
-    FIXME( "hwnd %p stub.\n", hwnd );
-
-    return FALSE;
-}
-
-
 /*******************************************************************
  *		GetTopWindow (USER32.@)
  */

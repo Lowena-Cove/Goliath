@@ -1047,8 +1047,7 @@ static void sdl_add_device(unsigned int index)
         desc.is_gamepad = (axis_count == 6  && button_count >= 14);
     }
 
-    axis_offset = 0;
-    do
+    for (axis_offset = 0; axis_offset < axis_count; axis_offset += (options.split_controllers ? 6 : axis_count))
     {
         NTSTATUS status;
 
@@ -1075,9 +1074,7 @@ static void sdl_add_device(unsigned int index)
         }
 
         bus_event_queue_device_created(&event_queue, &impl->unix_device, &desc);
-        axis_offset += (options.split_controllers ? 6 : axis_count);
     }
-    while (axis_offset < axis_count);
 }
 
 static void process_device_event(SDL_Event *event)

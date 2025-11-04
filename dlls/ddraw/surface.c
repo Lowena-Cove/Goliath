@@ -5364,15 +5364,6 @@ static HRESULT WINAPI ddraw_gamma_control_SetGammaRamp(IDirectDrawGammaControl *
         return DDERR_INVALIDPARAMS;
     }
 
-    {
-        const char *sgi = getenv("SteamGameId");
-        if (sgi && !strcmp(sgi, "3600700"))
-        {
-            FIXME("HACK: not applying gamma.\n");
-            return DD_OK;
-        }
-    }
-
     wined3d_mutex_lock();
     if (surface->surface_desc.ddsCaps.dwCaps & DDSCAPS_PRIMARYSURFACE)
     {
