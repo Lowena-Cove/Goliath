@@ -292,7 +292,7 @@ wine_srcdir=
 test "$srcdir" = . || wine_srcdir="$srcdir/"
 
 WINE_CONFIG_SYMLINK(wine,tools/winewrapper)
-WINE_CONFIG_SYMLINK(wine64,tools/winewrapper,["$wine_binary" = wine64 -o -n "$with_wine64"])
+WINE_CONFIG_SYMLINK(wine64,tools/winewrapper,[test "$wine_binary" = "wine64" -o -n "$with_wine64"])
 
 WINE_CONFIG_MAKEFILE(dlls/acledit)
 WINE_CONFIG_MAKEFILE(dlls/aclui)
@@ -1317,6 +1317,7 @@ WINE_CONFIG_MAKEFILE(dlls/xtajit64)
 WINE_CONFIG_MAKEFILE(fonts)
 WINE_CONFIG_MAKEFILE(include)
 WINE_CONFIG_MAKEFILE(libs/adsiid)
+WINE_CONFIG_MAKEFILE(libs/atl_android)
 WINE_CONFIG_MAKEFILE(libs/capstone)
 WINE_CONFIG_MAKEFILE(libs/darling)
 WINE_CONFIG_MAKEFILE(libs/dmoguids)
@@ -1326,10 +1327,12 @@ WINE_CONFIG_MAKEFILE(libs/dxguid)
 WINE_CONFIG_MAKEFILE(libs/faudio)
 WINE_CONFIG_MAKEFILE(libs/fluidsynth)
 WINE_CONFIG_MAKEFILE(libs/gsm)
+WINE_CONFIG_MAKEFILE(libs/ipasim)
 WINE_CONFIG_MAKEFILE(libs/jpeg)
 WINE_CONFIG_MAKEFILE(libs/jxr)
 WINE_CONFIG_MAKEFILE(libs/lcms2)
 WINE_CONFIG_MAKEFILE(libs/ldap)
+WINE_CONFIG_MAKEFILE(libs/libretro)
 WINE_CONFIG_MAKEFILE(libs/mfuuid)
 WINE_CONFIG_MAKEFILE(libs/mpg123)
 WINE_CONFIG_MAKEFILE(libs/musl)
@@ -1341,6 +1344,7 @@ WINE_CONFIG_MAKEFILE(libs/uuid)
 WINE_CONFIG_MAKEFILE(libs/vkd3d)
 WINE_CONFIG_MAKEFILE(libs/wbemuuid)
 WINE_CONFIG_MAKEFILE(libs/wmcodecdspuuid)
+WINE_CONFIG_MAKEFILE(libs/wsl)
 WINE_CONFIG_MAKEFILE(libs/xml2)
 WINE_CONFIG_MAKEFILE(libs/xslt)
 WINE_CONFIG_MAKEFILE(libs/zlib)
@@ -1487,7 +1491,6 @@ WINE_CONFIG_MAKEFILE(tools/winegcc,,[test "x$enable_tools" = xno])
 WINE_CONFIG_MAKEFILE(tools/winemaker,,[test "x$enable_tools" = xno])
 WINE_CONFIG_MAKEFILE(tools/wmc,,[test "x$enable_tools" = xno])
 WINE_CONFIG_MAKEFILE(tools/wrc,,[test "x$enable_tools" = xno])
-WINE_CONFIG_MAKEFILE(libs/atl_android)
 dnl End of auto-generated output commands
 
 dnl Main ignore file
@@ -1502,6 +1505,7 @@ WINE_IGNORE_FILE(include/config.h)
 WINE_IGNORE_FILE(include/stamp-h)
 test "$wine_binary" = wine || WINE_IGNORE_FILE(loader/wine)
 
+wine_makedep=tools/makedep
 if test "x$enable_tools" != xno
 then
     AC_CONFIG_COMMANDS([tools/makedep],[wine_fn_output_makedep || AS_EXIT],
