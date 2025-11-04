@@ -1505,7 +1505,6 @@ WINE_IGNORE_FILE(include/config.h)
 WINE_IGNORE_FILE(include/stamp-h)
 test "$wine_binary" = wine || WINE_IGNORE_FILE(loader/wine)
 
-wine_makedep=tools/makedep
 if test "x$enable_tools" != xno
 then
     AC_CONFIG_COMMANDS([tools/makedep],[wine_fn_output_makedep || AS_EXIT],
