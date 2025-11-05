@@ -1523,8 +1523,7 @@ static HRESULT WINAPI source_reader_async_commands_callback_Invoke(IMFAsyncCallb
         case SOURCE_READER_ASYNC_SAMPLE_READY:
 
             EnterCriticalSection(&reader->cs);
-            stream = &reader->streams[command->u.sample.stream_index];
-            response = media_stream_pop_response(reader, stream);
+            response = media_stream_pop_response(reader, NULL);
             LeaveCriticalSection(&reader->cs);
 
             if (response)

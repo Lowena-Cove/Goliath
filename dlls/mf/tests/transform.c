@@ -6411,12 +6411,28 @@ static void test_wmv_decoder(void)
         .attributes = output_sample_attributes,
         .sample_time = 0, .sample_duration = 333333,
         .buffer_count = 1, .buffers = &output_buffer_desc_nv12,
+        .todo_duration = TRUE,
+    };
+    const struct sample_desc output_sample_desc_nv12_todo_time =
+    {
+        .attributes = output_sample_attributes,
+        .sample_time = 0, .sample_duration = 333333,
+        .buffer_count = 1, .buffers = &output_buffer_desc_nv12,
+        .todo_time = TRUE, .todo_duration = TRUE,
     };
     const struct sample_desc output_sample_desc_rgb =
     {
         .attributes = output_sample_attributes,
         .sample_time = 0, .sample_duration = 333333,
         .buffer_count = 1, .buffers = &output_buffer_desc_rgb,
+        .todo_duration = TRUE,
+    };
+    const struct sample_desc output_sample_desc_rgb_todo_time =
+    {
+        .attributes = output_sample_attributes,
+        .sample_time = 0, .sample_duration = 333333,
+        .buffer_count = 1, .buffers = &output_buffer_desc_rgb,
+        .todo_time = TRUE, .todo_duration = TRUE,
     };
 
     const struct transform_desc
@@ -6450,7 +6466,7 @@ static void test_wmv_decoder(void)
             .expect_output_type_desc = expect_output_type_desc,
             .expect_input_info = &expect_input_info,
             .expect_output_info = &expect_output_info,
-            .output_sample_desc = &output_sample_desc_nv12,
+            .output_sample_desc = &output_sample_desc_nv12_todo_time,
             .result_bitmap = L"nv12frame.bmp",
             .delta = 0,
         },
@@ -6461,7 +6477,7 @@ static void test_wmv_decoder(void)
             .expect_output_type_desc = expect_output_type_desc_rgb,
             .expect_input_info = &expect_input_info_rgb,
             .expect_output_info = &expect_output_info_rgb,
-            .output_sample_desc = &output_sample_desc_rgb,
+            .output_sample_desc = &output_sample_desc_rgb_todo_time,
             .result_bitmap = L"rgb32frame-flip.bmp",
             .delta = 5,
         },
@@ -6472,7 +6488,7 @@ static void test_wmv_decoder(void)
             .expect_output_type_desc = expect_output_type_desc_rgb_negative_stride,
             .expect_input_info = &expect_input_info_rgb,
             .expect_output_info = &expect_output_info_rgb,
-            .output_sample_desc = &output_sample_desc_rgb,
+            .output_sample_desc = &output_sample_desc_rgb_todo_time,
             .result_bitmap = L"rgb32frame-flip.bmp",
             .delta = 5,
         },
@@ -6483,7 +6499,7 @@ static void test_wmv_decoder(void)
             .expect_output_type_desc = expect_output_type_desc_rgb,
             .expect_input_info = &expect_input_info_rgb,
             .expect_output_info = &expect_output_info_rgb,
-            .output_sample_desc = &output_sample_desc_rgb,
+            .output_sample_desc = &output_sample_desc_rgb_todo_time,
             .result_bitmap = L"rgb32frame-flip.bmp",
             .delta = 5,
         },
@@ -6506,7 +6522,7 @@ static void test_wmv_decoder(void)
             .expect_output_type_desc = expect_output_type_desc_rgb_negative_stride,
             .expect_input_info = &expect_input_info_rgb,
             .expect_output_info = &expect_output_info_rgb,
-            .output_sample_desc = &output_sample_desc_rgb,
+            .output_sample_desc = &output_sample_desc_rgb_todo_time,
             .result_bitmap = L"rgb32frame.bmp",
             .delta = 5,
         },

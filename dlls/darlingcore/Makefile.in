@@ -1,0 +1,7 @@
+MODULE    = darlingcore.dll
+IMPORTS   = kernel32 ntdll
+
+EXTRADLLFLAGS =
+
+SOURCES = \
+	main.c

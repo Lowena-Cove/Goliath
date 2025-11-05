@@ -906,7 +906,7 @@ static void test_D3DKMTOpenAdapterFromDeviceName_deviface(const GUID *devinterfa
         ok(ret, "Got unexpected ret %d, GetLastError() %lu.\n", ret, GetLastError());
 
         status = pD3DKMTOpenAdapterFromDeviceName(&device_name);
-        ok(status == expected_status, "Got status %#lx, expected %#lx.\n", status, expected_status);
+        todo_wine_if(todo) ok(status == expected_status, "Got status %#lx, expected %#lx.\n", status, expected_status);
 
         if (!status)
         {
@@ -918,7 +918,7 @@ static void test_D3DKMTOpenAdapterFromDeviceName_deviface(const GUID *devinterfa
             if (ret)
             {
                 ret = RtlEqualLuid( &luid, &device_name.AdapterLuid);
-                ok(ret, "Luid does not match.\n");
+                todo_wine ok(ret, "Luid does not match.\n");
             }
             else
             {

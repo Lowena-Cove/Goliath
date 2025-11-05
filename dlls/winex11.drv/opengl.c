@@ -1848,32 +1848,24 @@ BOOL enable_fullscreen_hack( HWND hwnd, BOOL check_gamma )
     if (NtUserGetDpiForWindow( hwnd ) != NtUserGetWinMonitorDpi( hwnd, MDT_RAW_DPI )) return TRUE; /* needs DPI scaling */
     if (check_gamma && X11DRV_HasWindowManager( "xwayland" ) && gl_renderer && strstr( gl_renderer, "NVIDIA" ))
     {
-        static int skip_cached = -1;
-        if (skip_cached == -1)
-        {
-            const char *sgi = getenv( "SteamGameId" );
-            skip_cached = sgi && !strcmp( sgi, "582660" );
-        }
-        if (!skip_cached)
-        {
-            /* Force fshack on XWayland / NVidia because drawing to front buffer doesn't get presented there and fshack works
-             * that around as a side effect. */
-            TRACE( "Forcing fshack on xwayland / NVIDIA.\n" );
-            return TRUE;
-        }
+        /* Force fshack on XWayland / NVidia because drawing to front buffer doesn't get presented there and fshack works
+         * that around as a side effect. */
+        TRACE( "Forcing fshack on xwayland / NVIDIA.\n" );
+        return TRUE;
     }
     return check_gamma && ReadNoFence( &gamma_serial );
 }
 
-static BOOL get_client_rect( HWND hwnd, BOOL raw, RECT *rect )
+static RECT get_client_rect( HWND hwnd, BOOL raw )
 {
     UINT dpi = NtUserGetDpiForWindow( hwnd );
+    RECT rect;
 
-    if (!NtUserGetClientRect( hwnd, rect, dpi )) return FALSE;
-    if (!raw) return TRUE;
-    *rect = map_rect_virt_to_raw_for_monitor( NtUserMonitorFromWindow( hwnd, MONITOR_DEFAULTTONEAREST ), *rect, dpi );
-    OffsetRect( rect, -rect->left, -rect->top );
-    return TRUE;
+    NtUserGetClientRect( hwnd, &rect, dpi );
+    if (!raw) return rect;
+    rect = map_rect_virt_to_raw_for_monitor( NtUserMonitorFromWindow( hwnd, MONITOR_DEFAULTTONEAREST ), rect, dpi );
+    OffsetRect( &rect, -rect.left, -rect.top );
+    return rect;
 }
 
 /***********************************************************************
@@ -1890,11 +1882,7 @@ static struct gl_drawable *create_gl_drawable( HWND hwnd, const struct glx_pixel
     int width, height;
     BOOL enable_fshack = enable_fullscreen_hack( hwnd, TRUE );
 
-    if (!get_client_rect( hwnd, enable_fshack, &rect ))
-    {
-        ERR( "get_client_rect failed.\n" );
-        return NULL;
-    }
+    rect = get_client_rect( hwnd, enable_fshack );
     width  = min( max( 1, rect.right ), 65535 );
     height = min( max( 1, rect.bottom ), 65535 );
 
@@ -2081,12 +2069,7 @@ static void update_gl_drawable_size( struct gl_drawable *gl )
     XWindowChanges changes;
     RECT rect;
 
-    if (!get_client_rect( gl->hwnd, gl->fs_hack, &rect ))
-    {
-        WARN( "get_client_rect failed.\n" );
-        return;
-    }
-
+    rect = get_client_rect( gl->hwnd, gl->fs_hack );
     if (EqualRect( &rect, &gl->rect )) return;
 
     changes.width  = min( max( 1, rect.right ), 65535 );
@@ -3067,12 +3050,6 @@ static void fs_hack_blit_framebuffer( struct gl_drawable *gl, GLenum draw_buffer
     LONG gamma_serial = 0;
     unsigned int i;
 
-    if (!ctx)
-    {
-        WARN( "NULL ctx.\n" );
-        return;
-    }
-
     NtUserGetClientRect( gl->hwnd, &src, NtUserGetDpiForWindow( gl->hwnd ) );
     dst = gl->rect;
 
@@ -3278,7 +3255,7 @@ static void present_gl_drawable( HWND hwnd, HDC hdc, struct gl_drawable *gl, BOO
             if (!drawable) sync_gl_drawable( hwnd, FALSE );
             return;
         }
-        TRACE( "Surface is present.\n" );
+        WARN( "surface is present on non-ULW window.\n" );
         hdc_dst = NtUserGetDCEx( hwnd, 0, DCX_CACHE | DCX_USESTYLE );
         region = get_dc_monitor_region( hwnd, hdc );
         if (region) NtGdiExtSelectClipRgn( hdc_dst, region, RGN_COPY );
