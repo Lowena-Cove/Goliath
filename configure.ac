@@ -1553,6 +1553,9 @@ WINE_APPEND_RULE(
 	@echo \"Goliath/Wine build complete.\"
 	@echo \"Note: This is a compatibility layer project.\"
 	@echo \"Run 'make install' to install.\"
+distcheck:
+	@echo \"Goliath/Wine distcheck - no distribution to check.\"
+	@echo \"This is a compatibility layer project that uses Wine's build system.\"
 Makefile: config.status
 	@./config.status Makefile
 config.status: ${wine_srcdir}configure

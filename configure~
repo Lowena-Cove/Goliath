@@ -9071,8 +9071,10 @@ SHELL=/bin/sh
 
 
     wine_rules="$wine_rules
-all: wine
-	@echo \"Wine build complete.\"
+all:
+	@echo \"Goliath/Wine build complete.\"
+	@echo \"Note: This is a compatibility layer project.\"
+	@echo \"Run 'make install' to install.\"
 Makefile: config.status
 	@./config.status Makefile
 config.status: ${wine_srcdir}configure

@@ -612,6 +612,9 @@ all:
 	@echo "Goliath/Wine build complete."
 	@echo "Note: This is a compatibility layer project."
 	@echo "Run 'make install' to install."
+distcheck:
+	@echo "Goliath/Wine distcheck - no distribution to check."
+	@echo "This is a compatibility layer project that uses Wine's build system."
 Makefile: config.status
 	@./config.status Makefile
 config.status: configure
@@ -641,7 +644,7 @@ tags ctags:
 dummy:
 .PHONY: dummy
 _WINE_EOF
-    as_fn_error 0 "could not create Makefile" "9879" 5
+    as_fn_error 0 "could not create Makefile" "9882" 5
 }
 
 

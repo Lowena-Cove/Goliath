@@ -3234,7 +3234,7 @@ configure:4047: checking for __clear_cache
 configure:4064: gcc -o conftest -g -O2   conftest.c  >&5
 configure:4064: $? = 0
 configure:4073: result: yes
-configure:9313: creating ./config.status
+configure:9316: creating ./config.status
 
 ## ---------------------- ##
 ## Running config.status. ##
