@@ -1,25 +1,13 @@
-SUBDIRS = \
-	tools \
-	dlls \
-	dlls/darling_coreaudio \
-	dlls/darling_sandbox \
-	dlls/wsl \
-	programs \
-	libs \
-	loader \
-	server \
-	fonts \
-	include \
-	documentation \
-	libs/atl_android \
-	libs/darling
+SUBDIRS = tools libs loader server dlls programs include fonts documentation
 
 EXTRA_DIST = goliath-launch.sh
 
-if USE_DARLING
-SUBDIRS += libs/darling
-endif
+# The 'wine' symlink to goliath binary in loader/
+all-local:
+	@echo "Goliath/Wine build complete."
+	@echo "Run 'make install' to install."
 
-if USE_ATL
-SUBDIRS += libs/atl-tmp
-endif
+# Create wine symlink for compatibility
+install-exec-hook:
+	cd $(DESTDIR)$(bindir) && $(LN_S) -f goliath wine || true
+

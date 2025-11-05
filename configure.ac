@@ -1519,47 +1519,48 @@ then
 }])
 fi
 
-AC_CONFIG_COMMANDS([Makefile], [wine_fn_output_makefile Makefile],
-[wine_fn_output_makefile ()
-{
-    cat <<\_WINE_EOF >\$tmp/makefile && mv -f \$tmp/makefile \$[]1 && "$wine_makedep"$makedep_flags && return
-# This Makefile understands the following targets:
-#
-# all (default):   build wine
-# clean:           remove all intermediate files
-# distclean:       also remove all files created by configure
-# test:            run tests
-# testclean:       clean test results to force running all tests again
-# install-lib:     install libraries needed to run applications
-# install-dev:     install development environment
-# install:         install everything
-# uninstall:       uninstall everything
-# ctags:           create a tags file for vim and others.
-# etags:           create a TAGS file for Emacs.
-
-m4_set_foreach([_AC_SUBST_VARS],[var],[var = $var
-])$SET_MAKE
-$wine_rules
-_WINE_EOF
-    AS_ERROR([could not create Makefile])
-}])
+dnl Commented out wine_fn_output_makefile for root Makefile since we're using Automake
+dnl AC_CONFIG_COMMANDS([Makefile], [wine_fn_output_makefile Makefile],
+dnl [wine_fn_output_makefile ()
+dnl {
+dnl     cat <<\_WINE_EOF >\$tmp/makefile && mv -f \$tmp/makefile \$[]1 && "$wine_makedep"$makedep_flags && return
+dnl # This Makefile understands the following targets:
+dnl #
+dnl # all (default):   build wine
+dnl # clean:           remove all intermediate files
+dnl # distclean:       also remove all files created by configure
+dnl # test:            run tests
+dnl # testclean:       clean test results to force running all tests again
+dnl # install-lib:     install libraries needed to run applications
+dnl # install-dev:     install development environment
+dnl # install:         install everything
+dnl # uninstall:       uninstall everything
+dnl # ctags:           create a tags file for vim and others.
+dnl # etags:           create a TAGS file for Emacs.
+dnl
+dnl m4_set_foreach([_AC_SUBST_VARS],[var],[var = $var
+dnl ])$SET_MAKE
+dnl $wine_rules
+dnl _WINE_EOF
+dnl     AS_ERROR([could not create Makefile])
+dnl }])
 
 dnl Main makefile
 
 AC_SUBST(SHELL,[/bin/sh])
 
 dnl Rules for re-running configure
-
-WINE_APPEND_RULE(
-[all: wine
-	@echo \"Wine build complete.\"
-Makefile: config.status
-	@./config.status Makefile
-config.status: ${wine_srcdir}configure
-	@./config.status --recheck
-include/config.h: include/stamp-h
-include/stamp-h: ${wine_srcdir}include/config.h.in config.status
-	@./config.status include/config.h include/stamp-h])
+dnl Commented out Wine-specific rules since we're using Automake
+dnl WINE_APPEND_RULE(
+dnl [all: wine
+dnl 	@echo \"Wine build complete.\"
+dnl Makefile: config.status
+dnl 	@./config.status Makefile
+dnl config.status: ${wine_srcdir}configure
+dnl 	@./config.status --recheck
+dnl include/config.h: include/stamp-h
+dnl include/stamp-h: ${wine_srcdir}include/config.h.in config.status
+dnl 	@./config.status include/config.h include/stamp-h])
 
 if test "x$enable_maintainer_mode" = xyes
 then
@@ -1664,6 +1665,10 @@ dummy:
 .PHONY: dummy])
 
 AS_ECHO(" done") >&AS_MESSAGE_FD
+
+dnl Generate Makefile for Automake
+AC_CONFIG_FILES([Makefile])
+
 AC_OUTPUT
 
 if test "$no_create" = "yes"

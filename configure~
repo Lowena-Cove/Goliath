@@ -666,6 +666,7 @@ LIBOBJS
 TAGSFLAGS
 HAVE_MACOS_FALSE
 HAVE_MACOS_TRUE
+wine_makedep
 LT_SYS_LIBRARY_PATH
 OTOOL64
 OTOOL
@@ -14315,6 +14316,9 @@ ac_config_commands="$ac_config_commands include/stamp-h"
 
 printf %s "creating Makefile rules..." >&6
 
+wine_makedep=tools/makedep
+
+
 makedep_flags=" -C"
 test "x$enable_silent_rules" = xyes && makedep_flags="$makedep_flags -S"
 
@@ -19134,25 +19138,10 @@ then
 
 fi
 
-ac_config_commands="$ac_config_commands Makefile"
-
 
 
 SHELL=/bin/sh
 
-
-
-
-    wine_rules="$wine_rules
-all: wine
-	@echo \"Wine build complete.\"
-Makefile: config.status
-	@./config.status Makefile
-config.status: ${wine_srcdir}configure
-	@./config.status --recheck
-include/config.h: include/stamp-h
-include/stamp-h: ${wine_srcdir}include/config.h.in config.status
-	@./config.status include/config.h include/stamp-h"
 
 
 if test "x$enable_maintainer_mode" = xyes
@@ -19270,6 +19259,10 @@ dummy:
 
 
 printf "%s\n" " done" >&6
+
+ac_config_files="$ac_config_files Makefile"
+
+
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -20280,152 +20273,6 @@ wine_fn_output_makedep ()
     as_dir=tools; as_fn_mkdir_p
     $CC -c -I${wine_srcdir}tools -Iinclude -I${wine_srcdir}include -D__WINESRC__ -DWINE_UNIX_LIB $EXTRACFLAGS $CPPFLAGS $CFLAGS -o tools/makedep.o ${wine_srcdir}tools/makedep.c
     $CC -o tools/makedep$ac_exeext tools/makedep.o $LDFLAGS
-}
-wine_fn_output_makefile ()
-{
-    cat <<\_WINE_EOF >\$tmp/makefile && mv -f \$tmp/makefile \$1 && "$wine_makedep"$makedep_flags && return
-# This Makefile understands the following targets:
-#
-# all (default):   build wine
-# clean:           remove all intermediate files
-# distclean:       also remove all files created by configure
-# test:            run tests
-# testclean:       clean test results to force running all tests again
-# install-lib:     install libraries needed to run applications
-# install-dev:     install development environment
-# install:         install everything
-# uninstall:       uninstall everything
-# ctags:           create a tags file for vim and others.
-# etags:           create a TAGS file for Emacs.
-
-am__quote = $am__quote
-SHELL = $SHELL
-PATH_SEPARATOR = $PATH_SEPARATOR
-PACKAGE_NAME = $PACKAGE_NAME
-PACKAGE_TARNAME = $PACKAGE_TARNAME
-PACKAGE_VERSION = $PACKAGE_VERSION
-PACKAGE_STRING = $PACKAGE_STRING
-PACKAGE_BUGREPORT = $PACKAGE_BUGREPORT
-PACKAGE_URL = $PACKAGE_URL
-exec_prefix = $exec_prefix
-prefix = $prefix
-program_transform_name = $program_transform_name
-bindir = $bindir
-sbindir = $sbindir
-libexecdir = $libexecdir
-datarootdir = $datarootdir
-datadir = $datadir
-sysconfdir = $sysconfdir
-sharedstatedir = $sharedstatedir
-localstatedir = $localstatedir
-runstatedir = $runstatedir
-includedir = $includedir
-oldincludedir = $oldincludedir
-docdir = $docdir
-infodir = $infodir
-htmldir = $htmldir
-dvidir = $dvidir
-pdfdir = $pdfdir
-psdir = $psdir
-libdir = $libdir
-localedir = $localedir
-mandir = $mandir
-DEFS = $DEFS
-ECHO_C = $ECHO_C
-ECHO_N = $ECHO_N
-ECHO_T = $ECHO_T
-LIBS = $LIBS
-build_alias = $build_alias
-host_alias = $host_alias
-target_alias = $target_alias
-INSTALL_PROGRAM = $INSTALL_PROGRAM
-INSTALL_SCRIPT = $INSTALL_SCRIPT
-INSTALL_DATA = $INSTALL_DATA
-am__isrc = $am__isrc
-CYGPATH_W = $CYGPATH_W
-PACKAGE = $PACKAGE
-VERSION = $VERSION
-ACLOCAL = $ACLOCAL
-AUTOCONF = $AUTOCONF
-AUTOMAKE = $AUTOMAKE
-AUTOHEADER = $AUTOHEADER
-MAKEINFO = $MAKEINFO
-install_sh = $install_sh
-STRIP = $STRIP
-INSTALL_STRIP_PROGRAM = $INSTALL_STRIP_PROGRAM
-MKDIR_P = $MKDIR_P
-mkdir_p = $mkdir_p
-AWK = $AWK
-SET_MAKE = $SET_MAKE
-am__leading_dot = $am__leading_dot
-AMTAR = $AMTAR
-am__tar = $am__tar
-am__untar = $am__untar
-CTAGS = $CTAGS
-ETAGS = $ETAGS
-CSCOPE = $CSCOPE
-AM_V = $AM_V
-AM_DEFAULT_V = $AM_DEFAULT_V
-AM_DEFAULT_VERBOSITY = $AM_DEFAULT_VERBOSITY
-AM_BACKSLASH = $AM_BACKSLASH
-LIBTOOL = $LIBTOOL
-build = $build
-build_cpu = $build_cpu
-build_vendor = $build_vendor
-build_os = $build_os
-host = $host
-host_cpu = $host_cpu
-host_vendor = $host_vendor
-host_os = $host_os
-CC = $CC
-CFLAGS = $CFLAGS
-LDFLAGS = $LDFLAGS
-CPPFLAGS = $CPPFLAGS
-ac_ct_CC = $ac_ct_CC
-EXEEXT = $EXEEXT
-OBJEXT = $OBJEXT
-DEPDIR = $DEPDIR
-am__include = $am__include
-AMDEP_TRUE = $AMDEP_TRUE
-AMDEP_FALSE = $AMDEP_FALSE
-AMDEPBACKSLASH = $AMDEPBACKSLASH
-am__nodep = $am__nodep
-CCDEPMODE = $CCDEPMODE
-am__fastdepCC_TRUE = $am__fastdepCC_TRUE
-am__fastdepCC_FALSE = $am__fastdepCC_FALSE
-SED = $SED
-GREP = $GREP
-EGREP = $EGREP
-FGREP = $FGREP
-LD = $LD
-DUMPBIN = $DUMPBIN
-ac_ct_DUMPBIN = $ac_ct_DUMPBIN
-NM = $NM
-LN_S = $LN_S
-FILECMD = $FILECMD
-OBJDUMP = $OBJDUMP
-DLLTOOL = $DLLTOOL
-AR = $AR
-ac_ct_AR = $ac_ct_AR
-RANLIB = $RANLIB
-MANIFEST_TOOL = $MANIFEST_TOOL
-DSYMUTIL = $DSYMUTIL
-NMEDIT = $NMEDIT
-LIPO = $LIPO
-OTOOL = $OTOOL
-OTOOL64 = $OTOOL64
-LT_SYS_LIBRARY_PATH = $LT_SYS_LIBRARY_PATH
-HAVE_MACOS_TRUE = $HAVE_MACOS_TRUE
-HAVE_MACOS_FALSE = $HAVE_MACOS_FALSE
-TAGSFLAGS = $TAGSFLAGS
-LIBOBJS = $LIBOBJS
-LTLIBOBJS = $LTLIBOBJS
-am__EXEEXT_TRUE = $am__EXEEXT_TRUE
-am__EXEEXT_FALSE = $am__EXEEXT_FALSE
-$SET_MAKE
-$wine_rules
-_WINE_EOF
-    as_fn_error $? "could not create Makefile" "$LINENO" 5
 }
 
 _ACEOF
@@ -21637,7 +21484,7 @@ do
     "tools/wmc/Makefile") CONFIG_FILES="$CONFIG_FILES tools/wmc/Makefile" ;;
     "tools/wrc/Makefile") CONFIG_FILES="$CONFIG_FILES tools/wrc/Makefile" ;;
     "tools/makedep") CONFIG_COMMANDS="$CONFIG_COMMANDS tools/makedep" ;;
-    "Makefile") CONFIG_COMMANDS="$CONFIG_COMMANDS Makefile" ;;
+    "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
@@ -22880,7 +22727,6 @@ ltmain=$ac_aux_dir/ltmain.sh
  ;;
     "include/stamp-h":C) echo timestamp > include/stamp-h ;;
     "tools/makedep":C) wine_fn_output_makedep || as_fn_exit $? ;;
-    "Makefile":C) wine_fn_output_makefile Makefile ;;
 
   esac
 done # for ac_tag
