@@ -664,6 +664,8 @@ am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
 TAGSFLAGS
+HAVE_MACOS_FALSE
+HAVE_MACOS_TRUE
 LT_SYS_LIBRARY_PATH
 OTOOL64
 OTOOL
@@ -19130,7 +19132,6 @@ test "$srcdir" = . || wine_srcdir="$srcdir/"
 
 test "$wine_binary" = wine ||
 
-wine_makedep=tools/makedep
 if test "x$enable_tools" != xno
 then
     ac_config_commands="$ac_config_commands tools/makedep"
@@ -19216,6 +19217,23 @@ server/wineserver"
       *) TOP_INSTALL_LIB="$TOP_INSTALL_LIB loader/wine.desktop" ;;
     esac
 fi
+
+case $host_os in
+  darwin*|macosx*)
+    HAVE_MACOS=yes
+    ;;
+  *)
+    HAVE_MACOS=no
+    ;;
+esac
+ if test "$HAVE_MACOS" = "yes"; then
+  HAVE_MACOS_TRUE=
+  HAVE_MACOS_FALSE='#'
+else
+  HAVE_MACOS_TRUE='#'
+  HAVE_MACOS_FALSE=
+fi
+
 
 
 
@@ -19391,6 +19409,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
   as_fn_error $? "conditional \"am__fastdepCC\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_MACOS_TRUE}" && test -z "${HAVE_MACOS_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_MACOS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 
@@ -20397,6 +20419,8 @@ LIPO = $LIPO
 OTOOL = $OTOOL
 OTOOL64 = $OTOOL64
 LT_SYS_LIBRARY_PATH = $LT_SYS_LIBRARY_PATH
+HAVE_MACOS_TRUE = $HAVE_MACOS_TRUE
+HAVE_MACOS_FALSE = $HAVE_MACOS_FALSE
 TAGSFLAGS = $TAGSFLAGS
 LIBOBJS = $LIBOBJS
 LTLIBOBJS = $LTLIBOBJS

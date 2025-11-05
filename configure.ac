@@ -1615,6 +1615,17 @@ server/wineserver"
     esac
 fi
 
+dnl Platform conditionals for Makefile.am files
+case $host_os in
+  darwin*|macosx*) 
+    HAVE_MACOS=yes
+    ;;
+  *)
+    HAVE_MACOS=no
+    ;;
+esac
+AM_CONDITIONAL([HAVE_MACOS], [test "$HAVE_MACOS" = "yes"])
+
 dnl Rules for cleaning
 
 WINE_APPEND_RULE(
