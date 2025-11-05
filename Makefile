@@ -129,6 +129,7 @@ LIPO =
 OTOOL = 
 OTOOL64 = 
 LT_SYS_LIBRARY_PATH = 
+wine_makedep = tools/makedep
 HAVE_MACOS_TRUE = #
 HAVE_MACOS_FALSE = 
 TAGSFLAGS = --langmap='c:+.idl.l.rh,make:(Make*.in)'
@@ -168,3 +169,21 @@ tags ctags:
 	(test -d .git && git ls-files || find -L . -name '*.[ch]' -print) | xargs ctags -a $(TAGSFLAGS)
 dummy:
 .PHONY: dummy
+
+### Dependencies (everything below this line is auto-generated; DO NOT EDIT!!)
+.INIT: Makefile
+.MAKEFILEDEPS:
+.SUFFIXES:
+Makefile: tools/makedep
+depend: tools/makedep
+	tools/makedep -C
+all:
+Makefile:
+:
+check test:
+clean::
+testclean::
+distclean::
+	rm -f .gitignore Makefile
+maintainer-clean::
+.PHONY: depend all check test distclean testclean maintainer-clean

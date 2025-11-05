@@ -303,6 +303,7 @@ target_alias =
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
+wine_makedep = tools/makedep
 
 # atl_android Makefile.am
 noinst_LTLIBRARIES = libatl_android.la

@@ -744,7 +744,7 @@ wine_fn_output_makedep ()
 }
 wine_fn_output_makefile ()
 {
-    cat <<\_WINE_EOF >$tmp/makefile && mv -f $tmp/makefile $1 && "" -C && return
+    cat <<\_WINE_EOF >$tmp/makefile && mv -f $tmp/makefile $1 && "tools/makedep" -C && return
 # This Makefile understands the following targets:
 #
 # all (default):   build wine
@@ -876,6 +876,7 @@ LIPO =
 OTOOL = 
 OTOOL64 = 
 LT_SYS_LIBRARY_PATH = 
+wine_makedep = tools/makedep
 HAVE_MACOS_TRUE = #
 HAVE_MACOS_FALSE = 
 TAGSFLAGS = --langmap='c:+.idl.l.rh,make:(Make*.in)'
@@ -916,7 +917,7 @@ tags ctags:
 dummy:
 .PHONY: dummy
 _WINE_EOF
-    as_fn_error 0 "could not create Makefile" "19980" 5
+    as_fn_error 0 "could not create Makefile" "19984" 5
 }
 
 
@@ -2198,6 +2199,7 @@ S["LIBOBJS"]=""
 S["TAGSFLAGS"]="--langmap='c:+.idl.l.rh,make:(Make*.in)'"
 S["HAVE_MACOS_FALSE"]=""
 S["HAVE_MACOS_TRUE"]="#"
+S["wine_makedep"]="tools/makedep"
 S["LT_SYS_LIBRARY_PATH"]=""
 S["OTOOL64"]=""
 S["OTOOL"]=""

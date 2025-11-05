@@ -337,6 +337,7 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
+wine_makedep = tools/makedep
 goliath_SOURCES = main.c main.h atl_main.c preloader.c $(am__append_1)
 goliath_CFLAGS = \
     -I$(top_srcdir)/include \

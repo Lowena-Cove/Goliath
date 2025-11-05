@@ -666,6 +666,7 @@ LIBOBJS
 TAGSFLAGS
 HAVE_MACOS_FALSE
 HAVE_MACOS_TRUE
+wine_makedep
 LT_SYS_LIBRARY_PATH
 OTOOL64
 OTOOL
@@ -14315,6 +14316,9 @@ ac_config_commands="$ac_config_commands include/stamp-h"
 
 printf %s "creating Makefile rules..." >&6
 
+wine_makedep=tools/makedep
+
+
 makedep_flags=" -C"
 test "x$enable_silent_rules" = xyes && makedep_flags="$makedep_flags -S"
 
@@ -20415,6 +20419,7 @@ LIPO = $LIPO
 OTOOL = $OTOOL
 OTOOL64 = $OTOOL64
 LT_SYS_LIBRARY_PATH = $LT_SYS_LIBRARY_PATH
+wine_makedep = $wine_makedep
 HAVE_MACOS_TRUE = $HAVE_MACOS_TRUE
 HAVE_MACOS_FALSE = $HAVE_MACOS_FALSE
 TAGSFLAGS = $TAGSFLAGS
