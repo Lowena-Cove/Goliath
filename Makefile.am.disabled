@@ -1,0 +1,18 @@
+# Minimal Automake wrapper for Wine/Goliath build system
+# The actual build is handled by Wine's custom Makefile rules
+
+EXTRA_DIST = goliath-launch.sh
+
+# Dummy targets - the real build is done by Wine's makedep system
+# which generates rules in the Makefile after the Automake section
+all-local:
+	@echo "Building Goliath/Wine..."
+
+clean-local:
+	@echo "Cleaning..."
+
+install-exec-local:
+	@echo "Installing Goliath/Wine..."
+
+.PHONY: all-local clean-local install-exec-local
+

@@ -5,7 +5,7 @@
 #define __WINE_CONFIG_H
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-#define HAVE_DLFCN_H 1
+/* #undef HAVE_DLFCN_H */
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
@@ -144,10 +144,10 @@
 #define HAVE___CLEAR_CACHE 1
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
-#define LT_OBJDIR ".libs/"
+/* #undef LT_OBJDIR */
 
 /* Name of package */
-#define PACKAGE "wine"
+/* #undef PACKAGE */
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "wine-devel@winehq.org"
@@ -173,7 +173,7 @@
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "10.0"
+/* #undef VERSION */
 
 /* Define if __aarch64__ is available */
 /* #undef __aarch64__ */
@@ -188,6 +188,6 @@
 /* #undef __powerpc64__ */
 
 /* Define if __x86_64__ is available */
-#define __x86_64__ 1
+/* #undef __x86_64__ */
 
 #endif /* __WINE_CONFIG_H */

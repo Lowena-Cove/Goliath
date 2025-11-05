@@ -12,7 +12,7 @@
 # even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE.
 
-
+@SET_MAKE@
 
 
 
@@ -71,10 +71,10 @@ am__make_running_with_option = \
   test $$has_opt = yes
 am__make_dryrun = (target_option=n; $(am__make_running_with_option))
 am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
-pkgdatadir = $(datadir)/wine
-pkgincludedir = $(includedir)/wine
-pkglibdir = $(libdir)/wine
-pkglibexecdir = $(libexecdir)/wine
+pkgdatadir = $(datadir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkglibexecdir = $(libexecdir)/@PACKAGE@
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -87,8 +87,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = x86_64-pc-linux-gnu
-host_triplet = x86_64-pc-linux-gnu
+build_triplet = @build@
+host_triplet = @host@
 bin_PROGRAMS = goliath$(EXEEXT)
 #am__append_1 = preloader_mac.c
 #am__append_2 = -Wl,-image_base,0x7c000000
@@ -119,26 +119,26 @@ am_goliath_OBJECTS = goliath-main.$(OBJEXT) goliath-atl_main.$(OBJEXT) \
 	goliath-preloader.$(OBJEXT) $(am__objects_1)
 goliath_OBJECTS = $(am_goliath_OBJECTS)
 goliath_LDADD = $(LDADD)
-AM_V_lt = $(am__v_lt_$(V))
-am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
+AM_V_lt = $(am__v_lt_@AM_V@)
+am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
 goliath_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(goliath_CFLAGS) \
 	$(CFLAGS) $(goliath_LDFLAGS) $(LDFLAGS) -o $@
-AM_V_P = $(am__v_P_$(V))
-am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
+AM_V_P = $(am__v_P_@AM_V@)
+am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
 am__v_P_1 = :
-AM_V_GEN = $(am__v_GEN_$(V))
-am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
+AM_V_GEN = $(am__v_GEN_@AM_V@)
+am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
 am__v_GEN_0 = @echo "  GEN     " $@;
 am__v_GEN_1 = 
-AM_V_at = $(am__v_at_$(V))
-am__v_at_ = $(am__v_at_$(AM_DEFAULT_VERBOSITY))
+AM_V_at = $(am__v_at_@AM_V@)
+am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
 am__v_at_1 = 
-DEFAULT_INCLUDES = -I. -I$(top_builddir)/include
+DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/tools/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/goliath-atl_main.Po \
@@ -151,16 +151,16 @@ LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
 	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
 	$(AM_CFLAGS) $(CFLAGS)
-AM_V_CC = $(am__v_CC_$(V))
-am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
+AM_V_CC = $(am__v_CC_@AM_V@)
+am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
 am__v_CC_0 = @echo "  CC      " $@;
 am__v_CC_1 = 
 CCLD = $(CC)
 LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-AM_V_CCLD = $(am__v_CCLD_$(V))
-am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
+AM_V_CCLD = $(am__v_CCLD_@AM_V@)
+am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(goliath_SOURCES)
@@ -217,59 +217,59 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/tools/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} '/home/runner/work/Goliath/Goliath/tools/missing' aclocal-1.16
-AMTAR = $${TAR-tar}
-AM_DEFAULT_VERBOSITY = 1
-AR = ar
-AUTOCONF = ${SHELL} '/home/runner/work/Goliath/Goliath/tools/missing' autoconf
-AUTOHEADER = ${SHELL} '/home/runner/work/Goliath/Goliath/tools/missing' autoheader
-AUTOMAKE = ${SHELL} '/home/runner/work/Goliath/Goliath/tools/missing' automake-1.16
-AWK = gawk
+ACLOCAL = @ACLOCAL@
+AMTAR = @AMTAR@
+AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
+AR = @AR@
+AUTOCONF = @AUTOCONF@
+AUTOHEADER = @AUTOHEADER@
+AUTOMAKE = @AUTOMAKE@
+AWK = @AWK@
 CC = gcc
-CCDEPMODE = depmode=gcc3
+CCDEPMODE = @CCDEPMODE@
 CFLAGS = -g -O2
 CPPFLAGS = 
-CSCOPE = cscope
-CTAGS = ctags
-CYGPATH_W = echo
+CSCOPE = @CSCOPE@
+CTAGS = @CTAGS@
+CYGPATH_W = @CYGPATH_W@
 DEFS = -DHAVE_CONFIG_H
-DEPDIR = .deps
-DLLTOOL = false
-DSYMUTIL = 
-DUMPBIN = 
+DEPDIR = @DEPDIR@
+DLLTOOL = @DLLTOOL@
+DSYMUTIL = @DSYMUTIL@
+DUMPBIN = @DUMPBIN@
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
-EGREP = /usr/bin/grep -E
-ETAGS = etags
+EGREP = @EGREP@
+ETAGS = @ETAGS@
 EXEEXT = 
-FGREP = /usr/bin/grep -F
-FILECMD = file
-GREP = /usr/bin/grep
-INSTALL = /usr/bin/install -c
-INSTALL_DATA = ${INSTALL} -m 644
-INSTALL_PROGRAM = ${INSTALL}
-INSTALL_SCRIPT = ${INSTALL}
-INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LD = /usr/bin/ld -m elf_x86_64
+FGREP = @FGREP@
+FILECMD = @FILECMD@
+GREP = @GREP@
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+LD = @LD@
 LDFLAGS = 
 LIBOBJS = 
 LIBS = 
-LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LIPO = 
-LN_S = ln -s
+LIBTOOL = @LIBTOOL@
+LIPO = @LIPO@
+LN_S = @LN_S@
 LTLIBOBJS = 
-LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} '/home/runner/work/Goliath/Goliath/tools/missing' makeinfo
-MANIFEST_TOOL = :
-MKDIR_P = /usr/bin/mkdir -p
-NM = /usr/bin/nm -B
-NMEDIT = 
-OBJDUMP = objdump
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
+MAKEINFO = @MAKEINFO@
+MANIFEST_TOOL = @MANIFEST_TOOL@
+MKDIR_P = @MKDIR_P@
+NM = @NM@
+NMEDIT = @NMEDIT@
+OBJDUMP = @OBJDUMP@
 OBJEXT = o
-OTOOL = 
-OTOOL64 = 
-PACKAGE = wine
+OTOOL = @OTOOL@
+OTOOL64 = @OTOOL64@
+PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = wine-devel@winehq.org
 PACKAGE_NAME = Wine
 PACKAGE_STRING = Wine 10.0
@@ -277,52 +277,52 @@ PACKAGE_TARNAME = wine
 PACKAGE_URL = https://www.winehq.org
 PACKAGE_VERSION = 10.0
 PATH_SEPARATOR = :
-RANLIB = ranlib
-SED = /usr/bin/sed
-SET_MAKE = 
+RANLIB = @RANLIB@
+SED = @SED@
+SET_MAKE = @SET_MAKE@
 SHELL = /bin/sh
-STRIP = strip
+STRIP = @STRIP@
 TAGSFLAGS = --langmap='c:+.idl.l.rh,make:(Make*.in)'
-VERSION = 10.0
+VERSION = @VERSION@
 abs_builddir = /home/runner/work/Goliath/Goliath/loader
 abs_srcdir = /home/runner/work/Goliath/Goliath/loader
 abs_top_builddir = /home/runner/work/Goliath/Goliath
 abs_top_srcdir = /home/runner/work/Goliath/Goliath
-ac_ct_AR = ar
+ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = gcc
-ac_ct_DUMPBIN = 
-am__include = include
-am__leading_dot = .
+ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
+am__include = @am__include@
+am__leading_dot = @am__leading_dot@
 am__quote = 
-am__tar = $${TAR-tar} chof - "$$tardir"
-am__untar = $${TAR-tar} xf -
+am__tar = @am__tar@
+am__untar = @am__untar@
 bindir = ${exec_prefix}/bin
-build = x86_64-pc-linux-gnu
+build = @build@
 build_alias = 
-build_cpu = x86_64
-build_os = linux-gnu
-build_vendor = pc
+build_cpu = @build_cpu@
+build_os = @build_os@
+build_vendor = @build_vendor@
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-pc-linux-gnu
+host = @host@
 host_alias = 
-host_cpu = x86_64
-host_os = linux-gnu
-host_vendor = pc
+host_cpu = @host_cpu@
+host_os = @host_os@
+host_vendor = @host_vendor@
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/runner/work/Goliath/Goliath/tools/install-sh
+install_sh = @install_sh@
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
 localstatedir = ${prefix}/var
 mandir = ${datarootdir}/man
-mkdir_p = $(MKDIR_P)
+mkdir_p = @mkdir_p@
 oldincludedir = /usr/include
 pdfdir = ${docdir}
 prefix = /usr/local
@@ -450,10 +450,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/goliath-atl_main.Po # am--include-marker
-include ./$(DEPDIR)/goliath-main.Po # am--include-marker
-include ./$(DEPDIR)/goliath-preloader.Po # am--include-marker
-include ./$(DEPDIR)/goliath-preloader_mac.Po # am--include-marker
+@AMDEP_TRUE@@am__include@ ./$(DEPDIR)/goliath-atl_main.Po # am--include-marker
+@AMDEP_TRUE@@am__include@ ./$(DEPDIR)/goliath-main.Po # am--include-marker
+@AMDEP_TRUE@@am__include@ ./$(DEPDIR)/goliath-preloader.Po # am--include-marker
+@AMDEP_TRUE@@am__include@ ./$(DEPDIR)/goliath-preloader_mac.Po # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -462,84 +462,84 @@ $(am__depfiles_remade):
 am--depfiles: $(am__depfiles_remade)
 
 .c.o:
-	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
-	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-	$(am__mv) $$depbase.Tpo $$depbase.Po
-#	$(AM_V_CC)source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(COMPILE) -c -o $@ $<
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ $<
 
 .c.obj:
-	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
-	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
-	$(am__mv) $$depbase.Tpo $$depbase.Po
-#	$(AM_V_CC)source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .c.lo:
-	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
-	$(LTCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-	$(am__mv) $$depbase.Tpo $$depbase.Plo
-#	$(AM_V_CC)source='$<' object='$@' libtool=yes \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(LTCOMPILE) -c -o $@ $<
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
+@am__fastdepCC_TRUE@	$(LTCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
 goliath-main.o: main.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-main.o -MD -MP -MF $(DEPDIR)/goliath-main.Tpo -c -o goliath-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-main.Tpo $(DEPDIR)/goliath-main.Po
-#	$(AM_V_CC)source='main.c' object='goliath-main.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-main.o -MD -MP -MF $(DEPDIR)/goliath-main.Tpo -c -o goliath-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-main.Tpo $(DEPDIR)/goliath-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='main.c' object='goliath-main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
 
 goliath-main.obj: main.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-main.obj -MD -MP -MF $(DEPDIR)/goliath-main.Tpo -c -o goliath-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-main.Tpo $(DEPDIR)/goliath-main.Po
-#	$(AM_V_CC)source='main.c' object='goliath-main.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-main.obj -MD -MP -MF $(DEPDIR)/goliath-main.Tpo -c -o goliath-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-main.Tpo $(DEPDIR)/goliath-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='main.c' object='goliath-main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
 
 goliath-atl_main.o: atl_main.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-atl_main.o -MD -MP -MF $(DEPDIR)/goliath-atl_main.Tpo -c -o goliath-atl_main.o `test -f 'atl_main.c' || echo '$(srcdir)/'`atl_main.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-atl_main.Tpo $(DEPDIR)/goliath-atl_main.Po
-#	$(AM_V_CC)source='atl_main.c' object='goliath-atl_main.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-atl_main.o `test -f 'atl_main.c' || echo '$(srcdir)/'`atl_main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-atl_main.o -MD -MP -MF $(DEPDIR)/goliath-atl_main.Tpo -c -o goliath-atl_main.o `test -f 'atl_main.c' || echo '$(srcdir)/'`atl_main.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-atl_main.Tpo $(DEPDIR)/goliath-atl_main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='atl_main.c' object='goliath-atl_main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-atl_main.o `test -f 'atl_main.c' || echo '$(srcdir)/'`atl_main.c
 
 goliath-atl_main.obj: atl_main.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-atl_main.obj -MD -MP -MF $(DEPDIR)/goliath-atl_main.Tpo -c -o goliath-atl_main.obj `if test -f 'atl_main.c'; then $(CYGPATH_W) 'atl_main.c'; else $(CYGPATH_W) '$(srcdir)/atl_main.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-atl_main.Tpo $(DEPDIR)/goliath-atl_main.Po
-#	$(AM_V_CC)source='atl_main.c' object='goliath-atl_main.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-atl_main.obj `if test -f 'atl_main.c'; then $(CYGPATH_W) 'atl_main.c'; else $(CYGPATH_W) '$(srcdir)/atl_main.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-atl_main.obj -MD -MP -MF $(DEPDIR)/goliath-atl_main.Tpo -c -o goliath-atl_main.obj `if test -f 'atl_main.c'; then $(CYGPATH_W) 'atl_main.c'; else $(CYGPATH_W) '$(srcdir)/atl_main.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-atl_main.Tpo $(DEPDIR)/goliath-atl_main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='atl_main.c' object='goliath-atl_main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-atl_main.obj `if test -f 'atl_main.c'; then $(CYGPATH_W) 'atl_main.c'; else $(CYGPATH_W) '$(srcdir)/atl_main.c'; fi`
 
 goliath-preloader.o: preloader.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-preloader.o -MD -MP -MF $(DEPDIR)/goliath-preloader.Tpo -c -o goliath-preloader.o `test -f 'preloader.c' || echo '$(srcdir)/'`preloader.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-preloader.Tpo $(DEPDIR)/goliath-preloader.Po
-#	$(AM_V_CC)source='preloader.c' object='goliath-preloader.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-preloader.o `test -f 'preloader.c' || echo '$(srcdir)/'`preloader.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-preloader.o -MD -MP -MF $(DEPDIR)/goliath-preloader.Tpo -c -o goliath-preloader.o `test -f 'preloader.c' || echo '$(srcdir)/'`preloader.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-preloader.Tpo $(DEPDIR)/goliath-preloader.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='preloader.c' object='goliath-preloader.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-preloader.o `test -f 'preloader.c' || echo '$(srcdir)/'`preloader.c
 
 goliath-preloader.obj: preloader.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-preloader.obj -MD -MP -MF $(DEPDIR)/goliath-preloader.Tpo -c -o goliath-preloader.obj `if test -f 'preloader.c'; then $(CYGPATH_W) 'preloader.c'; else $(CYGPATH_W) '$(srcdir)/preloader.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-preloader.Tpo $(DEPDIR)/goliath-preloader.Po
-#	$(AM_V_CC)source='preloader.c' object='goliath-preloader.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-preloader.obj `if test -f 'preloader.c'; then $(CYGPATH_W) 'preloader.c'; else $(CYGPATH_W) '$(srcdir)/preloader.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-preloader.obj -MD -MP -MF $(DEPDIR)/goliath-preloader.Tpo -c -o goliath-preloader.obj `if test -f 'preloader.c'; then $(CYGPATH_W) 'preloader.c'; else $(CYGPATH_W) '$(srcdir)/preloader.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-preloader.Tpo $(DEPDIR)/goliath-preloader.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='preloader.c' object='goliath-preloader.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-preloader.obj `if test -f 'preloader.c'; then $(CYGPATH_W) 'preloader.c'; else $(CYGPATH_W) '$(srcdir)/preloader.c'; fi`
 
 goliath-preloader_mac.o: preloader_mac.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-preloader_mac.o -MD -MP -MF $(DEPDIR)/goliath-preloader_mac.Tpo -c -o goliath-preloader_mac.o `test -f 'preloader_mac.c' || echo '$(srcdir)/'`preloader_mac.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-preloader_mac.Tpo $(DEPDIR)/goliath-preloader_mac.Po
-#	$(AM_V_CC)source='preloader_mac.c' object='goliath-preloader_mac.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-preloader_mac.o `test -f 'preloader_mac.c' || echo '$(srcdir)/'`preloader_mac.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-preloader_mac.o -MD -MP -MF $(DEPDIR)/goliath-preloader_mac.Tpo -c -o goliath-preloader_mac.o `test -f 'preloader_mac.c' || echo '$(srcdir)/'`preloader_mac.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-preloader_mac.Tpo $(DEPDIR)/goliath-preloader_mac.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='preloader_mac.c' object='goliath-preloader_mac.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-preloader_mac.o `test -f 'preloader_mac.c' || echo '$(srcdir)/'`preloader_mac.c
 
 goliath-preloader_mac.obj: preloader_mac.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-preloader_mac.obj -MD -MP -MF $(DEPDIR)/goliath-preloader_mac.Tpo -c -o goliath-preloader_mac.obj `if test -f 'preloader_mac.c'; then $(CYGPATH_W) 'preloader_mac.c'; else $(CYGPATH_W) '$(srcdir)/preloader_mac.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-preloader_mac.Tpo $(DEPDIR)/goliath-preloader_mac.Po
-#	$(AM_V_CC)source='preloader_mac.c' object='goliath-preloader_mac.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-preloader_mac.obj `if test -f 'preloader_mac.c'; then $(CYGPATH_W) 'preloader_mac.c'; else $(CYGPATH_W) '$(srcdir)/preloader_mac.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -MT goliath-preloader_mac.obj -MD -MP -MF $(DEPDIR)/goliath-preloader_mac.Tpo -c -o goliath-preloader_mac.obj `if test -f 'preloader_mac.c'; then $(CYGPATH_W) 'preloader_mac.c'; else $(CYGPATH_W) '$(srcdir)/preloader_mac.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/goliath-preloader_mac.Tpo $(DEPDIR)/goliath-preloader_mac.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='preloader_mac.c' object='goliath-preloader_mac.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(goliath_CFLAGS) $(CFLAGS) -c -o goliath-preloader_mac.obj `if test -f 'preloader_mac.c'; then $(CYGPATH_W) 'preloader_mac.c'; else $(CYGPATH_W) '$(srcdir)/preloader_mac.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
