@@ -2,3 +2,9 @@
 /.gitignore
 /Makefile
 libs/darling
+
+# Build artifacts
+Makefile
+config.log
+config.status
+configure~
