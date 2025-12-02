@@ -33,7 +33,9 @@ jobs:
           libx11-dev \
           libx11-dev:i386 \
           libfreetype-dev \
-          libfreetype-dev:i386
+          libfreetype-dev:i386 \
+          libdrm-dev \
+          libdrm-dev:i386
     - name: Generate configure script
       run: ./autogen.sh
     - name: configure
