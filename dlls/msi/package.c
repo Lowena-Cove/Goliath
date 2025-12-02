@@ -620,6 +620,29 @@ done:
     free(version);
 }
 
+static void fixup_winver(DWORD *verval)
+{
+    static int cached = -1;
+
+    if (cached == -1)
+    {
+        const char *s;
+
+        cached = (s = getenv("STEAM_COMPAT_APP_ID")) &&
+                    (
+                        !strcmp(s, "976730")
+                        || !strcmp(s, "231430")
+                        || !strcmp(s, "1017900")
+                        || !strcmp(s, "285190")
+                        || !strcmp(s, "627270")
+                    );
+        if (cached)
+            ERR("HACK: setting winver 502.\n");
+    }
+    if (!cached) return;
+    if (*verval > 502) *verval = 502;
+}
+
 static VOID set_installer_properties(MSIPACKAGE *package)
 {
     WCHAR *ptr;
@@ -747,6 +770,7 @@ static VOID set_installer_properties(MSIPACKAGE *package)
         verval = 603;
         OSVersion.dwBuildNumber = 9600;
     }
+    fixup_winver(&verval);
     len = swprintf( verstr, ARRAY_SIZE(verstr), L"%u", verval );
     switch (OSVersion.dwPlatformId)
     {
@@ -777,7 +801,7 @@ static VOID set_installer_properties(MSIPACKAGE *package)
     msi_set_property( package->db, L"Intel", bufstr, len );
     if (sys_info.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_INTEL)
     {
-        GetSystemDirectoryW( pth, MAX_PATH );
+        wcscpy( pth, sysdir );
         PathAddBackslashW( pth );
         msi_set_property( package->db, L"SystemFolder", pth, -1 );
 
@@ -798,7 +822,7 @@ static VOID set_installer_properties(MSIPACKAGE *package)
         msi_set_property( package->db, L"Msix64", bufstr, -1 );
         msi_set_property( package->db, L"VersionNT64", verstr, -1 );
 
-        GetSystemDirectoryW( pth, MAX_PATH );
+        wcscpy( pth, sysdir );
         PathAddBackslashW( pth );
         msi_set_property( package->db, L"System64Folder", pth, -1 );
 

@@ -82,6 +82,7 @@ static const unsigned int net_wm_state_atoms[NB_NET_WM_STATES] =
     XATOM__KDE_NET_WM_STATE_SKIP_SWITCHER,
     XATOM__NET_WM_STATE_FULLSCREEN,
     XATOM__NET_WM_STATE_ABOVE,
+    XATOM__NET_WM_STATE_BELOW,
     XATOM__NET_WM_STATE_MAXIMIZED_VERT,
     XATOM__NET_WM_STATE_SKIP_PAGER,
     XATOM__NET_WM_STATE_SKIP_TASKBAR
@@ -398,6 +399,31 @@ static struct x11drv_win_data *alloc_win_data( Display *display, HWND hwnd )
 }
 
 
+static BOOL thickframe_managed( DWORD style )
+{
+    static int cached = -1;
+
+    if (!(style & WS_POPUP)) return TRUE;
+
+    if (cached == -1)
+    {
+        static const WCHAR app_name[] = u"\\SocialClubHelper.exe";
+        UNICODE_STRING *name;
+        DWORD len, name_len;
+
+        cached = 1;
+
+        name = &NtCurrentTeb()->Peb->ProcessParameters->ImagePathName;
+        len = name->Length / sizeof(WCHAR);
+        name_len = ARRAY_SIZE(app_name) - 1;
+        if (len >= name_len)
+            cached = !!memcmp( name->Buffer + len - name_len, app_name, name_len * sizeof(*app_name) );
+        if (!cached) FIXME( "HACK: making popups with WS_THICKFRAME not managed.\n" );
+    }
+    return cached;
+}
+
+
 /***********************************************************************
  *		is_window_managed
  *
@@ -418,7 +444,7 @@ static BOOL is_window_managed( HWND hwnd, UINT swp_flags, BOOL fullscreen )
     /* windows with caption are managed */
     if ((style & WS_CAPTION) == WS_CAPTION) return TRUE;
     /* windows with thick frame are managed */
-    if (style & WS_THICKFRAME) return TRUE;
+    if (style & WS_THICKFRAME && thickframe_managed( style )) return TRUE;
     if (style & WS_POPUP)
     {
         /* popup with sysmenu == caption are managed */
@@ -990,12 +1016,6 @@ static void set_mwm_hints( struct x11drv_win_data *data, UINT style, UINT ex_sty
         }
     }
 
-    /* MWM functions changes can interacts with NET_WM_STATE changes with Mutter and may end
-     * up with unexpected NET_WM_STATE replies. We don't decorate windows with Mutter, there's
-     * no need to control MWM functions either.
-     */
-    if (X11DRV_HasWindowManager( "Mutter" )) mwm_hints.functions = MWM_FUNC_ALL;
-
     mwm_hints.flags = MWM_HINTS_FUNCTIONS | MWM_HINTS_DECORATIONS;
     mwm_hints.input_mode = 0;
     mwm_hints.status = 0;
@@ -1410,7 +1430,12 @@ static void window_set_config( struct x11drv_win_data *data, const RECT *new_rec
         mask |= CWX | CWY;
     }
 
-    if (above)
+    if (data->force_below_hack)
+    {
+        changes.stack_mode = Below;
+        mask |= CWStackMode;
+    }
+    else if (above)
     {
         changes.stack_mode = Above;
         mask |= CWStackMode;
@@ -1457,7 +1482,9 @@ static void update_net_wm_states( struct x11drv_win_data *data )
         new_state |= (1 << NET_WM_STATE_MAXIMIZED);
 
     ex_style = NtUserGetWindowLongW( data->hwnd, GWL_EXSTYLE );
-    if ((ex_style & WS_EX_TOPMOST) &&
+    if (data->force_below_hack)
+        new_state |= (1 << NET_WM_STATE_BELOW);
+    else if ((ex_style & WS_EX_TOPMOST) &&
         /* This workaround was initially targetting some mutter and KDE issues, but
          * removing it causes failure to focus out from exclusive fullscreen windows.
          *
@@ -2342,7 +2369,6 @@ void destroy_client_window( HWND hwnd, Window client_window )
  */
 Window create_client_window( HWND hwnd, RECT client_rect, const XVisualInfo *visual, Colormap colormap )
 {
-    Window dummy_parent = get_dummy_parent();
     struct x11drv_win_data *data = get_win_data( hwnd );
     XSetWindowAttributes attr;
     Window ret;
@@ -2373,7 +2399,7 @@ Window create_client_window( HWND hwnd, RECT client_rect, const XVisualInfo *vis
 
     XSync( gdi_display, False ); /* make sure whole_window is known from gdi_display */
     ret = data->client_window = XCreateWindow( gdi_display,
-                                               data->whole_window ? data->whole_window : dummy_parent,
+                                               data->whole_window ? data->whole_window : get_dummy_parent(),
                                                x, y, cx, cy, 0, default_visual.depth, InputOutput,
                                                visual->visual, CWBitGravity | CWWinGravity |
                                                CWBackingStore | CWColormap | CWBorderPixel, &attr );
@@ -2776,13 +2802,22 @@ BOOL X11DRV_CreateWindow( HWND hwnd )
 {
     if (hwnd == NtUserGetDesktopWindow())
     {
+        static const WCHAR winsta0[] = {'W','i','n','S','t','a','0',0};
         struct x11drv_thread_data *data = x11drv_init_thread_data();
+        WCHAR winstation_name[64];
         XSetWindowAttributes attr;
 
-        /* listen to raw xinput event in the desktop window thread */
-        data->xinput2_rawinput = TRUE;
-        x11drv_xinput2_enable( data->display, DefaultRootWindow( data->display ) );
-
+        if (NtUserGetObjectInformation( NtUserGetProcessWindowStation(), UOI_NAME, winstation_name,
+                                        sizeof(winstation_name), NULL ))
+        {
+            TRACE( "winstation name %s.\n", debugstr_w(winstation_name) );
+            if (!wcscmp( winstation_name, winsta0 ))
+            {
+                /* listen to raw xinput event in the desktop window thread */
+                data->xinput2_rawinput = TRUE;
+                x11drv_xinput2_enable( data->display, DefaultRootWindow( data->display ) );
+            }
+        }
         /* create the cursor clipping window */
         attr.override_redirect = TRUE;
         attr.event_mask = StructureNotifyMask | FocusChangeMask;
@@ -3266,6 +3301,21 @@ BOOL X11DRV_GetWindowStyleMasks( HWND hwnd, UINT style, UINT ex_style, UINT *sty
     return TRUE;
 }
 
+static int use_force_below_hack(void)
+{
+    static int cached = -1;
+
+    if (cached == -1)
+    {
+        char const *sgi = getenv( "SteamGameId" );
+
+        cached = sgi && (
+                 !strcmp(sgi, "1293830")
+                 || !strcmp(sgi, "1551360")
+                 );
+    }
+    return cached;
+}
 
 /***********************************************************************
  *		WindowPosChanged   (X11DRV.@)
@@ -3297,6 +3347,15 @@ void X11DRV_WindowPosChanged( HWND hwnd, HWND insert_after, HWND owner_hint, UIN
            debugstr_window_rects(new_rects), new_style, swp_flags, fullscreen );
 
     XFlush( gdi_display );  /* make sure painting is done before we move the window */
+
+    if (use_force_below_hack())
+    {
+        if (insert_after != HWND_BOTTOM && insert_after != HWND_NOTOPMOST && insert_after != HWND_TOP && insert_after != HWND_TOPMOST)
+        {
+            WARN( "%p/%#lx setting force_below_hack.\n", hwnd, data->whole_window );
+            data->force_below_hack = 1;
+        }
+    }
 
     sync_client_position( data, &old_rects );
 
@@ -3782,7 +3841,7 @@ static Window get_net_supporting_wm_check( Display *display, Window window )
     Atom type;
 
     if (!XGetWindowProperty( display, window, x11drv_atom(_NET_SUPPORTING_WM_CHECK), 0, 65536 / sizeof(CARD32),
-                             False, XA_WINDOW, &type, &format, &count, &remaining, (unsigned char **)&tmp ))
+                             False, XA_WINDOW, &type, &format, &count, &remaining, (unsigned char **)&tmp ) && tmp)
     {
         support = *tmp;
         free( tmp );
@@ -3827,7 +3886,8 @@ void net_supporting_wm_check_init( struct x11drv_thread_data *data )
 {
     Window window = None, other;
 
-    window = get_net_supporting_wm_check( data->display, DefaultRootWindow( data->display ) );
+    if (!(window = get_net_supporting_wm_check( data->display, DefaultRootWindow( data->display ) ))) return;
+
     /* the window itself must have the property set too */
     X11DRV_expect_error( data->display, host_window_error, NULL );
     other = get_net_supporting_wm_check( data->display, window );

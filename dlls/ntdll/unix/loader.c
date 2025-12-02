@@ -2128,6 +2128,7 @@ BOOL ac_odyssey;
 BOOL fsync_simulate_sched_quantum;
 BOOL alert_simulate_sched_quantum;
 BOOL fsync_yield_to_waiters;
+BOOL fsync_help_simulated_pulse;
 BOOL localsystem_sid;
 BOOL simulate_writecopy;
 BOOL wine_allocs_2g_limit;
@@ -2172,6 +2173,12 @@ static void hacks_init(void)
     {
         alert_simulate_sched_quantum = !!strstr(main_argv[1], "GTA5.exe");
         alert_simulate_sched_quantum = alert_simulate_sched_quantum || !!strstr(main_argv[1], "MarySkelter2.exe");
+        alert_simulate_sched_quantum = alert_simulate_sched_quantum || !!strstr(main_argv[1], "MarySkelterFinale.exe");
+        alert_simulate_sched_quantum = alert_simulate_sched_quantum || !!strstr(main_argv[1], "Application.exe");
+        alert_simulate_sched_quantum = alert_simulate_sched_quantum || !!strstr(main_argv[1], "DeathEndReQuest2.exe");
+        alert_simulate_sched_quantum = alert_simulate_sched_quantum || !!strstr(main_argv[1], "v2r.exe");
+        alert_simulate_sched_quantum = alert_simulate_sched_quantum || !!strstr(main_argv[1], "NeptuniaVirtualStars.exe");
+        alert_simulate_sched_quantum = alert_simulate_sched_quantum || !!strstr(main_argv[1], "DragonStarVarnir.exe");
     }
     if (alert_simulate_sched_quantum)
         ERR("HACK: Simulating sched quantum in NtWaitForAlertByThreadId.\n");
@@ -2182,6 +2189,13 @@ static void hacks_init(void)
     else if (sgi) fsync_yield_to_waiters = !strcmp(sgi, "292120") || !strcmp(sgi, "345350") || !strcmp(sgi, "292140");
     if (fsync_yield_to_waiters)
         ERR("HACK: fsync: yield to waiters.\n");
+
+    env_str = getenv("WINE_FSYNC_HELP_SIMULATED_PULSE");
+    if (env_str)
+        fsync_help_simulated_pulse = !!atoi(env_str);
+    else if (sgi) fsync_help_simulated_pulse = !strcmp(sgi, "460870") || !strcmp(sgi, "438490");
+    if (fsync_help_simulated_pulse)
+        ERR("HACK: fsync: helping simulated pulse event.\n");
 
     switch (sgi ? atoi( sgi ) : -1)
     {
@@ -2213,6 +2227,7 @@ static void hacks_init(void)
                                        || !strcmp(sgi, "2152990") /* Dinogen Online */
                                        || !strcmp(sgi, "2176450") /* Mr. Hopp's Playhouse 3 */
                                        || !strcmp(sgi, "2329630") /* Lovey-Dovey Lockdown */
+                                       || !strcmp(sgi, "2209020") /* Gemstones */
                                        || !strcmp(sgi, "2361360"); /* Hentai Maid Memories */
 
     if (sgi) wine_allocs_2g_limit = !strcmp(sgi, "359870");
@@ -2239,19 +2254,6 @@ static void hacks_init(void)
     {
         ERR("HACK: setting WINE_ENABLE_GST_LIVE_LATENCY.\n");
         setenv("WINE_ENABLE_GST_LIVE_LATENCY", "1", 0);
-    }
-    if (sgi && !strcmp(sgi, "292030"))
-    {
-        ERR("HACK: setting LIBGL_ALWAYS_SOFTWARE.\n");
-        setenv("LIBGL_ALWAYS_SOFTWARE", "1", 0);
-    }
-
-   if (main_argc > 1 && (strstr(main_argv[1], "\\EADesktop.exe") || strstr(main_argv[1], "\\Link2EA.exe")
-        || strstr(main_argv[1], "EA Desktop\\ErrorReporter.exe") || strstr(main_argv[1], "\\EAConnect_microsoft.exe")
-        || strstr(main_argv[1], "\\EALaunchHelper.exe") || strstr(main_argv[1], "\\EACrashReporter.exe")))
-    {
-        ERR("HACK: setting LIBGL_ALWAYS_SOFTWARE.\n");
-        setenv("LIBGL_ALWAYS_SOFTWARE", "1", 0);
     }
 
     if (sgi && !strcmp(sgi, "2379390"))

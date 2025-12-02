@@ -77,6 +77,7 @@ struct wg_parser
     guint64 file_size, start_offset, next_offset, stop_offset;
     guint64 next_pull_offset;
     gchar *uri;
+    gboolean is_web_scheme;
 
     pthread_t push_thread;
 
@@ -125,7 +126,7 @@ struct wg_parser_stream
     GstBuffer *buffer;
     GstMapInfo map_info;
 
-    bool flushing, eos, enabled, has_tags, has_buffer, no_more_pads;
+    bool flushing, eos, enabled, has_tags, has_buffer, no_more_pads, fix_nv12;
 
     uint64_t duration;
     gchar *tags[WG_PARSER_TAG_COUNT];
@@ -683,6 +684,13 @@ static gboolean sink_event_cb(GstPad *pad, GstObject *parent, GstEvent *event)
             break;
         }
 
+        /* decodebin collects EOS and sends them only when all streams are EOS.
+         * In place it sends stream-group-done notifications for individual
+         * streams. This is mainly meant to accommodate chained OGGs. However,
+         * Windows is generally capable of reading from arbitrary streams while
+         * ignoring others, and should still send EOS in that case.
+         * Therefore translate stream-group-done back to EOS. */
+        case GST_EVENT_STREAM_GROUP_DONE:
         case GST_EVENT_EOS:
             pthread_mutex_lock(&parser->mutex);
             stream->eos = true;
@@ -729,11 +737,29 @@ static gboolean sink_event_cb(GstPad *pad, GstObject *parent, GstEvent *event)
 
         case GST_EVENT_CAPS:
         {
+            GstStructure *structure;
+            GstVideoInfo video_info;
+            bool fix_nv12 = false;
             GstCaps *caps;
 
             gst_event_parse_caps(event, &caps);
+            structure = gst_caps_get_structure(caps, 0);
+            if (gst_structure_has_name(structure, "video/x-raw") && gst_video_info_from_caps(&video_info, caps))
+            {
+                fix_nv12 = video_info.stride[0] > GST_ROUND_UP_2(video_info.width)
+                        && GST_VIDEO_INFO_FORMAT(&video_info) == GST_VIDEO_FORMAT_NV12;
+                if (fix_nv12 && GST_VIDEO_INFO_IS_INTERLACED(&video_info))
+                {
+                    GST_WARNING("NV12 alignment fix is not implemented for interlaced NV12.\n");
+                    fix_nv12 = false;
+                }
+                if (fix_nv12)
+                    GST_INFO("Enabling the NV12 alignment fix.");
+            }
+
             pthread_mutex_lock(&parser->mutex);
             stream->current_caps = gst_caps_ref(caps);
+            stream->fix_nv12 = fix_nv12;
             pthread_mutex_unlock(&parser->mutex);
             pthread_cond_signal(&parser->init_cond);
             break;
@@ -751,6 +777,54 @@ static gboolean sink_event_cb(GstPad *pad, GstObject *parent, GstEvent *event)
     }
     gst_event_unref(event);
     return TRUE;
+}
+
+static void buffer_fix_nv12(GstBuffer *buffer, GstCaps *caps)
+{
+    GstVideoInfo src_info, dst_info;
+    gint i, aligned_height;
+    GstMapInfo map_info;
+    guint8 *dst, *src;
+
+    if (!gst_video_info_from_caps(&src_info, caps))
+    {
+        GST_ERROR("Failed to get video info from %"GST_PTR_FORMAT, caps);
+        return;
+    }
+    if (!gst_buffer_map(buffer, &map_info, GST_MAP_READWRITE))
+    {
+        GST_ERROR("Failed to map buffer.");
+        return;
+    }
+
+    dst_info = src_info;
+
+    aligned_height = GST_ROUND_UP_2(dst_info.height);
+    dst_info.stride[0] = GST_ROUND_UP_2(dst_info.width);
+    dst_info.stride[1] = dst_info.stride[0];
+    dst_info.offset[0] = 0;
+    dst_info.offset[1] = dst_info.stride[0] * aligned_height;
+    dst_info.size = dst_info.offset[1] + dst_info.stride[0] * aligned_height / 2;
+
+    dst = src = map_info.data;
+    for (i = 0; i < aligned_height; ++i)
+    {
+        memmove(dst, src, dst_info.stride[0]);
+        dst += dst_info.stride[0];
+        src += src_info.stride[0];
+    }
+
+    dst = map_info.data + dst_info.offset[1];
+    src = map_info.data + src_info.offset[1];
+    for (i = 0; i < aligned_height / 2; ++i)
+    {
+        memmove(dst, src, dst_info.stride[1]);
+        dst += dst_info.stride[1];
+        src += src_info.stride[1];
+    }
+
+    gst_buffer_unmap(buffer, &map_info);
+    gst_buffer_set_size(buffer, dst_info.size);
 }
 
 static GstFlowReturn sink_chain_cb(GstPad *pad, GstObject *parent, GstBuffer *buffer)
@@ -789,6 +863,9 @@ static GstFlowReturn sink_chain_cb(GstPad *pad, GstObject *parent, GstBuffer *bu
         gst_buffer_unref(buffer);
         return GST_FLOW_FLUSHING;
     }
+
+    if (stream->fix_nv12)
+        buffer_fix_nv12(buffer, stream->current_caps);
 
     if (!gst_buffer_map(buffer, &stream->map_info, GST_MAP_READ))
     {
@@ -1583,9 +1660,12 @@ static GstBusSyncReply bus_handler_cb(GstBus *bus, GstMessage *msg, gpointer use
             pthread_mutex_lock(&parser->mutex);
             if (!parser->use_mediaconv)
             {
-                GST_WARNING("Autoplugged element failed to initialise, trying again with protonvideoconvert.");
                 parser->error = true;
                 pthread_cond_signal(&parser->init_cond);
+                if (parser->is_web_scheme)
+                    GST_WARNING("Autoplugged element failed to initialise. Giving up as we're using a web scheme.");
+                else
+                    GST_WARNING("Autoplugged element failed to initialise, trying again with protonvideoconvert.");
             }
             pthread_mutex_unlock(&parser->mutex);
         }
@@ -1818,7 +1898,7 @@ static NTSTATUS wg_parser_connect(void *args)
 
     if (ret == GST_STATE_CHANGE_FAILURE)
     {
-        if (!parser->use_mediaconv)
+        if (!parser->use_mediaconv && !parser->is_web_scheme)
         {
             GST_WARNING("Failed to play media, trying again with protonvideoconvert.");
             use_mediaconv = true;
@@ -1834,7 +1914,7 @@ static NTSTATUS wg_parser_connect(void *args)
         pthread_cond_wait(&parser->init_cond, &parser->mutex);
     if (parser->error)
     {
-        if (!parser->use_mediaconv)
+        if (!parser->use_mediaconv && !parser->is_web_scheme)
             use_mediaconv = true;
         pthread_mutex_unlock(&parser->mutex);
         goto out;
@@ -1974,7 +2054,9 @@ static NTSTATUS wg_parser_disconnect(void *args)
     for (i = 0; i < parser->stream_count; ++i)
     {
         parser->streams[i]->flushing = true;
+        parser->streams[i]->eos = true;
         pthread_cond_signal(&parser->streams[i]->event_empty_cond);
+        pthread_cond_signal(&parser->streams[i]->event_cond);
     }
     pthread_mutex_unlock(&parser->mutex);
 
@@ -2016,8 +2098,9 @@ static BOOL decodebin_parser_init_gst(struct wg_parser *parser)
     GstElement *element;
     const char *type;
 
-    type = parser->uri && (!strncmp(parser->uri, "http://", 7) || !strncmp(parser->uri, "https://", 8) ||
-                            !strncmp(parser->uri, "rtsp://", 7)) ? "uridecodebin" : "decodebin";
+    parser->is_web_scheme = parser->uri && (!strncmp(parser->uri, "http://", 7) || !strncmp(parser->uri, "https://", 8) ||
+                            !strncmp(parser->uri, "rtsp://", 7));
+    type = parser->is_web_scheme ? "uridecodebin" : "decodebin";
     if (!(element = create_element(type, "base")))
         return FALSE;
     GST_INFO("creating %s element for uri \"%s\"", type, parser->uri ? parser->uri : "(null)");

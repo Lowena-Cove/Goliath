@@ -171,7 +171,7 @@ int do_fsync(void)
     if (do_fsync_cached == -1)
     {
         syscall( __NR_futex_waitv, NULL, 0, 0, NULL, 0 );
-        do_fsync_cached = getenv("WINEFSYNC") && atoi(getenv("WINEFSYNC")) && errno != ENOSYS;
+        do_fsync_cached = getenv("WINEFSYNC") && atoi(getenv("WINEFSYNC")) && errno != ENOSYS && errno != EPERM;
     }
 
     return do_fsync_cached;
@@ -718,6 +718,13 @@ NTSTATUS fsync_reset_event( HANDLE handle, LONG *prev )
     {
         put_object( &obj );
         return STATUS_OBJECT_TYPE_MISMATCH;
+    }
+
+    if (fsync_help_simulated_pulse && event->signaled
+        && __atomic_load_n( &event->last_pid, __ATOMIC_SEQ_CST ) == current_pid)
+    {
+        TRACE( "event %p, helping simulated pulse.\n", handle );
+        usleep( 0 );
     }
 
     current = __atomic_exchange_n( &event->signaled, 0, __ATOMIC_SEQ_CST );

@@ -84,6 +84,18 @@ static const struct column col_bios[] =
     { L"SystemBiosMinorVersion",         CIM_UINT8 },
     { L"Version",                        CIM_STRING|COL_FLAG_KEY },
 };
+static const struct column col_cache_memory[] =
+{
+    { L"BlockSize",      CIM_UINT64 },
+    { L"CacheSpeed",     CIM_UINT32 },
+    { L"CacheType",      CIM_UINT16 },
+    { L"DeviceId",       CIM_STRING|COL_FLAG_DYNAMIC },
+    { L"InstalledSize",  CIM_UINT32 },
+    { L"Level",          CIM_UINT16 },
+    { L"MaxCacheSize",   CIM_UINT32 },
+    { L"NumberOfBlocks", CIM_UINT64 },
+    { L"Status",         CIM_STRING },
+};
 static const struct column col_cdromdrive[] =
 {
     { L"DeviceId",    CIM_STRING|COL_FLAG_KEY },
@@ -191,6 +203,43 @@ static const struct column col_logicaldisktopartition[] =
 {
     { L"Antecedent", CIM_REFERENCE|COL_FLAG_DYNAMIC|COL_FLAG_KEY },
     { L"Dependent",  CIM_REFERENCE|COL_FLAG_DYNAMIC|COL_FLAG_KEY },
+};
+static const struct column col_msft_phys_disk[] =
+{
+    { L"AdapterSerialNumber",               CIM_STRING },
+    { L"AllocatedSize",                     CIM_UINT64 },
+    { L"BusType",                           CIM_UINT16 },
+    { L"CannotPoolReason",                  CIM_UINT16|CIM_FLAG_ARRAY },
+    { L"CanPool",                           CIM_BOOLEAN },
+    { L"Description",                       CIM_STRING },
+    { L"DeviceId",                          CIM_STRING|COL_FLAG_DYNAMIC|COL_FLAG_KEY },
+    { L"EnclosureNumber",                   CIM_UINT16 },
+    { L"FirmwareVersion",                   CIM_STRING },
+    { L"FriendlyName",                      CIM_STRING },
+    { L"FruId",                             CIM_STRING },
+    { L"HealthStatus",                      CIM_UINT16 },
+    { L"IsIndicationEnabled",               CIM_BOOLEAN },
+    { L"IsPartial",                         CIM_BOOLEAN },
+    { L"LogicalSectorSize",                 CIM_UINT64 },
+    { L"Manufacturer",                      CIM_STRING },
+    { L"MediaType",                         CIM_UINT16 },
+    { L"Model",                             CIM_STRING },
+    { L"OperationalDetails",                CIM_STRING|CIM_FLAG_ARRAY },
+    { L"OperationalStatus",                 CIM_UINT16|CIM_FLAG_ARRAY|COL_FLAG_DYNAMIC },
+    { L"OtherCannotPoolReasonDescription",  CIM_STRING },
+    { L"PartNumber",                        CIM_STRING },
+    { L"PhysicalLocation",                  CIM_STRING },
+    { L"PhysicalSectorSize",                CIM_UINT64 },
+    { L"SerialNumber",                      CIM_STRING|COL_FLAG_DYNAMIC },
+    { L"Size",                              CIM_UINT64 },
+    { L"SlotNumber",                        CIM_UINT16 },
+    { L"SoftwareVersion",                   CIM_STRING },
+    { L"SpindleSpeed",                      CIM_UINT32 },
+    { L"SupportedUsages",                   CIM_UINT16|CIM_FLAG_ARRAY|COL_FLAG_DYNAMIC },
+    { L"UniqueId",                          CIM_STRING|COL_FLAG_DYNAMIC },
+    { L"UniqueIdFormat",                    CIM_UINT16 },
+    { L"Usage",                             CIM_UINT16 },
+    { L"VirtualDiskFootprint",              CIM_UINT64 },
 };
 static const struct column col_networkadapter[] =
 {
@@ -577,6 +626,18 @@ struct record_bios
     UINT8        systembiosminorversion;
     const WCHAR *version;
 };
+struct record_cache_memory
+{
+    UINT64       block_size;
+    UINT32       cache_speed;
+    UINT16       cache_type;
+    const WCHAR *device_id;
+    UINT32       installed_size;
+    UINT16       level;
+    UINT32       max_cache_size;
+    UINT64       number_of_blocks;
+    const WCHAR *status;
+};
 struct record_cdromdrive
 {
     const WCHAR *device_id;
@@ -684,6 +745,43 @@ struct record_logicaldisktopartition
 {
     const WCHAR *antecedent;
     const WCHAR *dependent;
+};
+struct record_msft_phys_disk
+{
+    const WCHAR  *adapter_serial_number;
+    UINT64        allocated_size;
+    UINT16        bus_type;
+    struct array *cannot_pool_reason;
+    int           can_pool;
+    const WCHAR  *description;
+    const WCHAR  *device_id;
+    UINT16        enclosure_number;
+    const WCHAR  *firmware_version;
+    const WCHAR  *friendly_name;
+    const WCHAR  *fru_id;
+    UINT16        health_status;
+    int           is_indication_enabled;
+    int           is_partial;
+    UINT64        logical_sector_size;
+    const WCHAR  *manufacturer;
+    UINT16        media_type;
+    const WCHAR  *model;
+    struct array *operational_details;
+    struct array *operational_status;
+    const WCHAR  *other_cannot_pool_reason_description;
+    const WCHAR  *part_number;
+    const WCHAR  *physical_location;
+    UINT64        physical_sector_size;
+    const WCHAR  *serial_number;
+    UINT64        size;
+    UINT16        slot_number;
+    const WCHAR  *software_version;
+    UINT32        spindle_speed;
+    struct array *supported_usages;
+    const WCHAR  *unique_id;
+    UINT16        unique_id_format;
+    UINT16        usage;
+    UINT64        virtual_disk_footprint;
 };
 struct record_networkadapter
 {
@@ -2367,21 +2465,27 @@ done:
 static UINT64 get_freespace( const WCHAR *dir, UINT64 *disksize )
 {
     WCHAR root[] = L"\\\\.\\A:";
-    ULARGE_INTEGER free;
+    ULARGE_INTEGER free, total;
     DISK_GEOMETRY_EX info;
     HANDLE handle;
     DWORD bytes_returned;
 
     free.QuadPart = 512 * 1024 * 1024;
-    GetDiskFreeSpaceExW( dir, NULL, NULL, &free );
-
-    root[4] = dir[0];
-    handle = CreateFileW( root, GENERIC_READ, FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, 0 );
-    if (handle != INVALID_HANDLE_VALUE)
+    if (!GetDiskFreeSpaceExW( dir, NULL, &total, &free ))
     {
-        if (DeviceIoControl( handle, IOCTL_DISK_GET_DRIVE_GEOMETRY_EX, NULL, 0, &info, sizeof(info), &bytes_returned, NULL ))
-            *disksize = info.DiskSize.QuadPart;
-        CloseHandle( handle );
+        *disksize = 0;
+        root[4] = dir[0];
+        handle = CreateFileW( root, GENERIC_READ, FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, 0 );
+        if (handle != INVALID_HANDLE_VALUE)
+        {
+            if (DeviceIoControl( handle, IOCTL_DISK_GET_DRIVE_GEOMETRY_EX, NULL, 0, &info, sizeof(info), &bytes_returned, NULL ))
+                *disksize = info.DiskSize.QuadPart;
+            CloseHandle( handle );
+        }
+    }
+    else
+    {
+        *disksize = total.QuadPart;
     }
     return free.QuadPart;
 }
@@ -3253,6 +3357,30 @@ static enum fill_status fill_physicalmemory( struct table *table, const struct e
     return status;
 }
 
+static BOOL steam_input_get_vid_pid( UINT slot, UINT16 *vid, UINT16 *pid )
+{
+    const char *info = getenv( "SteamVirtualGamepadInfo" );
+    char buffer[256];
+    UINT current;
+    FILE *file;
+
+    TRACE( "reading SteamVirtualGamepadInfo %s\n", debugstr_a(info) );
+
+    if (!info || !(file = fopen( info, "r" ))) return FALSE;
+    while (fscanf( file, "%255[^\n]\n", buffer ) == 1)
+    {
+        if (sscanf( buffer, "[slot %d]", &current )) continue;
+        if (current < slot) continue;
+        if (current > slot) break;
+        if (sscanf( buffer, "VID=0x%hx", vid )) continue;
+        if (sscanf( buffer, "PID=0x%hx", pid )) continue;
+    }
+
+    fclose( file );
+
+    return TRUE;
+}
+
 static enum fill_status fill_pnpentity( struct table *table, const struct expr *cond )
 {
     struct record_pnpentity *rec;
@@ -3282,6 +3410,22 @@ static enum fill_status fill_pnpentity( struct table *table, const struct expr *
         if (SetupDiGetDeviceInstanceIdW( device_info_set, &devinfo, device_id,
                     ARRAY_SIZE(device_id), NULL ))
         {
+            /* CW-Bug-Id: #23185 Emulate Steam Input native hooks for native SDL */
+            UINT16 vid, pid;
+            UINT slot;
+
+            if (swscanf( device_id, L"HID\\VID_%04x&PID_%04x&XI_%02u", &vid, &pid, &slot ) == 3 &&
+                vid == 0x28de && pid == 0x11ff)
+            {
+                swprintf( device_id, ARRAY_SIZE(device_id), L"#HID#VID_%04X&PID_%04X&IG_%02u", vid, pid, slot );
+            }
+            if (swscanf( device_id, L"HID\\VID_%04x&PID_%04x&IG_%02u", &vid, &pid, &slot ) == 3 &&
+                vid == 0x28de && pid == 0x11ff && steam_input_get_vid_pid( slot, &vid, &pid ))
+            {
+                swprintf( device_id, ARRAY_SIZE(device_id), L"HID\\VID_%04X&PID_%04X&IG_%02u", vid, pid, slot );
+                device_id[27] = '\\';
+            }
+
             StringFromGUID2( &devinfo.ClassGuid, guid, ARRAY_SIZE(guid) );
             rec->caption = L"Wine PnP Device";
             rec->class_guid = wcsdup( wcslwr(guid) );
@@ -3498,6 +3642,77 @@ static UINT get_processor_maxclockspeed( UINT index )
         free( info );
     }
     return ret;
+}
+
+static enum fill_status fill_cache_memory( struct table *table, const struct expr *cond )
+{
+    enum fill_status status = FILL_STATUS_UNFILTERED;
+    SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX *info;
+    UINT i, idx, offset = 0, row_count = 0;
+    struct record_cache_memory *rec;
+    ULONG64 cache_size[16] = { 0 };
+    char *buffer = NULL;
+    DWORD size = 1024;
+    WCHAR str[64];
+
+    while (1)
+    {
+        buffer = realloc( buffer, size );
+        if (GetLogicalProcessorInformationEx( RelationCache, (void *)buffer, &size )) break;
+        if (GetLastError() != ERROR_INSUFFICIENT_BUFFER)
+        {
+            free( buffer );
+            return FILL_STATUS_FAILED;
+        }
+    }
+
+    info = (SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX *)buffer;
+    while ((char *)info != buffer + size)
+    {
+        if (info->Cache.Level < ARRAY_SIZE(cache_size) && info->Cache.CacheSize)
+        {
+            if (!cache_size[info->Cache.Level]) ++row_count;
+            cache_size[info->Cache.Level] += info->Cache.CacheSize;
+        }
+        info = (SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX *)((char *)info + info->Size);
+    }
+
+    if (!resize_table( table, row_count, sizeof(*rec) ))
+    {
+        free( buffer );
+        return FILL_STATUS_FAILED;
+    }
+
+    row_count = 0;
+    idx = 0;
+    for (i = 0; i < ARRAY_SIZE(cache_size); ++i)
+    {
+        if (!cache_size[i]) continue;
+        rec = (struct record_cache_memory *)(table->data + offset);
+        rec->block_size = 1024;
+        rec->cache_speed = 1;
+        rec->cache_type = 5;
+        rec->installed_size = cache_size[i] / rec->block_size;
+        rec->level = i + 2;
+        rec->max_cache_size = rec->installed_size;
+        rec->number_of_blocks = rec->installed_size;
+        swprintf( str, sizeof(str), L"Cache Memory %u", idx );
+        rec->device_id = wcsdup( str );
+        rec->status = L"OK";
+        if (!match_row( table, idx, cond, &status ))
+        {
+            free_row_values( table, idx );
+            ++idx;
+            continue;
+        }
+        offset += sizeof(*rec);
+        ++idx;
+        ++row_count;
+    }
+    TRACE("created %u rows\n", row_count);
+    table->num_rows = row_count;
+    free( buffer );
+    return status;
 }
 
 static enum fill_status fill_processor( struct table *table, const struct expr *cond )
@@ -4243,7 +4458,7 @@ static enum fill_status fill_videocontroller( struct table *table, const struct 
     rec->description           = wcsdup( name );
     rec->device_id             = L"VideoController1";
     rec->driverdate            = L"20250831000000.000000-000";
-    rec->driverversion         = L"31.0.21902.5";
+    rec->driverversion         = L"35.0.99999.9999";
     rec->installeddriver       = get_videocontroller_installeddriver( desc.VendorId );
     rec->name                  = wcsdup( name );
     rec->pnpdevice_id          = get_videocontroller_pnpdeviceid( &desc );
@@ -4370,6 +4585,7 @@ static struct table cimv2_builtin_classes[] =
     { L"SystemRestore", C(col_sysrestore), D(data_sysrestore) },
     { L"Win32_BIOS", C(col_bios), 0, 0, NULL, fill_bios },
     { L"Win32_BaseBoard", C(col_baseboard), 0, 0, NULL, fill_baseboard },
+    { L"Win32_CacheMemory", C(col_cache_memory), 0, 0, NULL, fill_cache_memory },
     { L"Win32_CDROMDrive", C(col_cdromdrive), 0, 0, NULL, fill_cdromdrive },
     { L"Win32_ComputerSystem", C(col_compsys), 0, 0, NULL, fill_compsys },
     { L"Win32_ComputerSystemProduct", C(col_compsysproduct), 0, 0, NULL, fill_compsysproduct },
@@ -4406,6 +4622,84 @@ static struct table wmi_builtin_classes[] =
 {
     { L"MSSMBios_RawSMBiosTables", C(col_rawsmbiostables), D(data_rawsmbiostables) },
 };
+
+static enum fill_status fill_msft_phys_disk( struct table *table, const struct expr *cond )
+{
+    static UINT16 operational_status[] = { 2 };
+    static struct array operational_status_array =
+    {
+        .elem_size = sizeof(*operational_status),
+        .count = ARRAY_SIZE(operational_status),
+        .ptr = &operational_status,
+    };
+    static UINT16 supported_usages[] = { 1, 2, 3, 4, 5 };
+    static struct array supported_usages_array =
+    {
+        .elem_size = sizeof(*supported_usages),
+        .count = ARRAY_SIZE(supported_usages),
+        .ptr = supported_usages,
+    };
+    WCHAR device_id[10], root[] = L"A:\\";
+    struct record_msft_phys_disk *rec;
+    UINT i, row = 0, offset = 0, index = 0, type;
+    UINT64 size;
+    DWORD drives = GetLogicalDrives();
+    enum fill_status status = FILL_STATUS_UNFILTERED;
+
+    if (!resize_table( table, 2, sizeof(*rec) )) return FILL_STATUS_FAILED;
+
+    for (i = 0; i < 26; i++)
+    {
+        if (drives & (1 << i))
+        {
+            root[0] = 'A' + i;
+            type = GetDriveTypeW( root );
+            if (type != DRIVE_FIXED && type != DRIVE_REMOVABLE) continue;
+
+            if (!resize_table( table, row + 1, sizeof(*rec) )) return FILL_STATUS_FAILED;
+
+            get_freespace( root, &size );
+            rec = (struct record_msft_phys_disk *)(table->data + offset);
+            rec->allocated_size         = size;
+            rec->bus_type               = type == DRIVE_FIXED ? 17 /* NVME */: 1 /* USB */;
+            rec->can_pool               = -1;
+            swprintf( device_id, ARRAY_SIZE( device_id ), L"%d", index );
+            rec->device_id              = wcsdup( device_id );
+            rec->firmware_version       = L"1234";
+            rec->friendly_name          = L"Wine disk";
+            rec->health_status          = 0; /* Healthy */
+            rec->logical_sector_size    = 512;
+            rec->media_type             = 4; /* SSD */
+            rec->model                  = wcsdup( L"Wine disk" );
+            rec->operational_status     = dup_array( &operational_status_array );
+            rec->physical_location      = L"Integrated : Bus 0 : Device 0 : Function 0 : Adapter 0 : Port 0";
+            rec->physical_sector_size   = 4096;
+            rec->serial_number          = get_diskdrive_serialnumber( root[0] );
+            rec->size                   = size;
+            rec->supported_usages       = dup_array( &supported_usages_array );
+            rec->unique_id              = wcsdup( rec->serial_number );
+            rec->unique_id_format       = 0; /* Vendor specific */
+            rec->usage                  = 1; /* Auto select */
+            ++index;
+            if (!match_row( table, row, cond, &status ))
+            {
+                free_row_values( table, row );
+                continue;
+            }
+            offset += sizeof(*rec);
+            row++;
+        }
+    }
+    TRACE("created %u rows\n", row);
+    table->num_rows = row;
+    return status;
+}
+
+static struct table win_storage_builtin_classes[] =
+{
+    { L"MSFT_PhysicalDisk", C(col_msft_phys_disk), 0, 0, NULL, fill_msft_phys_disk },
+};
+
 #undef C
 #undef D
 
@@ -4418,7 +4712,7 @@ static const struct
 builtin_namespaces[WBEMPROX_NAMESPACE_LAST] =
 {
     {L"cimv2", cimv2_builtin_classes, ARRAY_SIZE(cimv2_builtin_classes)},
-    {L"Microsoft\\Windows\\Storage", NULL, 0},
+    {L"Microsoft\\Windows\\Storage", win_storage_builtin_classes, ARRAY_SIZE(win_storage_builtin_classes)},
     {L"StandardCimv2", NULL, 0},
     {L"wmi", wmi_builtin_classes, ARRAY_SIZE(wmi_builtin_classes)},
 };

@@ -141,6 +141,29 @@ static HRESULT WINAPI wine_provider_GetTrustLevel( IWineGameControllerProvider *
     return E_NOTIMPL;
 }
 
+static HRESULT WINAPI wine_provider_get_DisplayName( IWineGameControllerProvider *iface, HSTRING *value )
+{
+    struct provider *impl = impl_from_IWineGameControllerProvider( iface );
+    DIDEVICEINSTANCEW instance = {.dwSize = sizeof(DIDEVICEINSTANCEW)};
+    UINT16 vid, pid;
+    HRESULT hr;
+
+    TRACE( "iface %p, value %p\n", iface, value );
+
+    if (FAILED(hr = IGameControllerProvider_get_HardwareVendorId( &impl->IGameControllerProvider_iface, &vid ))) return hr;
+    if (FAILED(hr = IGameControllerProvider_get_HardwareProductId( &impl->IGameControllerProvider_iface, &pid ))) return hr;
+
+    /* CW-Bug-Id: #23185 Emulate Steam Input native hooks for native SDL */
+    if (vid == 0x28de && pid == 0x11ff)
+    {
+        static const WCHAR name[] = L"Xbox 360 Controller for Windows";
+        return WindowsCreateString( name, wcslen( name ), value );
+    }
+
+    if (FAILED(hr = IDirectInputDevice8_GetDeviceInfo( impl->dinput_device, &instance ))) return hr;
+    return WindowsCreateString( instance.tszProductName, wcslen( instance.tszProductName ), value );
+}
+
 static BOOL CALLBACK count_ffb_axes( const DIDEVICEOBJECTINSTANCEW *obj, void *args )
 {
     DWORD *count = args;
@@ -416,6 +439,7 @@ static const struct IWineGameControllerProviderVtbl wine_provider_vtbl =
     wine_provider_GetTrustLevel,
     /* IWineGameControllerProvider methods */
     wine_provider_get_NonRoamableId,
+    wine_provider_get_DisplayName,
     wine_provider_get_Type,
     wine_provider_get_AxisCount,
     wine_provider_get_ButtonCount,

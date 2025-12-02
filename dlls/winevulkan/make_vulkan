@@ -64,7 +64,7 @@ from enum import Enum
 LOGGER = logging.Logger("vulkan")
 LOGGER.addHandler(logging.StreamHandler())
 
-VK_XML_VERSION = "1.4.303"
+VK_XML_VERSION = "1.4.318"
 WINE_VK_VERSION = (1, 4)
 
 # Filenames to create.
@@ -88,7 +88,6 @@ EXT_BLOCK_SIZE = 1000
 
 UNSUPPORTED_EXTENSIONS = [
     # Instance extensions
-    "VK_EXT_headless_surface", # Needs WSI work.
     "VK_KHR_display", # Needs WSI work.
     "VK_KHR_surface_protected_capabilities",
     "VK_LUNARG_direct_driver_loading", # Implemented in the Vulkan loader
@@ -102,6 +101,7 @@ UNSUPPORTED_EXTENSIONS = [
     "VK_KHR_maintenance7", # Causes infinity recursion in struct convert code
     "VK_KHR_shared_presentable_image", # Needs WSI work.
     "VK_NV_external_memory_rdma", # Needs shared resources work.
+    "VK_NV_external_compute_queue", # Has a new dispatchable handle
 
     # Extensions for other platforms
     "VK_EXT_external_memory_dma_buf",
@@ -125,6 +125,7 @@ UNSUPPORTED_EXTENSIONS = [
 # but not expose to applications (useful for test commits)
 UNEXPOSED_EXTENSIONS = {
     "VK_EXT_map_memory_placed",
+    "VK_EXT_headless_surface",
 }
 
 # The Vulkan loader provides entry-points for core functionality and important
@@ -172,6 +173,10 @@ FUNCTION_OVERRIDES = {
     "vkGetPhysicalDeviceExternalBufferProperties" : {"dispatch" : True},
     "vkGetPhysicalDeviceExternalFenceProperties" : {"dispatch" : False},
     "vkGetPhysicalDeviceExternalSemaphoreProperties" : {"dispatch" : True},
+
+    "vkGetPhysicalDeviceProperties" : {"dispatch" : True},
+    "vkGetPhysicalDeviceProperties2" : {"dispatch" : True},
+    "vkGetPhysicalDeviceProperties2KHR" : {"dispatch" : True},
 
     # Device functions
     "vkCreateCommandPool" : {"extra_param" : "client_ptr"},
@@ -285,6 +290,9 @@ MANUAL_UNIX_THUNKS = {
     "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR",
     "vkGetPhysicalDeviceImageFormatProperties2",
     "vkGetPhysicalDeviceImageFormatProperties2KHR",
+    "vkGetPhysicalDeviceProperties",
+    "vkGetPhysicalDeviceProperties2",
+    "vkGetPhysicalDeviceProperties2KHR",
     "vkMapMemory",
     "vkMapMemory2KHR",
     "vkUnmapMemory",
@@ -324,7 +332,6 @@ MANUAL_LOADER_THUNKS = {
     "vkEnumerateInstanceExtensionProperties",
     "vkEnumerateInstanceVersion",
     "vkFreeCommandBuffers",
-    "vkGetPhysicalDeviceProperties",
     "vkGetPhysicalDeviceProperties2",
     "vkGetPhysicalDeviceProperties2KHR",
 }
@@ -1364,7 +1371,7 @@ class VkVariable(object):
         return self.pointer and self.pointer.count('*') > 1
 
     def is_pointer_size(self):
-        if self.type in ["size_t", "HWND", "HINSTANCE"] or self.type.startswith("PFN"):
+        if self.type in ["size_t", "HWND", "HINSTANCE", "HANDLE", "LPCWSTR"] or self.type.startswith("PFN"):
             return True
         if self.is_handle() and self.handle.is_dispatchable():
             return True
@@ -3227,7 +3234,7 @@ class VkGenerator(object):
         f.write("#define ALL_VK_DEVICE_FUNCS \\\n")
         first = True
         for vk_func in self.registry.device_funcs:
-            if not vk_func.needs_exposing():
+            if not vk_func.is_required():
                 continue
 
             if not vk_func.needs_dispatch():
@@ -3244,7 +3251,7 @@ class VkGenerator(object):
         f.write("#define ALL_VK_INSTANCE_FUNCS \\\n")
         first = True
         for vk_func in self.registry.instance_funcs + self.registry.phys_dev_funcs:
-            if not vk_func.needs_exposing():
+            if not vk_func.is_required():
                 continue
 
             if not vk_func.needs_dispatch():

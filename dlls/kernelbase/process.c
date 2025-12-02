@@ -559,6 +559,12 @@ static int battleye_launcher_redirect_hack( const WCHAR *app_name, WCHAR *new_na
     static const WCHAR belauncherW[] = L"c:\\windows\\system32\\belauncher.exe";
     unsigned int len;
 
+    if (GetEnvironmentVariableW(L"PROTON_ORIG_LAUNCHER_NAME", NULL, 0))
+    {
+        /* run from builtin belauncher. */
+        return 0;
+    }
+
     /* We detect the BattlEye launcher executable through the product name property, as the executable name varies */
     if (!product_name_matches( app_name, "BattlEye Launcher" ))
         return 0;
@@ -592,6 +598,7 @@ static const WCHAR *hack_append_command_line( const WCHAR *cmd )
     }
     options[] =
     {
+        {L"Click&Fight.exe", L" --disable_direct_composition=1"},
         {L"Willful.exe", L" --disable_direct_composition=1"},
         {L"Banyu Lintar Angin - Little Storm -.exe", L" --disable_direct_composition=1"},
         {L"Super\\Super.exe", L" --disable_direct_composition=1"},
@@ -601,12 +608,10 @@ static const WCHAR *hack_append_command_line( const WCHAR *cmd )
         {L"Insanitys Blade\\nw.exe", L" --use-gl=swiftshader"},
         {L"Warhammer2.exe", L" --in-process-gpu"},
         {L"SummerIslands.exe", L" --in-process-gpu"},
-        {L"UplayWebCore.exe", L" --use-angle=vulkan"},
         {L"Paradox Launcher.exe", L" --use-angle=gl"},
         {L"Montaro\\nw.exe", L" --use-gl=swiftshader"},
         {L"Aisling and the Tavern of Elves\\nw.exe", L" --use-gl=swiftshader"},
         {L"Snares of Ruin 2\\SoR2.exe", L" --use-gl=swiftshader"},
-        {L"\\EOSOverlayRenderer-Win64-Shipping.exe", L" --use-gl=swiftshader --in-process-gpu"},
         {L"\\EpicOnlineServicesUIHelper", L" --use-angle=vulkan"},
         {L"OlympiaRising.exe", L" --use-gl=swiftshader"},
         {L"nw.exe.exe", L" --use-angle=d3d9"},
@@ -618,7 +623,6 @@ static const WCHAR *hack_append_command_line( const WCHAR *cmd )
         {L"Red Tie Runner.exe", L" --use-angle=gl"},
         {L"UnrealCEFSubProcess.exe", L" --use-gl=swiftshader", "2316580"},
         {L"UnrealCEFSubProcess.exe", L" --use-angle=d3d9", "2684500"},
-        {L"\\EACefSubProcess.exe", L" --use-angle=vulkan"},
     };
     unsigned int i;
     char sgi[64];
@@ -2005,47 +2009,6 @@ BOOL WINAPI DECLSPEC_HOTPATCH SetEnvironmentVariableW( LPCWSTR name, LPCWSTR val
         SetLastError( ERROR_ENVVAR_NOT_FOUND );
         return FALSE;
     }
-
-    if (name && !lstrcmpW( name, L"QT_OPENGL" ) && value && !lstrcmpW( value, L"angle" ))
-    {
-        static const WCHAR *names[] =
-        {
-            L"\\EADesktop.exe",
-            L"\\Link2EA.exe",
-            L"\\EAConnect_microsoft.exe",
-            L"\\EALaunchHelper.exe",
-            L"\\EACrashReporter.exe",
-            L"EA Desktop\\ErrorReporter.exe",
-        };
-        unsigned int i, len;
-        WCHAR module[256];
-        DWORD size;
-
-        if ((size = GetModuleFileNameW( NULL, module, ARRAY_SIZE(module) )) && size < ARRAY_SIZE(module))
-        {
-            for (i = 0; i < ARRAY_SIZE(names); ++i)
-            {
-                len = lstrlenW(names[i]);
-                if (size > len && !memcmp( module + size - len, names[i], len * sizeof(*module) ))
-                {
-                    HMODULE h = GetModuleHandleW(L"Qt5Core.dll");
-                    void (WINAPI *QCoreApplication_setAttribute)(int attr, BOOL set);
-
-                    QCoreApplication_setAttribute = (void *)GetProcAddress(h, "?setAttribute@QCoreApplication@@SAXW4ApplicationAttribute@Qt@@_N@Z");
-                    if (QCoreApplication_setAttribute)
-                    {
-                        QCoreApplication_setAttribute(16 /* AA_UseOpenGLES */, 0);
-                        QCoreApplication_setAttribute(15 /* AA_UseDesktopOpenGL */, 1);
-                    }
-                    else ERR("QCoreApplication_setAttribute not found, h %p.\n", h);
-                    value = L"desktop";
-                    FIXME( "HACK: setting QT_OPENGL=desktop.\n" );
-                    break;
-                }
-            }
-        }
-    }
-
 
     RtlInitUnicodeString( &us_name, name );
     if (value)

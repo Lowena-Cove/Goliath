@@ -6411,28 +6411,12 @@ static void test_wmv_decoder(void)
         .attributes = output_sample_attributes,
         .sample_time = 0, .sample_duration = 333333,
         .buffer_count = 1, .buffers = &output_buffer_desc_nv12,
-        .todo_duration = TRUE,
-    };
-    const struct sample_desc output_sample_desc_nv12_todo_time =
-    {
-        .attributes = output_sample_attributes,
-        .sample_time = 0, .sample_duration = 333333,
-        .buffer_count = 1, .buffers = &output_buffer_desc_nv12,
-        .todo_time = TRUE, .todo_duration = TRUE,
     };
     const struct sample_desc output_sample_desc_rgb =
     {
         .attributes = output_sample_attributes,
         .sample_time = 0, .sample_duration = 333333,
         .buffer_count = 1, .buffers = &output_buffer_desc_rgb,
-        .todo_duration = TRUE,
-    };
-    const struct sample_desc output_sample_desc_rgb_todo_time =
-    {
-        .attributes = output_sample_attributes,
-        .sample_time = 0, .sample_duration = 333333,
-        .buffer_count = 1, .buffers = &output_buffer_desc_rgb,
-        .todo_time = TRUE, .todo_duration = TRUE,
     };
 
     const struct transform_desc
@@ -6466,7 +6450,7 @@ static void test_wmv_decoder(void)
             .expect_output_type_desc = expect_output_type_desc,
             .expect_input_info = &expect_input_info,
             .expect_output_info = &expect_output_info,
-            .output_sample_desc = &output_sample_desc_nv12_todo_time,
+            .output_sample_desc = &output_sample_desc_nv12,
             .result_bitmap = L"nv12frame.bmp",
             .delta = 0,
         },
@@ -6477,7 +6461,7 @@ static void test_wmv_decoder(void)
             .expect_output_type_desc = expect_output_type_desc_rgb,
             .expect_input_info = &expect_input_info_rgb,
             .expect_output_info = &expect_output_info_rgb,
-            .output_sample_desc = &output_sample_desc_rgb_todo_time,
+            .output_sample_desc = &output_sample_desc_rgb,
             .result_bitmap = L"rgb32frame-flip.bmp",
             .delta = 5,
         },
@@ -6488,7 +6472,7 @@ static void test_wmv_decoder(void)
             .expect_output_type_desc = expect_output_type_desc_rgb_negative_stride,
             .expect_input_info = &expect_input_info_rgb,
             .expect_output_info = &expect_output_info_rgb,
-            .output_sample_desc = &output_sample_desc_rgb_todo_time,
+            .output_sample_desc = &output_sample_desc_rgb,
             .result_bitmap = L"rgb32frame-flip.bmp",
             .delta = 5,
         },
@@ -6499,7 +6483,7 @@ static void test_wmv_decoder(void)
             .expect_output_type_desc = expect_output_type_desc_rgb,
             .expect_input_info = &expect_input_info_rgb,
             .expect_output_info = &expect_output_info_rgb,
-            .output_sample_desc = &output_sample_desc_rgb_todo_time,
+            .output_sample_desc = &output_sample_desc_rgb,
             .result_bitmap = L"rgb32frame-flip.bmp",
             .delta = 5,
         },
@@ -6522,7 +6506,7 @@ static void test_wmv_decoder(void)
             .expect_output_type_desc = expect_output_type_desc_rgb_negative_stride,
             .expect_input_info = &expect_input_info_rgb,
             .expect_output_info = &expect_output_info_rgb,
-            .output_sample_desc = &output_sample_desc_rgb_todo_time,
+            .output_sample_desc = &output_sample_desc_rgb,
             .result_bitmap = L"rgb32frame.bmp",
             .delta = 5,
         },
@@ -8615,8 +8599,17 @@ static void test_video_processor(BOOL use_2d_buffer)
     hr = IMFMediaType_SetGUID(media_type, &MF_MT_SUBTYPE, &MFVideoFormat_RGB32);
     ok(hr == S_OK, "Failed to set attribute, hr %#lx.\n", hr);
 
+    hr = IMFTransform_GetOutputStatus(transform, &flags);
+    ok(hr == MF_E_TRANSFORM_TYPE_NOT_SET, "GetOutputStatus returned %#lx.\n", hr);
+
     hr = IMFTransform_SetOutputType(transform, 0, media_type, 0);
     ok(hr == S_OK, "Failed to set output type, hr %#lx.\n", hr);
+
+    flags = 0xdeadbeef;
+    hr = IMFTransform_GetOutputStatus(transform, &flags);
+    ok(hr == S_OK, "GetOutputStatus returned %#lx.\n", hr);
+    todo_wine
+    ok(flags == 0, "Unexpected output status %#lx.\n", flags);
 
     hr = MFCalculateImageSize(&MFVideoFormat_IYUV, 16, 16, (UINT32 *)&input_info.cbSize);
     ok(hr == S_OK, "Unexpected hr %#lx.\n", hr);
@@ -8638,6 +8631,11 @@ static void test_video_processor(BOOL use_2d_buffer)
     hr = IMFTransform_ProcessInput(transform, 0, input_sample, 0);
     todo_wine
     ok(hr == S_OK, "Failed to push a sample, hr %#lx.\n", hr);
+
+    flags = 0xdeadbeef;
+    hr = IMFTransform_GetOutputStatus(transform, &flags);
+    ok(hr == S_OK, "GetOutputStatus returned %#lx.\n", hr);
+    ok(flags == MFT_OUTPUT_STATUS_SAMPLE_READY, "Unexpected output status %#lx.\n", flags);
 
     hr = IMFTransform_ProcessInput(transform, 0, input_sample, 0);
     todo_wine
@@ -8670,6 +8668,12 @@ static void test_video_processor(BOOL use_2d_buffer)
     {
         hr = check_mft_process_output(transform, output_sample, &output_status);
         ok(hr == MF_E_TRANSFORM_NEED_MORE_INPUT, "Unexpected hr %#lx.\n", hr);
+
+        flags = 0xdeadbeef;
+        hr = IMFTransform_GetOutputStatus(transform, &flags);
+        ok(hr == S_OK, "GetOutputStatus returned %#lx.\n", hr);
+        todo_wine
+        ok(flags == 0, "Unexpected output status %#lx.\n", flags);
     }
 
     ref = IMFTransform_Release(transform);
