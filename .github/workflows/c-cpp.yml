@@ -15,6 +15,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Install dependencies
       run: |
+        sudo dpkg --add-architecture i386
         sudo apt-get update
         sudo apt-get install -y \
           autoconf \
@@ -24,7 +25,15 @@ jobs:
           pkg-config \
           python3 \
           libxml2-dev \
-          libxml2-utils
+          libxml2-utils \
+          gcc-multilib \
+          g++-multilib \
+          flex \
+          bison \
+          libx11-dev \
+          libx11-dev:i386 \
+          libfreetype-dev \
+          libfreetype-dev:i386
     - name: Generate configure script
       run: ./autogen.sh
     - name: configure
