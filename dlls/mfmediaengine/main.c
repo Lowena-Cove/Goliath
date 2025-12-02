@@ -153,6 +153,7 @@ struct media_engine
     double default_playback_rate;
     double volume;
     double duration;
+    double next_seek;
     MF_MEDIA_ENGINE_NETWORK network_state;
     MF_MEDIA_ENGINE_ERR error_code;
     HRESULT extended_code;
@@ -181,6 +182,7 @@ struct media_engine
         BYTE *buffer;
         UINT buffer_size;
         DXGI_FORMAT output_format;
+        BOOL format_mismatch;
 
         struct
         {
@@ -821,31 +823,34 @@ static void media_engine_get_frame_size(struct media_engine *engine)
     engine->video_frame.ratio.cx = 1;
     engine->video_frame.ratio.cy = 1;
 
-    video_frame_sink_query_iface(engine->presentation.frame_sink, &IID_IMFMediaTypeHandler, (void**)&handler);
-    if (SUCCEEDED(IMFMediaTypeHandler_GetCurrentMediaType(handler, &media_type)))
+    if (engine->presentation.frame_sink &&
+                SUCCEEDED(video_frame_sink_query_iface(engine->presentation.frame_sink, &IID_IMFMediaTypeHandler, (void**)&handler)))
     {
-        UINT64 size;
-        HRESULT hr = IMFMediaType_GetUINT64(media_type, &MF_MT_FRAME_SIZE, &size);
-        if (SUCCEEDED(hr))
+        if (SUCCEEDED(IMFMediaTypeHandler_GetCurrentMediaType(handler, &media_type)))
         {
-            unsigned int gcd;
-            engine->video_frame.size.cx = size >> 32;
-            engine->video_frame.size.cy = size;
-
-            if ((gcd = get_gcd(engine->video_frame.size.cx, engine->video_frame.size.cy)))
+            UINT64 size;
+            HRESULT hr = IMFMediaType_GetUINT64(media_type, &MF_MT_FRAME_SIZE, &size);
+            if (SUCCEEDED(hr))
             {
-                engine->video_frame.ratio.cx = engine->video_frame.size.cx / gcd;
-                engine->video_frame.ratio.cy = engine->video_frame.size.cy / gcd;
-            }
-        }
-        else
-        {
-            WARN("Failed to get frame size %#lx.\n", hr);
-        }
+                unsigned int gcd;
+                engine->video_frame.size.cx = size >> 32;
+                engine->video_frame.size.cy = size;
 
-        IMFMediaType_Release(media_type);
+                if ((gcd = get_gcd(engine->video_frame.size.cx, engine->video_frame.size.cy)))
+                {
+                    engine->video_frame.ratio.cx = engine->video_frame.size.cx / gcd;
+                    engine->video_frame.ratio.cy = engine->video_frame.size.cy / gcd;
+                }
+            }
+            else
+            {
+                WARN("Failed to get frame size %#lx.\n", hr);
+            }
+
+            IMFMediaType_Release(media_type);
+        }
+        IMFMediaTypeHandler_Release(handler);
     }
-    IMFMediaTypeHandler_Release(handler);
 }
 
 static void media_engine_apply_volume(const struct media_engine *engine)
@@ -896,6 +901,8 @@ static HRESULT WINAPI media_engine_callback_GetParameters(IMFAsyncCallback *ifac
 {
     return E_NOTIMPL;
 }
+
+static HRESULT media_engine_set_current_time(struct media_engine *engine, double seektime);
 
 static HRESULT WINAPI media_engine_session_events_Invoke(IMFAsyncCallback *iface, IMFAsyncResult *result)
 {
@@ -962,6 +969,8 @@ static HRESULT WINAPI media_engine_session_events_Invoke(IMFAsyncCallback *iface
                 media_engine_set_flag(engine, FLAGS_ENGINE_SEEKING | FLAGS_ENGINE_IS_ENDED, FALSE);
                 IMFMediaEngineNotify_EventNotify(engine->callback, MF_MEDIA_ENGINE_EVENT_SEEKED, 0, 0);
                 IMFMediaEngineNotify_EventNotify(engine->callback, MF_MEDIA_ENGINE_EVENT_TIMEUPDATE, 0, 0);
+                if (isfinite(engine->next_seek))
+                    media_engine_set_current_time(engine, engine->next_seek);
             }
             LeaveCriticalSection(&engine->cs);
             IMFMediaEngineNotify_EventNotify(engine->callback, MF_MEDIA_ENGINE_EVENT_PLAYING, 0, 0);
@@ -1154,6 +1163,23 @@ static HRESULT media_engine_create_video_renderer(struct media_engine *engine, I
     {
         WARN("Output format was not specified.\n");
         return E_FAIL;
+    }
+
+    switch (output_format)
+    {
+        case DXGI_FORMAT_R10G10B10A2_TYPELESS:
+        case DXGI_FORMAT_R10G10B10A2_UNORM:
+        case DXGI_FORMAT_R10G10B10A2_UINT:
+            /* IMFMediaSession doesn't support output to these formats unless the decoder supports
+             * MFVideoFormat_P010 output, which would allow inclusion of a suitable converter.
+             * The Windows H.264 decoder doesn't suppport MFVideoFormat_P010 output, and Media
+             * Engine apparently performs a format conversion.
+             * Create an 8-bit output and ensure the sampled texture is copied via a pixel shader. */
+            output_format = DXGI_FORMAT_B8G8R8A8_UNORM;
+            engine->video_frame.format_mismatch = TRUE;
+            break;
+        default:
+            break;
     }
 
     memcpy(&subtype, &MFVideoFormat_Base, sizeof(subtype));
@@ -1837,6 +1863,14 @@ static HRESULT media_engine_set_current_time(struct media_engine *engine, double
     hr = IMFMediaSession_GetSessionCapabilities(engine->session, &caps);
     if (FAILED(hr) || !(caps & MFSESSIONCAP_SEEK))
         return hr;
+
+    if (engine->flags & FLAGS_ENGINE_SEEKING)
+    {
+        engine->next_seek = seektime;
+        return S_OK;
+    }
+
+    engine->next_seek = NAN;
 
     position.vt = VT_I8;
     position.hVal.QuadPart = min(max(0, seektime), engine->duration) * 10000000;
@@ -2702,7 +2736,9 @@ static HRESULT WINAPI media_engine_TransferVideoFrame(IMFMediaEngineEx *iface, I
 
     if (SUCCEEDED(IUnknown_QueryInterface(surface, &IID_ID3D11Texture2D, (void **)&texture)))
     {
-        if (!engine->device_manager || FAILED(hr = media_engine_transfer_d3d11(engine, texture, src_rect, dst_rect, color)))
+        if (!engine->device_manager
+                || engine->video_frame.format_mismatch
+                || FAILED(hr = media_engine_transfer_d3d11(engine, texture, src_rect, dst_rect, color)))
             hr = media_engine_transfer_to_d3d11_texture(engine, texture, src_rect, dst_rect, color);
         ID3D11Texture2D_Release(texture);
     }
@@ -3372,6 +3408,7 @@ static HRESULT init_media_engine(DWORD flags, IMFAttributes *attributes, struct 
     engine->playback_rate = 1.0;
     engine->volume = 1.0;
     engine->duration = NAN;
+    engine->next_seek = NAN;
     engine->video_frame.pts = MINLONGLONG;
     InitializeCriticalSection(&engine->cs);
 

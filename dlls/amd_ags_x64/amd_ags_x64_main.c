@@ -49,8 +49,8 @@ static BOOL init_unix_lib(void)
     return unix_lib_initialized;
 }
 
-static const char driver_version[] = "23.19.02-230831a-396538C-AMD-Software-Adrenalin-Edition";
-static const char radeon_version[] = "23.10.2";
+static const char driver_version[] = "99.19.02-230831a-396538C-AMD-Software-Adrenalin-Edition";
+static const char radeon_version[] = "99.10.2";
 
 enum amd_ags_version
 {
@@ -64,6 +64,7 @@ enum amd_ags_version
     AMD_AGS_VERSION_5_4_2,
     AMD_AGS_VERSION_6_0_0,
     AMD_AGS_VERSION_6_1_0,
+    AMD_AGS_VERSION_6_3_0,
 
     AMD_AGS_VERSION_COUNT
 };
@@ -88,34 +89,35 @@ amd_ags_info[AMD_AGS_VERSION_COUNT] =
     {AGS_MAKE_VERSION(5, 4, 2), AGS_MAKE_VERSION(5, 4, 2), sizeof(AGSDeviceInfo_542), sizeof(AGSDX11ReturnedParams_520), AsicFamily_RDNA},
     {AGS_MAKE_VERSION(6, 0, 0), AGS_MAKE_VERSION(6, 0, 1), sizeof(AGSDeviceInfo_600), sizeof(AGSDX11ReturnedParams_600), AsicFamily_RDNA2},
     {AGS_MAKE_VERSION(6, 1, 0), AGS_MAKE_VERSION(6, 2, 0), sizeof(AGSDeviceInfo_600), sizeof(AGSDX11ReturnedParams_600), AsicFamily_RDNA3},
+    {AGS_MAKE_VERSION(6, 3, 0), AGS_MAKE_VERSION(6, 3, 0), sizeof(AGSDeviceInfo_600), sizeof(AGSDX11ReturnedParams_600), AsicFamily_RDNA4},
 };
 
 #define DEF_FIELD(name) {DEVICE_FIELD_##name, {offsetof(AGSDeviceInfo_511, name), offsetof(AGSDeviceInfo_511, name), \
         offsetof(AGSDeviceInfo_511, name), offsetof(AGSDeviceInfo_520, name), \
         offsetof(AGSDeviceInfo_520, name), offsetof(AGSDeviceInfo_540, name), \
         offsetof(AGSDeviceInfo_541, name), offsetof(AGSDeviceInfo_542, name), \
-        offsetof(AGSDeviceInfo_600, name), offsetof(AGSDeviceInfo_600, name)}}
+        offsetof(AGSDeviceInfo_600, name), offsetof(AGSDeviceInfo_600, name), offsetof(AGSDeviceInfo_600, name)}}
 #define DEF_FIELD_520_BELOW(name) {DEVICE_FIELD_##name, {offsetof(AGSDeviceInfo_511, name), offsetof(AGSDeviceInfo_511, name), \
         offsetof(AGSDeviceInfo_511, name), offsetof(AGSDeviceInfo_520, name), \
         offsetof(AGSDeviceInfo_520, name), -1, \
-        -1, -1, -1, -1}}
+        -1, -1, -1, -1, -1}}
 #define DEF_FIELD_520_UP(name) {DEVICE_FIELD_##name, {-1, -1, -1, offsetof(AGSDeviceInfo_520, name), \
         offsetof(AGSDeviceInfo_520, name), offsetof(AGSDeviceInfo_540, name), \
         offsetof(AGSDeviceInfo_541, name), offsetof(AGSDeviceInfo_542, name), \
-        offsetof(AGSDeviceInfo_600, name), offsetof(AGSDeviceInfo_600, name)}}
+        offsetof(AGSDeviceInfo_600, name), offsetof(AGSDeviceInfo_600, name), offsetof(AGSDeviceInfo_600, name)}}
 #define DEF_FIELD_540_UP(name) {DEVICE_FIELD_##name, {-1, -1, -1, -1, \
         -1, offsetof(AGSDeviceInfo_540, name), \
         offsetof(AGSDeviceInfo_541, name), offsetof(AGSDeviceInfo_542, name), \
-        offsetof(AGSDeviceInfo_600, name), offsetof(AGSDeviceInfo_600, name)}}
+        offsetof(AGSDeviceInfo_600, name), offsetof(AGSDeviceInfo_600, name), offsetof(AGSDeviceInfo_600, name)}}
 #define DEF_FIELD_540_600(name) {DEVICE_FIELD_##name, {-1, -1, -1, -1, \
         -1, offsetof(AGSDeviceInfo_540, name), \
         offsetof(AGSDeviceInfo_541, name), offsetof(AGSDeviceInfo_542, name), \
-        -1, -1}}
+        -1, -1, -1}}
 #define DEF_FIELD_600_BELOW(name) {DEVICE_FIELD_##name, {offsetof(AGSDeviceInfo_511, name), offsetof(AGSDeviceInfo_511, name), \
         offsetof(AGSDeviceInfo_511, name), offsetof(AGSDeviceInfo_520, name), \
         offsetof(AGSDeviceInfo_520, name), offsetof(AGSDeviceInfo_540, name), \
         offsetof(AGSDeviceInfo_541, name), offsetof(AGSDeviceInfo_542, name), \
-        -1, -1}}
+        -1, -1, -1}}
 
 #define DEVICE_FIELD_adapterString 0
 #define DEVICE_FIELD_architectureVersion 1
@@ -1057,6 +1059,21 @@ AGSReturnCode WINAPI agsInitialize(int ags_version, const AGSConfiguration *conf
     return AGS_SUCCESS;
 }
 
+AGSReturnCode WINAPI agsGetGPUInfo(AGSContext* context, AGSGPUInfo_600 *gpu_info)
+{
+    TRACE("context %p, gpu_info %p.\n", context, gpu_info);
+
+    if (!context || !gpu_info)
+        return AGS_INVALID_ARGS;
+
+    memset(gpu_info, 0, sizeof(*gpu_info));
+    gpu_info->driverVersion = driver_version;
+    gpu_info->radeonSoftwareVersion  = radeon_version;
+    gpu_info->numDevices = context->device_count;
+    gpu_info->devices = context->devices;
+    return AGS_SUCCESS;
+}
+
 AGSReturnCode WINAPI agsDeInit(AGSContext *context)
 {
     return agsDeInitialize(context);
@@ -1979,5 +1996,11 @@ __ASM_GLOBAL_FUNC( agsDriverExtensionsDX11_DestroyDevice,
 AGSReturnCode WINAPI agsDriverExtensionsDX11_SetDiskShaderCacheEnabled(AGSContext *context, int enable)
 {
     FIXME("context %p, enable %d stub.\n", context, enable);
+    return AGS_SUCCESS;
+}
+
+AGSReturnCode WINAPI agsDriverExtensionsDX11_SetMaxAsyncCompileThreadCount(AGSContext *context, unsigned int thread_count)
+{
+    FIXME("context %p, thread_count %u.\n", context, thread_count);
     return AGS_SUCCESS;
 }

@@ -143,7 +143,7 @@ struct context_data
     union
     {
         struct { unsigned int eip, ebp, esp, eflags, cs, ss; } i386_regs;
-        struct { unsigned __int64 rip, rbp, rsp;
+        struct { unsigned __int64 rip, rsp;
                  unsigned int cs, ss, flags, __pad; } x86_64_regs;
         struct { unsigned int sp, lr, pc, cpsr; } arm_regs;
         struct { unsigned __int64 sp, pc, pstate; } arm64_regs;
@@ -151,7 +151,7 @@ struct context_data
     union
     {
         struct { unsigned int eax, ebx, ecx, edx, esi, edi; } i386_regs;
-        struct { unsigned __int64 rax,rbx, rcx, rdx, rsi, rdi,
+        struct { unsigned __int64 rax, rbx, rcx, rdx, rbp, rsi, rdi,
                                   r8, r9, r10, r11, r12, r13, r14, r15; } x86_64_regs;
         struct { unsigned int r[13]; } arm_regs;
         struct { unsigned __int64 x[31]; } arm64_regs;
@@ -992,6 +992,7 @@ typedef volatile struct
     struct shared_cursor cursor;           /* global cursor information */
     unsigned char        keystate[256];    /* asynchronous key state */
     unsigned __int64     monitor_serial;   /* winstation monitor update counter */
+    unsigned __int64     keystate_serial;  /* keystate update counter */
 } desktop_shm_t;
 
 typedef volatile struct
@@ -1017,6 +1018,7 @@ typedef volatile struct
     int                  cursor_count;     /* cursor show count */
     unsigned char        keystate[256];    /* key state */
     int                  keystate_lock;    /* keystate is locked */
+    unsigned __int64     keystate_serial;  /* keystate update counter at last sync */
 } input_shm_t;
 
 typedef volatile union
@@ -1103,7 +1105,6 @@ struct obj_locator
     client_ptr_t teb;          /* TEB of new thread (in process address space) */
     client_ptr_t peb;          /* PEB of new process (in process address space) */
     client_ptr_t ldt_copy;     /* address of LDT copy (in process address space) */
-    VARARG(cpu_override,cpu_topology_override); /* Overridden CPUs to host CPUs mapping. */
 @REPLY
     int          suspend;      /* is process suspended? */
 @END
@@ -1116,6 +1117,7 @@ struct obj_locator
     int          debug_level;  /* new debug level */
     int          reply_fd;     /* fd for reply pipe */
     int          wait_fd;      /* fd for blocking calls pipe */
+    VARARG(cpu_override,cpu_topology_override); /* Overridden CPUs to host CPUs mapping. */
 @REPLY
     process_id_t pid;          /* process id of the new thread's process */
     thread_id_t  tid;          /* thread id of the new thread */
@@ -1979,6 +1981,8 @@ struct process_info
     obj_handle_t handle;       /* process handle */
     client_ptr_t addr;         /* addr to write to */
     VARARG(data,bytes);        /* data to write */
+@REPLY
+    data_size_t written;       /* number of bytes written. */
 @END
 
 
@@ -2343,6 +2347,16 @@ enum message_type
     int             prev_y;
     int             new_x;     /* new cursor position */
     int             new_y;
+@END
+
+
+/* Control generating of mouse events from pointer events. */
+@REQ(track_mouse_from_pointer)
+    user_handle_t   win;        /* window handle */
+    unsigned int    msg;        /* message code */
+    unsigned int    pointer_id; /* pointer id */
+@REPLY
+    int             cursor_pos_updated; /* cursor position updated */
 @END
 
 

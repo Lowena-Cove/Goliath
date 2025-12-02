@@ -509,6 +509,9 @@ static VkResult wine_vk_physical_device_init(struct wine_phys_dev *object, VkPhy
     if (have_external_memory_fd && have_external_semaphore_fd)
         ++num_properties; /* VK_KHR_win32_keyed_mutex */
 
+    ++num_properties; /* VK_WINE_openxr_device_extensions */
+    ++num_properties; /* VK_WINE_openvr_device_extensions */
+
     if (!(object->extensions = calloc(num_properties, sizeof(*object->extensions))))
     {
         ERR("Failed to allocate memory for device extensions!\n");
@@ -530,6 +533,14 @@ static VkResult wine_vk_physical_device_init(struct wine_phys_dev *object, VkPhy
         TRACE("Enabling extension '%s' for physical device %p\n", object->extensions[j].extensionName, object);
         ++j;
     }
+
+    strcpy(object->extensions[j].extensionName, "VK_WINE_openxr_device_extensions");
+    TRACE("Enabling extension '%s' for physical device %p\n", object->extensions[j].extensionName, object);
+    ++j;
+    strcpy(object->extensions[j].extensionName, "VK_WINE_openvr_device_extensions");
+    TRACE("Enabling extension '%s' for physical device %p\n", object->extensions[j].extensionName, object);
+    ++j;
+
     object->extension_count = num_properties;
     TRACE("Host supported extensions %u, Wine supported extensions %u\n", num_host_properties, num_properties);
 
@@ -595,12 +606,14 @@ static void wine_vk_free_command_buffers(struct vulkan_device *device,
         struct wine_cmd_pool *pool, uint32_t count, const VkCommandBuffer *buffers)
 {
     struct vulkan_instance *instance = device->physical_device->instance;
+    struct wine_cmd_buffer *buffer;
     unsigned int i;
 
     for (i = 0; i < count; i++)
     {
-        struct wine_cmd_buffer *buffer = wine_cmd_buffer_from_handle(buffers[i]);
-
+        if (!buffers[i])
+            continue;
+        buffer = wine_cmd_buffer_from_handle(buffers[i]);
         if (!buffer)
             continue;
 
@@ -667,39 +680,6 @@ static char *cc_strdup(struct conversion_context *ctx, const char *s)
     return ret;
 }
 
-static void parse_xr_extensions(struct conversion_context *ctx, const char **extra_extensions, unsigned int *extra_count)
-{
-    char *iter, *start;
-
-    iter = getenv("__WINE_OPENXR_VK_DEVICE_EXTENSIONS");
-    if (!iter) return;
-    iter = cc_strdup(ctx, iter);
-
-    TRACE("got var: %s\n", iter);
-    start = iter;
-    do
-    {
-        if(*iter == ' ')
-        {
-            *iter = 0;
-            extra_extensions[(*extra_count)++] = cc_strdup(ctx, start);
-            TRACE("added %s to list\n", extra_extensions[(*extra_count) - 1]);
-            iter++;
-            start = iter;
-        }
-        else if(*iter == 0)
-        {
-            extra_extensions[(*extra_count)++] = cc_strdup(ctx, start);
-            TRACE("added %s to list\n", extra_extensions[(*extra_count) - 1]);
-            break;
-        }
-        else
-        {
-            iter++;
-        }
-    } while (1);
-}
-
 static const char *find_extension(const char *const *extensions, uint32_t count, const char *ext)
 {
     while (count--)
@@ -710,11 +690,67 @@ static const char *find_extension(const char *const *extensions, uint32_t count,
     return NULL;
 }
 
+static void parse_vr_extensions(struct conversion_context *ctx, const char **extra_extensions, unsigned int *extra_count,
+        const char *ext_str)
+{
+    char *iter, *start;
+
+    if (!ext_str) return;
+    iter = cc_strdup(ctx, ext_str);
+
+    TRACE("got var: %s\n", iter);
+    start = iter;
+    do
+    {
+        if(*iter == ' ')
+        {
+            *iter = 0;
+            if (!find_extension(extra_extensions, *extra_count, start))
+            {
+                extra_extensions[(*extra_count)++] = cc_strdup(ctx, start);
+                TRACE("added %s to list\n", extra_extensions[(*extra_count) - 1]);
+            }
+            iter++;
+            start = iter;
+        }
+        else if(*iter == 0)
+        {
+            if (!find_extension(extra_extensions, *extra_count, start))
+            {
+                extra_extensions[(*extra_count)++] = cc_strdup(ctx, start);
+                TRACE("added %s to list\n", extra_extensions[(*extra_count) - 1]);
+            }
+            break;
+        }
+        else
+        {
+            iter++;
+        }
+    } while (1);
+}
+
+static void parse_openxr_extensions(struct conversion_context *ctx, const char **extra_extensions, unsigned int *extra_count)
+{
+    parse_vr_extensions(ctx, extra_extensions, extra_count, getenv("__WINE_OPENXR_VK_DEVICE_EXTENSIONS"));
+}
+
+static void parse_openvr_extensions(struct conversion_context *ctx, const char **extra_extensions, unsigned int *extra_count,
+        struct wine_phys_dev *phys_dev)
+{
+    VkPhysicalDeviceProperties prop;
+    char name[64];
+
+    phys_dev->obj.instance->p_vkGetPhysicalDeviceProperties(phys_dev->obj.host.physical_device, &prop);
+    sprintf( name, "VK_WINE_OPENVR_DEVICE_EXTS_PCIID_%04x_%04x", prop.vendorID, prop.deviceID );
+    parse_vr_extensions(ctx, extra_extensions, extra_count, getenv(name));
+}
+
 static VkResult wine_vk_device_convert_create_info(VkPhysicalDevice client_physical_device,
         struct conversion_context *ctx, const VkDeviceCreateInfo *src, VkDeviceCreateInfo *dst,
         struct vulkan_device *device)
 {
     static const char *wine_xr_extension_name = "VK_WINE_openxr_device_extensions";
+    static const char *wine_vr_extension_name = "VK_WINE_openvr_device_extensions";
     struct wine_phys_dev *phys_dev = wine_phys_dev_from_handle(client_physical_device);
     const char *extra_extensions[64], * const*extensions = src->ppEnabledExtensionNames;
     unsigned int i, extra_count = 0, extensions_count = src->enabledExtensionCount;
@@ -739,8 +775,14 @@ static VkResult wine_vk_device_convert_create_info(VkPhysicalDevice client_physi
 
     if (find_extension(extensions, extensions_count, wine_xr_extension_name))
     {
-        parse_xr_extensions(ctx, extra_extensions, &extra_count);
+        parse_openxr_extensions(ctx, extra_extensions, &extra_count);
         remove_extensions[remove_count++] = wine_xr_extension_name;
+    }
+
+    if (find_extension(extensions, extensions_count, wine_vr_extension_name))
+    {
+        parse_openvr_extensions(ctx, extra_extensions, &extra_count, phys_dev);
+        remove_extensions[remove_count++] = wine_vr_extension_name;
     }
 
     if (find_extension(extensions, extensions_count, "VK_KHR_external_memory_win32"))
@@ -2139,6 +2181,27 @@ struct shared_resource_create
     WCHAR name[1];
 };
 
+/* helper for internal ioctl calls */
+typedef struct
+{
+    union
+    {
+        NTSTATUS Status;
+        ULONG Pointer;
+    };
+    ULONG Information;
+} IO_STATUS_BLOCK32;
+
+static NTSTATUS wine_ioctl(HANDLE file, ULONG code, void *in_buffer, ULONG in_size, void *out_buffer, ULONG out_size)
+{
+    IO_STATUS_BLOCK32 io32;
+    IO_STATUS_BLOCK io;
+
+    /* the 32-bit iosb is filled for overlapped file handles */
+    io.Pointer = &io32;
+    return NtDeviceIoControlFile(file, NULL, NULL, NULL, &io, code, in_buffer, in_size, out_buffer, out_size);
+}
+
 static HANDLE create_gpu_resource(int fd, LPCWSTR name, UINT64 resource_size)
 {
     static const WCHAR shared_gpu_resourceW[] = {'\\','?','?','\\','S','h','a','r','e','d','G','p','u','R','e','s','o','u','r','c','e',0};
@@ -2179,8 +2242,7 @@ static HANDLE create_gpu_resource(int fd, LPCWSTR name, UINT64 resource_size)
     if (name)
         lstrcpyW(&inbuff->name[0], name);
 
-    if ((status = NtDeviceIoControlFile(shared_resource, NULL, NULL, NULL, &iosb, IOCTL_SHARED_GPU_RESOURCE_CREATE,
-            inbuff, in_size, NULL, 0)))
+    if ((status = wine_ioctl(shared_resource, IOCTL_SHARED_GPU_RESOURCE_CREATE, inbuff, in_size, NULL, 0)))
 
     free(inbuff);
     NtClose(unix_resource);
@@ -2240,8 +2302,7 @@ static HANDLE open_shared_resource(HANDLE kmt_handle, LPCWSTR name)
     if (name)
         lstrcpyW(&inbuff->name[0], name);
 
-    status = NtDeviceIoControlFile(shared_resource, NULL, NULL, NULL, &iosb, IOCTL_SHARED_GPU_RESOURCE_OPEN,
-            inbuff, in_size, NULL, 0);
+    status = wine_ioctl(shared_resource, IOCTL_SHARED_GPU_RESOURCE_OPEN, inbuff, in_size, NULL, 0);
 
     free(inbuff);
 
@@ -2259,11 +2320,9 @@ static HANDLE open_shared_resource(HANDLE kmt_handle, LPCWSTR name)
 
 static BOOL shared_resource_get_info(HANDLE handle, struct shared_resource_info *info)
 {
-    IO_STATUS_BLOCK iosb;
     unsigned int status;
 
-    status = NtDeviceIoControlFile(handle, NULL, NULL, NULL, &iosb, IOCTL_SHARED_GPU_RESOURCE_GET_INFO,
-            NULL, 0, info, sizeof(*info));
+    status = wine_ioctl(handle, IOCTL_SHARED_GPU_RESOURCE_GET_INFO, NULL, 0, info, sizeof(*info));
     if (status)
         ERR("Failed to get shared resource info, status %#x.\n", status);
 
@@ -2274,13 +2333,11 @@ static BOOL shared_resource_get_info(HANDLE handle, struct shared_resource_info 
 
 static int get_shared_resource_fd(HANDLE shared_resource)
 {
-    IO_STATUS_BLOCK iosb;
     obj_handle_t unix_resource;
     NTSTATUS status;
     int ret;
 
-    if (NtDeviceIoControlFile(shared_resource, NULL, NULL, NULL, &iosb, IOCTL_SHARED_GPU_RESOURCE_GET_UNIX_RESOURCE,
-            NULL, 0, &unix_resource, sizeof(unix_resource)))
+    if (wine_ioctl(shared_resource, IOCTL_SHARED_GPU_RESOURCE_GET_UNIX_RESOURCE, NULL, 0, &unix_resource, sizeof(unix_resource)))
         return -1;
 
     status = wine_server_handle_to_fd(wine_server_ptr_handle(unix_resource), FILE_READ_DATA, &ret, NULL);
@@ -2292,11 +2349,9 @@ static int get_shared_resource_fd(HANDLE shared_resource)
 
 static HANDLE get_shared_resource_kmt_handle(HANDLE shared_resource)
 {
-    IO_STATUS_BLOCK iosb;
     obj_handle_t kmt_handle;
 
-    if (NtDeviceIoControlFile(shared_resource, NULL, NULL, NULL, &iosb, IOCTL_SHARED_GPU_RESOURCE_GETKMT,
-            NULL, 0, &kmt_handle, sizeof(kmt_handle)))
+    if (wine_ioctl(shared_resource, IOCTL_SHARED_GPU_RESOURCE_GETKMT, NULL, 0, &kmt_handle, sizeof(kmt_handle)))
         return INVALID_HANDLE_VALUE;
 
     return wine_server_ptr_handle(kmt_handle);
@@ -3343,7 +3398,6 @@ VkResult wine_vkGetMemoryWin32HandlePropertiesKHR(VkDevice device_handle, VkExte
 
 static bool set_shared_resource_object(HANDLE shared_resource, unsigned int index, HANDLE handle)
 {
-    IO_STATUS_BLOCK iosb;
     struct shared_resource_set_object
     {
         unsigned int index;
@@ -3353,19 +3407,16 @@ static bool set_shared_resource_object(HANDLE shared_resource, unsigned int inde
     params.index = index;
     params.handle = wine_server_obj_handle(handle);
 
-    return NtDeviceIoControlFile(shared_resource, NULL, NULL, NULL, &iosb, IOCTL_SHARED_GPU_RESOURCE_SET_OBJECT,
-            &params, sizeof(params), NULL, 0) == STATUS_SUCCESS;
+    return wine_ioctl(shared_resource, IOCTL_SHARED_GPU_RESOURCE_SET_OBJECT, &params, sizeof(params), NULL, 0) == STATUS_SUCCESS;
 }
 
 #define IOCTL_SHARED_GPU_RESOURCE_GET_OBJECT           CTL_CODE(FILE_DEVICE_VIDEO, 6, METHOD_BUFFERED, FILE_READ_ACCESS)
 
 static HANDLE get_shared_resource_object(HANDLE shared_resource, unsigned int index)
 {
-    IO_STATUS_BLOCK iosb;
     obj_handle_t handle;
 
-    if (NtDeviceIoControlFile(shared_resource, NULL, NULL, NULL, &iosb, IOCTL_SHARED_GPU_RESOURCE_GET_OBJECT,
-            &index, sizeof(index), &handle, sizeof(handle)))
+    if (wine_ioctl(shared_resource, IOCTL_SHARED_GPU_RESOURCE_GET_OBJECT, &index, sizeof(index), &handle, sizeof(handle)))
         return NULL;
 
     return wine_server_ptr_handle(handle);
@@ -4668,6 +4719,64 @@ VkResult wine_wine_vkAcquireKeyedMutex(VkDevice device, VkDeviceMemory memory, u
 VkResult wine_wine_vkReleaseKeyedMutex(VkDevice device, VkDeviceMemory memory, uint64_t key)
 {
     return release_keyed_mutex(vulkan_device_from_handle(device), wine_device_memory_from_handle(memory), key, NULL);
+}
+
+static void fixup_device_id(UINT *vendor_id, UINT *device_id)
+{
+    const char *sgi;
+
+    if (*vendor_id == 0x10de /* NVIDIA */ && (sgi = getenv("WINE_HIDE_NVIDIA_GPU")) && *sgi != '0')
+    {
+        *vendor_id = 0x1002; /* AMD */
+        *device_id = 0x73df; /* RX 6700XT */
+    }
+    else if (*vendor_id == 0x1002 /* AMD */ && (sgi = getenv("WINE_HIDE_AMD_GPU")) && *sgi != '0')
+    {
+        *vendor_id = 0x10de; /* NVIDIA */
+        *device_id = 0x2487; /* RTX 3060 */
+    }
+    else if (*vendor_id == 0x1002 && (*device_id == 0x163f || *device_id == 0x1435) && (sgi = getenv("WINE_HIDE_VANGOGH_GPU")) && *sgi != '0')
+    {
+        *device_id = 0x687f; /* Radeon RX Vega 56/64 */
+    }
+    else if (*vendor_id == 0x8086 /* Intel */ && (sgi = getenv("WINE_HIDE_INTEL_GPU")) && *sgi != '0')
+    {
+        *vendor_id = 0x1002; /* AMD */
+        *device_id = 0x73df; /* RX 6700XT */
+    }
+}
+
+void wine_vkGetPhysicalDeviceProperties(VkPhysicalDevice client_physical_device,
+        VkPhysicalDeviceProperties *properties)
+{
+    struct wine_phys_dev *phys_dev = wine_phys_dev_from_handle(client_physical_device);
+
+    TRACE("%p, %p\n", phys_dev, properties);
+
+    phys_dev->obj.instance->p_vkGetPhysicalDeviceProperties(phys_dev->obj.host.physical_device, properties);
+    fixup_device_id(&properties->vendorID, &properties->deviceID);
+}
+
+void wine_vkGetPhysicalDeviceProperties2(VkPhysicalDevice client_physical_device,
+        VkPhysicalDeviceProperties2 *properties)
+{
+    struct wine_phys_dev *phys_dev = wine_phys_dev_from_handle(client_physical_device);
+
+    TRACE("%p, %p\n", phys_dev, properties);
+
+    phys_dev->obj.instance->p_vkGetPhysicalDeviceProperties2(phys_dev->obj.host.physical_device, properties);
+    fixup_device_id(&properties->properties.vendorID, &properties->properties.deviceID);
+}
+
+void wine_vkGetPhysicalDeviceProperties2KHR(VkPhysicalDevice client_physical_device,
+        VkPhysicalDeviceProperties2 *properties)
+{
+    struct wine_phys_dev *phys_dev = wine_phys_dev_from_handle(client_physical_device);
+
+    TRACE("%p, %p\n", phys_dev, properties);
+
+    phys_dev->obj.instance->p_vkGetPhysicalDeviceProperties2KHR(phys_dev->obj.host.physical_device, properties);
+    fixup_device_id(&properties->properties.vendorID, &properties->properties.deviceID);
 }
 
 DECLSPEC_EXPORT VkDevice __wine_get_native_VkDevice(VkDevice handle)

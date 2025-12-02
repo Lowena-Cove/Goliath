@@ -253,14 +253,13 @@ struct module* module_new(struct process* pcs, const WCHAR* name,
         module->cpu = dbghelp_current_cpu;
     module->debug_format_bitmask = 0;
 
-    vector_init(&module->vsymt, sizeof(struct symt*), 128);
-    vector_init(&module->vcustom_symt, sizeof(struct symt*), 16);
+    vector_init(&module->vsymt, sizeof(symref_t), 0);
+    vector_init(&module->vcustom_symt, sizeof(symref_t), 0);
     /* FIXME: this seems a bit too high (on a per module basis)
      * need some statistics about this
      */
     hash_table_init(&module->pool, &module->ht_symbols, 4096);
     hash_table_init(&module->pool, &module->ht_types,   4096);
-    vector_init(&module->vtypes, sizeof(struct symt*),  32);
 
     module->sources_used      = 0;
     module->sources_alloc     = 0;
@@ -903,6 +902,7 @@ BOOL image_check_alternate(struct image_file_map* fmap, const struct module* mod
     return FALSE;
 }
 
+#ifndef _WIN64
 /***********************************************************************
  *			SymLoadModule (DBGHELP.@)
  */
@@ -912,6 +912,7 @@ DWORD WINAPI SymLoadModule(HANDLE hProcess, HANDLE hFile, PCSTR ImageName,
     return SymLoadModuleEx(hProcess, hFile, ImageName, ModuleName, BaseOfDll,
                            SizeOfDll, NULL, 0);
 }
+#endif
 
 /***********************************************************************
  *			SymLoadModuleEx (DBGHELP.@)
@@ -1080,9 +1081,8 @@ DWORD64 WINAPI SymLoadModule64(HANDLE hProcess, HANDLE hFile, PCSTR ImageName,
  */
 BOOL module_remove(struct process* pcs, struct module* module)
 {
-    struct module_format*modfmt;
+    struct module_format_vtable_iterator iter = {};
     struct module**     p;
-    unsigned            i;
 
     TRACE("%s (%p)\n", debugstr_w(module->modulename), module);
 
@@ -1094,20 +1094,20 @@ BOOL module_remove(struct process* pcs, struct module* module)
             locsym = &symt_get_function_from_inlined((struct symt_function*)locsym)->symt;
         if (symt_check_tag(locsym, SymTagFunction))
         {
-            locsym = ((struct symt_function*)locsym)->container;
-            if (symt_check_tag(locsym, SymTagCompiland) &&
-                module == ((struct symt_compiland*)locsym)->container->module)
+            struct symt_compiland *compiland = (struct symt_compiland*)SYMT_SYMREF_TO_PTR(((struct symt_function*)locsym)->container);
+            if (symt_check_tag(&compiland->symt, SymTagCompiland))
             {
-                pcs->localscope_pc = 0;
-                pcs->localscope_symt = NULL;
+                if (module == ((struct symt_module*)SYMT_SYMREF_TO_PTR(compiland->container))->module)
+                {
+                    pcs->localscope_pc = 0;
+                    pcs->localscope_symt = NULL;
+                }
             }
         }
     }
-    for (i = 0; i < DFI_LAST; i++)
-    {
-        if ((modfmt = module->format_info[i]) && modfmt->remove)
-            modfmt->remove(pcs, module->format_info[i]);
-    }
+    while (module_format_vtable_iterator_next(module, &iter, MODULE_FORMAT_VTABLE_INDEX(remove)))
+        iter.modfmt->vtable->remove(iter.modfmt);
+
     hash_table_destroy(&module->ht_symbols);
     hash_table_destroy(&module->ht_types);
     HeapFree(GetProcessHeap(), 0, module->sources);
@@ -1129,6 +1129,7 @@ BOOL module_remove(struct process* pcs, struct module* module)
     return FALSE;
 }
 
+#ifndef _WIN64
 /******************************************************************
  *		SymUnloadModule (DBGHELP.@)
  *
@@ -1137,6 +1138,7 @@ BOOL WINAPI SymUnloadModule(HANDLE hProcess, DWORD BaseOfDll)
 {
     return SymUnloadModule64(hProcess, BaseOfDll);
 }
+#endif
 
 /******************************************************************
  *		SymUnloadModule64 (DBGHELP.@)
@@ -1155,6 +1157,7 @@ BOOL WINAPI SymUnloadModule64(HANDLE hProcess, DWORD64 BaseOfDll)
     return TRUE;
 }
 
+#ifndef _WIN64
 /******************************************************************
  *		SymEnumerateModules (DBGHELP.@)
  *
@@ -1185,6 +1188,7 @@ BOOL  WINAPI SymEnumerateModules(HANDLE hProcess,
 
     return SymEnumerateModulesW64(hProcess, enum_modW64_32, &x);
 }
+#endif
 
 /******************************************************************
  *		SymEnumerateModules64 (DBGHELP.@)
@@ -1274,6 +1278,7 @@ BOOL  WINAPI EnumerateLoadedModules64(HANDLE hProcess,
     return EnumerateLoadedModulesW64(hProcess, enum_load_modW64_64, &x);
 }
 
+#ifndef _WIN64
 /******************************************************************
  *		EnumerateLoadedModules (DBGHELP.@)
  *
@@ -1304,6 +1309,7 @@ BOOL  WINAPI EnumerateLoadedModules(HANDLE hProcess,
 
     return EnumerateLoadedModulesW64(hProcess, enum_load_modW64_32, &x);
 }
+#endif
 
 static unsigned int load_and_grow_modules(HANDLE process, HMODULE** hmods, unsigned start, unsigned* alloc, DWORD filter)
 {
@@ -1330,6 +1336,7 @@ BOOL  WINAPI EnumerateLoadedModulesW64(HANDLE process,
                                        PENUMLOADED_MODULES_CALLBACKW64 enum_cb,
                                        PVOID user)
 {
+    OBJECT_BASIC_INFORMATION obi;
     HMODULE*            hmods;
     unsigned            alloc = 256, count, count32, i;
     USHORT              pcs_machine, native_machine;
@@ -1339,6 +1346,15 @@ BOOL  WINAPI EnumerateLoadedModulesW64(HANDLE process,
     WCHAR*              sysdir = NULL;
     WCHAR*              wowdir = NULL;
     size_t              sysdir_len = 0, wowdir_len = 0;
+
+    if (process != GetCurrentProcess() &&
+        RtlIsCurrentProcess( process ) &&
+        !NtQueryObject(process, ObjectBasicInformation, &obi, sizeof(obi), NULL) &&
+        obi.GrantedAccess & PROCESS_VM_READ)
+    {
+        TRACE("same process.\n");
+        process = GetCurrentProcess();
+    }
 
     /* process might not be a handle to a live process */
     if (!IsWow64Process2(process, &pcs_machine, &native_machine))
@@ -1429,6 +1445,7 @@ static void dbghelp_str_WtoA(const WCHAR *src, char *dst, int dst_len)
     dst[dst_len - 1] = 0;
 }
 
+#ifndef _WIN64
 /******************************************************************
  *		SymGetModuleInfo (DBGHELP.@)
  *
@@ -1489,6 +1506,7 @@ BOOL  WINAPI SymGetModuleInfoW(HANDLE hProcess, DWORD dwAddr,
 
     return TRUE;
 }
+#endif
 
 /******************************************************************
  *		SymGetModuleInfo64 (DBGHELP.@)
@@ -1584,6 +1602,7 @@ BOOL  WINAPI SymGetModuleInfoW64(HANDLE hProcess, DWORD64 dwAddr,
     return TRUE;
 }
 
+#ifndef _WIN64
 /***********************************************************************
  *		SymGetModuleBase (DBGHELP.@)
  */
@@ -1591,6 +1610,7 @@ DWORD WINAPI SymGetModuleBase(HANDLE hProcess, DWORD dwAddr)
 {
     return (DWORD)SymGetModuleBase64(hProcess, dwAddr);
 }
+#endif
 
 /***********************************************************************
  *		SymGetModuleBase64 (DBGHELP.@)
@@ -1622,7 +1642,6 @@ void module_reset_debug_info(struct module* module)
     hash_table_destroy(&module->ht_types);
     module->ht_types.num_buckets = 0;
     module->ht_types.buckets = NULL;
-    module->vtypes.num_elts = 0;
     hash_table_destroy(&module->ht_symbols);
     module->sources_used = module->sources_alloc = 0;
     module->sources = NULL;
@@ -1665,6 +1684,7 @@ BOOL WINAPI SymRefreshModuleList(HANDLE hProcess)
     return module_refresh_list(pcs);
 }
 
+#ifndef _WIN64
 /***********************************************************************
  *		SymFunctionTableAccess (DBGHELP.@)
  */
@@ -1672,6 +1692,7 @@ PVOID WINAPI SymFunctionTableAccess(HANDLE hProcess, DWORD AddrBase)
 {
     return SymFunctionTableAccess64(hProcess, AddrBase);
 }
+#endif
 
 /***********************************************************************
  *		SymFunctionTableAccess64 (DBGHELP.@)

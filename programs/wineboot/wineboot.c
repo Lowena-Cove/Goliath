@@ -378,6 +378,15 @@ static UINT64 read_tsc_frequency(void)
     return freq;
 }
 
+#elif defined(__aarch64__)
+
+static UINT64 read_tsc_frequency(void)
+{
+    UINT64 tsc_frequency;
+    __asm__ volatile( "mrs %[Res], CNTFRQ_EL0" : [Res] "=r" (tsc_frequency) );
+    return tsc_frequency;
+}
+
 #else
 
 static void initialize_xstate_features(struct _KUSER_SHARED_DATA *data)
@@ -1043,6 +1052,14 @@ static void create_computer_name_keys(void)
 
 static void create_volatile_environment_registry_key(void)
 {
+    static const WCHAR *preserve[] =
+    {
+        L"DXVK_ENABLE_NVAPI",
+        L"DXVK_NVAPI_ALLOW_OTHER_DRIVERS",
+        L"DXVK_NVAPI_DRIVER_VERSION",
+    };
+    const WCHAR *str;
+    unsigned int i;
     WCHAR path[MAX_PATH];
     WCHAR computername[MAX_COMPUTERNAME_LENGTH + 1 + 2];
     DWORD size;
@@ -1087,6 +1104,12 @@ static void create_volatile_environment_registry_key(void)
     }
 
     set_reg_value( hkey, L"SESSIONNAME", L"Console" );
+
+    for (i = 0; i < ARRAY_SIZE(preserve); ++i)
+    {
+        if ((str = _wgetenv( preserve[i] ))) set_reg_value( hkey, preserve[i], str );
+    }
+
     RegCloseKey( hkey );
 }
 
@@ -1604,7 +1627,7 @@ static void update_user_profile(void)
 
 static void update_win_version(void)
 {
-    static const WCHAR win10_buildW[] = L"19043";
+    static const WCHAR win10_buildW[] = L"19045";
     static const WCHAR win10_ntW[] = L"6.3";
 
     HKEY cv_h;
