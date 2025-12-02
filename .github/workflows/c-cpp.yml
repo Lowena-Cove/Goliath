@@ -35,7 +35,13 @@ jobs:
           libfreetype-dev \
           libfreetype-dev:i386 \
           libdrm-dev \
-          libdrm-dev:i386
+          libdrm-dev:i386 \
+          mingw-w64 \
+          clang-14 \
+          lld-14
+        # Use clang-14 as it's more stable with Wine's inline asm
+        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-14 100
+        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-14 100
     - name: Generate configure script
       run: ./autogen.sh
     - name: configure
