@@ -2774,6 +2774,7 @@ static void test_rsa_encrypt(void)
         ok(ret == STATUS_SUCCESS, "got %lx\n", ret);
         BCryptDestroyKey(key);
     }
+    }
 }
 
 static void test_RSA(void)
