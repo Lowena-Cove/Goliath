@@ -53,7 +53,7 @@
 #include <jni.h>
 
 // FIXME: put the header in a common place
-#include "../api-impl-jni/defines.h"
+#include "api-impl-jni/defines.h"
 
 #include "native_window.h"
 #include "wayland_server.h"

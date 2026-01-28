@@ -11,8 +11,8 @@
 
 #include <androidfw/androidfw_c_api.h>
 
-#include "../api-impl-jni/defines.h"
-#include "../api-impl-jni/util.h"
+#include "api-impl-jni/defines.h"
+#include "api-impl-jni/util.h"
 
 struct AAssetDir {
 	struct AssetDir *asset_dir;

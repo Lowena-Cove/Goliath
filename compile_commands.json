@@ -29256,6 +29256,84 @@
     "directory": "/home/runner/work/Goliath/Goliath"
   },
   {
+    "command": "@CC@ -c -o libs/atl_android/asset_manager.o libs/atl_android/asset_manager.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/asset_manager.c",
+    "output": "libs/atl_android/asset_manager.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_android/bitmap.o libs/atl_android/bitmap.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/bitmap.c",
+    "output": "libs/atl_android/bitmap.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_android/configuration.o libs/atl_android/configuration.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/configuration.c",
+    "output": "libs/atl_android/configuration.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_android/input.o libs/atl_android/input.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/input.c",
+    "output": "libs/atl_android/input.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_android/looper.o libs/atl_android/looper.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/looper.c",
+    "output": "libs/atl_android/looper.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_android/media.o libs/atl_android/media.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/media.c",
+    "output": "libs/atl_android/media.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_android/native_window.o libs/atl_android/native_window.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/native_window.c",
+    "output": "libs/atl_android/native_window.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_android/sensor.o libs/atl_android/sensor.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/sensor.c",
+    "output": "libs/atl_android/sensor.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_android/trace.o libs/atl_android/trace.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/trace.c",
+    "output": "libs/atl_android/trace.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_android/wayland_server.o libs/atl_android/wayland_server.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/wayland_server.c",
+    "output": "libs/atl_android/wayland_server.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_android/atl_android.o libs/atl_android/atl_android.c -Ilibs/atl_android -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_android/atl_android.c",
+    "output": "libs/atl_android/atl_android.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/atl_runtime/atl_runtime.o libs/atl_runtime/atl_runtime.c -Ilibs/atl_runtime -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/atl_runtime/atl_runtime.c",
+    "output": "libs/atl_runtime/atl_runtime.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
+    "command": "@CC@ -c -o libs/libretro_core/libretro_loader.o libs/libretro_core/libretro_loader.c -Ilibs/libretro_core -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 @CFLAGS@",
+    "file": "libs/libretro_core/libretro_loader.c",
+    "output": "libs/libretro_core/libretro_loader.o",
+    "directory": "/home/runner/work/Goliath/Goliath"
+  },
+  {
     "command": "gcc -m32 -c -o loader/main.o loader/main.c -Iloader -Iinclude -D__WINESRC__ -DBINDIR=\\\"${bindir}\\\" -DLIBDIR=\\\"${libdir}\\\" -DWINE_UNIX_LIB -fPIE -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4 -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0",
     "file": "loader/main.c",
     "output": "loader/main.o",

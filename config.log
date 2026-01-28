@@ -10419,7 +10419,7 @@ configure: failed program was:
 configure:17008: result: no
 configure:17086: checking for resolver library
 configure:17110: gcc -m32 -o conftest -g -O2   conftest.c   >&5
-/usr/bin/ld: /tmp/ccQeNUXW.o: in function `main':
+/usr/bin/ld: /tmp/ccbLMb8m.o: in function `main':
 /home/runner/work/Goliath/Goliath/conftest.c:112:(.text.startup+0x46): undefined reference to `ns_initparse'
 collect2: error: ld returned 1 exit status
 configure:17110: $? = 1
@@ -10548,7 +10548,7 @@ conftest.c: In function 'main':
 conftest.c:110:1: warning: implicit declaration of function 'res_getservers' [-Wimplicit-function-declaration]
   110 | res_getservers(NULL, NULL, 0);
       | ^~~~~~~~~~~~~~
-/usr/bin/ld: /tmp/ccOq7dJ8.o: in function `main':
+/usr/bin/ld: /tmp/ccZm0dxk.o: in function `main':
 /home/runner/work/Goliath/Goliath/conftest.c:110:(.text.startup+0x24): undefined reference to `res_getservers'
 collect2: error: ld returned 1 exit status
 configure:17159: $? = 1
@@ -10809,7 +10809,7 @@ configure: failed program was:
 configure:17273: result: yes
 configure:17304: checking for pthread_getthreadid_np
 configure:17304: gcc -m32 -o conftest -g -O2   conftest.c   >&5
-/usr/bin/ld: /tmp/ccXTI1iy.o: in function `main':
+/usr/bin/ld: /tmp/ccBwVBGE.o: in function `main':
 /home/runner/work/Goliath/Goliath/conftest.c:137:(.text.startup+0x13): undefined reference to `pthread_getthreadid_np'
 collect2: error: ld returned 1 exit status
 configure:17304: $? = 1
@@ -15017,7 +15017,7 @@ configure:20650: $? = 0
 configure:20650: result: yes
 configure:20656: checking for getattrlist
 configure:20656: gcc -m32 -o conftest -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0    conftest.c  >&5
-/usr/bin/ld: /tmp/ccsx4c7l.o: in function `main':
+/usr/bin/ld: /tmp/ccG36PLN.o: in function `main':
 /home/runner/work/Goliath/Goliath/conftest.c:149:(.text.startup+0x13): undefined reference to `getattrlist'
 collect2: error: ld returned 1 exit status
 configure:20656: $? = 1
@@ -15189,7 +15189,7 @@ configure:20674: $? = 0
 configure:20674: result: yes
 configure:20680: checking for kqueue
 configure:20680: gcc -m32 -o conftest -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0    conftest.c  >&5
-/usr/bin/ld: /tmp/cccywZGu.o: in function `main':
+/usr/bin/ld: /tmp/ccPjFm3S.o: in function `main':
 /home/runner/work/Goliath/Goliath/conftest.c:152:(.text.startup+0x13): undefined reference to `kqueue'
 collect2: error: ld returned 1 exit status
 configure:20680: $? = 1
@@ -15356,7 +15356,7 @@ configure:20686: $? = 0
 configure:20686: result: yes
 configure:20692: checking for port_create
 configure:20692: gcc -m32 -o conftest -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0    conftest.c  >&5
-/usr/bin/ld: /tmp/ccm0Z3zV.o: in function `main':
+/usr/bin/ld: /tmp/cckJr8wB.o: in function `main':
 /home/runner/work/Goliath/Goliath/conftest.c:153:(.text.startup+0x13): undefined reference to `port_create'
 collect2: error: ld returned 1 exit status
 configure:20692: $? = 1
@@ -15544,7 +15544,7 @@ configure:20728: $? = 0
 configure:20728: result: yes
 configure:20734: checking for setproctitle
 configure:20734: gcc -m32 -o conftest -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0    conftest.c  >&5
-/usr/bin/ld: /tmp/ccTizQvh.o: in function `main':
+/usr/bin/ld: /tmp/ccl5nKqd.o: in function `main':
 /home/runner/work/Goliath/Goliath/conftest.c:159:(.text.startup+0x13): undefined reference to `setproctitle'
 collect2: error: ld returned 1 exit status
 configure:20734: $? = 1
@@ -15714,7 +15714,7 @@ configure: failed program was:
 configure:20734: result: no
 configure:20740: checking for setprogname
 configure:20740: gcc -m32 -o conftest -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0    conftest.c  >&5
-/usr/bin/ld: /tmp/ccWjsxDQ.o: in function `main':
+/usr/bin/ld: /tmp/ccuP0GfV.o: in function `main':
 /home/runner/work/Goliath/Goliath/conftest.c:159:(.text.startup+0x13): undefined reference to `setprogname'
 collect2: error: ld returned 1 exit status
 configure:20740: $? = 1
@@ -15896,7 +15896,7 @@ configure:20758: $? = 0
 configure:20758: result: yes
 configure:20764: checking for thr_kill2
 configure:20764: gcc -m32 -o conftest -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0    conftest.c  >&5
-/usr/bin/ld: /tmp/ccEz60jj.o: in function `main':
+/usr/bin/ld: /tmp/ccco5AL1.o: in function `main':
 /home/runner/work/Goliath/Goliath/conftest.c:162:(.text.startup+0x13): undefined reference to `thr_kill2'
 collect2: error: ld returned 1 exit status
 configure:20764: $? = 1
@@ -24211,7 +24211,46 @@ config.status:: linking tools/winewrapper to wine
 config.status:: executing include/stamp-h commands
 config.status:: executing tools/makedep commands
 config.status:: executing Makefile commands
-config.status:23703: error: could not create Makefile
+configure:24432: libxcursor 32-bit development files not found, the Xcursor extension won't be supported.
+configure:24432: libxi 32-bit development files not found, the Xinput extension won't be supported.
+configure:24432: XShm 32-bit development files not found, X Shared Memory won't be supported.
+configure:24432: XShape 32-bit development files not found, XShape won't be supported.
+configure:24432: libXxf86vm 32-bit development files not found, XFree86 Vidmode won't be supported.
+configure:24432: libxrandr 32-bit development files not found, XRandr won't be supported.
+configure:24432: libxfixes 32-bit development files not found, Xfixes won't be supported.
+configure:24432: libxinerama 32-bit development files not found, multi-monitor setups won't be supported.
+configure:24432: libxcomposite 32-bit development files not found, Xcomposite won't be supported.
+configure:24432: libOSMesa 32-bit development files not found (or too old), OpenGL rendering in bitmaps won't be supported.
+configure:24432: Wayland 32-bit development files not found, the Wayland driver won't be supported.
+configure:24432: pcap 32-bit development files not found, wpcap won't be supported.
+configure:24432: libpcsclite not found, smart cards won't be supported.
+configure:24432: libdbus 32-bit development files not found, no dynamic device support.
+configure:24432: libsane 32-bit development files not found, scanners won't be supported.
+configure:24432: libusb-1.0 32-bit development files not found (or too old), USB devices won't be supported.
+configure:24432: libv4l2 32-bit development files not found.
+configure:24432: libgphoto2 32-bit development files not found, digital cameras won't be supported.
+configure:24432: libgphoto2_port 32-bit development files not found, digital cameras won't be auto-detected.
+configure:24432: libpulse 32-bit development files not found or too old, Pulse won't be supported.
+configure:24432: FFmpeg 32-bit development files not found.
+configure:24432: gstreamer-1.0 base plugins 32-bit development files not found, GStreamer won't be supported.
+configure:24432: OSS sound system found but too old (OSSv4 needed), OSS won't be supported.
+configure:24432: libudev 32-bit development files not found, plug and play won't be supported.
+configure:24432: libSDL2 32-bit development files not found, SDL2 won't be supported.
+configure:24432: libcapi20 32-bit development files not found, ISDN won't be supported.
+configure:24432: libcups 32-bit development files not found, CUPS won't be supported.
+configure:24432: fontconfig 32-bit development files not found, fontconfig won't be supported.
+configure:24432: libkrb5 32-bit development files not found (or too old), Kerberos won't be supported.
+configure:24432: libnetapi not found, Samba NetAPI won't be supported.
+configure:24432: libvosk 32-bit development files not found, speech recognition won't be supported.
+configure:24432: libvulkan and libMoltenVK 32-bit development files not found, Vulkan won't be supported.
+configure:24432: libgcrypt 32-bit development files not found, GCRYPT won't be supported.
+configure:24432: libpiper 32-bit development files not found, protontts won't be supported.
+configure:24445: WARNING: gettext tools not found (or too old), translations won't be built.
+configure:24445: WARNING: libxrender 32-bit development files not found, XRender won't be supported.
+configure:24445: WARNING: No OpenGL library found on this system.
+OpenGL and Direct3D won't be supported.
+configure:24445: WARNING: libgnutls 32-bit development files not found, no schannel support.
+configure:24445: WARNING: No sound system was found. Windows applications will be silent.
 
 ## ---------------- ##
 ## Cache variables. ##
@@ -26454,4 +26493,4 @@ x86_64_TARGET=''
 #define HAVE___BUILTIN_POPCOUNT 1
 #define HAVE___CLEAR_CACHE 1
 
-configure: exit 1
+configure: exit 0
