@@ -1,6 +1,6 @@
-MODULE    = avifile.dll16
-IMPORTS   = avifil32
-EXTRADLLFLAGS = -m16 -Wb,--main-module,avifil32.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/avifile.dll16:
+	@cd ../.. && $(MAKE) dlls/avifile.dll16/$@
+.PHONY: all install install-lib clean

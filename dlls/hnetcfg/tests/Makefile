@@ -1,5 +1,7 @@
-TESTDLL   = hnetcfg.dll
-IMPORTS   = ole32 uuid oleaut32 advapi32 mpr
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	policy.c
+all:
+all clean check test testclean i386-windows/hnetcfg_test-stripped.exe i386-windows/policy.ok \
+  i386-windows/policy.o i386-windows/testlist.o i386-windows/hnetcfg_test.exe:
+	@cd ../../.. && $(MAKE) dlls/hnetcfg/tests/$@
+.PHONY: all clean check test testclean

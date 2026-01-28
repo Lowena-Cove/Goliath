@@ -1,15 +1,8 @@
-MODULE    = winhlp32.exe
-IMPORTS   = user32 gdi32
-DELAYIMPORTS = shell32 comctl32 comdlg32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mwindows
-
-SOURCES = \
-	callback.c \
-	hlpfile.c \
-	macro.c \
-	macro.lex.l \
-	string.c \
-	winhelp.c \
-	winhelp.svg \
-	winhlp32.rc
+all:
+all install install-lib clean macro.lex.yy.c winhlp32.res i386-windows/callback.o \
+  i386-windows/hlpfile.o i386-windows/macro.o i386-windows/string.o i386-windows/winhelp.o \
+  i386-windows/macro.lex.yy.o i386-windows/winhlp32.exe winhlp32.pot:
+	@cd ../.. && $(MAKE) programs/winhlp32/$@
+.PHONY: all install install-lib clean

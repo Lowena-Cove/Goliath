@@ -1,12 +1,8 @@
-MODULE    = itss.dll
-IMPORTS   = uuid urlmon shlwapi ole32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	chm_lib.c \
-	itss.c \
-	itss.idl \
-	lzx.c \
-	moniker.c \
-	protocol.c \
-	rsrc.rc \
-	storage.c
+all:
+all install install-lib clean rsrc.res i386-windows/chm_lib.o i386-windows/itss.o i386-windows/lzx.o \
+  i386-windows/moniker.o i386-windows/protocol.o i386-windows/storage.o i386-windows/itss_r.res \
+  i386-windows/itss.dll:
+	@cd ../.. && $(MAKE) dlls/itss/$@
+.PHONY: all install install-lib clean

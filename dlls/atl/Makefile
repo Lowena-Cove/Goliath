@@ -1,12 +1,8 @@
-MODULE    = atl.dll
-IMPORTLIB = atl
-IMPORTS   = uuid oleaut32 ole32 user32 gdi32 advapi32 shlwapi
-EXTRADEFS = -D_ATL_VER=_ATL_VER_30
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	atl.c \
-	atl30.c \
-	atl_ax.c \
-	atl_classes.idl \
-	atl_lib.idl \
-	registrar.c
+all:
+all install install-lib install-dev clean libatl.a i386-windows/libatl.a i386-windows/atl.o \
+  i386-windows/atl30.o i386-windows/atl_ax.o i386-windows/registrar.o i386-windows/atl_classes_r.res \
+  i386-windows/atl_lib_t.res i386-windows/atl.dll:
+	@cd ../.. && $(MAKE) dlls/atl/$@
+.PHONY: all install install-lib install-dev clean

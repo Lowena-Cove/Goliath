@@ -1,13 +1,8 @@
-MODULE    = oleview.exe
-IMPORTS   = uuid comdlg32 comctl32 shell32 oleaut32 ole32 user32 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mwindows
-
-SOURCES = \
-	details.c \
-	interface.c \
-	oleview.c \
-	oleview.rc \
-	pane.c \
-	tree.c \
-	typelib.c
+all:
+all install install-lib clean oleview.res i386-windows/details.o i386-windows/interface.o \
+  i386-windows/oleview.o i386-windows/pane.o i386-windows/tree.o i386-windows/typelib.o \
+  i386-windows/oleview.exe oleview.pot:
+	@cd ../.. && $(MAKE) programs/oleview/$@
+.PHONY: all install install-lib clean

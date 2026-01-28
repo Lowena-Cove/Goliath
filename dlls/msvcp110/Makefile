@@ -1,15 +1,8 @@
-MODULE = msvcp110.dll
-IMPORTS   = msvcr110
-EXTRADEFS = -D_MSVCP_VER=110
-PARENTSRC = ../msvcp90
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	details.c \
-	exception.c \
-	ios.c \
-	locale.c \
-	math.c \
-	memory.c \
-	misc.c \
-	msvcp_main.c \
-	string.c
+all:
+all install install-lib clean i386-windows/details.o i386-windows/exception.o i386-windows/ios.o \
+  i386-windows/locale.o i386-windows/math.o i386-windows/memory.o i386-windows/misc.o \
+  i386-windows/msvcp_main.o i386-windows/string.o i386-windows/msvcp110.dll:
+	@cd ../.. && $(MAKE) dlls/msvcp110/$@
+.PHONY: all install install-lib clean

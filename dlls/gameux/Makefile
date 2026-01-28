@@ -1,9 +1,7 @@
-MODULE    = gameux.dll
-IMPORTS   = uuid shell32 oleaut32 ole32 user32 advapi32 shlwapi
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	factory.c \
-	gameexplorer.c \
-	gamestatistics.c \
-	gameux_tlb.idl \
-	rsrc.rc
+all:
+all install install-lib clean rsrc.res i386-windows/factory.o i386-windows/gameexplorer.o \
+  i386-windows/gamestatistics.o i386-windows/gameux_tlb_t.res i386-windows/gameux.dll:
+	@cd ../.. && $(MAKE) dlls/gameux/$@
+.PHONY: all install install-lib clean

@@ -1,5 +1,8 @@
-TESTDLL = windows.gaming.ui.gamebar.dll
-IMPORTS = combase
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	gamebar.c
+all:
+all clean check test testclean i386-windows/windows.gaming.ui.gamebar_test-stripped.exe \
+  i386-windows/gamebar.ok i386-windows/gamebar.o i386-windows/testlist.o \
+  i386-windows/windows.gaming.ui.gamebar_test.exe:
+	@cd ../../.. && $(MAKE) dlls/windows.gaming.ui.gamebar/tests/$@
+.PHONY: all clean check test testclean

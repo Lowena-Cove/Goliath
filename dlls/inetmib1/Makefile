@@ -1,6 +1,6 @@
-MODULE    = inetmib1.dll
-IMPORTS   = snmpapi ws2_32
-DELAYIMPORTS = iphlpapi
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/inetmib1.dll:
+	@cd ../.. && $(MAKE) dlls/inetmib1/$@
+.PHONY: all install install-lib clean

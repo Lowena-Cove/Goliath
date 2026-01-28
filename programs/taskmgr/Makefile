@@ -1,26 +1,11 @@
-MODULE    = taskmgr.exe
-IMPORTS   = shell32 shlwapi comctl32 user32 gdi32 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mwindows
-
-SOURCES = \
-	about.c \
-	affinity.c \
-	applpage.c \
-	column.c \
-	dbgchnl.c \
-	debug.c \
-	endproc.c \
-	graph.c \
-	graphctl.c \
-	optnmenu.c \
-	perfdata.c \
-	perfpage.c \
-	priority.c \
-	proclist.c \
-	procpage.c \
-	run.c \
-	taskmgr.c \
-	taskmgr.rc \
-	taskmgr.svg \
-	trayicon.c
+all:
+all install install-lib clean taskmgr.res i386-windows/about.o i386-windows/affinity.o \
+  i386-windows/applpage.o i386-windows/column.o i386-windows/dbgchnl.o i386-windows/debug.o \
+  i386-windows/endproc.o i386-windows/graph.o i386-windows/graphctl.o i386-windows/optnmenu.o \
+  i386-windows/perfdata.o i386-windows/perfpage.o i386-windows/priority.o i386-windows/proclist.o \
+  i386-windows/procpage.o i386-windows/run.o i386-windows/taskmgr.o i386-windows/trayicon.o \
+  i386-windows/taskmgr.exe taskmgr.pot:
+	@cd ../.. && $(MAKE) programs/taskmgr/$@
+.PHONY: all install install-lib clean

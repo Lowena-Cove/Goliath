@@ -1,6 +1,6 @@
-MODULE = vcomp140.dll
-PARENTSRC = ../vcomp
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	fork.c \
-	main.c
+all:
+all install install-lib clean i386-windows/fork.o i386-windows/main.o i386-windows/vcomp140.dll:
+	@cd ../.. && $(MAKE) dlls/vcomp140/$@
+.PHONY: all install install-lib clean

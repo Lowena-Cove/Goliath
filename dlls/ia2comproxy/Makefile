@@ -1,8 +1,9 @@
-MODULE    = ia2comproxy.dll
-IMPORTS   = uuid oleacc oleaut32 ole32 rpcrt4
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	ia2_classes.idl \
-	oleacc_classes.idl
-
-dlldata_EXTRADEFS = -DWINE_REGISTER_DLL -DPROXY_DELEGATION
+all:
+all install install-lib clean ia2_classes.h i386-windows/ia2_classes_i.c \
+  i386-windows/ia2_classes_p.c dlldata.c i386-windows/oleacc_classes_i.c \
+  i386-windows/ia2_classes_i.o i386-windows/ia2_classes_p.o i386-windows/dlldata.o \
+  i386-windows/oleacc_classes_i.o i386-windows/ia2_classes_r.res i386-windows/ia2comproxy.dll:
+	@cd ../.. && $(MAKE) dlls/ia2comproxy/$@
+.PHONY: all install install-lib clean

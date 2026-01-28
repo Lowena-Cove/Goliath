@@ -1,6 +1,6 @@
-MODULE    = regini.exe
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole -municode
-
-SOURCES = \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/regini.exe:
+	@cd ../.. && $(MAKE) programs/regini/$@
+.PHONY: all install install-lib clean

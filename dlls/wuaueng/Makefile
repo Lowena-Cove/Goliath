@@ -1,6 +1,6 @@
-MODULE    = wuaueng.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	version.rc
+all:
+all install install-lib clean version.res i386-windows/wuaueng.dll:
+	@cd ../.. && $(MAKE) dlls/wuaueng/$@
+.PHONY: all install install-lib clean

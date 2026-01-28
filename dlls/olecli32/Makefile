@@ -1,6 +1,7 @@
-MODULE    = olecli32.dll
-IMPORTLIB = olecli32
-IMPORTS   = ole32 gdi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	olecli_main.c
+all:
+all install install-lib install-dev clean libolecli32.a i386-windows/libolecli32.a \
+  i386-windows/olecli_main.o i386-windows/olecli32.dll:
+	@cd ../.. && $(MAKE) dlls/olecli32/$@
+.PHONY: all install install-lib install-dev clean

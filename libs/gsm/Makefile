@@ -1,20 +1,10 @@
-EXTLIB    = libgsm.a
-EXTRAINCL = $(GSM_PE_CFLAGS)
-EXTRADEFS = -DWAV49
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	src/add.c \
-	src/code.c \
-	src/decode.c \
-	src/gsm_create.c \
-	src/gsm_decode.c \
-	src/gsm_destroy.c \
-	src/gsm_encode.c \
-	src/gsm_option.c \
-	src/gsm_print.c \
-	src/long_term.c \
-	src/lpc.c \
-	src/preprocess.c \
-	src/rpe.c \
-	src/short_term.c \
-	src/table.c
+all:
+clean i386-windows/libgsm.a i386-windows/src/add.o i386-windows/src/code.o i386-windows/src/decode.o \
+  i386-windows/src/gsm_create.o i386-windows/src/gsm_decode.o i386-windows/src/gsm_destroy.o \
+  i386-windows/src/gsm_encode.o i386-windows/src/gsm_option.o i386-windows/src/gsm_print.o \
+  i386-windows/src/long_term.o i386-windows/src/lpc.o i386-windows/src/preprocess.o \
+  i386-windows/src/rpe.o i386-windows/src/short_term.o i386-windows/src/table.o:
+	@cd ../.. && $(MAKE) libs/gsm/$@
+.PHONY: clean

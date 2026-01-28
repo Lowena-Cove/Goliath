@@ -1,16 +1,9 @@
-EXTRADEFS = -DXAUDIO2_VER=8
-MODULE    = xaudio2_8.dll
-IMPORTLIB = xaudio2_8
-IMPORTS   = $(FAUDIO_PE_LIBS) advapi32 ole32 user32 uuid
-EXTRAINCL = $(FAUDIO_PE_CFLAGS)
-PARENTSRC = ../xaudio2_7
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	x3daudio.c \
-	xapo.c \
-	xapofx.c \
-	xaudio_allocator.c \
-	xaudio_classes.idl \
-	xaudio_dll.c
+all:
+all install install-lib install-dev clean libxaudio2_8.a i386-windows/libxaudio2_8.a \
+  xaudio_classes.h i386-windows/x3daudio.o i386-windows/xapo.o i386-windows/xapofx.o \
+  i386-windows/xaudio_allocator.o i386-windows/xaudio_dll.o i386-windows/xaudio_classes_r.res \
+  i386-windows/xaudio2_8.dll:
+	@cd ../.. && $(MAKE) dlls/xaudio2_8/$@
+.PHONY: all install install-lib install-dev clean

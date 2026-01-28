@@ -1,7 +1,6 @@
-MODULE    = presentationfontcache.exe
-IMPORTS   = advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole -municode
-
-SOURCES = \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/presentationfontcache.exe:
+	@cd ../.. && $(MAKE) programs/presentationfontcache/$@
+.PHONY: all install install-lib clean

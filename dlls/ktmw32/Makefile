@@ -1,4 +1,6 @@
-MODULE    = ktmw32.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	ktmw32_main.c
+all:
+all install install-lib clean i386-windows/ktmw32_main.o i386-windows/ktmw32.dll:
+	@cd ../.. && $(MAKE) dlls/ktmw32/$@
+.PHONY: all install install-lib clean

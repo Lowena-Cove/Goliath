@@ -1,29 +1,9 @@
-PROGRAMS = widl
-PARENTSRC = ../wrc
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	attribute.c \
-	client.c \
-	expr.c \
-	hash.c \
-	header.c \
-	parser.l \
-	parser.y \
-	ppl.l \
-	ppy.y \
-	proxy.c \
-	register.c \
-	server.c \
-	typegen.c \
-	typelib.c \
-	typetree.c \
-	utils.c \
-	widl.c \
-	widl.man.in \
-	wpp.c \
-	write_msft.c \
-	write_sltg.c
-
-widl_EXTRADEFS = -DINCLUDEDIR="\"${includedir}\"" -DBINDIR="\"${bindir}\"" -DLIBDIR="\"${libdir}\""
-
-INSTALL_DEV = $(PROGRAMS)
+all:
+all install install-dev clean parser.tab.h ppy.tab.h parser.yy.c parser.tab.c ppl.yy.c ppy.tab.c \
+  attribute.o client.o expr.o hash.o header.o proxy.o register.o server.o typegen.o typelib.o \
+  typetree.o utils.o widl.o wpp.o write_msft.o write_sltg.o parser.yy.o parser.tab.o ppl.yy.o \
+  ppy.tab.o widl.man widl:
+	@cd ../.. && $(MAKE) tools/widl/$@
+.PHONY: all install install-dev clean

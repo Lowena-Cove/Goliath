@@ -1,6 +1,6 @@
-MODULE    = msacm.dll16
-IMPORTS   = msacm32
-EXTRADLLFLAGS = -m16 -Wb,--main-module,msacm32.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	msacm.c
+all:
+all install install-lib clean i386-windows/msacm.o i386-windows/msacm.dll16:
+	@cd ../.. && $(MAKE) dlls/msacm.dll16/$@
+.PHONY: all install install-lib clean

@@ -1,7 +1,6 @@
-MODULE    = belauncher.exe
-IMPORTS   = shlwapi shcore
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mwindows -municode
-
-SOURCES = \
-        main.c \
+all:
+all install install-lib clean i386-windows/main.o i386-windows/belauncher.exe:
+	@cd ../.. && $(MAKE) programs/belauncher/$@
+.PHONY: all install install-lib clean

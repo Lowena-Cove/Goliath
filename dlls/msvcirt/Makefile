@@ -1,8 +1,7 @@
-MODULE    = msvcirt.dll
-EXTRADEFS = -D_MSVCIRT
-PARENTSRC = ../msvcp90
-IMPORTS   = msvcrt
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	exception.c \
-	msvcirt.c
+all:
+all install install-lib clean i386-windows/exception.o i386-windows/msvcirt.o \
+  i386-windows/msvcirt.dll:
+	@cd ../.. && $(MAKE) dlls/msvcirt/$@
+.PHONY: all install install-lib clean

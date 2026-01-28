@@ -1,6 +1,6 @@
-MODULE    = winemapi.dll
-IMPORTS   = shlwapi shell32 mapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c \
-	sendmail.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/sendmail.o i386-windows/winemapi.dll:
+	@cd ../.. && $(MAKE) dlls/winemapi/$@
+.PHONY: all install install-lib clean

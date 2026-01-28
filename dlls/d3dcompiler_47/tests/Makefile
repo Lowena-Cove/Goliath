@@ -1,11 +1,10 @@
-TESTDLL   = d3dcompiler_47.dll
-IMPORTS   = d3d9 user32 d3dcompiler
-EXTRADEFS = -DD3D_COMPILER_VERSION=47
-PARENTSRC = ../../d3dcompiler_43/tests
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	asm.c \
-	blob.c \
-	hlsl_d3d11.c \
-	hlsl_d3d9.c \
-	reflection.c
+all:
+all clean check test testclean i386-windows/d3dcompiler_47_test-stripped.exe i386-windows/asm.ok \
+  i386-windows/blob.ok i386-windows/hlsl_d3d11.ok i386-windows/hlsl_d3d9.ok \
+  i386-windows/reflection.ok i386-windows/asm.o i386-windows/blob.o i386-windows/hlsl_d3d11.o \
+  i386-windows/hlsl_d3d9.o i386-windows/reflection.o i386-windows/testlist.o \
+  i386-windows/d3dcompiler_47_test.exe:
+	@cd ../../.. && $(MAKE) dlls/d3dcompiler_47/tests/$@
+.PHONY: all clean check test testclean

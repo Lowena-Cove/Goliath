@@ -1,17 +1,9 @@
-MODULE    = dmusic.dll
-IMPORTS   = dxguid uuid ole32 advapi32 dsound user32 winmm
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	band.c \
-	buffer.c \
-	clock.c \
-	collection.c \
-	dmobject.c \
-	dmusic.c \
-	dmusic.idl \
-	dmusic_main.c \
-	download.c \
-	instrument.c \
-	port.c \
-	version.rc \
-	wave.c
+all:
+all install install-lib clean version.res i386-windows/band.o i386-windows/buffer.o \
+  i386-windows/clock.o i386-windows/collection.o i386-windows/dmobject.o i386-windows/dmusic.o \
+  i386-windows/dmusic_main.o i386-windows/download.o i386-windows/instrument.o i386-windows/port.o \
+  i386-windows/wave.o i386-windows/dmusic_r.res i386-windows/dmusic.dll:
+	@cd ../.. && $(MAKE) dlls/dmusic/$@
+.PHONY: all install install-lib clean

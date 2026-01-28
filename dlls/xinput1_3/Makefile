@@ -1,7 +1,7 @@
-MODULE    = xinput1_3.dll
-IMPORTLIB = xinput
-IMPORTS   = hid setupapi advapi32 user32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c \
-	version.rc
+all:
+all install install-lib install-dev clean libxinput.a i386-windows/libxinput.a version.res \
+  i386-windows/main.o i386-windows/xinput1_3.dll:
+	@cd ../.. && $(MAKE) dlls/xinput1_3/$@
+.PHONY: all install install-lib install-dev clean

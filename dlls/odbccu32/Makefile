@@ -1,4 +1,6 @@
-MODULE    = odbccu32.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	version.rc
+all:
+all install install-lib clean version.res i386-windows/odbccu32.dll:
+	@cd ../.. && $(MAKE) dlls/odbccu32/$@
+.PHONY: all install install-lib clean

@@ -1,5 +1,6 @@
-MODULE    = scardsvr.dll
-IMPORTS   = advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	scardsvr.c
+all:
+all install install-lib clean i386-windows/scardsvr.o i386-windows/scardsvr.dll:
+	@cd ../.. && $(MAKE) dlls/scardsvr/$@
+.PHONY: all install install-lib clean

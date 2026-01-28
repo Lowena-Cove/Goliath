@@ -1,70 +1,17 @@
-EXTRADEFS = -D_USER32_
-MODULE    = user32.dll
-IMPORTLIB = user32
-IMPORTS   = $(PNG_PE_LIBS) gdi32 sechost advapi32 kernelbase win32u uuid
-EXTRAINCL = $(PNG_PE_CFLAGS)
-DELAYIMPORTS = imm32 combase
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	button.c \
-	class.c \
-	clipboard.c \
-	combo.c \
-	cursoricon.c \
-	dde_client.c \
-	dde_misc.c \
-	dde_server.c \
-	defdlg.c \
-	defwnd.c \
-	desktop.c \
-	dialog.c \
-	edit.c \
-	exticon.c \
-	hook.c \
-	icontitle.c \
-	input.c \
-	listbox.c \
-	lstr.c \
-	mdi.c \
-	menu.c \
-	message.c \
-	misc.c \
-	msgbox.c \
-	nonclient.c \
-	property.c \
-	resource.c \
-	resources/ocr_appstarting.svg \
-	resources/ocr_cross.svg \
-	resources/ocr_hand.svg \
-	resources/ocr_help.svg \
-	resources/ocr_ibeam.svg \
-	resources/ocr_no.svg \
-	resources/ocr_normal.svg \
-	resources/ocr_pen.svg \
-	resources/ocr_size.svg \
-	resources/ocr_sizeall.svg \
-	resources/ocr_sizenesw.svg \
-	resources/ocr_sizens.svg \
-	resources/ocr_sizenwse.svg \
-	resources/ocr_sizewe.svg \
-	resources/ocr_up.svg \
-	resources/ocr_wait.svg \
-	resources/oic_bang.svg \
-	resources/oic_hand.svg \
-	resources/oic_note.svg \
-	resources/oic_ques.svg \
-	resources/oic_sample.svg \
-	resources/oic_shield.svg \
-	resources/oic_winlogo.svg \
-	scroll.c \
-	static.c \
-	sysparams.c \
-	text.c \
-	uitools.c \
-	user32.rc \
-	user_main.c \
-	win.c \
-	winhelp.c \
-	winproc.c \
-	winstation.c \
-	wsprintf.c
+all:
+all install install-lib install-dev clean libuser32.a i386-windows/libuser32.a \
+  i386-windows/libuser32.delay.a user32.res i386-windows/button.o i386-windows/class.o \
+  i386-windows/clipboard.o i386-windows/combo.o i386-windows/cursoricon.o i386-windows/dde_client.o \
+  i386-windows/dde_misc.o i386-windows/dde_server.o i386-windows/defdlg.o i386-windows/defwnd.o \
+  i386-windows/desktop.o i386-windows/dialog.o i386-windows/edit.o i386-windows/exticon.o \
+  i386-windows/hook.o i386-windows/icontitle.o i386-windows/input.o i386-windows/listbox.o \
+  i386-windows/lstr.o i386-windows/mdi.o i386-windows/menu.o i386-windows/message.o \
+  i386-windows/misc.o i386-windows/msgbox.o i386-windows/nonclient.o i386-windows/property.o \
+  i386-windows/resource.o i386-windows/scroll.o i386-windows/static.o i386-windows/sysparams.o \
+  i386-windows/text.o i386-windows/uitools.o i386-windows/user_main.o i386-windows/win.o \
+  i386-windows/winhelp.o i386-windows/winproc.o i386-windows/winstation.o i386-windows/wsprintf.o \
+  i386-windows/user32.dll user32.pot:
+	@cd ../.. && $(MAKE) dlls/user32/$@
+.PHONY: all install install-lib install-dev clean

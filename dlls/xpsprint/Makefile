@@ -1,6 +1,6 @@
-MODULE = xpsprint.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	xpsprint.rc
+all:
+all install install-lib clean xpsprint.res i386-windows/xpsprint.dll:
+	@cd ../.. && $(MAKE) dlls/xpsprint/$@
+.PHONY: all install install-lib clean

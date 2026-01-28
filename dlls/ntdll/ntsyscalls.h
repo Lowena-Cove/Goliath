@@ -247,11 +247,8 @@
     SYSCALL_ENTRY( 0x00f3, NtWriteFileGather, 36 ) \
     SYSCALL_ENTRY( 0x00f4, NtWriteVirtualMemory, 20 ) \
     SYSCALL_ENTRY( 0x00f5, NtYieldExecution, 0 ) \
-    SYSCALL_ENTRY( 0x00f6, __wine_dbg_ftrace, 12 ) \
-    SYSCALL_ENTRY( 0x00f7, __wine_needs_override_large_address_aware, 0 ) \
-    SYSCALL_ENTRY( 0x00f8, __wine_set_unix_env, 8 ) \
-    SYSCALL_ENTRY( 0x00f9, wine_nt_to_unix_file_name, 16 ) \
-    SYSCALL_ENTRY( 0x00fa, wine_unix_to_nt_file_name, 12 )
+    SYSCALL_ENTRY( 0x00f6, wine_nt_to_unix_file_name, 16 ) \
+    SYSCALL_ENTRY( 0x00f7, wine_unix_to_nt_file_name, 12 )
 
 #define ALL_SYSCALLS64 \
     SYSCALL_ENTRY( 0x0000, NtAcceptConnectPort, 48 ) \
@@ -494,8 +491,5 @@
     SYSCALL_ENTRY( 0x00ed, NtWriteFileGather, 72 ) \
     SYSCALL_ENTRY( 0x00ee, NtWriteVirtualMemory, 40 ) \
     SYSCALL_ENTRY( 0x00ef, NtYieldExecution, 0 ) \
-    SYSCALL_ENTRY( 0x00f0, __wine_dbg_ftrace, 24 ) \
-    SYSCALL_ENTRY( 0x00f1, __wine_needs_override_large_address_aware, 0 ) \
-    SYSCALL_ENTRY( 0x00f2, __wine_set_unix_env, 16 ) \
-    SYSCALL_ENTRY( 0x00f3, wine_nt_to_unix_file_name, 32 ) \
-    SYSCALL_ENTRY( 0x00f4, wine_unix_to_nt_file_name, 24 )
+    SYSCALL_ENTRY( 0x00f0, wine_nt_to_unix_file_name, 32 ) \
+    SYSCALL_ENTRY( 0x00f1, wine_unix_to_nt_file_name, 24 )

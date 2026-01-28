@@ -1,59 +1,24 @@
-EXTLIB    = libldap.a
-EXTRAINCL = -I$(srcdir)/include
-EXTRADEFS = -D_TIMEVAL_DEFINED
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	liblber/bprint.c \
-	liblber/decode.c \
-	liblber/encode.c \
-	liblber/io.c \
-	liblber/memory.c \
-	liblber/nt_err.c \
-	liblber/options.c \
-	liblber/sockbuf.c \
-	libldap/abandon.c \
-	libldap/add.c \
-	libldap/avl.c \
-	libldap/bind.c \
-	libldap/charray.c \
-	libldap/compare.c \
-	libldap/controls.c \
-	libldap/cyrus.c \
-	libldap/delete.c \
-	libldap/error.c \
-	libldap/extended.c \
-	libldap/fetch.c \
-	libldap/filter.c \
-	libldap/free.c \
-	libldap/getattr.c \
-	libldap/getdn.c \
-	libldap/getentry.c \
-	libldap/getvalues.c \
-	libldap/init.c \
-	libldap/lbase64.c \
-	libldap/ldif.c \
-	libldap/modify.c \
-	libldap/modrdn.c \
-	libldap/open.c \
-	libldap/options.c \
-	libldap/os-ip.c \
-	libldap/pagectrl.c \
-	libldap/print.c \
-	libldap/references.c \
-	libldap/request.c \
-	libldap/result.c \
-	libldap/sasl.c \
-	libldap/sasl_w.c \
-	libldap/schema.c \
-	libldap/search.c \
-	libldap/sortctrl.c \
-	libldap/string.c \
-	libldap/tavl.c \
-	libldap/thr_nt.c \
-	libldap/tls2.c \
-	libldap/tls_w.c \
-	libldap/unbind.c \
-	libldap/url.c \
-	libldap/utf-8.c \
-	libldap/util-int.c \
-	libldap/vlvctrl.c
+all:
+clean i386-windows/libldap.a i386-windows/liblber/bprint.o i386-windows/liblber/decode.o \
+  i386-windows/liblber/encode.o i386-windows/liblber/io.o i386-windows/liblber/memory.o \
+  i386-windows/liblber/nt_err.o i386-windows/liblber/options.o i386-windows/liblber/sockbuf.o \
+  i386-windows/libldap/abandon.o i386-windows/libldap/add.o i386-windows/libldap/avl.o \
+  i386-windows/libldap/bind.o i386-windows/libldap/charray.o i386-windows/libldap/compare.o \
+  i386-windows/libldap/controls.o i386-windows/libldap/cyrus.o i386-windows/libldap/delete.o \
+  i386-windows/libldap/error.o i386-windows/libldap/extended.o i386-windows/libldap/fetch.o \
+  i386-windows/libldap/filter.o i386-windows/libldap/free.o i386-windows/libldap/getattr.o \
+  i386-windows/libldap/getdn.o i386-windows/libldap/getentry.o i386-windows/libldap/getvalues.o \
+  i386-windows/libldap/init.o i386-windows/libldap/lbase64.o i386-windows/libldap/ldif.o \
+  i386-windows/libldap/modify.o i386-windows/libldap/modrdn.o i386-windows/libldap/open.o \
+  i386-windows/libldap/options.o i386-windows/libldap/os-ip.o i386-windows/libldap/pagectrl.o \
+  i386-windows/libldap/print.o i386-windows/libldap/references.o i386-windows/libldap/request.o \
+  i386-windows/libldap/result.o i386-windows/libldap/sasl.o i386-windows/libldap/sasl_w.o \
+  i386-windows/libldap/schema.o i386-windows/libldap/search.o i386-windows/libldap/sortctrl.o \
+  i386-windows/libldap/string.o i386-windows/libldap/tavl.o i386-windows/libldap/thr_nt.o \
+  i386-windows/libldap/tls2.o i386-windows/libldap/tls_w.o i386-windows/libldap/unbind.o \
+  i386-windows/libldap/url.o i386-windows/libldap/utf-8.o i386-windows/libldap/util-int.o \
+  i386-windows/libldap/vlvctrl.o:
+	@cd ../.. && $(MAKE) libs/ldap/$@
+.PHONY: clean

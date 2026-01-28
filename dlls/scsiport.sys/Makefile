@@ -1,8 +1,6 @@
-MODULE    = scsiport.sys
-IMPORTS   = ntoskrnl
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wl,--subsystem,native
-
-SOURCES = \
-	scsiport.c \
-	scsiport.sys.spec
+all:
+all install install-lib clean i386-windows/scsiport.o i386-windows/scsiport.sys:
+	@cd ../.. && $(MAKE) dlls/scsiport.sys/$@
+.PHONY: all install install-lib clean

@@ -1,8 +1,6 @@
-MODULE        = mouhid.sys
-IMPORTS       = ntoskrnl hidparse win32u
-EXTRADLLFLAGS = -Wl,--subsystem,native
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c \
-	mouhid.rc \
-	mouhid.sys.spec
+all:
+all install install-lib clean mouhid.res i386-windows/main.o i386-windows/mouhid.sys:
+	@cd ../.. && $(MAKE) dlls/mouhid.sys/$@
+.PHONY: all install install-lib clean

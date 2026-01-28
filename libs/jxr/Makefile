@@ -1,26 +1,16 @@
-EXTLIB    = libjxr.a
-EXTRAINCL = $(JXR_PE_CFLAGS)
-EXTRADEFS = -DDISABLE_PERF_MEASUREMENT
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	image/decode/JXRTranscode.c \
-	image/decode/decode.c \
-	image/decode/postprocess.c \
-	image/decode/segdec.c \
-	image/decode/strInvTransform.c \
-	image/decode/strPredQuantDec.c \
-	image/decode/strdec.c \
-	image/encode/encode.c \
-	image/encode/segenc.c \
-	image/encode/strFwdTransform.c \
-	image/encode/strPredQuantEnc.c \
-	image/encode/strenc.c \
-	image/sys/adapthuff.c \
-	image/sys/image.c \
-	image/sys/strPredQuant.c \
-	image/sys/strTransform.c \
-	image/sys/strcodec.c \
-	jxrgluelib/JXRGlue.c \
-	jxrgluelib/JXRGlueJxr.c \
-	jxrgluelib/JXRGluePFC.c \
-	jxrgluelib/JXRMeta.c
+all:
+clean i386-windows/libjxr.a i386-windows/image/decode/JXRTranscode.o \
+  i386-windows/image/decode/decode.o i386-windows/image/decode/postprocess.o \
+  i386-windows/image/decode/segdec.o i386-windows/image/decode/strInvTransform.o \
+  i386-windows/image/decode/strPredQuantDec.o i386-windows/image/decode/strdec.o \
+  i386-windows/image/encode/encode.o i386-windows/image/encode/segenc.o \
+  i386-windows/image/encode/strFwdTransform.o i386-windows/image/encode/strPredQuantEnc.o \
+  i386-windows/image/encode/strenc.o i386-windows/image/sys/adapthuff.o \
+  i386-windows/image/sys/image.o i386-windows/image/sys/strPredQuant.o \
+  i386-windows/image/sys/strTransform.o i386-windows/image/sys/strcodec.o \
+  i386-windows/jxrgluelib/JXRGlue.o i386-windows/jxrgluelib/JXRGlueJxr.o \
+  i386-windows/jxrgluelib/JXRGluePFC.o i386-windows/jxrgluelib/JXRMeta.o:
+	@cd ../.. && $(MAKE) libs/jxr/$@
+.PHONY: clean

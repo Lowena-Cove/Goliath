@@ -1,7 +1,6 @@
-MODULE    = sfc.dll
-IMPORTLIB = sfc
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--data-only -Wb,--prefer-native
-
-SOURCES = \
-	sfc.spec
+all:
+all install install-lib install-dev clean libsfc.a i386-windows/libsfc.a i386-windows/sfc.dll:
+	@cd ../.. && $(MAKE) dlls/sfc/$@
+.PHONY: all install install-lib install-dev clean

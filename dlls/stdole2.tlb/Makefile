@@ -1,7 +1,6 @@
-MODULE    = stdole2.tlb
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--data-only
-
-SOURCES = \
-	rsrc.rc \
-	stdole2.idl
+all:
+all install install-lib clean rsrc.res i386-windows/stdole2_t.res i386-windows/stdole2.tlb:
+	@cd ../.. && $(MAKE) dlls/stdole2.tlb/$@
+.PHONY: all install install-lib clean

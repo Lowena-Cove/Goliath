@@ -1,5 +1,7 @@
-TESTDLL   = dmsynth.dll
-IMPORTS   = oleaut32 ole32 uuid dsound user32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	dmsynth.c
+all:
+all clean check test testclean i386-windows/dmsynth_test-stripped.exe i386-windows/dmsynth.ok \
+  i386-windows/dmsynth.o i386-windows/testlist.o i386-windows/dmsynth_test.exe:
+	@cd ../../.. && $(MAKE) dlls/dmsynth/tests/$@
+.PHONY: all clean check test testclean

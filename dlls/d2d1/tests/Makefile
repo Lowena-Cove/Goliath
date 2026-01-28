@@ -1,5 +1,7 @@
-TESTDLL   = d2d1.dll
-IMPORTS   = d2d1 d3d10_1 d3d11 dwrite dxguid uuid user32 advapi32 ole32 gdi32 d3dcompiler
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	d2d1.c
+all:
+all clean check test testclean i386-windows/d2d1_test-stripped.exe i386-windows/d2d1.ok \
+  i386-windows/d2d1.o i386-windows/testlist.o i386-windows/d2d1_test.exe:
+	@cd ../../.. && $(MAKE) dlls/d2d1/tests/$@
+.PHONY: all clean check test testclean

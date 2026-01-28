@@ -1,13 +1,8 @@
-MODULE    = mfsrcsnk.dll
-IMPORTLIB = mfsrcsnk
-IMPORTS   = advapi32 ole32 mfplat mfuuid uuid winedmo
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	factory.c \
-	media_sink.c \
-	media_source.c \
-	mfsrcsnk.idl \
-	mfsrcsnk.rc \
-	wave.c
+all:
+all install install-lib install-dev clean libmfsrcsnk.a i386-windows/libmfsrcsnk.a mfsrcsnk.res \
+  i386-windows/factory.o i386-windows/media_sink.o i386-windows/media_source.o i386-windows/wave.o \
+  i386-windows/mfsrcsnk_r.res i386-windows/mfsrcsnk.dll:
+	@cd ../.. && $(MAKE) dlls/mfsrcsnk/$@
+.PHONY: all install install-lib install-dev clean

@@ -1,19 +1,10 @@
-EXTRADEFS = -D_WININET_INTERNAL_
-MODULE    = wininet.dll
-IMPORTLIB = wininet
-IMPORTS   = $(ZLIB_PE_LIBS) mpr shlwapi shell32 user32 ws2_32 advapi32
-EXTRAINCL = $(ZLIB_PE_CFLAGS)
-DELAYIMPORTS = secur32 crypt32 cryptui dhcpcsvc iphlpapi
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	cookie.c \
-	dialogs.c \
-	ftp.c \
-	gopher.c \
-	http.c \
-	internet.c \
-	netconnection.c \
-	urlcache.c \
-	utility.c \
-	wininet.rc \
-	winineterror.mc
+all:
+all install install-lib install-dev clean libwininet.a i386-windows/libwininet.a \
+  i386-windows/libwininet.delay.a wininet.res winineterror.res i386-windows/cookie.o \
+  i386-windows/dialogs.o i386-windows/ftp.o i386-windows/gopher.o i386-windows/http.o \
+  i386-windows/internet.o i386-windows/netconnection.o i386-windows/urlcache.o \
+  i386-windows/utility.o i386-windows/wininet.dll wininet.pot winineterror.pot:
+	@cd ../.. && $(MAKE) dlls/wininet/$@
+.PHONY: all install install-lib install-dev clean

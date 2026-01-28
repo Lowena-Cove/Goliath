@@ -1,0 +1,24 @@
+# Integration mapping for WSL (Windows Subsystem for Linux concepts)
+# Format: upstream_path:goliath_path:action
+# Actions: copy, copy+modify, exclude, manual
+
+# This file tracks how upstream WSL code maps to Goliath's integration.
+
+## Core files (conceptual integration)
+# Note: WSL is primarily documentation and concepts, not direct source code
+
+## Modified files (copied but with Goliath-specific changes)
+# Document any implementations based on WSL concepts
+
+## Excluded files (not needed for Goliath integration)
+# Most of WSL repo is documentation and Windows kernel code
+# We extract concepts, not direct code
+
+## Manual integration files (managed by Goliath, not synced)
+# All files are manual - this is a conceptual integration
+
+## Notes
+# - WSL integration is primarily conceptual
+# - We implement WSL-like ideas for Linux/Windows hybrid support
+# - Most code is original, inspired by WSL architecture
+# - May reference WSL documentation and design patterns

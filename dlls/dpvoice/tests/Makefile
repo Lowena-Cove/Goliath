@@ -1,5 +1,7 @@
-TESTDLL   = dpvoice.dll
-IMPORTS   = uuid dpnet ole32 user32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	voice.c
+all:
+all clean check test testclean i386-windows/dpvoice_test-stripped.exe i386-windows/voice.ok \
+  i386-windows/voice.o i386-windows/testlist.o i386-windows/dpvoice_test.exe:
+	@cd ../../.. && $(MAKE) dlls/dpvoice/tests/$@
+.PHONY: all clean check test testclean

@@ -1,9 +1,7 @@
-EXTRADEFS = -D_CRYPTDLG_
-MODULE    = cryptdlg.dll
-IMPORTS   = cryptui crypt32 wintrust user32 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	cryptdlg.rc \
-	main.c
+all:
+all install install-lib clean cryptdlg.res i386-windows/main.o i386-windows/cryptdlg.dll \
+  cryptdlg.pot:
+	@cd ../.. && $(MAKE) dlls/cryptdlg/$@
+.PHONY: all install install-lib clean

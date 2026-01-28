@@ -1,5 +1,8 @@
-TESTDLL = opcservices.dll
-IMPORTS = ole32 urlmon oleaut32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	opcservices.c
+all:
+all clean check test testclean i386-windows/opcservices_test-stripped.exe \
+  i386-windows/opcservices.ok i386-windows/opcservices.o i386-windows/testlist.o \
+  i386-windows/opcservices_test.exe:
+	@cd ../../.. && $(MAKE) dlls/opcservices/tests/$@
+.PHONY: all clean check test testclean

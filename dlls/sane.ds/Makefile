@@ -1,15 +1,6 @@
-MODULE    = sane.ds
-UNIXLIB   = sane.so
-IMPORTS   = comctl32 user32 gdi32
-UNIX_LIBS    = $(SANE_LIBS)
-UNIX_CFLAGS  = $(SANE_CFLAGS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	capability.c \
-	ds_ctrl.c \
-	ds_image.c \
-	options.c \
-	sane.rc \
-	sane_main.c \
-	ui.c \
-	unixlib.c
+all:
+clean sane.pot:
+	@cd ../.. && $(MAKE) dlls/sane.ds/$@
+.PHONY: clean

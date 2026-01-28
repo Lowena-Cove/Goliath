@@ -1,7 +1,6 @@
-MODULE    = wuauserv.exe
-IMPORTS   = advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole
-
-SOURCES = \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/wuauserv.exe:
+	@cd ../.. && $(MAKE) programs/wuauserv/$@
+.PHONY: all install install-lib clean

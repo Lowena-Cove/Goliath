@@ -1,10 +1,7 @@
-MODULE    = schannel.dll
-IMPORTS   = secur32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	lsamode.c \
-	schannel_main.c \
-	usermode.c \
-	version.rc
+all:
+all install install-lib clean version.res i386-windows/lsamode.o i386-windows/schannel_main.o \
+  i386-windows/usermode.o i386-windows/schannel.dll:
+	@cd ../.. && $(MAKE) dlls/schannel/$@
+.PHONY: all install install-lib clean

@@ -1,15 +1,6 @@
-MODULE    = wow64.dll
-IMPORTLIB = wow64
-IMPORTS   = ntdll winecrt0
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -nodefaultlibs
-
-SOURCES = \
-	file.c \
-	process.c \
-	registry.c \
-	security.c \
-	sync.c \
-	syscall.c \
-	system.c \
-	virtual.c
+all:
+clean i386-windows/libwow64.a:
+	@cd ../.. && $(MAKE) dlls/wow64/$@
+.PHONY: clean

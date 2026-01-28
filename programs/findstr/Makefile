@@ -1,8 +1,6 @@
-MODULE    = findstr.exe
-IMPORTS   = user32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole -municode
-
-SOURCES = \
-	findstr.rc \
-	main.c
+all:
+all install install-lib clean findstr.res i386-windows/main.o i386-windows/findstr.exe findstr.pot:
+	@cd ../.. && $(MAKE) programs/findstr/$@
+.PHONY: all install install-lib clean

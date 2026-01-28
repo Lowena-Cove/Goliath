@@ -1,5 +1,6 @@
-MODULE    = msg711.acm
-IMPORTS   = winmm user32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	msg711.c
+all:
+all install install-lib clean i386-windows/msg711.o i386-windows/msg711.acm:
+	@cd ../.. && $(MAKE) dlls/msg711.acm/$@
+.PHONY: all install install-lib clean

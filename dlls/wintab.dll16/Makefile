@@ -1,5 +1,6 @@
-MODULE    = wintab.dll16
-EXTRADLLFLAGS = -m16 -Wb,--main-module,wintab32.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	wintab.c
+all:
+all install install-lib clean i386-windows/wintab.o i386-windows/wintab.dll16:
+	@cd ../.. && $(MAKE) dlls/wintab.dll16/$@
+.PHONY: all install install-lib clean

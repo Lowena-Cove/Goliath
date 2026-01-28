@@ -1,23 +1,12 @@
-EXTLIB    = libxslt.a
-EXTRAINCL = $(XML2_PE_CFLAGS) $(XSLT_PE_CFLAGS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	libxslt/attributes.c \
-	libxslt/attrvt.c \
-	libxslt/documents.c \
-	libxslt/extensions.c \
-	libxslt/extra.c \
-	libxslt/functions.c \
-	libxslt/imports.c \
-	libxslt/keys.c \
-	libxslt/namespaces.c \
-	libxslt/numbers.c \
-	libxslt/pattern.c \
-	libxslt/preproc.c \
-	libxslt/security.c \
-	libxslt/templates.c \
-	libxslt/transform.c \
-	libxslt/variables.c \
-	libxslt/xslt.c \
-	libxslt/xsltlocale.c \
-	libxslt/xsltutils.c
+all:
+clean i386-windows/libxslt.a i386-windows/libxslt/attributes.o i386-windows/libxslt/attrvt.o \
+  i386-windows/libxslt/documents.o i386-windows/libxslt/extensions.o i386-windows/libxslt/extra.o \
+  i386-windows/libxslt/functions.o i386-windows/libxslt/imports.o i386-windows/libxslt/keys.o \
+  i386-windows/libxslt/namespaces.o i386-windows/libxslt/numbers.o i386-windows/libxslt/pattern.o \
+  i386-windows/libxslt/preproc.o i386-windows/libxslt/security.o i386-windows/libxslt/templates.o \
+  i386-windows/libxslt/transform.o i386-windows/libxslt/variables.o i386-windows/libxslt/xslt.o \
+  i386-windows/libxslt/xsltlocale.o i386-windows/libxslt/xsltutils.o:
+	@cd ../.. && $(MAKE) libs/xslt/$@
+.PHONY: clean

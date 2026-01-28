@@ -1,7 +1,7 @@
-MODULE    = ole2.dll16
-IMPORTS   = uuid ole32 user32 gdi32
-EXTRADLLFLAGS = -m16 -Wb,--main-module,ole32.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	memlockbytes.c \
-	ole2.c
+all:
+all install install-lib clean i386-windows/memlockbytes.o i386-windows/ole2.o \
+  i386-windows/ole2.dll16:
+	@cd ../.. && $(MAKE) dlls/ole2.dll16/$@
+.PHONY: all install install-lib clean

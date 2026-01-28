@@ -1,13 +1,10 @@
-MODULE    = msdaps.dll
-IMPORTS   = uuid oleaut32 ole32 rpcrt4 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c \
-	msdaps.idl \
-	row_server.c \
-	row_server.idl \
-	usrmarshal.c
-
-dlldata_EXTRADEFS  = -DWINE_REGISTER_DLL -DPROXY_CLSID=CLSID_PSFactoryBuffer -DENTRY_PREFIX=msdaps_
-i386_EXTRAIDLFLAGS = --packing=2
-arm_EXTRAIDLFLAGS  = --packing=2
+all:
+all install install-lib clean msdaps.h row_server.h i386-windows/msdaps_p.c dlldata.c \
+  i386-windows/row_server_p.c i386-windows/main.o i386-windows/row_server.o \
+  i386-windows/usrmarshal.o i386-windows/msdaps_p.o i386-windows/dlldata.o \
+  i386-windows/row_server_p.o i386-windows/msdaps_r.res i386-windows/row_server_r.res \
+  i386-windows/msdaps.dll:
+	@cd ../.. && $(MAKE) dlls/msdaps/$@
+.PHONY: all install install-lib clean

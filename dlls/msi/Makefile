@@ -1,51 +1,20 @@
-MODULE    = msi.dll
-IMPORTLIB = msi
-IMPORTS   = uuid urlmon wininet comctl32 shell32 shlwapi cabinet oleaut32 ole32 version user32 gdi32 advapi32 rpcrt4 sxs imagehlp mspatcha odbccp32 wintrust crypt32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRAIDLFLAGS = --prefix-server=s_
-
-SOURCES = \
-	action.c \
-	alter.c \
-	appsearch.c \
-	assembly.c \
-	automation.c \
-	classes.c \
-	cond.y \
-	create.c \
-	custom.c \
-	database.c \
-	delete.c \
-	dialog.c \
-	distinct.c \
-	drop.c \
-	files.c \
-	font.c \
-	format.c \
-	handle.c \
-	insert.c \
-	install.c \
-	media.c \
-	msi.c \
-	msi.rc \
-	msi_main.c \
-	msiquery.c \
-	msiserver.idl \
-	package.c \
-	patch.c \
-	record.c \
-	registry.c \
-	script.c \
-	select.c \
-	source.c \
-	sql.y \
-	storages.c \
-	streams.c \
-	string.c \
-	suminfo.c \
-	table.c \
-	tokenize.c \
-	update.c \
-	upgrade.c \
-	where.c \
-	winemsi.idl
+all:
+all install install-lib install-dev clean msiserver.h sql.tab.h cond.tab.c \
+  i386-windows/msiserver_i.c sql.tab.c i386-windows/winemsi_c.c i386-windows/winemsi_s.c libmsi.a \
+  i386-windows/libmsi.a i386-windows/libmsi.delay.a msi.res winemsi.h i386-windows/action.o \
+  i386-windows/alter.o i386-windows/appsearch.o i386-windows/assembly.o i386-windows/automation.o \
+  i386-windows/classes.o i386-windows/create.o i386-windows/custom.o i386-windows/database.o \
+  i386-windows/delete.o i386-windows/dialog.o i386-windows/distinct.o i386-windows/drop.o \
+  i386-windows/files.o i386-windows/font.o i386-windows/format.o i386-windows/handle.o \
+  i386-windows/insert.o i386-windows/install.o i386-windows/media.o i386-windows/msi.o \
+  i386-windows/msi_main.o i386-windows/msiquery.o i386-windows/package.o i386-windows/patch.o \
+  i386-windows/record.o i386-windows/registry.o i386-windows/script.o i386-windows/select.o \
+  i386-windows/source.o i386-windows/storages.o i386-windows/streams.o i386-windows/string.o \
+  i386-windows/suminfo.o i386-windows/table.o i386-windows/tokenize.o i386-windows/update.o \
+  i386-windows/upgrade.o i386-windows/where.o i386-windows/cond.tab.o i386-windows/msiserver_i.o \
+  i386-windows/sql.tab.o i386-windows/winemsi_c.o i386-windows/winemsi_s.o \
+  i386-windows/msiserver_t.res i386-windows/msiserver_r.res i386-windows/msi.dll msi.pot:
+	@cd ../.. && $(MAKE) dlls/msi/$@
+.PHONY: all install install-lib install-dev clean

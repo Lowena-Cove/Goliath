@@ -1,12 +1,7 @@
-MODULE    = cscript.exe
-IMPORTS   = uuid shell32 oleaut32 ole32 user32 advapi32
-EXTRADEFS = -DCSCRIPT_BUILD
-PARENTSRC = ../wscript
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole -municode
-
-SOURCES = \
-	arguments.c \
-	host.c \
-	ihost.idl \
-	main.c
+all:
+all install install-lib clean ihost.h i386-windows/arguments.o i386-windows/host.o \
+  i386-windows/main.o i386-windows/ihost_l.res i386-windows/cscript.exe:
+	@cd ../.. && $(MAKE) programs/cscript/$@
+.PHONY: all install install-lib clean

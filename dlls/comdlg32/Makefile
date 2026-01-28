@@ -1,22 +1,10 @@
-EXTRADEFS = -D_COMDLG32_
-MODULE    = comdlg32.dll
-IMPORTLIB = comdlg32
-IMPORTS   = uuid shell32 shlwapi comctl32 winspool user32 gdi32 advapi32
-DELAYIMPORTS = ole32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	cdlg32.c \
-	colordlg.c \
-	comdlg32.rc \
-	comdlg32_classes.idl \
-	filedlg.c \
-	filedlg31.c \
-	filedlgbrowser.c \
-	finddlg.c \
-	fontdlg.c \
-	itemdlg.c \
-	pd32_collate.svg \
-	pd32_landscape.svg \
-	pd32_nocollate.svg \
-	pd32_portrait.svg \
-	printdlg.c
+all:
+all install install-lib install-dev clean libcomdlg32.a i386-windows/libcomdlg32.a \
+  i386-windows/libcomdlg32.delay.a comdlg32.res i386-windows/cdlg32.o i386-windows/colordlg.o \
+  i386-windows/filedlg.o i386-windows/filedlg31.o i386-windows/filedlgbrowser.o \
+  i386-windows/finddlg.o i386-windows/fontdlg.o i386-windows/itemdlg.o i386-windows/printdlg.o \
+  i386-windows/comdlg32_classes_r.res i386-windows/comdlg32.dll comdlg32.pot:
+	@cd ../.. && $(MAKE) dlls/comdlg32/$@
+.PHONY: all install install-lib install-dev clean

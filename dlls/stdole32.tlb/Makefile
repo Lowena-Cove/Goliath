@@ -1,8 +1,6 @@
-MODULE    = stdole32.tlb
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRAIDLFLAGS = --oldtlb --win32
-EXTRADLLFLAGS = -Wb,--data-only
-
-SOURCES = \
-	rsrc.rc \
-	std_ole_v1.idl
+all:
+all install install-lib clean rsrc.res i386-windows/std_ole_v1_t.res i386-windows/stdole32.tlb:
+	@cd ../.. && $(MAKE) dlls/stdole32.tlb/$@
+.PHONY: all install install-lib clean

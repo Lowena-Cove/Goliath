@@ -1,5 +1,7 @@
-TESTDLL   = dispex.dll
-IMPORTS   = oleaut32 ole32 rpcrt4 user32 gdi32 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	marshal.c
+all:
+all clean check test testclean i386-windows/dispex_test-stripped.exe i386-windows/marshal.ok \
+  i386-windows/marshal.o i386-windows/testlist.o i386-windows/dispex_test.exe:
+	@cd ../../.. && $(MAKE) dlls/dispex/tests/$@
+.PHONY: all clean check test testclean

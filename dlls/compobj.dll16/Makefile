@@ -1,6 +1,6 @@
-MODULE    = compobj.dll16
-IMPORTS   = uuid ole32 advapi32
-EXTRADLLFLAGS = -m16 -Wb,--main-module,ole32.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	compobj.c
+all:
+all install install-lib clean i386-windows/compobj.o i386-windows/compobj.dll16:
+	@cd ../.. && $(MAKE) dlls/compobj.dll16/$@
+.PHONY: all install install-lib clean

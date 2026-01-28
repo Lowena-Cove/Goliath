@@ -1,5 +1,7 @@
-TESTDLL   = mlang.dll
-IMPORTS   = mlang oleaut32 ole32 user32 gdi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	mlang.c
+all:
+all clean check test testclean i386-windows/mlang_test-stripped.exe i386-windows/mlang.ok \
+  i386-windows/mlang.o i386-windows/testlist.o i386-windows/mlang_test.exe:
+	@cd ../../.. && $(MAKE) dlls/mlang/tests/$@
+.PHONY: all clean check test testclean

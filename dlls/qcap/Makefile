@@ -1,18 +1,9 @@
-MODULE    = qcap.dll
-UNIXLIB   = qcap.so
-IMPORTS   = strmbase strmiids uuid ole32 oleaut32 winmm msvcrt
-DELAYIMPORTS = msvfw32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	audiorecord.c \
-	avico.c \
-	avimux.c \
-	capturegraph.c \
-	filewriter.c \
-	inftee.c \
-	qcap_classes.idl \
-	qcap_main.c \
-	smartteefilter.c \
-	v4l.c \
-	version.rc \
-	vfwcapture.c
+all:
+all install install-lib clean version.res qcap.so i386-windows/audiorecord.o i386-windows/avico.o \
+  i386-windows/avimux.o i386-windows/capturegraph.o i386-windows/filewriter.o i386-windows/inftee.o \
+  i386-windows/qcap_main.o i386-windows/smartteefilter.o i386-windows/vfwcapture.o \
+  i386-windows/qcap_classes_r.res i386-windows/qcap.dll v4l.o:
+	@cd ../.. && $(MAKE) dlls/qcap/$@
+.PHONY: all install install-lib clean

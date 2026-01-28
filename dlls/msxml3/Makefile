@@ -1,43 +1,16 @@
-MODULE    = msxml3.dll
-IMPORTS   = $(XSLT_PE_LIBS) $(XML2_PE_LIBS) uuid urlmon shlwapi oleaut32 ole32 user32 advapi32 rtworkq
-EXTRAINCL = $(XSLT_PE_CFLAGS) $(XML2_PE_CFLAGS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	attribute.c \
-	bsc.c \
-	cdata.c \
-	comment.c \
-	dispex.c \
-	docfrag.c \
-	doctype.c \
-	domdoc.c \
-	domimpl.c \
-	element.c \
-	entityref.c \
-	factory.c \
-	httprequest.c \
-	main.c \
-	msxml3_v1.idl \
-	mxnamespace.c \
-	mxwriter.c \
-	node.c \
-	nodelist.c \
-	nodemap.c \
-	parseerror.c \
-	pi.c \
-	saxreader.c \
-	schema.c \
-	schemas.rc \
-	selection.c \
-	stylesheet.c \
-	text.c \
-	uuid.c \
-	version.rc \
-	xdr.c \
-	xmldoc.c \
-	xmlelem.c \
-	xmlparser.c \
-	xmlparser.idl \
-	xmlview.c \
-	xslpattern.l \
-	xslpattern.y
+all:
+all install install-lib clean xmlparser.h xslpattern.tab.h xslpattern.yy.c xslpattern.tab.c \
+  schemas.res version.res i386-windows/attribute.o i386-windows/bsc.o i386-windows/cdata.o \
+  i386-windows/comment.o i386-windows/dispex.o i386-windows/docfrag.o i386-windows/doctype.o \
+  i386-windows/domdoc.o i386-windows/domimpl.o i386-windows/element.o i386-windows/entityref.o \
+  i386-windows/factory.o i386-windows/httprequest.o i386-windows/main.o i386-windows/mxnamespace.o \
+  i386-windows/mxwriter.o i386-windows/node.o i386-windows/nodelist.o i386-windows/nodemap.o \
+  i386-windows/parseerror.o i386-windows/pi.o i386-windows/saxreader.o i386-windows/schema.o \
+  i386-windows/selection.o i386-windows/stylesheet.o i386-windows/text.o i386-windows/uuid.o \
+  i386-windows/xdr.o i386-windows/xmldoc.o i386-windows/xmlelem.o i386-windows/xmlparser.o \
+  i386-windows/xmlview.o i386-windows/xslpattern.yy.o i386-windows/xslpattern.tab.o \
+  i386-windows/msxml3_v1_t.res i386-windows/xmlparser_r.res i386-windows/msxml3.dll:
+	@cd ../.. && $(MAKE) dlls/msxml3/$@
+.PHONY: all install install-lib clean

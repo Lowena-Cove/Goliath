@@ -1,8 +1,7 @@
-MODULE    = mp3dmod.dll
-IMPORTS   = $(MPG123_PE_LIBS) dmoguids mfplat mfuuid msdmo ole32 uuid wmcodecdspuuid kernelbase
-EXTRAINCL = $(MPG123_PE_CFLAGS)
-EXTRADEFS = -DMPG123_NO_LARGENAME
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	mp3dmod.c \
-	mp3dmod.idl
+all:
+all install install-lib clean i386-windows/mp3dmod.o i386-windows/mp3dmod_r.res \
+  i386-windows/mp3dmod.dll:
+	@cd ../.. && $(MAKE) dlls/mp3dmod/$@
+.PHONY: all install install-lib clean

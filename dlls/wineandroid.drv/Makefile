@@ -1,16 +1,6 @@
-MODULE    = wineandroid.drv
-UNIXLIB   = wineandroid.so
-IMPORTS   = ntoskrnl
-UNIX_LIBS = -lwin32u $(PTHREAD_LIBS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	build.gradle.in \
-	device.c \
-	dllmain.c \
-	init.c \
-	keyboard.c \
-	opengl.c \
-	window.c \
-	wine.svg
-
-EXTRA_TARGETS = wine-debug.apk
+all:
+all clean build.gradle wine-debug.apk:
+	@cd ../.. && $(MAKE) dlls/wineandroid.drv/$@
+.PHONY: all clean

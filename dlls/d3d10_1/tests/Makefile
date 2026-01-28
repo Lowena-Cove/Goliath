@@ -1,8 +1,8 @@
-TESTDLL = d3d10_1.dll
-IMPORTS = d3d10_1 user32
-EXTRADEFS = -DD3D_COMPILER_VERSION=0
-PARENTSRC = ../../d3dcompiler_43/tests
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	d3d10_1.c \
-	reflection.c
+all:
+all clean check test testclean i386-windows/d3d10_1_test-stripped.exe i386-windows/d3d10_1.ok \
+  i386-windows/reflection.ok i386-windows/d3d10_1.o i386-windows/reflection.o \
+  i386-windows/testlist.o i386-windows/d3d10_1_test.exe:
+	@cd ../../.. && $(MAKE) dlls/d3d10_1/tests/$@
+.PHONY: all clean check test testclean

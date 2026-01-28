@@ -1,37 +1,15 @@
-MODULE    = wined3d.dll
-IMPORTLIB = wined3d
-IMPORTS   = $(VKD3D_PE_LIBS) dxguid opengl32 user32 gdi32 advapi32
-EXTRAINCL = $(VKD3D_PE_CFLAGS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	adapter_gl.c \
-	adapter_vk.c \
-	buffer.c \
-	context.c \
-	context_gl.c \
-	context_vk.c \
-	cs.c \
-	device.c \
-	directx.c \
-	ffp_gl.c \
-	ffp_hlsl.c \
-	gl_compat.c \
-	glsl_shader.c \
-	palette.c \
-	query.c \
-	resource.c \
-	resource.rc \
-	sampler.c \
-	shader.c \
-	shader_sm1.c \
-	shader_sm4.c \
-	shader_spirv.c \
-	stateblock.c \
-	surface.c \
-	swapchain.c \
-	texture.c \
-	utils.c \
-	version.rc \
-	vertexdeclaration.c \
-	view.c \
-	wined3d_main.c
+all:
+all install install-lib install-dev clean libwined3d.a i386-windows/libwined3d.a resource.res \
+  version.res i386-windows/adapter_gl.o i386-windows/adapter_vk.o i386-windows/buffer.o \
+  i386-windows/context.o i386-windows/context_gl.o i386-windows/context_vk.o i386-windows/cs.o \
+  i386-windows/device.o i386-windows/directx.o i386-windows/ffp_gl.o i386-windows/ffp_hlsl.o \
+  i386-windows/gl_compat.o i386-windows/glsl_shader.o i386-windows/palette.o i386-windows/query.o \
+  i386-windows/resource.o i386-windows/sampler.o i386-windows/shader.o i386-windows/shader_sm1.o \
+  i386-windows/shader_sm4.o i386-windows/shader_spirv.o i386-windows/stateblock.o \
+  i386-windows/surface.o i386-windows/swapchain.o i386-windows/texture.o i386-windows/utils.o \
+  i386-windows/vertexdeclaration.o i386-windows/view.o i386-windows/wined3d_main.o \
+  i386-windows/wined3d.dll:
+	@cd ../.. && $(MAKE) dlls/wined3d/$@
+.PHONY: all install install-lib install-dev clean

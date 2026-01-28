@@ -1,5 +1,6 @@
-MODULE    = msadp32.acm
-IMPORTS   = winmm user32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	msadp32.c
+all:
+all install install-lib clean i386-windows/msadp32.o i386-windows/msadp32.acm:
+	@cd ../.. && $(MAKE) dlls/msadp32.acm/$@
+.PHONY: all install install-lib clean

@@ -1,3 +1,6 @@
-MODULE    = scarddlg.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
+all:
+all install install-lib clean i386-windows/scarddlg.dll:
+	@cd ../.. && $(MAKE) dlls/scarddlg/$@
+.PHONY: all install install-lib clean

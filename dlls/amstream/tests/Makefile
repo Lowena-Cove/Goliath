@@ -1,6 +1,7 @@
-TESTDLL   = amstream.dll
-IMPORTS   = strmbase strmiids uuid ddraw ole32 user32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	amstream.c \
-	rsrc.rc
+all:
+all clean check test testclean i386-windows/amstream_test-stripped.exe i386-windows/amstream.ok \
+  rsrc.res i386-windows/amstream.o i386-windows/testlist.o i386-windows/amstream_test.exe:
+	@cd ../../.. && $(MAKE) dlls/amstream/tests/$@
+.PHONY: all clean check test testclean

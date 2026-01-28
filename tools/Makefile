@@ -1,12 +1,6 @@
-PROGRAMS = \
-	makedep \
-	make_xftmpl
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	gdbinit.py.in \
-	make_xftmpl.c \
-	makedep.c \
-	wineapploader.in
-
-makedep_OBJS = makedep.o
-make_xftmpl_OBJS = make_xftmpl.o
+all:
+all clean make_xftmpl.o makedep.o gdbinit.py wineapploader makedep make_xftmpl:
+	@cd .. && $(MAKE) tools/$@
+.PHONY: all clean

@@ -1,5 +1,7 @@
-TESTDLL = mp3dmod.dll
-IMPORTS = dmoguids msdmo ole32 strmiids uuid wmcodecdspuuid
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	mp3dmod.c
+all:
+all clean check test testclean i386-windows/mp3dmod_test-stripped.exe i386-windows/mp3dmod.ok \
+  i386-windows/mp3dmod.o i386-windows/testlist.o i386-windows/mp3dmod_test.exe:
+	@cd ../../.. && $(MAKE) dlls/mp3dmod/tests/$@
+.PHONY: all clean check test testclean

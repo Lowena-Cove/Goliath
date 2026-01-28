@@ -1,4 +1,7 @@
-MODULE    = unicows.dll
-IMPORTLIB = unicows
-IMPORTS   = avicap32 msvfw32 oledlg comdlg32 shell32 winmm winspool \
-            rasapi32 secur32 sensapi version oleacc user32 mpr gdi32 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
+
+all:
+all install install-lib install-dev clean libunicows.a i386-windows/libunicows.a \
+  i386-windows/unicows.dll:
+	@cd ../.. && $(MAKE) dlls/unicows/$@
+.PHONY: all install install-lib install-dev clean

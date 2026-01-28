@@ -175,6 +175,8 @@ See [INTEGRATION.md](INTEGRATION.md) for how to integrate new compatibility laye
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for system architecture details.
 
+See [upstream-sync/README.md](upstream-sync/README.md) for how upstream dependencies are tracked and updated.
+
 ## Roadmap
 
 ### Phase 1: Foundation ✓

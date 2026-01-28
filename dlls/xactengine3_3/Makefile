@@ -1,11 +1,7 @@
-MODULE    = xactengine3_3.dll
-IMPORTS   = $(FAUDIO_PE_LIBS) ole32 uuid
-EXTRAINCL = $(FAUDIO_PE_CFLAGS)
-EXTRADEFS = -DXACT3_VER=0x0303
-PARENTSRC = ../xactengine3_7
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	xact_classes.idl \
-	xact_dll.c
+all:
+all install install-lib clean i386-windows/xact_dll.o i386-windows/xact_classes_r.res \
+  i386-windows/xactengine3_3.dll:
+	@cd ../.. && $(MAKE) dlls/xactengine3_3/$@
+.PHONY: all install install-lib clean

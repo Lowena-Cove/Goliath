@@ -1,58 +1,12 @@
-EXTRADEFS = -D_WIN32U_
-MODULE    = win32u.dll
-UNIXLIB   = win32u.so
-IMPORTLIB = win32u
-IMPORTS   = ntdll winecrt0
-UNIX_CFLAGS  = $(FREETYPE_CFLAGS) $(FONTCONFIG_CFLAGS)
-UNIX_LIBS    = $(CARBON_LIBS) $(APPKIT_LIBS) $(PTHREAD_LIBS) -lm
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -nodefaultlibs
-
-SOURCES = \
-	bitblt.c \
-	bitmap.c \
-	brush.c \
-	class.c \
-	clipboard.c \
-	clipping.c \
-	cursoricon.c \
-	d3dkmt.c \
-	dc.c \
-	dce.c \
-	defwnd.c \
-	dib.c \
-	dibdrv/bitblt.c \
-	dibdrv/dc.c \
-	dibdrv/graphics.c \
-	dibdrv/objects.c \
-	dibdrv/opengl.c \
-	dibdrv/primitives.c \
-	driver.c \
-	emfdrv.c \
-	font.c \
-	freetype.c \
-	gdiobj.c \
-	hook.c \
-	imm.c \
-	input.c \
-	main.c \
-	mapping.c \
-	menu.c \
-	message.c \
-	opentype.c \
-	painting.c \
-	palette.c \
-	path.c \
-	pen.c \
-	printdrv.c \
-	rawinput.c \
-	region.c \
-	scroll.c \
-	spy.c \
-	syscall.c \
-	sysparams.c \
-	systray.c \
-	vertical.c \
-	vulkan.c \
-	window.c \
-	winstation.c
+all:
+all install install-lib install-dev clean libwin32u.a i386-windows/libwin32u.a win32u.so \
+  i386-windows/main.o i386-windows/win32u.dll bitblt.o bitmap.o brush.o class.o clipboard.o \
+  clipping.o cursoricon.o d3dkmt.o dc.o dce.o defwnd.o dib.o dibdrv/bitblt.o dibdrv/dc.o \
+  dibdrv/graphics.o dibdrv/objects.o dibdrv/opengl.o dibdrv/primitives.o driver.o emfdrv.o font.o \
+  freetype.o gdiobj.o hook.o imm.o input.o mapping.o menu.o message.o opentype.o painting.o \
+  palette.o path.o pen.o printdrv.o rawinput.o region.o scroll.o spy.o syscall.o sysparams.o \
+  systray.o vertical.o vulkan.o window.o winstation.o:
+	@cd ../.. && $(MAKE) dlls/win32u/$@
+.PHONY: all install install-lib install-dev clean

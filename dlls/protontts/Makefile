@@ -1,11 +1,6 @@
-MODULE      = protontts.dll
-UNIXLIB     = protontts.so
-IMPORTS     = ole32
-UNIX_CFLAGS = $(PIPER_CFLAGS)
-UNIX_LIBS   = $(PIPER_LIBS) $(PTHREAD_LIBS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c \
-	tts.c \
-	protontts_classes.idl \
-	unixlib.c
+all:
+clean protontts_classes.h:
+	@cd ../.. && $(MAKE) dlls/protontts/$@
+.PHONY: clean

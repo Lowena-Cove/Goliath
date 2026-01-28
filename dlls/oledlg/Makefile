@@ -1,9 +1,8 @@
-MODULE    = oledlg.dll
-IMPORTLIB = oledlg
-IMPORTS   = ole32 comdlg32 user32 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	insobjdlg.c \
-	oledlg.rc \
-	oledlg_main.c \
-	pastespl.c
+all:
+all install install-lib install-dev clean liboledlg.a i386-windows/liboledlg.a oledlg.res \
+  i386-windows/insobjdlg.o i386-windows/oledlg_main.o i386-windows/pastespl.o \
+  i386-windows/oledlg.dll oledlg.pot:
+	@cd ../.. && $(MAKE) dlls/oledlg/$@
+.PHONY: all install install-lib install-dev clean

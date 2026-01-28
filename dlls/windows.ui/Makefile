@@ -1,9 +1,7 @@
-MODULE  = windows.ui.dll
-IMPORTS = combase advapi32 user32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	classes.idl \
-	inputpane.c \
-	main.c \
-	uisettings.c \
-	uiviewsettings.c
+all:
+all install install-lib clean i386-windows/inputpane.o i386-windows/main.o i386-windows/uisettings.o \
+  i386-windows/uiviewsettings.o i386-windows/classes_r.res i386-windows/windows.ui.dll:
+	@cd ../.. && $(MAKE) dlls/windows.ui/$@
+.PHONY: all install install-lib clean

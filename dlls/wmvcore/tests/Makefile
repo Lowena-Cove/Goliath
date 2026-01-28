@@ -1,6 +1,7 @@
-TESTDLL   = wmvcore.dll
-IMPORTS   = ole32 wmvcore
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	rsrc.rc \
-	wmvcore.c
+all:
+all clean check test testclean i386-windows/wmvcore_test-stripped.exe i386-windows/wmvcore.ok \
+  rsrc.res i386-windows/wmvcore.o i386-windows/testlist.o i386-windows/wmvcore_test.exe:
+	@cd ../../.. && $(MAKE) dlls/wmvcore/tests/$@
+.PHONY: all clean check test testclean

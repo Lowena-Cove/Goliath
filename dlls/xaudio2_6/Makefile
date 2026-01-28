@@ -1,13 +1,7 @@
-EXTRADEFS = -DXAUDIO2_VER=6
-MODULE    = xaudio2_6.dll
-IMPORTS   = $(FAUDIO_PE_LIBS) advapi32 ole32 user32 uuid
-EXTRAINCL = $(FAUDIO_PE_CFLAGS)
-PARENTSRC = ../xaudio2_7
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	xapo.c \
-	xaudio_allocator.c \
-	xaudio_classes.idl \
-	xaudio_dll.c
+all:
+all install install-lib clean xaudio_classes.h i386-windows/xapo.o i386-windows/xaudio_allocator.o \
+  i386-windows/xaudio_dll.o i386-windows/xaudio_classes_r.res i386-windows/xaudio2_6.dll:
+	@cd ../.. && $(MAKE) dlls/xaudio2_6/$@
+.PHONY: all install install-lib clean

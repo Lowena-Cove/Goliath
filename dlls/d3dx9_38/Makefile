@@ -1,29 +1,11 @@
-EXTRADEFS = -DD3DX_SDK_VERSION=38 -DD3DX_D3D_VERSION=9
-MODULE    = d3dx9_38.dll
-IMPORTS   = d3d9 d3dcompiler dxguid d3dxof ole32 gdi32 user32
-PARENTSRC = ../d3dx9_36
-DELAYIMPORTS = windowscodecs
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	animation.c \
-	core.c \
-	d3dx_helpers.c \
-	effect.c \
-	font.c \
-	line.c \
-	main.c \
-	math.c \
-	mesh.c \
-	preshader.c \
-	render.c \
-	shader.c \
-	skin.c \
-	sprite.c \
-	surface.c \
-	texture.c \
-	util.c \
-	version.rc \
-	volume.c \
-	xfile.c
+all:
+all install install-lib clean version.res i386-windows/animation.o i386-windows/core.o \
+  i386-windows/d3dx_helpers.o i386-windows/effect.o i386-windows/font.o i386-windows/line.o \
+  i386-windows/main.o i386-windows/math.o i386-windows/mesh.o i386-windows/preshader.o \
+  i386-windows/render.o i386-windows/shader.o i386-windows/skin.o i386-windows/sprite.o \
+  i386-windows/surface.o i386-windows/texture.o i386-windows/util.o i386-windows/volume.o \
+  i386-windows/xfile.o i386-windows/d3dx9_38.dll:
+	@cd ../.. && $(MAKE) dlls/d3dx9_38/$@
+.PHONY: all install install-lib clean

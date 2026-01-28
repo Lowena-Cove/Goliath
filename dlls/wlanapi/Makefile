@@ -1,7 +1,7 @@
-MODULE    = wlanapi.dll
-IMPORTLIB = wlanapi
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	main.c
+all:
+all install install-lib install-dev clean libwlanapi.a i386-windows/libwlanapi.a i386-windows/main.o \
+  i386-windows/wlanapi.dll:
+	@cd ../.. && $(MAKE) dlls/wlanapi/$@
+.PHONY: all install install-lib install-dev clean

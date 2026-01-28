@@ -1,28 +1,16 @@
-EXTLIB    = libcapstone.a
-EXTRAINCL = $(CAPSTONE_PE_CFLAGS)
-EXTRADEFS = -DCAPSTONE_HAS_ARM -DCAPSTONE_HAS_ARM64 -DCAPSTONE_HAS_X86 -DNDEBUG
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	MCInst.c \
-	MCInstrDesc.c \
-	MCRegisterInfo.c \
-	Mapping.c \
-	SStream.c \
-	arch/AArch64/AArch64BaseInfo.c \
-	arch/AArch64/AArch64Disassembler.c \
-	arch/AArch64/AArch64InstPrinter.c \
-	arch/AArch64/AArch64Mapping.c \
-	arch/AArch64/AArch64Module.c \
-	arch/ARM/ARMDisassembler.c \
-	arch/ARM/ARMInstPrinter.c \
-	arch/ARM/ARMMapping.c \
-	arch/ARM/ARMModule.c \
-	arch/X86/X86ATTInstPrinter.c \
-	arch/X86/X86Disassembler.c \
-	arch/X86/X86DisassemblerDecoder.c \
-	arch/X86/X86InstPrinterCommon.c \
-	arch/X86/X86IntelInstPrinter.c \
-	arch/X86/X86Mapping.c \
-	arch/X86/X86Module.c \
-	cs.c \
-	utils.c
+all:
+clean i386-windows/libcapstone.a i386-windows/MCInst.o i386-windows/MCInstrDesc.o \
+  i386-windows/MCRegisterInfo.o i386-windows/Mapping.o i386-windows/SStream.o \
+  i386-windows/arch/AArch64/AArch64BaseInfo.o i386-windows/arch/AArch64/AArch64Disassembler.o \
+  i386-windows/arch/AArch64/AArch64InstPrinter.o i386-windows/arch/AArch64/AArch64Mapping.o \
+  i386-windows/arch/AArch64/AArch64Module.o i386-windows/arch/ARM/ARMDisassembler.o \
+  i386-windows/arch/ARM/ARMInstPrinter.o i386-windows/arch/ARM/ARMMapping.o \
+  i386-windows/arch/ARM/ARMModule.o i386-windows/arch/X86/X86ATTInstPrinter.o \
+  i386-windows/arch/X86/X86Disassembler.o i386-windows/arch/X86/X86DisassemblerDecoder.o \
+  i386-windows/arch/X86/X86InstPrinterCommon.o i386-windows/arch/X86/X86IntelInstPrinter.o \
+  i386-windows/arch/X86/X86Mapping.o i386-windows/arch/X86/X86Module.o i386-windows/cs.o \
+  i386-windows/utils.o:
+	@cd ../.. && $(MAKE) libs/capstone/$@
+.PHONY: clean

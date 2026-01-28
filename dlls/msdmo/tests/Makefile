@@ -1,5 +1,7 @@
-TESTDLL = msdmo.dll
-IMPORTS = advapi32 dmoguids msdmo uuid
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	msdmo.c
+all:
+all clean check test testclean i386-windows/msdmo_test-stripped.exe i386-windows/msdmo.ok \
+  i386-windows/msdmo.o i386-windows/testlist.o i386-windows/msdmo_test.exe:
+	@cd ../../.. && $(MAKE) dlls/msdmo/tests/$@
+.PHONY: all clean check test testclean

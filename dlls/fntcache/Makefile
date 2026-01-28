@@ -1,7 +1,6 @@
-MODULE    = fntcache.dll
-IMPORTS   = advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/fntcache.dll:
+	@cd ../.. && $(MAKE) dlls/fntcache/$@
+.PHONY: all install install-lib clean

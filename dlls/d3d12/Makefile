@@ -1,7 +1,7 @@
-MODULE    = d3d12.dll
-IMPORTLIB = d3d12
-IMPORTS   = dxgi dxguid wined3d gdi32 user32 uuid win32u
-EXTRAINCL = $(VKD3D_PE_CFLAGS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	d3d12_main.c
+all:
+all install install-lib install-dev clean libd3d12.a i386-windows/libd3d12.a \
+  i386-windows/d3d12_main.o i386-windows/d3d12.dll:
+	@cd ../.. && $(MAKE) dlls/d3d12/$@
+.PHONY: all install install-lib install-dev clean

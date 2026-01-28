@@ -1,138 +1,52 @@
-EXTLIB    = libmusl.a
-EXTRAINCL = -I$(srcdir)/src/internal -I$(srcdir)/arch/generic
-EXTRADEFS = -D_ACRTIMP= -D_NO_CRT_MATH_INLINE
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	src/math/__cos.c \
-	src/math/__cosdf.c \
-	src/math/__expo2.c \
-	src/math/__expo2f.c \
-	src/math/__fpclassify.c \
-	src/math/__fpclassifyf.c \
-	src/math/__math_divzero.c \
-	src/math/__math_divzerof.c \
-	src/math/__math_invalid.c \
-	src/math/__math_invalidf.c \
-	src/math/__rem_pio2.c \
-	src/math/__rem_pio2_large.c \
-	src/math/__rem_pio2f.c \
-	src/math/__sin.c \
-	src/math/__sindf.c \
-	src/math/__tan.c \
-	src/math/__tandf.c \
-	src/math/acos.c \
-	src/math/acosf.c \
-	src/math/acosh.c \
-	src/math/acoshf.c \
-	src/math/asin.c \
-	src/math/asinf.c \
-	src/math/asinh.c \
-	src/math/asinhf.c \
-	src/math/atan.c \
-	src/math/atan2.c \
-	src/math/atan2f.c \
-	src/math/atanf.c \
-	src/math/atanh.c \
-	src/math/atanhf.c \
-	src/math/cbrt.c \
-	src/math/cbrtf.c \
-	src/math/ceil.c \
-	src/math/ceilf.c \
-	src/math/copysign.c \
-	src/math/copysignf.c \
-	src/math/cos.c \
-	src/math/cosf.c \
-	src/math/cosh.c \
-	src/math/coshf.c \
-	src/math/erf.c \
-	src/math/erff.c \
-	src/math/exp.c \
-	src/math/exp2.c \
-	src/math/exp2f.c \
-	src/math/exp2f_data.c \
-	src/math/exp_data.c \
-	src/math/expf.c \
-	src/math/expm1.c \
-	src/math/expm1f.c \
-	src/math/fabs.c \
-	src/math/fabsf.c \
-	src/math/fdim.c \
-	src/math/fdimf.c \
-	src/math/floor.c \
-	src/math/floorf.c \
-	src/math/fma.c \
-	src/math/fmaf.c \
-	src/math/fmax.c \
-	src/math/fmaxf.c \
-	src/math/fmin.c \
-	src/math/fminf.c \
-	src/math/fmod.c \
-	src/math/fmodf.c \
-	src/math/frexp.c \
-	src/math/frexpf.c \
-	src/math/hypot.c \
-	src/math/hypotf.c \
-	src/math/ilogb.c \
-	src/math/ilogbf.c \
-	src/math/j0.c \
-	src/math/j1.c \
-	src/math/jn.c \
-	src/math/ldexp.c \
-	src/math/lgamma.c \
-	src/math/lgamma_r.c \
-	src/math/lgammaf.c \
-	src/math/lgammaf_r.c \
-	src/math/log.c \
-	src/math/log10.c \
-	src/math/log10f.c \
-	src/math/log1p.c \
-	src/math/log1pf.c \
-	src/math/log2.c \
-	src/math/log2_data.c \
-	src/math/log2f.c \
-	src/math/log2f_data.c \
-	src/math/log_data.c \
-	src/math/logb.c \
-	src/math/logbf.c \
-	src/math/logf.c \
-	src/math/logf_data.c \
-	src/math/modf.c \
-	src/math/modff.c \
-	src/math/nan.c \
-	src/math/nanf.c \
-	src/math/nextafter.c \
-	src/math/nextafterf.c \
-	src/math/nexttoward.c \
-	src/math/nexttowardf.c \
-	src/math/pow.c \
-	src/math/pow_data.c \
-	src/math/powf.c \
-	src/math/powf_data.c \
-	src/math/remainder.c \
-	src/math/remainderf.c \
-	src/math/remquo.c \
-	src/math/remquof.c \
-	src/math/rint.c \
-	src/math/rintf.c \
-	src/math/round.c \
-	src/math/roundf.c \
-	src/math/scalbn.c \
-	src/math/scalbnf.c \
-	src/math/signgam.c \
-	src/math/sin.c \
-	src/math/sincos.c \
-	src/math/sincosf.c \
-	src/math/sinf.c \
-	src/math/sinh.c \
-	src/math/sinhf.c \
-	src/math/sqrt.c \
-	src/math/sqrt_data.c \
-	src/math/sqrtf.c \
-	src/math/tan.c \
-	src/math/tanf.c \
-	src/math/tanh.c \
-	src/math/tanhf.c \
-	src/math/tgamma.c \
-	src/math/tgammaf.c \
-	src/math/trunc.c \
-	src/math/truncf.c
+all:
+clean i386-windows/libmusl.a i386-windows/src/math/__cos.o i386-windows/src/math/__cosdf.o \
+  i386-windows/src/math/__expo2.o i386-windows/src/math/__expo2f.o \
+  i386-windows/src/math/__fpclassify.o i386-windows/src/math/__fpclassifyf.o \
+  i386-windows/src/math/__math_divzero.o i386-windows/src/math/__math_divzerof.o \
+  i386-windows/src/math/__math_invalid.o i386-windows/src/math/__math_invalidf.o \
+  i386-windows/src/math/__rem_pio2.o i386-windows/src/math/__rem_pio2_large.o \
+  i386-windows/src/math/__rem_pio2f.o i386-windows/src/math/__sin.o i386-windows/src/math/__sindf.o \
+  i386-windows/src/math/__tan.o i386-windows/src/math/__tandf.o i386-windows/src/math/acos.o \
+  i386-windows/src/math/acosf.o i386-windows/src/math/acosh.o i386-windows/src/math/acoshf.o \
+  i386-windows/src/math/asin.o i386-windows/src/math/asinf.o i386-windows/src/math/asinh.o \
+  i386-windows/src/math/asinhf.o i386-windows/src/math/atan.o i386-windows/src/math/atan2.o \
+  i386-windows/src/math/atan2f.o i386-windows/src/math/atanf.o i386-windows/src/math/atanh.o \
+  i386-windows/src/math/atanhf.o i386-windows/src/math/cbrt.o i386-windows/src/math/cbrtf.o \
+  i386-windows/src/math/ceil.o i386-windows/src/math/ceilf.o i386-windows/src/math/copysign.o \
+  i386-windows/src/math/copysignf.o i386-windows/src/math/cos.o i386-windows/src/math/cosf.o \
+  i386-windows/src/math/cosh.o i386-windows/src/math/coshf.o i386-windows/src/math/erf.o \
+  i386-windows/src/math/erff.o i386-windows/src/math/exp.o i386-windows/src/math/exp2.o \
+  i386-windows/src/math/exp2f.o i386-windows/src/math/exp2f_data.o i386-windows/src/math/exp_data.o \
+  i386-windows/src/math/expf.o i386-windows/src/math/expm1.o i386-windows/src/math/expm1f.o \
+  i386-windows/src/math/fabs.o i386-windows/src/math/fabsf.o i386-windows/src/math/fdim.o \
+  i386-windows/src/math/fdimf.o i386-windows/src/math/floor.o i386-windows/src/math/floorf.o \
+  i386-windows/src/math/fma.o i386-windows/src/math/fmaf.o i386-windows/src/math/fmax.o \
+  i386-windows/src/math/fmaxf.o i386-windows/src/math/fmin.o i386-windows/src/math/fminf.o \
+  i386-windows/src/math/fmod.o i386-windows/src/math/fmodf.o i386-windows/src/math/frexp.o \
+  i386-windows/src/math/frexpf.o i386-windows/src/math/hypot.o i386-windows/src/math/hypotf.o \
+  i386-windows/src/math/ilogb.o i386-windows/src/math/ilogbf.o i386-windows/src/math/j0.o \
+  i386-windows/src/math/j1.o i386-windows/src/math/jn.o i386-windows/src/math/ldexp.o \
+  i386-windows/src/math/lgamma.o i386-windows/src/math/lgamma_r.o i386-windows/src/math/lgammaf.o \
+  i386-windows/src/math/lgammaf_r.o i386-windows/src/math/log.o i386-windows/src/math/log10.o \
+  i386-windows/src/math/log10f.o i386-windows/src/math/log1p.o i386-windows/src/math/log1pf.o \
+  i386-windows/src/math/log2.o i386-windows/src/math/log2_data.o i386-windows/src/math/log2f.o \
+  i386-windows/src/math/log2f_data.o i386-windows/src/math/log_data.o i386-windows/src/math/logb.o \
+  i386-windows/src/math/logbf.o i386-windows/src/math/logf.o i386-windows/src/math/logf_data.o \
+  i386-windows/src/math/modf.o i386-windows/src/math/modff.o i386-windows/src/math/nan.o \
+  i386-windows/src/math/nanf.o i386-windows/src/math/nextafter.o i386-windows/src/math/nextafterf.o \
+  i386-windows/src/math/nexttoward.o i386-windows/src/math/nexttowardf.o i386-windows/src/math/pow.o \
+  i386-windows/src/math/pow_data.o i386-windows/src/math/powf.o i386-windows/src/math/powf_data.o \
+  i386-windows/src/math/remainder.o i386-windows/src/math/remainderf.o \
+  i386-windows/src/math/remquo.o i386-windows/src/math/remquof.o i386-windows/src/math/rint.o \
+  i386-windows/src/math/rintf.o i386-windows/src/math/round.o i386-windows/src/math/roundf.o \
+  i386-windows/src/math/scalbn.o i386-windows/src/math/scalbnf.o i386-windows/src/math/signgam.o \
+  i386-windows/src/math/sin.o i386-windows/src/math/sincos.o i386-windows/src/math/sincosf.o \
+  i386-windows/src/math/sinf.o i386-windows/src/math/sinh.o i386-windows/src/math/sinhf.o \
+  i386-windows/src/math/sqrt.o i386-windows/src/math/sqrt_data.o i386-windows/src/math/sqrtf.o \
+  i386-windows/src/math/tan.o i386-windows/src/math/tanf.o i386-windows/src/math/tanh.o \
+  i386-windows/src/math/tanhf.o i386-windows/src/math/tgamma.o i386-windows/src/math/tgammaf.o \
+  i386-windows/src/math/trunc.o i386-windows/src/math/truncf.o:
+	@cd ../.. && $(MAKE) libs/musl/$@
+.PHONY: clean

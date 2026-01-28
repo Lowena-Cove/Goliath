@@ -1,11 +1,8 @@
-MODULE    = msado15.dll
-IMPORTS   = oleaut32 ole32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	command.c \
-	connection.c \
-	main.c \
-	msado15_classes.idl \
-	msado15_tlb.idl \
-	recordset.c \
-	stream.c
+all:
+all install install-lib clean i386-windows/command.o i386-windows/connection.o i386-windows/main.o \
+  i386-windows/recordset.o i386-windows/stream.o i386-windows/msado15_classes_r.res \
+  i386-windows/msado15_tlb_t.res i386-windows/msado15.dll:
+	@cd ../.. && $(MAKE) dlls/msado15/$@
+.PHONY: all install install-lib clean

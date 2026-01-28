@@ -1,9 +1,9 @@
-TESTDLL   = secur32.dll
-IMPORTS   = secur32 crypt32 advapi32 ws2_32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c \
-	negotiate.c \
-	ntlm.c \
-	schannel.c \
-	secur32.c
+all:
+all clean check test testclean i386-windows/secur32_test-stripped.exe i386-windows/main.ok \
+  i386-windows/negotiate.ok i386-windows/ntlm.ok i386-windows/schannel.ok i386-windows/secur32.ok \
+  i386-windows/main.o i386-windows/negotiate.o i386-windows/ntlm.o i386-windows/schannel.o \
+  i386-windows/secur32.o i386-windows/testlist.o i386-windows/secur32_test.exe:
+	@cd ../../.. && $(MAKE) dlls/secur32/tests/$@
+.PHONY: all clean check test testclean

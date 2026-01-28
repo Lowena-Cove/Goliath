@@ -1,10 +1,7 @@
-MODULE    = services.exe
-IMPORTS   = rpcrt4 advapi32 userenv setupapi
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mwindows
-
-SOURCES = \
-	rpc.c \
-	services.c \
-	svcctl.idl \
-	utils.c
+all:
+all install install-lib clean svcctl.h i386-windows/svcctl_s.c i386-windows/rpc.o \
+  i386-windows/services.o i386-windows/utils.o i386-windows/svcctl_s.o i386-windows/services.exe:
+	@cd ../.. && $(MAKE) programs/services/$@
+.PHONY: all install install-lib clean

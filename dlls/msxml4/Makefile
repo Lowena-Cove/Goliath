@@ -1,6 +1,6 @@
-MODULE    = msxml4.dll
-IMPORTS   = ole32 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	msxml4_tlb.idl \
-	rsrc.rc
+all:
+all install install-lib clean rsrc.res i386-windows/msxml4_tlb_t.res i386-windows/msxml4.dll:
+	@cd ../.. && $(MAKE) dlls/msxml4/$@
+.PHONY: all install install-lib clean

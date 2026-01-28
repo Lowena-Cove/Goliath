@@ -1,16 +1,8 @@
-MODULE    = opengl32.dll
-UNIXLIB   = opengl32.so
-EXTRADEFS = -D_OPENGL32_
-IMPORTLIB = opengl32
-IMPORTS   = user32 gdi32 advapi32 win32u
-DELAYIMPORTS = glu32
-UNIX_LIBS    = -lwin32u
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wl,--image-base,0x7a800000
-
-SOURCES = \
-	thunks.c \
-	unix_thunks.c \
-	unix_wgl.c \
-	version.rc \
-	wgl.c
+all:
+all install install-lib install-dev clean libopengl32.a i386-windows/libopengl32.a version.res \
+  opengl32.so i386-windows/thunks.o i386-windows/wgl.o i386-windows/opengl32.dll unix_thunks.o \
+  unix_wgl.o:
+	@cd ../.. && $(MAKE) dlls/opengl32/$@
+.PHONY: all install install-lib install-dev clean

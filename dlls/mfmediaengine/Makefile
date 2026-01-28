@@ -1,9 +1,7 @@
-MODULE    = mfmediaengine.dll
-IMPORTS = oleaut32 ole32 mfplat mf mfuuid dxguid uuid
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	main.c \
-	mediaengine_classes.idl \
-	video_frame_sink.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/video_frame_sink.o \
+  i386-windows/mediaengine_classes_r.res i386-windows/mfmediaengine.dll:
+	@cd ../.. && $(MAKE) dlls/mfmediaengine/$@
+.PHONY: all install install-lib clean

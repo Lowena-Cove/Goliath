@@ -1,11 +1,7 @@
-EXTRADEFS = -D_CREDUI_
-MODULE    = credui.dll
-IMPORTLIB = credui
-IMPORTS   = comctl32 user32 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	banner.svg \
-	credui.rc \
-	credui_main.c
+all:
+all install install-lib install-dev clean libcredui.a i386-windows/libcredui.a credui.res \
+  i386-windows/credui_main.o i386-windows/credui.dll credui.pot:
+	@cd ../.. && $(MAKE) dlls/credui/$@
+.PHONY: all install install-lib install-dev clean

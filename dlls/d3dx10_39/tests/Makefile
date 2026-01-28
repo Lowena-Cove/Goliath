@@ -1,7 +1,7 @@
-EXTRADEFS = -DD3DX10_SDK_VERSION=39
-TESTDLL = d3dx10_39.dll
-IMPORTS = d3dx10_39 ole32 gdi32
-PARENTSRC = ../../d3dx10_43/tests
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	d3dx10.c
+all:
+all clean check test testclean i386-windows/d3dx10_39_test-stripped.exe i386-windows/d3dx10.ok \
+  i386-windows/d3dx10.o i386-windows/testlist.o i386-windows/d3dx10_39_test.exe:
+	@cd ../../.. && $(MAKE) dlls/d3dx10_39/tests/$@
+.PHONY: all clean check test testclean

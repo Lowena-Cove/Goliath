@@ -1,16 +1,7 @@
-MODULE    = winebus.sys
-UNIXLIB   = winebus.so
-IMPORTS   = ntoskrnl hidparse
-UNIX_LIBS    = $(IOKIT_LIBS) $(UDEV_LIBS) $(PTHREAD_LIBS) $(INOTIFY_LIBS)
-UNIX_CFLAGS  = $(UDEV_CFLAGS) $(SDL2_CFLAGS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wl,--subsystem,native
-
-SOURCES = \
-	bus_iohid.c \
-	bus_sdl.c \
-	bus_udev.c \
-	hid.c \
-	main.c \
-	unixlib.c \
-	winebus.rc
+all:
+all install install-lib clean winebus.res winebus.so i386-windows/main.o i386-windows/winebus.sys \
+  bus_iohid.o bus_sdl.o bus_udev.o hid.o unixlib.o:
+	@cd ../.. && $(MAKE) dlls/winebus.sys/$@
+.PHONY: all install install-lib clean

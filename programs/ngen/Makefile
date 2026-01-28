@@ -1,7 +1,6 @@
-MODULE    = ngen.exe
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole -municode
-
-SOURCES = \
-	ngen_main.c \
-	version.rc
+all:
+all install install-lib clean version.res i386-windows/ngen_main.o i386-windows/ngen.exe:
+	@cd ../.. && $(MAKE) programs/ngen/$@
+.PHONY: all install install-lib clean

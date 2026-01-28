@@ -1,6 +1,7 @@
-MODULE = windows.gaming.ui.gamebar.dll
-IMPORTS = combase uuid
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	classes.idl \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/classes_r.res \
+  i386-windows/windows.gaming.ui.gamebar.dll:
+	@cd ../.. && $(MAKE) dlls/windows.gaming.ui.gamebar/$@
+.PHONY: all install install-lib clean

@@ -1,6 +1,6 @@
-MODULE    = npmshtml.dll
-IMPORTS   = mshtml
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c \
-	rsrc.rc
+all:
+all install install-lib clean rsrc.res i386-windows/main.o i386-windows/npmshtml.dll:
+	@cd ../.. && $(MAKE) dlls/npmshtml/$@
+.PHONY: all install install-lib clean

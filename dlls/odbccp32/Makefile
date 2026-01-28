@@ -1,6 +1,7 @@
-MODULE    = odbccp32.dll
-IMPORTLIB = odbccp32
-IMPORTS   = uuid advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	odbccp32.c
+all:
+all install install-lib install-dev clean libodbccp32.a i386-windows/libodbccp32.a \
+  i386-windows/odbccp32.o i386-windows/odbccp32.dll:
+	@cd ../.. && $(MAKE) dlls/odbccp32/$@
+.PHONY: all install install-lib install-dev clean

@@ -1,13 +1,7 @@
-EXTRADEFS = -DXAPOFX1_VER=4 -DXAUDIO2_VER=6
-MODULE    = xapofx1_4.dll
-IMPORTS   = $(FAUDIO_PE_LIBS) ole32
-EXTRAINCL = $(FAUDIO_PE_CFLAGS)
-PARENTSRC = ../xaudio2_7
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	xapo.c \
-	xapofx.c \
-	xaudio_allocator.c \
-	xaudio_classes.idl
+all:
+all install install-lib clean xaudio_classes.h i386-windows/xapo.o i386-windows/xapofx.o \
+  i386-windows/xaudio_allocator.o i386-windows/xaudio_classes_r.res i386-windows/xapofx1_4.dll:
+	@cd ../.. && $(MAKE) dlls/xapofx1_4/$@
+.PHONY: all install install-lib clean

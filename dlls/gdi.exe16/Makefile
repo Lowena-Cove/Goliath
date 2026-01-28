@@ -1,12 +1,7 @@
-MODULE    = gdi.exe16
-IMPORTS   = user32 advapi32 gdi32 win32u
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -m16 -Wb,--main-module,gdi32.dll,--heap,65520
-
-SOURCES = \
-	bidi.c \
-	env.c \
-	gdi.c \
-	metafile.c \
-	printdrv.c \
-	version.rc
+all:
+all install install-lib clean version.res i386-windows/bidi.o i386-windows/env.o i386-windows/gdi.o \
+  i386-windows/metafile.o i386-windows/printdrv.o i386-windows/gdi.exe16:
+	@cd ../.. && $(MAKE) dlls/gdi.exe16/$@
+.PHONY: all install install-lib clean

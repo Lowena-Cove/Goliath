@@ -1,6 +1,7 @@
-TESTDLL = d3dx11_42.dll
-IMPORTS = d3dx11_42 ole32 gdi32
-PARENTSRC = ../../d3dx11_43/tests
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	d3dx11.c
+all:
+all clean check test testclean i386-windows/d3dx11_42_test-stripped.exe i386-windows/d3dx11.ok \
+  i386-windows/d3dx11.o i386-windows/testlist.o i386-windows/d3dx11_42_test.exe:
+	@cd ../../.. && $(MAKE) dlls/d3dx11_42/tests/$@
+.PHONY: all clean check test testclean

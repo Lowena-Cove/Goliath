@@ -1,7 +1,6 @@
-MODULE    = tabtip.exe
-IMPORTS   = ole32 user32 uiautomationcore shell32 oleaut32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole -municode
-
-SOURCES = \
-	tabtip.c
+all:
+all install install-lib clean i386-windows/tabtip.o i386-windows/tabtip.exe:
+	@cd ../.. && $(MAKE) programs/tabtip/$@
+.PHONY: all install install-lib clean

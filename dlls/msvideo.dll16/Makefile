@@ -1,7 +1,6 @@
-MODULE    = msvideo.dll16
-IMPORTS   = msvfw32 version advapi32 user32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -m16 -Wb,--main-module,msvfw32.dll
-
-SOURCES = \
-	msvideo16.c
+all:
+all install install-lib clean i386-windows/msvideo16.o i386-windows/msvideo.dll16:
+	@cd ../.. && $(MAKE) dlls/msvideo.dll16/$@
+.PHONY: all install install-lib clean

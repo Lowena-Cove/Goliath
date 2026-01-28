@@ -1,3 +1,6 @@
-MODULE = xpssvcs.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
+all:
+all install install-lib clean i386-windows/xpssvcs.dll:
+	@cd ../.. && $(MAKE) dlls/xpssvcs/$@
+.PHONY: all install install-lib clean

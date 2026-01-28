@@ -1,8 +1,7 @@
-MODULE    = netstat.exe
-IMPORTS   = iphlpapi user32 ws2_32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole -municode
-
-SOURCES = \
-	netstat.c \
-	netstat.rc
+all:
+all install install-lib clean netstat.res i386-windows/netstat.o i386-windows/netstat.exe \
+  netstat.pot:
+	@cd ../.. && $(MAKE) programs/netstat/$@
+.PHONY: all install install-lib clean

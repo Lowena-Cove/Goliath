@@ -1,7 +1,6 @@
-MODULE    = winebrowser.exe
-IMPORTS   = urlmon oleaut32 shell32 user32 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mwindows -municode
-
-SOURCES = \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/winebrowser.exe:
+	@cd ../.. && $(MAKE) programs/winebrowser/$@
+.PHONY: all install install-lib clean

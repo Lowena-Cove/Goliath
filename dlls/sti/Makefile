@@ -1,12 +1,8 @@
-MODULE    = sti.dll
-IMPORTLIB = sti
-IMPORTS   = uuid ole32 oleaut32 rpcrt4 advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	sti.c \
-	sti_main.c \
-	sti_wia.idl
-
-dlldata_EXTRADEFS = -DENTRY_PREFIX=STI_ -DPROXY_DELEGATION -DWINE_REGISTER_DLL
+all:
+all install install-lib install-dev clean sti_wia.h i386-windows/sti_wia_p.c dlldata.c libsti.a \
+  i386-windows/libsti.a i386-windows/sti.o i386-windows/sti_main.o i386-windows/sti_wia_p.o \
+  i386-windows/dlldata.o i386-windows/sti_wia_r.res i386-windows/sti.dll:
+	@cd ../.. && $(MAKE) dlls/sti/$@
+.PHONY: all install install-lib install-dev clean

@@ -1,31 +1,12 @@
-MODULE    = winedbg.exe
-IMPORTS   = $(CAPSTONE_PE_LIBS) dbghelp advapi32
-EXTRAINCL = $(CAPSTONE_PE_CFLAGS)
-DELAYIMPORTS = comdlg32 shell32 comctl32 user32 gdi32 ws2_32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole
-
-SOURCES = \
-	be_arm.c \
-	be_arm64.c \
-	be_i386.c \
-	be_x86_64.c \
-	break.c \
-	crashdlg.c \
-	dbg.y \
-	debug.l \
-	display.c \
-	expr.c \
-	gdbproxy.c \
-	info.c \
-	memory.c \
-	source.c \
-	stack.c \
-	symbol.c \
-	tgt_active.c \
-	tgt_minidump.c \
-	tgt_module.c \
-	types.c \
-	winedbg.c \
-	winedbg.man.in \
-	winedbg.rc
+all:
+all install install-lib clean dbg.tab.h dbg.tab.c debug.yy.c winedbg.res winedbg.man \
+  i386-windows/be_arm.o i386-windows/be_arm64.o i386-windows/be_i386.o i386-windows/be_x86_64.o \
+  i386-windows/break.o i386-windows/crashdlg.o i386-windows/display.o i386-windows/expr.o \
+  i386-windows/gdbproxy.o i386-windows/info.o i386-windows/memory.o i386-windows/source.o \
+  i386-windows/stack.o i386-windows/symbol.o i386-windows/tgt_active.o i386-windows/tgt_minidump.o \
+  i386-windows/tgt_module.o i386-windows/types.o i386-windows/winedbg.o i386-windows/dbg.tab.o \
+  i386-windows/debug.yy.o i386-windows/winedbg.exe winedbg.pot:
+	@cd ../.. && $(MAKE) programs/winedbg/$@
+.PHONY: all install install-lib clean

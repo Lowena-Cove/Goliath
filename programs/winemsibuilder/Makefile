@@ -1,7 +1,6 @@
-MODULE    = winemsibuilder.exe
-IMPORTS   = msi ole32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole -municode
-
-SOURCES = \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/winemsibuilder.exe:
+	@cd ../.. && $(MAKE) programs/winemsibuilder/$@
+.PHONY: all install install-lib clean

@@ -1,10 +1,7 @@
-MODULE    = msdasql.dll
-IMPORTS   = uuid ole32 oleaut32 odbc32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	msdasql.rc \
-	msdasql_classes.idl \
-	msdasql_main.c \
-	session.c
+all:
+all install install-lib clean msdasql.res i386-windows/msdasql_main.o i386-windows/session.o \
+  i386-windows/msdasql_classes_r.res i386-windows/msdasql.dll:
+	@cd ../.. && $(MAKE) dlls/msdasql/$@
+.PHONY: all install install-lib clean

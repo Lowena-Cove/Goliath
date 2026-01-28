@@ -1,13 +1,7 @@
-MODULE  = winebth.sys
-IMPORTS = ntoskrnl uuid
-UNIXLIB = winebth.so
-UNIX_CFLAGS = $(DBUS_CFLAGS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wl,--subsystem,native
-
-SOURCES = \
-	dbus.c \
-	unixlib.c \
-	winebluetooth.c \
-	winebth.c \
-	winebth.rc
+all:
+all install install-lib clean winebth.res winebth.so i386-windows/winebluetooth.o \
+  i386-windows/winebth.o i386-windows/winebth.sys dbus.o unixlib.o:
+	@cd ../.. && $(MAKE) dlls/winebth.sys/$@
+.PHONY: all install install-lib clean

@@ -1,5 +1,6 @@
-MODULE    = msvcrt20.dll
-IMPORTS   = msvcrt
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	msvcrt20.c
+all:
+all install install-lib clean i386-windows/msvcrt20.o i386-windows/msvcrt20.dll:
+	@cd ../.. && $(MAKE) dlls/msvcrt20/$@
+.PHONY: all install install-lib clean

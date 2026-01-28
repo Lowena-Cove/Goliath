@@ -1,5 +1,6 @@
-MODULE = windows.networking.dll
-IMPORTS = combase
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/windows.networking.dll:
+	@cd ../.. && $(MAKE) dlls/windows.networking/$@
+.PHONY: all install install-lib clean

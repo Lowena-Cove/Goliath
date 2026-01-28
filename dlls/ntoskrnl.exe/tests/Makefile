@@ -1,21 +1,12 @@
-TESTDLL   = ntoskrnl.exe
-IMPORTS   = advapi32 crypt32 newdev setupapi user32 wintrust ws2_32 hid
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-driver_IMPORTS = winecrt0 ntoskrnl hal fltmgr
-driver_EXTRADLLFLAGS = -nodefaultlibs -nostartfiles -Wl,--subsystem,native
-driver2_IMPORTS = winecrt0 ntoskrnl hal
-driver2_EXTRADLLFLAGS = -nodefaultlibs -nostartfiles -Wl,--subsystem,native
-driver3_IMPORTS = winecrt0 ntoskrnl hal
-driver3_EXTRADLLFLAGS = -nodefaultlibs -nostartfiles -Wl,--subsystem,native
-driver_netio_IMPORTS = winecrt0 ntoskrnl hal netio
-driver_netio_EXTRADLLFLAGS = -nodefaultlibs -nostartfiles -Wl,--subsystem,native
-driver_pnp_IMPORTS = winecrt0 ntoskrnl hal
-driver_pnp_EXTRADLLFLAGS = -nodefaultlibs -nostartfiles -Wl,--subsystem,native
-
-SOURCES = \
-	driver.c \
-	driver2.c \
-	driver3.c \
-	driver_netio.c \
-	driver_pnp.c \
-	ntoskrnl.c
+all:
+all clean check test testclean i386-windows/driver.o i386-windows/driver.dll i386-windows/driver2.o \
+  i386-windows/driver2.dll i386-windows/driver3.o i386-windows/driver3.dll \
+  i386-windows/driver_netio.o i386-windows/driver_netio.dll i386-windows/driver_pnp.o \
+  i386-windows/driver_pnp.dll i386-windows/ntoskrnl.exe_test-stripped.exe i386-windows/ntoskrnl.ok \
+  i386-windows/ntoskrnl.o i386-windows/testlist.o i386-windows/driver.dll.res \
+  i386-windows/driver2.dll.res i386-windows/driver3.dll.res i386-windows/driver_netio.dll.res \
+  i386-windows/driver_pnp.dll.res i386-windows/ntoskrnl.exe_test.exe:
+	@cd ../../.. && $(MAKE) dlls/ntoskrnl.exe/tests/$@
+.PHONY: all clean check test testclean

@@ -1,7 +1,6 @@
-MODULE    = ping.exe
-IMPORTS   = ws2_32 iphlpapi
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole
-
-SOURCES = \
-	ping_main.c
+all:
+all install install-lib clean i386-windows/ping_main.o i386-windows/ping.exe:
+	@cd ../.. && $(MAKE) programs/ping/$@
+.PHONY: all install install-lib clean

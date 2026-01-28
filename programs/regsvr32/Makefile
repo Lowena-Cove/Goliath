@@ -1,9 +1,7 @@
-MODULE    = regsvr32.exe
-IMPORTS   = ole32 user32 kernelbase
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mwindows -municode
-
-SOURCES = \
-	regsvr32.c \
-	regsvr32.man.in \
-	regsvr32.rc
+all:
+all install install-lib clean regsvr32.res regsvr32.man i386-windows/regsvr32.o \
+  i386-windows/regsvr32.exe regsvr32.pot:
+	@cd ../.. && $(MAKE) programs/regsvr32/$@
+.PHONY: all install install-lib clean

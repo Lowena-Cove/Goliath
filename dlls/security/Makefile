@@ -1,7 +1,6 @@
-MODULE    = security.dll
-IMPORTS   = secur32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--data-only
-
-SOURCES = \
-	security.spec
+all:
+all install install-lib clean i386-windows/security.dll:
+	@cd ../.. && $(MAKE) dlls/security/$@
+.PHONY: all install install-lib clean

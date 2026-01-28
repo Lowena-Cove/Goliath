@@ -1,6 +1,6 @@
-MODULE    = netsh.exe
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole -municode
-
-SOURCES = \
-	netsh.c
+all:
+all install install-lib clean i386-windows/netsh.o i386-windows/netsh.exe:
+	@cd ../.. && $(MAKE) programs/netsh/$@
+.PHONY: all install install-lib clean

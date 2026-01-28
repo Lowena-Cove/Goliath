@@ -1,6 +1,6 @@
-MODULE    = msnet32.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	msnet_main.c
+all:
+all install install-lib clean i386-windows/msnet_main.o i386-windows/msnet32.dll:
+	@cd ../.. && $(MAKE) dlls/msnet32/$@
+.PHONY: all install install-lib clean

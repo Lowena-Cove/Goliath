@@ -1,16 +1,9 @@
-MODULE    = d3d8.dll
-IMPORTLIB = d3d8
-IMPORTS   = dxguid uuid wined3d
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	buffer.c \
-	d3d8_main.c \
-	device.c \
-	directx.c \
-	shader.c \
-	surface.c \
-	swapchain.c \
-	texture.c \
-	version.rc \
-	vertexdeclaration.c \
-	volume.c
+all:
+all install install-lib install-dev clean libd3d8.a i386-windows/libd3d8.a version.res \
+  i386-windows/buffer.o i386-windows/d3d8_main.o i386-windows/device.o i386-windows/directx.o \
+  i386-windows/shader.o i386-windows/surface.o i386-windows/swapchain.o i386-windows/texture.o \
+  i386-windows/vertexdeclaration.o i386-windows/volume.o i386-windows/d3d8.dll:
+	@cd ../.. && $(MAKE) dlls/d3d8/$@
+.PHONY: all install install-lib install-dev clean

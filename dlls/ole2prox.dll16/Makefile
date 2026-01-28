@@ -1,2 +1,6 @@
-MODULE    = ole2prox.dll16
-EXTRADLLFLAGS = -m16 -Wb,--main-module,ole32.dll
+# Auto-generated stub makefile; all rules forward to the top-level makefile
+
+all:
+all install install-lib clean i386-windows/ole2prox.dll16:
+	@cd ../.. && $(MAKE) dlls/ole2prox.dll16/$@
+.PHONY: all install install-lib clean

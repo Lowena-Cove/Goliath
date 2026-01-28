@@ -1,19 +1,6 @@
-PROGRAMS = winegcc
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	utils.c \
-	winegcc.c \
-	winegcc.man.in
-
-winegcc_SYMLINKS = winecpp wineg++
-
-winegcc_EXTRADEFS = \
-	-DINCLUDEDIR="\"${includedir}\"" \
-	-DBINDIR="\"${bindir}\"" \
-	-DLIBDIR="\"${libdir}\"" \
-	-DCC="\"$(CC)\"" \
-	-DCPP="\"$(CPPBIN)\"" \
-	-DCXX="\"$(CXX)\"" \
-	-DLD="\"$(LD)\""
-
-INSTALL_DEV = $(PROGRAMS) $(winegcc_SYMLINKS)
+all:
+all install install-dev clean utils.o winegcc.o winegcc.man winegcc winecpp wineg++:
+	@cd ../.. && $(MAKE) tools/winegcc/$@
+.PHONY: all install install-dev clean

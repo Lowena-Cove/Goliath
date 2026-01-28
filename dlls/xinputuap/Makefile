@@ -1,7 +1,6 @@
-MODULE    = xinputuap.dll
-IMPORTS   = hid setupapi advapi32 user32
-PARENTSRC = ../xinput1_3
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c \
-	version.rc
+all:
+all install install-lib clean version.res i386-windows/main.o i386-windows/xinputuap.dll:
+	@cd ../.. && $(MAKE) dlls/xinputuap/$@
+.PHONY: all install install-lib clean

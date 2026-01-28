@@ -1,7 +1,6 @@
-MODULE    = sc.exe
-IMPORTS   = advapi32
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole -municode
-
-SOURCES = \
-	sc.c
+all:
+all install install-lib clean i386-windows/sc.o i386-windows/sc.exe:
+	@cd ../.. && $(MAKE) programs/sc/$@
+.PHONY: all install install-lib clean

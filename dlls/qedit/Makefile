@@ -1,11 +1,8 @@
-MODULE    = qedit.dll
-IMPORTS   = strmiids strmbase uuid oleaut32 ole32 advapi32 msvcrt
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	main.c \
-	mediadet.c \
-	nullrenderer.c \
-	qedit_classes.idl \
-	samplegrabber.c \
-	timeline.c \
-	version.rc
+all:
+all install install-lib clean version.res i386-windows/main.o i386-windows/mediadet.o \
+  i386-windows/nullrenderer.o i386-windows/samplegrabber.o i386-windows/timeline.o \
+  i386-windows/qedit_classes_r.res i386-windows/qedit.dll:
+	@cd ../.. && $(MAKE) dlls/qedit/$@
+.PHONY: all install install-lib clean

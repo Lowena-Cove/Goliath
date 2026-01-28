@@ -1,6 +1,7 @@
-TESTDLL   = atl100.dll
-IMPORTS   = uuid atl100 oleaut32 ole32 advapi32 user32
-EXTRADEFS = -D_ATL_VER=_ATL_VER_100
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	atl.c
+all:
+all clean check test testclean i386-windows/atl100_test-stripped.exe i386-windows/atl.ok \
+  i386-windows/atl.o i386-windows/testlist.o i386-windows/atl100_test.exe:
+	@cd ../../.. && $(MAKE) dlls/atl100/tests/$@
+.PHONY: all clean check test testclean

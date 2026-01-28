@@ -1,9 +1,7 @@
-EXTRADEFS = -D_CONCRT=
-MODULE = concrt140.dll
-PARENTSRC = ../msvcrt
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	concrt140.c \
-	concurrency.c \
-	details.c \
-	exception_ptr.c
+all:
+all install install-lib clean i386-windows/concrt140.o i386-windows/concurrency.o \
+  i386-windows/details.o i386-windows/exception_ptr.o i386-windows/concrt140.dll:
+	@cd ../.. && $(MAKE) dlls/concrt140/$@
+.PHONY: all install install-lib clean

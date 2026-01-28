@@ -1,8 +1,7 @@
-MODULE    = directmanipulation.dll
-IMPORTS   = uuid
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	directmanip.idl \
-	directmanipulation.c
+all:
+all install install-lib clean i386-windows/directmanipulation.o i386-windows/directmanip_r.res \
+  i386-windows/directmanipulation.dll:
+	@cd ../.. && $(MAKE) dlls/directmanipulation/$@
+.PHONY: all install install-lib clean

@@ -1,6 +1,6 @@
-MODULE    = secedit.exe
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -mconsole
-
-SOURCES = \
-	main.c
+all:
+all install install-lib clean i386-windows/main.o i386-windows/secedit.exe:
+	@cd ../.. && $(MAKE) programs/secedit/$@
+.PHONY: all install install-lib clean

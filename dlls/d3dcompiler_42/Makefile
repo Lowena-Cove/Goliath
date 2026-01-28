@@ -1,18 +1,9 @@
-MODULE    = d3dcompiler_42.dll
-IMPORTS   = wined3d
-EXTRADEFS = -DD3D_COMPILER_VERSION=42
-PARENTSRC = ../d3dcompiler_43
-EXTRAINCL = $(VKD3D_PE_CFLAGS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-EXTRADLLFLAGS = -Wb,--prefer-native
-
-SOURCES = \
-	asmparser.c \
-	asmshader.l \
-	asmshader.y \
-	blob.c \
-	bytecodewriter.c \
-	compiler.c \
-	reflection.c \
-	utils.c \
-	version.rc
+all:
+all install install-lib clean asmshader.tab.h asmshader.yy.c asmshader.tab.c version.res \
+  i386-windows/asmparser.o i386-windows/blob.o i386-windows/bytecodewriter.o i386-windows/compiler.o \
+  i386-windows/reflection.o i386-windows/utils.o i386-windows/asmshader.yy.o \
+  i386-windows/asmshader.tab.o i386-windows/d3dcompiler_42.dll:
+	@cd ../.. && $(MAKE) dlls/d3dcompiler_42/$@
+.PHONY: all install install-lib clean
