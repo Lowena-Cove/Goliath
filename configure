@@ -1686,6 +1686,17 @@ enable_wmcodecdspuuid
 enable_xml2
 enable_xslt
 enable_zlib
+enable_atl_android
+enable_atl_runtime
+enable_darling_framework
+enable_goliath_core
+enable_ipasim
+enable_libretro
+enable_libretro_core
+enable_wsl
+enable_wsl_bridge
+enable_wsl_core
+enable_compatibility
 enable_loader
 enable_nls
 enable_po
@@ -22750,6 +22761,17 @@ wine_fn_config_makefile libs/wmcodecdspuuid enable_wmcodecdspuuid
 wine_fn_config_makefile libs/xml2 enable_xml2
 wine_fn_config_makefile libs/xslt enable_xslt
 wine_fn_config_makefile libs/zlib enable_zlib
+wine_fn_config_makefile libs/atl_android enable_atl_android
+wine_fn_config_makefile libs/atl_runtime enable_atl_runtime
+wine_fn_config_makefile libs/darling_framework enable_darling_framework
+wine_fn_config_makefile libs/goliath_core enable_goliath_core
+wine_fn_config_makefile libs/ipasim enable_ipasim
+wine_fn_config_makefile libs/libretro enable_libretro
+wine_fn_config_makefile libs/libretro_core enable_libretro_core
+wine_fn_config_makefile libs/wsl enable_wsl
+wine_fn_config_makefile libs/wsl_bridge enable_wsl_bridge
+wine_fn_config_makefile libs/wsl_core enable_wsl_core
+wine_fn_config_makefile libs/compatibility enable_compatibility
 wine_fn_config_makefile loader enable_loader
 wine_fn_config_makefile nls enable_nls
 wine_fn_config_makefile po enable_po

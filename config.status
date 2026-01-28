@@ -1745,6 +1745,17 @@ SUBDIRS =  \
 	libs/xml2 \
 	libs/xslt \
 	libs/zlib \
+	libs/atl_android \
+	libs/atl_runtime \
+	libs/darling_framework \
+	libs/goliath_core \
+	libs/ipasim \
+	libs/libretro \
+	libs/libretro_core \
+	libs/wsl \
+	libs/wsl_bridge \
+	libs/wsl_core \
+	libs/compatibility \
 	loader \
 	nls \
 	po \
@@ -2059,7 +2070,7 @@ tags ctags:
 dummy:
 .PHONY: dummy
 _WINE_EOF
-    as_fn_error 0 "could not create Makefile" "23681" 5
+    as_fn_error 0 "could not create Makefile" "23703" 5
 }
 
 

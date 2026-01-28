@@ -10,3 +10,28 @@
 /config.status
 include/config.h
 include/stamp-h
+
+# Build artifacts
+*.o
+*.a
+*.so
+*.dll.so
+*.exe.so
+configure~
+tools/makedep
+tools/gdbinit.py
+dlls/*/Makefile
+programs/*/Makefile
+server/Makefile
+tools/*/Makefile
+libs/*/Makefile
+
+# Editor files
+*~
+*.swp
+*.swo
+
+# Test artifacts
+*.ok
+*.test
+*.res
