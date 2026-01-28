@@ -268,6 +268,7 @@ BOOL adjust_window_rect( RECT *rect, DWORD style, BOOL menu, DWORD ex_style, UIN
              && !(sgi && !strcmp( sgi, "2563800" )) /* Bug 23342: The Last Game */
              && !(sgi && !strcmp( sgi, "1240440" )) /* Bug 23802: Halo Infinite */
              && !(sgi && !strcmp( sgi, "613830" ))  /* Bug 25747: CHRONO TRIGGER */
+             && !(sgi && !strcmp( sgi, "3077660" )) /* Bug 26235: Mystery Manor: Hidden Objects */
             )
             return TRUE;
     }
@@ -497,7 +498,7 @@ static LONG handle_window_pos_changing( HWND hwnd, WINDOWPOS *winpos )
         /* HACK: This code changes the window's size to fit the display. However,
          * some games (Bayonetta, Dragon's Dogma) will then have the incorrect
          * render size. So just let windows be too big to fit the display. */
-        if (!user_driver->pHasWindowManager( "steamcompmgr" ))
+        if (disable_gamescope_max_size_hack() || !user_driver->pHasWindowManager( "steamcompmgr" ))
         {
             winpos->cx = min( winpos->cx, info.ptMaxTrackSize.x );
             winpos->cy = min( winpos->cy, info.ptMaxTrackSize.y );

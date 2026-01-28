@@ -22,17 +22,24 @@
 
 #include <stdarg.h>
 
+#include "ntstatus.h"
+#define WIN32_NO_STATUS
+#include "winerror.h"
+#include "winternl.h"
 #define COBJMACROS
 #include "corerror.h"
 #include "windef.h"
 #include "winbase.h"
 #include "winstring.h"
+#include "winuser.h"
 #include "objbase.h"
 
 #include "activation.h"
 
 #define WIDL_using_Windows_Foundation
 #define WIDL_using_Windows_Foundation_Collections
+#define WIDL_using_Windows_Storage_Streams
+#define WIDL_using_Windows_Foundation
 #include "windows.foundation.h"
 #define WIDL_using_Windows_Globalization
 #include "windows.globalization.h"
@@ -42,6 +49,8 @@
 #include "windows.media.speechrecognition.h"
 
 #include "wine/list.h"
+
+#define SPERR_WINRT_INTERNAL_ERROR 0x800455a0
 
 /*
  *

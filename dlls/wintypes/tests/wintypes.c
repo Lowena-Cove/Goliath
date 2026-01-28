@@ -32,9 +32,260 @@
 #include "windows.foundation.metadata.h"
 #include "wintypes_test.h"
 
+#define WIDL_using_Windows_Storage_Streams
+#include "windows.storage.streams.h"
+
+#include "robuffer.h"
+
 #include "wine/test.h"
 
 static BOOL is_wow64;
+
+#define check_interface(obj, iid, supported) check_interface_(__LINE__, obj, iid, supported)
+static void check_interface_(unsigned int line, void *obj, const IID *iid, BOOL supported)
+{
+    HRESULT hr, expected_hr;
+    IUnknown *iface = obj;
+    IUnknown *unk;
+
+    expected_hr = supported ? S_OK : E_NOINTERFACE;
+    hr = IUnknown_QueryInterface(iface, iid, (void **)&unk);
+    ok_(__FILE__, line)(hr == expected_hr, "Got hr %#lx.\n", hr);
+    if (SUCCEEDED(hr))
+        IUnknown_Release(unk);
+}
+
+static void test_interfaces(void)
+{
+    static WCHAR class_name[1024];
+    IActivationFactory *factory;
+    IUnknown *unk;
+    HSTRING str;
+    HRESULT hr;
+
+    hr = RoInitialize(RO_INIT_MULTITHREADED);
+    ok(hr == S_OK, "Got hr %#lx.\n", hr);
+
+    wcscpy(class_name, L"Windows.Foundation.Metadata.ApiInformation");
+    hr = WindowsCreateString(class_name, wcslen(class_name), &str);
+    ok(hr == S_OK, "Got hr %#lx.\n", hr);
+    hr = RoGetActivationFactory(str, &IID_IActivationFactory, (void **)&factory);
+    ok(hr == S_OK || broken(hr == REGDB_E_CLASSNOTREG) /* pre-win8 */, "Got hr %#lx.\n", hr);
+    if (hr == S_OK)
+    {
+        check_interface(factory, &IID_IUnknown, TRUE);
+        check_interface(factory, &IID_IInspectable, TRUE);
+        check_interface(factory, &IID_IAgileObject, TRUE);
+        check_interface(factory, &IID_IActivationFactory, TRUE);
+        check_interface(factory, &IID_IApiInformationStatics, TRUE);
+        check_interface(factory, &IID_IPropertyValueStatics, FALSE);
+        IActivationFactory_Release(factory);
+    }
+    else
+        win_skip("%s runtimeclass not registered, skipping tests.\n", wine_dbgstr_w(class_name));
+    WindowsDeleteString(str);
+
+    wcscpy(class_name, L"Windows.Foundation.PropertyValue");
+    hr = WindowsCreateString(class_name, wcslen(class_name), &str);
+    ok(hr == S_OK, "Got hr %#lx.\n", hr);
+    hr = RoGetActivationFactory(str, &IID_IActivationFactory, (void **)&factory);
+    ok(hr == S_OK, "Got hr %#lx.\n", hr);
+    check_interface(factory, &IID_IUnknown, TRUE);
+    check_interface(factory, &IID_IInspectable, TRUE);
+    check_interface(factory, &IID_IAgileObject, TRUE);
+    check_interface(factory, &IID_IActivationFactory, TRUE);
+    check_interface(factory, &IID_IApiInformationStatics, FALSE);
+    check_interface(factory, &IID_IPropertyValueStatics, TRUE);
+    IActivationFactory_Release(factory);
+    WindowsDeleteString(str);
+
+    wcscpy(class_name, L"Windows.Storage.Streams.DataWriter");
+    hr = WindowsCreateString(class_name, wcslen(class_name), &str);
+    ok(hr == S_OK, "Got hr %#lx.\n", hr);
+    hr = RoGetActivationFactory(str, &IID_IActivationFactory, (void **)&factory);
+    ok(hr == S_OK, "Got hr %#lx.\n", hr);
+    check_interface(factory, &IID_IUnknown, TRUE);
+    check_interface(factory, &IID_IInspectable, TRUE);
+    check_interface(factory, &IID_IAgileObject, TRUE);
+    check_interface(factory, &IID_IActivationFactory, TRUE);
+    todo_wine check_interface(factory, &IID_IDataWriterFactory, TRUE);
+    check_interface(factory, &IID_IRandomAccessStreamReferenceStatics, FALSE);
+    check_interface(factory, &IID_IApiInformationStatics, FALSE);
+    check_interface(factory, &IID_IPropertyValueStatics, FALSE);
+    IActivationFactory_Release(factory);
+    WindowsDeleteString(str);
+
+    wcscpy(class_name, L"Windows.Storage.Streams.RandomAccessStreamReference");
+    hr = WindowsCreateString(class_name, wcslen(class_name), &str);
+    ok(hr == S_OK, "Got hr %#lx.\n", hr);
+    hr = RoGetActivationFactory(str, &IID_IActivationFactory, (void **)&factory);
+    ok(hr == S_OK, "Got hr %#lx.\n", hr);
+    check_interface(factory, &IID_IUnknown, TRUE);
+    check_interface(factory, &IID_IInspectable, TRUE);
+    hr = IActivationFactory_QueryInterface(factory, &IID_IAgileObject, (void **)&unk);
+    ok(hr == S_OK || broken(hr == E_NOINTERFACE) /* pre win10 v1809 */, "Got hr %#lx.\n", hr);
+    if (SUCCEEDED(hr)) IUnknown_Release(unk);
+    check_interface(factory, &IID_IActivationFactory, TRUE);
+    check_interface(factory, &IID_IDataWriterFactory, FALSE);
+    check_interface(factory, &IID_IRandomAccessStreamReferenceStatics, TRUE);
+    check_interface(factory, &IID_IApiInformationStatics, FALSE);
+    check_interface(factory, &IID_IPropertyValueStatics, FALSE);
+    IActivationFactory_Release(factory);
+    WindowsDeleteString(str);
+
+    RoUninitialize();
+}
+
+static void test_IBufferStatics(void)
+{
+    static const WCHAR *class_name = L"Windows.Storage.Streams.Buffer";
+    IBufferByteAccess *buffer_byte_access = NULL;
+    IBufferFactory *buffer_factory = NULL;
+    IActivationFactory *factory = NULL;
+    UINT32 capacity, length;
+    IBuffer *buffer = NULL;
+    HSTRING str;
+    HRESULT hr;
+    BYTE *data;
+
+    hr = RoInitialize(RO_INIT_MULTITHREADED);
+    ok(hr == S_OK, "RoInitialize failed, hr %#lx.\n", hr);
+
+    hr = WindowsCreateString(class_name, wcslen(class_name), &str);
+    ok(hr == S_OK, "WindowsCreateString failed, hr %#lx.\n", hr);
+
+    hr = RoGetActivationFactory(str, &IID_IActivationFactory, (void **)&factory);
+    ok(hr == S_OK || broken(hr == REGDB_E_CLASSNOTREG), "RoGetActivationFactory failed, hr %#lx.\n", hr);
+    WindowsDeleteString(str);
+    if (hr == REGDB_E_CLASSNOTREG)
+    {
+        win_skip("%s runtimeclass not registered, skipping tests.\n", wine_dbgstr_w(class_name));
+        RoUninitialize();
+        return;
+    }
+
+    check_interface(factory, &IID_IUnknown, TRUE);
+    check_interface(factory, &IID_IInspectable, TRUE);
+    check_interface(factory, &IID_IAgileObject, TRUE);
+    check_interface(factory, &IID_IBufferByteAccess, FALSE);
+
+    hr = IActivationFactory_QueryInterface(factory, &IID_IBufferFactory, (void **)&buffer_factory);
+    ok(hr == S_OK, "QueryInterface IID_IBufferFactory failed, hr %#lx.\n", hr);
+
+    if (0) /* Crash on Windows */
+    {
+    hr = IBufferFactory_Create(buffer_factory, 0, NULL);
+    ok(hr == E_INVALIDARG, "IBufferFactory_Create failed, hr %#lx.\n", hr);
+    }
+
+    hr = IBufferFactory_Create(buffer_factory, 0, &buffer);
+    ok(hr == S_OK, "IBufferFactory_Create failed, hr %#lx.\n", hr);
+
+    check_interface(buffer, &IID_IAgileObject, TRUE);
+
+    if (0) /* Crash on Windows */
+    {
+    hr = IBuffer_get_Capacity(buffer, NULL);
+    ok(hr == E_INVALIDARG, "IBuffer_get_Capacity failed, hr %#lx.\n", hr);
+    }
+
+    capacity = 0xdeadbeef;
+    hr = IBuffer_get_Capacity(buffer, &capacity);
+    ok(hr == S_OK, "IBuffer_get_Capacity failed, hr %#lx.\n", hr);
+    ok(capacity == 0, "IBuffer_get_Capacity returned capacity %u.\n", capacity);
+
+    if (0) /* Crash on Windows */
+    {
+    hr = IBuffer_get_Length(buffer, NULL);
+    ok(hr == E_INVALIDARG, "IBuffer_get_Length failed, hr %#lx.\n", hr);
+    }
+
+    length = 0xdeadbeef;
+    hr = IBuffer_get_Length(buffer, &length);
+    ok(hr == S_OK, "IBuffer_get_Length failed, hr %#lx.\n", hr);
+    ok(length == 0, "IBuffer_get_Length returned length %u.\n", length);
+
+    hr = IBuffer_put_Length(buffer, 1);
+    ok(hr == E_INVALIDARG, "IBuffer_put_Length failed, hr %#lx.\n", hr);
+
+    hr = IBuffer_QueryInterface(buffer, &IID_IBufferByteAccess, (void **)&buffer_byte_access);
+    ok(hr == S_OK, "QueryInterface IID_IBufferByteAccess failed, hr %#lx.\n", hr);
+
+    check_interface(buffer_byte_access, &IID_IInspectable, TRUE);
+    check_interface(buffer_byte_access, &IID_IAgileObject, TRUE);
+    check_interface(buffer_byte_access, &IID_IBuffer, TRUE);
+
+    if (0) /* Crash on Windows */
+    {
+    hr = IBufferByteAccess_Buffer(buffer_byte_access, NULL);
+    ok(hr == E_INVALIDARG, "IBufferByteAccess_Buffer failed, hr %#lx.\n", hr);
+    }
+
+    data = NULL;
+    hr = IBufferByteAccess_Buffer(buffer_byte_access, &data);
+    ok(hr == S_OK, "IBufferByteAccess_Buffer failed, hr %#lx.\n", hr);
+    ok(data != NULL, "IBufferByteAccess_Buffer returned NULL data.\n");
+
+    IBufferByteAccess_Release(buffer_byte_access);
+    IBuffer_Release(buffer);
+
+    hr = IBufferFactory_Create(buffer_factory, 100, &buffer);
+    ok(hr == S_OK, "IBufferFactory_Create failed, hr %#lx.\n", hr);
+
+    capacity = 0;
+    hr = IBuffer_get_Capacity(buffer, &capacity);
+    ok(hr == S_OK, "IBuffer_get_Capacity failed, hr %#lx.\n", hr);
+    ok(capacity == 100, "IBuffer_get_Capacity returned capacity %u.\n", capacity);
+
+    length = 0xdeadbeef;
+    hr = IBuffer_get_Length(buffer, &length);
+    ok(hr == S_OK, "IBuffer_get_Length failed, hr %#lx.\n", hr);
+    ok(length == 0, "IBuffer_get_Length returned length %u.\n", length);
+
+    hr = IBuffer_put_Length(buffer, 1);
+    ok(hr == S_OK, "IBuffer_put_Length failed, hr %#lx.\n", hr);
+    length = 0xdeadbeef;
+    hr = IBuffer_get_Length(buffer, &length);
+    ok(hr == S_OK, "IBuffer_get_Length failed, hr %#lx.\n", hr);
+    ok(length == 1, "IBuffer_get_Length returned length %u.\n", length);
+
+    hr = IBuffer_put_Length(buffer, 100 + 1);
+    ok(hr == E_INVALIDARG, "IBuffer_put_Length failed, hr %#lx.\n", hr);
+
+    hr = IBuffer_put_Length(buffer, 100);
+    ok(hr == S_OK, "IBuffer_put_Length failed, hr %#lx.\n", hr);
+    length = 0;
+    hr = IBuffer_get_Length(buffer, &length);
+    ok(hr == S_OK, "IBuffer_get_Length failed, hr %#lx.\n", hr);
+    ok(length == 100, "IBuffer_get_Length returned length %u.\n", length);
+
+    hr = IBuffer_QueryInterface(buffer, &IID_IBufferByteAccess, (void **)&buffer_byte_access);
+    ok(hr == S_OK, "QueryInterface IID_IBufferByteAccess failed, hr %#lx.\n", hr);
+
+    hr = IBufferByteAccess_Buffer(buffer_byte_access, &data);
+    ok(hr == S_OK, "IBufferByteAccess_Buffer failed, hr %#lx.\n", hr);
+
+    /* Windows does not zero out data when changing Length */
+
+    hr = IBuffer_put_Length(buffer, 0);
+    ok(hr == S_OK, "IBuffer_put_Length failed, hr %#lx.\n", hr);
+    data[0] = 1;
+    data[10] = 10;
+    length = 0xdeadbeef;
+    hr = IBuffer_get_Length(buffer, &length);
+    ok(hr == S_OK, "IBuffer_get_Length failed, hr %#lx.\n", hr);
+    ok(length == 0, "IBuffer_get_Length returned length %u.\n", length);
+    hr = IBuffer_put_Length(buffer, 1);
+    ok(hr == S_OK, "IBuffer_put_Length failed, hr %#lx.\n", hr);
+    ok(data[0] == 1, "Buffer returned %#x.\n", data[0]);
+    ok(data[10] == 10, "Buffer returned %#x.\n", data[10]);
+
+    IBufferByteAccess_Release(buffer_byte_access);
+    IBuffer_Release(buffer);
+    IBufferFactory_Release(buffer_factory);
+    IActivationFactory_Release(factory);
+    RoUninitialize();
+}
 
 static void test_IApiInformationStatics(void)
 {
@@ -965,7 +1216,9 @@ START_TEST(wintypes)
 {
     IsWow64Process(GetCurrentProcess(), &is_wow64);
 
+    test_interfaces();
     test_IApiInformationStatics();
+    test_IBufferStatics();
     test_IPropertyValueStatics();
     test_RoParseTypeName();
     test_RoResolveNamespace();

@@ -2618,7 +2618,7 @@ static HWND *list_children_from_point( HWND hwnd, POINT pt, UINT dpi )
  *
  * Find the window and hittest for a given point.
  */
-HWND window_from_point( HWND hwnd, POINT pt, INT *hittest )
+HWND window_from_point( HWND hwnd, POINT pt, INT *hittest, BOOL send_nchittest )
 {
     int i, res;
     HWND ret, *list;
@@ -2645,7 +2645,7 @@ HWND window_from_point( HWND hwnd, POINT pt, INT *hittest )
             break;
         }
         /* Send WM_NCCHITTEST (if same thread) */
-        if (!is_current_thread_window( list[i] ))
+        if (!send_nchittest || !is_current_thread_window( list[i] ))
         {
             *hittest = HTCLIENT;
             break;
@@ -2672,7 +2672,7 @@ HWND WINAPI NtUserWindowFromPoint( LONG x, LONG y )
 {
     POINT pt = { .x = x, .y = y };
     INT hittest;
-    return window_from_point( 0, pt, &hittest );
+    return window_from_point( 0, pt, &hittest, TRUE );
 }
 
 /*******************************************************************
@@ -4703,8 +4703,17 @@ static BOOL show_window( HWND hwnd, INT cmd )
     BOOL show_flag = TRUE;
     RECT newPos = {0, 0, 0, 0};
     UINT new_swp, swp = 0, context;
+    const char *sgi;
 
     TRACE( "hwnd=%p, cmd=%d, was_visible %d\n", hwnd, cmd, was_visible );
+
+    /* Batman: Arkham City minimises its main window while the splash window is shown, but under gamescope, the
+     * game then restores the window and it becomes the foreground, resulting in broken splash display. The game
+     * later calls ShowWindow() with SW_SHOWNORMAL, so it's safe to suppress the restoration. CW-Bug-Id: #25955 */
+    if (cmd == SW_RESTORE
+            && user_driver->pHasWindowManager( "steamcompmgr" )
+            && (sgi = getenv( "SteamGameId" )) && !strcmp( sgi, "200260" ))
+        return was_visible;
 
     context = set_thread_dpi_awareness_context( get_window_dpi_awareness_context( hwnd ));
 
@@ -5562,6 +5571,53 @@ static void map_dpi_create_struct( CREATESTRUCTW *cs, UINT dpi_to )
     cs->cy = rect.bottom - rect.top;
 }
 
+int disable_gamescope_max_size_hack(void)
+{
+    static int cached = -1;
+
+    if (cached == -1)
+    {
+        const char *s = getenv( "WINE_DISABLE_GAMESCOPE_MAX_SIZE_HACK" );
+
+        cached = s && *s != '0';
+    }
+
+    return cached;
+}
+
+static void style_fixup_workarounds( CREATESTRUCTW *cs, unsigned int class_name_len )
+{
+    static const WCHAR BlockClickMASKWndW[] = {'B','l','o','c','k','C','l','i','c','k','M','A','S','K','W','n','d'};
+    static const struct
+    {
+        const WCHAR *class_name;
+        const char *wm;
+        const char *game_id;
+        unsigned exstyle;
+    }
+    workarounds[] =
+    {
+        { BlockClickMASKWndW, "steamcompmgr", "3839850", WS_EX_NOACTIVATE },
+    };
+    const char *sgi = getenv( "SteamGameId" );
+    unsigned int i;
+
+    if (cs->lpszClass == (LPCWSTR)DESKTOP_CLASS_ATOM) return;
+
+    for (i = 0; i < ARRAY_SIZE(workarounds); ++i)
+    {
+        if ((!workarounds[i].wm || user_driver->pHasWindowManager( workarounds[i].wm ))
+            && (!workarounds[i].game_id || (sgi && !strcmp( sgi, workarounds[i].game_id )))
+            && (!workarounds[i].class_name ||
+                 (class_name_len == wcslen( workarounds[i].class_name ) * sizeof(WCHAR)
+                 && !memcmp( cs->lpszClass, workarounds[i].class_name, class_name_len ))))
+        {
+            FIXME( "HACK: adding %#x exstyle for %s.\n", workarounds[i].exstyle, debugstr_w( cs->lpszClass ));
+            cs->dwExStyle |= workarounds[i].exstyle;
+        }
+    }
+}
+
 /***********************************************************************
  *           NtUserCreateWindowEx (win32u.@)
  */
@@ -5595,6 +5651,8 @@ HWND WINAPI NtUserCreateWindowEx( DWORD ex_style, UNICODE_STRING *class_name,
     cs.y  = y;
     cs.cx = cx;
     cs.cy = cy;
+
+    style_fixup_workarounds( &cs, class_name->Length );
 
     /* Find the parent window */
     if (parent == HWND_MESSAGE)
@@ -5745,7 +5803,7 @@ HWND WINAPI NtUserCreateWindowEx( DWORD ex_style, UNICODE_STRING *class_name,
         /* HACK: This code changes the window's size to fit the display. However,
          * some games (Bayonetta, Dragon's Dogma) will then have the incorrect
          * render size. So just let windows be too big to fit the display. */
-        if (!user_driver->pHasWindowManager( "steamcompmgr" ))
+        if (disable_gamescope_max_size_hack() || !user_driver->pHasWindowManager( "steamcompmgr" ))
         {
             cx = min( cx, info.ptMaxTrackSize.x );
             cy = min( cy, info.ptMaxTrackSize.y );
@@ -6374,4 +6432,21 @@ HWND set_taskman_window( HWND hwnd )
     }
     SERVER_END_REQ;
     return hwnd;
+}
+
+/*****************************************************************
+ *           NtUserGetWindowDisplayAffinity (win32u.@)
+ */
+BOOL WINAPI NtUserGetWindowDisplayAffinity( HWND hwnd, DWORD *affinity )
+{
+    FIXME("(%p, %p): stub\n", hwnd, affinity);
+
+    if (!hwnd || !affinity)
+    {
+        RtlSetLastWin32Error(hwnd ? ERROR_NOACCESS : ERROR_INVALID_WINDOW_HANDLE);
+        return FALSE;
+    }
+
+    *affinity = WDA_NONE;
+    return TRUE;
 }

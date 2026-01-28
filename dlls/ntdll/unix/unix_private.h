@@ -201,6 +201,7 @@ extern BOOL localsystem_sid;
 extern BOOL simulate_writecopy;
 extern long long ram_reporting_bias;
 extern BOOL wine_allocs_2g_limit;
+extern char *release_reserved_memory_low_bound;
 
 extern void init_environment(void);
 extern void init_startup_info(void);
@@ -212,7 +213,7 @@ extern char *get_alternate_wineloader( WORD machine );
 extern NTSTATUS exec_wineloader( char **argv, int socketfd, const struct pe_image_info *pe_info );
 extern NTSTATUS load_builtin( const struct pe_image_info *image_info, WCHAR *filename, USHORT machine,
                               SECTION_IMAGE_INFORMATION *info, void **module, SIZE_T *size,
-                              ULONG_PTR limit_low, ULONG_PTR limit_high );
+                              ULONG_PTR limit_low, ULONG_PTR limit_high, off_t offset  );
 extern BOOL is_builtin_path( const UNICODE_STRING *path, WORD *machine );
 extern NTSTATUS load_main_exe( const WCHAR *name, const char *unix_name, const WCHAR *curdir,
                                USHORT load_machine, WCHAR **image, void **module );
@@ -289,7 +290,7 @@ extern ULONG_PTR get_system_affinity_mask(void);
 extern void virtual_get_system_info( SYSTEM_BASIC_INFORMATION *info, BOOL wow64 );
 extern NTSTATUS virtual_map_builtin_module( HANDLE mapping, void **module, SIZE_T *size,
                                             SECTION_IMAGE_INFORMATION *info, ULONG_PTR limit_low,
-                                            ULONG_PTR limit_high, WORD machine, BOOL prefer_native );
+                                            ULONG_PTR limit_high, WORD machine, BOOL prefer_native, off_t offset );
 extern NTSTATUS virtual_map_module( HANDLE mapping, void **module, SIZE_T *size,
                                     SECTION_IMAGE_INFORMATION *info, ULONG_PTR limit_low,
                                     ULONG_PTR limit_high, USHORT machine );
@@ -604,7 +605,5 @@ static inline NTSTATUS map_section( HANDLE mapping, void **ptr, SIZE_T *size, UL
     return NtMapViewOfSection( mapping, NtCurrentProcess(), ptr, user_space_wow_limit,
                                0, NULL, size, ViewShare, 0, protect );
 }
-
-BOOL WINAPI __wine_needs_override_large_address_aware(void);
 
 #endif /* __NTDLL_UNIX_PRIVATE_H */

@@ -62,6 +62,7 @@ AC_ARG_WITH(udev,      AS_HELP_STRING([--without-udev],[do not use udev (plug an
 AC_ARG_WITH(unwind,    AS_HELP_STRING([--without-unwind],[do not use the libunwind library (exception handling)]))
 AC_ARG_WITH(usb,       AS_HELP_STRING([--without-usb],[do not use the libusb library]))
 AC_ARG_WITH(v4l2,      AS_HELP_STRING([--without-v4l2],[do not use v4l2 (video capture)]))
+AC_ARG_WITH(vosk,      AS_HELP_STRING([--without-vosk],[do not use Vosk]))
 AC_ARG_WITH(vulkan,    AS_HELP_STRING([--without-vulkan],[do not use Vulkan]))
 AC_ARG_WITH(wayland,   AS_HELP_STRING([--without-wayland],[do not build the Wayland driver]))
 AC_ARG_WITH(xcomposite,AS_HELP_STRING([--without-xcomposite],[do not use the Xcomposite extension]),
@@ -446,7 +447,8 @@ AC_CHECK_HEADERS(\
 	syscall.h \
 	utime.h \
 	valgrind/memcheck.h \
-	valgrind/valgrind.h
+	valgrind/valgrind.h \
+	vosk_api.h
 )
 AC_HEADER_MAJOR()
 
@@ -1886,6 +1888,14 @@ then
     WINE_WARNING([No sound system was found. Windows applications will be silent.])
 fi
 
+dnl **** Check for Vosk ****
+if test x$with_vosk != xno
+then
+    WINE_CHECK_SONAME(vosk,vosk_recognizer_new)
+fi
+WINE_NOTICE_WITH(vosk,[test x$ac_cv_lib_soname_vosk = x],
+                 [libvosk ${notice_platform}development files not found, speech recognition won't be supported.])
+
 dnl *** Check for Vulkan ***
 if test "x$with_vulkan" != "xno"
 then
@@ -2721,6 +2731,7 @@ WINE_CONFIG_MAKEFILE(dlls/fontsub)
 WINE_CONFIG_MAKEFILE(dlls/fusion)
 WINE_CONFIG_MAKEFILE(dlls/fusion/tests)
 WINE_CONFIG_MAKEFILE(dlls/fwpuclnt)
+WINE_CONFIG_MAKEFILE(dlls/gameinput)
 WINE_CONFIG_MAKEFILE(dlls/gameux)
 WINE_CONFIG_MAKEFILE(dlls/gameux/tests)
 WINE_CONFIG_MAKEFILE(dlls/gamingtcui)
@@ -3179,6 +3190,7 @@ WINE_CONFIG_MAKEFILE(dlls/taskschd)
 WINE_CONFIG_MAKEFILE(dlls/taskschd/tests)
 WINE_CONFIG_MAKEFILE(dlls/tbs)
 WINE_CONFIG_MAKEFILE(dlls/tdh)
+WINE_CONFIG_MAKEFILE(dlls/tdh/tests)
 WINE_CONFIG_MAKEFILE(dlls/tdi.sys)
 WINE_CONFIG_MAKEFILE(dlls/threadpoolwinrt)
 WINE_CONFIG_MAKEFILE(dlls/threadpoolwinrt/tests)
@@ -3216,6 +3228,8 @@ WINE_CONFIG_MAKEFILE(dlls/uxtheme)
 WINE_CONFIG_MAKEFILE(dlls/uxtheme/tests)
 WINE_CONFIG_MAKEFILE(dlls/vbscript)
 WINE_CONFIG_MAKEFILE(dlls/vbscript/tests)
+WINE_CONFIG_MAKEFILE(dlls/vccorlib140)
+WINE_CONFIG_MAKEFILE(dlls/vccorlib140/tests)
 WINE_CONFIG_MAKEFILE(dlls/vcomp)
 WINE_CONFIG_MAKEFILE(dlls/vcomp/tests)
 WINE_CONFIG_MAKEFILE(dlls/vcomp100)
@@ -3302,6 +3316,8 @@ WINE_CONFIG_MAKEFILE(dlls/windows.security.credentials.ui.userconsentverifier)
 WINE_CONFIG_MAKEFILE(dlls/windows.security.credentials.ui.userconsentverifier/tests)
 WINE_CONFIG_MAKEFILE(dlls/windows.storage.applicationdata)
 WINE_CONFIG_MAKEFILE(dlls/windows.storage.applicationdata/tests)
+WINE_CONFIG_MAKEFILE(dlls/windows.storage)
+WINE_CONFIG_MAKEFILE(dlls/windows.storage/tests)
 WINE_CONFIG_MAKEFILE(dlls/windows.system.profile.systemmanufacturers)
 WINE_CONFIG_MAKEFILE(dlls/windows.system.profile.systemmanufacturers/tests)
 WINE_CONFIG_MAKEFILE(dlls/windows.ui)

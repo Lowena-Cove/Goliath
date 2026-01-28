@@ -2491,11 +2491,15 @@ static void fixup_effective_user_space_limit( const void **effective_user_space_
 
     if (cached == -1)
     {
+        const char *e = getenv( "PROTON_LIMIT_ADDRESS_SPACE" );
         const char *sgi = getenv( "SteamGameId" );
-        cached = sgi &&
+        if (e) cached = e[0] != '0';
+        else cached = sgi &&
             (
                 !strcmp( sgi, "3092660" )
+                || !strcmp( sgi, "3681810" )
             );
+        if (cached) FIXME( "fixing up effective user space limit.\n" );
     }
     if (cached)
         *effective_user_space_limit = min( *effective_user_space_limit, (void *)0x700000000000 );
@@ -3566,7 +3570,7 @@ static NTSTATUS map_image_view( struct file_view **view_ret, struct pe_image_inf
 static NTSTATUS virtual_map_image( HANDLE mapping, void **addr_ptr, SIZE_T *size_ptr, HANDLE shared_file,
                                    ULONG_PTR limit_low, ULONG_PTR limit_high, ULONG alloc_type,
                                    USHORT machine, struct pe_image_info *image_info,
-                                   WCHAR *filename, BOOL is_builtin )
+                                   WCHAR *filename, BOOL is_builtin, off_t offset )
 {
     int unix_fd = -1, needs_close;
     int shared_fd = -1, shared_needs_close = 0;
@@ -3574,6 +3578,9 @@ static NTSTATUS virtual_map_image( HANDLE mapping, void **addr_ptr, SIZE_T *size
     struct file_view *view;
     unsigned int status;
     sigset_t sigset;
+
+    if (offset >= size)
+        return STATUS_INVALID_PARAMETER;
 
     if ((status = server_get_unix_fd( mapping, 0, &unix_fd, &needs_close, NULL, NULL )))
         return status;
@@ -3605,6 +3612,11 @@ static NTSTATUS virtual_map_image( HANDLE mapping, void **addr_ptr, SIZE_T *size
     status = map_image_into_view( view, filename, unix_fd, image_info, machine, shared_fd, needs_close );
     if (status == STATUS_SUCCESS)
     {
+        if (offset)
+        {
+            free_pages( view, view->base, offset );
+            size -= offset;
+        }
         SERVER_START_REQ( map_image_view )
         {
             req->mapping = wine_server_obj_handle( mapping );
@@ -3612,13 +3624,14 @@ static NTSTATUS virtual_map_image( HANDLE mapping, void **addr_ptr, SIZE_T *size
             req->size    = size;
             req->entry   = image_info->entry_point;
             req->machine = image_info->machine;
+            req->offset  = offset;
             status = wine_server_call( req );
         }
         SERVER_END_REQ;
     }
     if (NT_SUCCESS(status))
     {
-        if (is_builtin) add_builtin_module( view->base, NULL );
+        if (is_builtin && !offset) add_builtin_module( view->base, NULL );
         *addr_ptr = view->base;
         *size_ptr = size;
         VIRTUAL_DEBUG_DUMP_VIEW( view );
@@ -3682,6 +3695,8 @@ static unsigned int virtual_map_section( HANDLE handle, PVOID *addr_ptr, ULONG_P
     res = get_mapping_info( handle, access, &sec_flags, &full_size, &shared_file, &image_info );
     if (res) return res;
 
+    offset.QuadPart = offset_ptr ? offset_ptr->QuadPart : 0;
+
     if (image_info)
     {
         SECTION_IMAGE_INFORMATION info;
@@ -3695,10 +3710,10 @@ static unsigned int virtual_map_section( HANDLE handle, PVOID *addr_ptr, ULONG_P
         filename = (WCHAR *)(image_info + 1);
         /* check if we can replace that mapping with the builtin */
         res = load_builtin( image_info, filename, machine, &info,
-                            addr_ptr, size_ptr, limit_low, limit_high );
+                            addr_ptr, size_ptr, limit_low, limit_high, offset.QuadPart );
         if (res == STATUS_IMAGE_ALREADY_LOADED)
             res = virtual_map_image( handle, addr_ptr, size_ptr, shared_file, limit_low, limit_high,
-                                     alloc_type, machine, image_info, filename, FALSE );
+                                     alloc_type, machine, image_info, filename, FALSE, offset.QuadPart );
         if (shared_file) NtClose( shared_file );
         free( image_info );
         if (NtCurrentTeb64()) NtCurrentTeb64()->Tib.ArbitraryUserPointer = prev;
@@ -3706,7 +3721,6 @@ static unsigned int virtual_map_section( HANDLE handle, PVOID *addr_ptr, ULONG_P
     }
 
     base = *addr_ptr;
-    offset.QuadPart = offset_ptr ? offset_ptr->QuadPart : 0;
     if (offset.QuadPart >= full_size) return STATUS_INVALID_PARAMETER;
     if (*size_ptr)
     {
@@ -3941,7 +3955,7 @@ void virtual_get_system_info( SYSTEM_BASIC_INFORMATION *info, BOOL wow64 )
  */
 NTSTATUS virtual_map_builtin_module( HANDLE mapping, void **module, SIZE_T *size,
                                      SECTION_IMAGE_INFORMATION *info, ULONG_PTR limit_low,
-                                     ULONG_PTR limit_high, WORD machine, BOOL prefer_native )
+                                     ULONG_PTR limit_high, WORD machine, BOOL prefer_native, off_t offset )
 {
     mem_size_t full_size;
     unsigned int sec_flags;
@@ -3973,7 +3987,7 @@ NTSTATUS virtual_map_builtin_module( HANDLE mapping, void **module, SIZE_T *size
     else
     {
         status = virtual_map_image( mapping, module, size, shared_file, limit_low, limit_high, 0,
-                                    machine, image_info, filename, TRUE );
+                                    machine, image_info, filename, TRUE, offset );
         virtual_fill_image_information( image_info, info );
     }
 
@@ -4007,11 +4021,11 @@ NTSTATUS virtual_map_module( HANDLE mapping, void **module, SIZE_T *size, SECTIO
     filename = (WCHAR *)(image_info + 1);
 
     /* check if we can replace that mapping with the builtin */
-    status = load_builtin( image_info, filename, machine, info, module, size, limit_low, limit_high );
+    status = load_builtin( image_info, filename, machine, info, module, size, limit_low, limit_high, 0 );
     if (status == STATUS_IMAGE_ALREADY_LOADED)
     {
         status = virtual_map_image( mapping, module, size, shared_file, limit_low, limit_high, 0,
-                                    machine, image_info, filename, FALSE );
+                                    machine, image_info, filename, FALSE, 0 );
         virtual_fill_image_information( image_info, info );
         if (status == STATUS_IMAGE_NOT_AT_BASE)
             info->TransferAddress = (char *)*module + image_info->entry_point;
@@ -5126,14 +5140,17 @@ static void free_reserved_memory( char *base, char *limit )
 static void virtual_release_address_space(void)
 {
 #ifndef __APPLE__  /* On macOS, we still want to free some of low memory, for OpenGL resources */
-    if (user_space_limit > (void *)limit_2g) return;
+    if (user_space_limit > (void *)limit_2g && !release_reserved_memory_low_bound) return;
 #endif
-    free_reserved_memory( (char *)0x20000000, (char *)0x7f000000 );
+    if (release_reserved_memory_low_bound)
+        ERR( "HACK: release_reserved_memory_low_bound %p.\n", release_reserved_memory_low_bound );
+    free_reserved_memory( release_reserved_memory_low_bound ? release_reserved_memory_low_bound : (char *)0x20000000,
+                          (char *)0x7f000000 );
 }
 
 #endif  /* _WIN64 */
 
-BOOL WINAPI __wine_needs_override_large_address_aware(void)
+static int need_override_large_address_aware(void)
 {
     static int needs_override = -1;
 
@@ -5141,7 +5158,7 @@ BOOL WINAPI __wine_needs_override_large_address_aware(void)
     {
         const char *str = getenv( "WINE_LARGE_ADDRESS_AWARE" );
 
-        needs_override = !str || atoi(str) == 1;
+        needs_override = !str /* on by default */ || atoi(str) == 1;
     }
     return needs_override;
 }
@@ -5149,7 +5166,7 @@ BOOL WINAPI __wine_needs_override_large_address_aware(void)
 static BOOL is_large_address_aware(void)
 {
     return (main_image_info.ImageCharacteristics & IMAGE_FILE_LARGE_ADDRESS_AWARE)
-           || __wine_needs_override_large_address_aware();
+           || need_override_large_address_aware();
 }
 
 /***********************************************************************
@@ -5651,7 +5668,7 @@ NTSTATUS WINAPI NtProtectVirtualMemory( HANDLE process, PVOID *addr_ptr, SIZE_T 
     if ((view = find_view( base, size )))
     {
         /* Make sure all the pages are committed */
-        if (get_committed_size( view, base, ~(size_t)0, &vprot, VPROT_COMMITTED ) >= size && (vprot & VPROT_COMMITTED))
+        if (get_committed_size( view, base, size, &vprot, VPROT_COMMITTED ) >= size && (vprot & VPROT_COMMITTED))
         {
             old = get_win32_prot( vprot, view->protect );
             status = set_protection( view, base, size, new_prot );

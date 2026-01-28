@@ -1085,6 +1085,48 @@ static NTSTATUS load_so_dll( void *args )
     return status;
 }
 
+
+/**********************************************************************
+ *      __wine_get_unix_env
+ */
+NTSTATUS WINAPI wine_get_unix_env( void *args )
+{
+    struct wine_get_unix_env_params *params = args;
+    unsigned int len;
+    char *s;
+
+    if (!(s = getenv( params->name ))) return STATUS_VARIABLE_NOT_FOUND;
+    len = strlen( s ) + 1;
+    if (len > params->buffer_len) return STATUS_BUFFER_TOO_SMALL;
+    memcpy( params->val, s, len );
+    return STATUS_SUCCESS;
+}
+
+
+/**********************************************************************
+ *      __wine_set_unix_env
+ */
+NTSTATUS WINAPI wine_set_unix_env( void *args )
+{
+    struct wine_set_unix_env_params *params = args;
+
+    if (!params->val) unsetenv( params->name );
+    else setenv( params->name, params->val, 1 );
+    return 0;
+}
+
+
+/**********************************************************************
+ *      __wine_dbg_ftrace
+ */
+static NTSTATUS unix__wine_dbg_ftrace( void *args )
+{
+    struct wine_dbg_ftrace_params *params = args;
+
+    return __wine_dbg_ftrace( params->str, params->len, params->ctx );
+}
+
+
 static void *steamclient_srcs[128];
 static void *steamclient_tgts[128];
 static int steamclient_count;
@@ -1262,6 +1304,9 @@ static const unixlib_entry_t unix_call_funcs[] =
     unixcall_wine_server_handle_to_fd,
     unixcall_wine_spawnvp,
     system_time_precise,
+    wine_get_unix_env,
+    wine_set_unix_env,
+    unix__wine_dbg_ftrace,
     steamclient_setup_trampolines,
     is_pc_in_native_so,
     debugstr_pc,
@@ -1272,6 +1317,49 @@ static const unixlib_entry_t unix_call_funcs[] =
 
 static NTSTATUS wow64_load_so_dll( void *args ) { return STATUS_INVALID_IMAGE_FORMAT; }
 static NTSTATUS wow64_unwind_builtin_dll( void *args ) { return STATUS_UNSUCCESSFUL; }
+
+static NTSTATUS wow64___wine_get_unix_env( void *args )
+{
+    struct
+    {
+        ULONG name;
+        ULONG val;
+        unsigned int buffer_len;
+    } const *params32 = args;
+    struct wine_get_unix_env_params params =
+    {
+        .name = ULongToPtr( params32->name ),
+        .val = ULongToPtr( params32->val ),
+        .buffer_len = params32->buffer_len,
+    };
+    return wine_get_unix_env( &params );
+}
+
+static NTSTATUS wow64___wine_set_unix_env( void *args )
+{
+    struct
+    {
+        ULONG name;
+        ULONG val;
+    } const *params32 = args;
+    struct wine_set_unix_env_params params =
+    {
+        .name = ULongToPtr( params32->name ),
+        .val = ULongToPtr( params32->val ),
+    };
+    return wine_set_unix_env( &params );
+}
+
+static NTSTATUS wow64___wine_dbg_ftrace( void *args )
+{
+    struct
+    {
+        ULONG str;
+        unsigned int len;
+        unsigned int ctx;
+    } const *params32 = args;
+    return __wine_dbg_ftrace( ULongToPtr( params32->str ), params32->len, params32->ctx );
+}
 
 static NTSTATUS wow64_steamclient_setup_trampolines( void *args )
 {
@@ -1308,6 +1396,9 @@ const unixlib_entry_t unix_call_wow64_funcs[] =
     wow64_wine_server_handle_to_fd,
     wow64_wine_spawnvp,
     system_time_precise,
+    wow64___wine_get_unix_env,
+    wow64___wine_set_unix_env,
+    wow64___wine_dbg_ftrace,
     wow64_steamclient_setup_trampolines,
     is_pc_in_native_so,
     wow64_debugstr_pc,
@@ -1413,7 +1504,7 @@ static NTSTATUS open_dll_file( const char *name, OBJECT_ATTRIBUTES *attr, HANDLE
 static NTSTATUS open_builtin_pe_file( const char *name, OBJECT_ATTRIBUTES *attr, void **module,
                                       SIZE_T *size, SECTION_IMAGE_INFORMATION *image_info,
                                       ULONG_PTR limit_low, ULONG_PTR limit_high,
-                                      WORD machine, BOOL prefer_native )
+                                      WORD machine, BOOL prefer_native, off_t offset )
 {
     NTSTATUS status;
     HANDLE mapping;
@@ -1423,7 +1514,7 @@ static NTSTATUS open_builtin_pe_file( const char *name, OBJECT_ATTRIBUTES *attr,
     if (!status)
     {
         status = virtual_map_builtin_module( mapping, module, size, image_info,
-                                             limit_low, limit_high, machine, prefer_native );
+                                             limit_low, limit_high, machine, prefer_native, offset );
         NtClose( mapping );
     }
     return status;
@@ -1467,7 +1558,7 @@ static NTSTATUS open_builtin_so_file( const char *name, OBJECT_ATTRIBUTES *attr,
 static NTSTATUS find_builtin_dll( UNICODE_STRING *nt_name, void **module, SIZE_T *size_ptr,
                                   SECTION_IMAGE_INFORMATION *image_info, ULONG_PTR limit_low,
                                   ULONG_PTR limit_high, USHORT search_machine,
-                                  USHORT load_machine, BOOL prefer_native )
+                                  USHORT load_machine, BOOL prefer_native, off_t offset )
 {
     unsigned int i, pos, namepos, maxlen = 0;
     unsigned int len = nt_name->Length / sizeof(WCHAR);
@@ -1506,7 +1597,7 @@ static NTSTATUS find_builtin_dll( UNICODE_STRING *nt_name, void **module, SIZE_T
         file[pos + len + 1] = 0;
         ptr = prepend_build_dir_path( file + pos, ".dll", pe_dir, "/dlls" );
         status = open_builtin_pe_file( ptr, &attr, module, size_ptr, image_info,
-                                       limit_low, limit_high, load_machine, prefer_native );
+                                       limit_low, limit_high, load_machine, prefer_native, offset );
         ptr = prepend_build_dir_path( file + pos, ".dll", "", "/dlls" );
         if (status != STATUS_DLL_NOT_FOUND) goto done;
         if (try_so)
@@ -1520,7 +1611,7 @@ static NTSTATUS find_builtin_dll( UNICODE_STRING *nt_name, void **module, SIZE_T
         file[pos + len + 1] = 0;
         ptr = prepend_build_dir_path( file + pos, ".exe", pe_dir, "/programs" );
         status = open_builtin_pe_file( ptr, &attr, module, size_ptr, image_info,
-                                       limit_low, limit_high, load_machine, prefer_native );
+                                       limit_low, limit_high, load_machine, prefer_native, offset );
         ptr = prepend_build_dir_path( file + pos, ".exe", "", "/programs" );
         if (status != STATUS_DLL_NOT_FOUND) goto done;
         if (try_so)
@@ -1538,7 +1629,7 @@ static NTSTATUS find_builtin_dll( UNICODE_STRING *nt_name, void **module, SIZE_T
         ptr = prepend( ptr, pe_dir, strlen(pe_dir) );
         ptr = prepend( ptr, dll_paths[i], strlen(dll_paths[i]) );
         status = open_builtin_pe_file( ptr, &attr, module, size_ptr, image_info, limit_low, limit_high,
-                                       load_machine, prefer_native );
+                                       load_machine, prefer_native, offset );
         /* use so dir for unix lib */
         ptr = file + pos;
         ptr = prepend( ptr, so_dir, strlen(so_dir) );
@@ -1553,7 +1644,7 @@ static NTSTATUS find_builtin_dll( UNICODE_STRING *nt_name, void **module, SIZE_T
         file[pos + len + 1] = 0;
         ptr = prepend( file + pos, dll_paths[i], strlen(dll_paths[i]) );
         status = open_builtin_pe_file( ptr, &attr, module, size_ptr, image_info, limit_low, limit_high,
-                                       load_machine, prefer_native );
+                                       load_machine, prefer_native, offset );
         if (status == STATUS_NOT_SUPPORTED)
         {
             found_image = TRUE;
@@ -1588,7 +1679,7 @@ done:
  */
 NTSTATUS load_builtin( const struct pe_image_info *image_info, WCHAR *filename, USHORT machine,
                        SECTION_IMAGE_INFORMATION *info, void **module, SIZE_T *size,
-                       ULONG_PTR limit_low, ULONG_PTR limit_high )
+                       ULONG_PTR limit_low, ULONG_PTR limit_high, off_t offset )
 {
     NTSTATUS status;
     UNICODE_STRING nt_name;
@@ -1622,10 +1713,10 @@ NTSTATUS load_builtin( const struct pe_image_info *image_info, WCHAR *filename, 
         return STATUS_IMAGE_ALREADY_LOADED;
     case LO_BUILTIN:
         return find_builtin_dll( &nt_name, module, size, info, limit_low, limit_high,
-                                 search_machine, machine, FALSE );
+                                 search_machine, machine, FALSE, offset );
     default:
         status = find_builtin_dll( &nt_name, module, size, info, limit_low, limit_high,
-                                   search_machine, machine, (loadorder == LO_DEFAULT) );
+                                   search_machine, machine, (loadorder == LO_DEFAULT), offset );
         if (status == STATUS_DLL_NOT_FOUND || status == STATUS_NOT_SUPPORTED)
             return STATUS_IMAGE_ALREADY_LOADED;
         return status;
@@ -1784,7 +1875,7 @@ NTSTATUS load_main_exe( const WCHAR *dos_name, const char *unix_name, const WCHA
     if (loadorder != LO_NATIVE && is_builtin_path( &nt_name, &search_machine ))
     {
         status = find_builtin_dll( &nt_name, module, &size, &main_image_info, 0, 0,
-                                   search_machine, load_machine, FALSE );
+                                   search_machine, load_machine, FALSE, 0 );
         if (status != STATUS_DLL_NOT_FOUND) return status;
     }
     if (!contains_path) return STATUS_DLL_NOT_FOUND;
@@ -1813,7 +1904,7 @@ NTSTATUS load_start_exe( WCHAR **image, void **module )
     wcscpy( *image, get_machine_wow64_dir( current_machine ));
     wcscat( *image, startW );
     init_unicode_string( &nt_name, *image );
-    status = find_builtin_dll( &nt_name, module, &size, &main_image_info, 0, 0, current_machine, 0, FALSE );
+    status = find_builtin_dll( &nt_name, module, &size, &main_image_info, 0, 0, current_machine, 0, FALSE, 0 );
     if (!NT_SUCCESS(status))
     {
         MESSAGE( "wine: failed to load start.exe: %x\n", status );
@@ -1981,7 +2072,7 @@ static void load_ntdll(void)
     else asprintf( &name, "%s%s/ntdll.dll", dll_dir, pe_dir );
 
     if (is_arm64ec()) machine = main_image_info.Machine;
-    status = open_builtin_pe_file( name, &attr, &module, &size, &info, 0, 0, machine, FALSE );
+    status = open_builtin_pe_file( name, &attr, &module, &size, &info, 0, 0, machine, FALSE, 0 );
     if (status == STATUS_DLL_NOT_FOUND)
     {
         free( name );
@@ -2087,7 +2178,7 @@ static void load_wow64_ntdll( USHORT machine )
     wcscpy( path, wow64_dir );
     wcscat( path, ntdllW );
     init_unicode_string( &nt_name, path );
-    status = find_builtin_dll( &nt_name, &module, &size, &info, 0, 0, machine, 0, FALSE );
+    status = find_builtin_dll( &nt_name, &module, &size, &info, 0, 0, machine, 0, FALSE, 0 );
     if (status == STATUS_IMAGE_NOT_AT_BASE) status = virtual_relocate_module( module );
     if (status) fatal_error( "failed to load %s error %x\n", debugstr_w(path), status );
     load_ntdll_wow64_functions( module );
@@ -2134,6 +2225,7 @@ BOOL simulate_writecopy;
 BOOL wine_allocs_2g_limit;
 SIZE_T kernel_stack_size = 0x100000;
 long long ram_reporting_bias;
+char *release_reserved_memory_low_bound;
 
 static void hacks_init(void)
 {
@@ -2193,7 +2285,11 @@ static void hacks_init(void)
     env_str = getenv("WINE_FSYNC_HELP_SIMULATED_PULSE");
     if (env_str)
         fsync_help_simulated_pulse = !!atoi(env_str);
-    else if (sgi) fsync_help_simulated_pulse = !strcmp(sgi, "460870") || !strcmp(sgi, "438490");
+    else if (sgi) fsync_help_simulated_pulse =
+        !strcmp(sgi, "460870")
+        || !strcmp(sgi, "1486920")
+        || !strcmp(sgi, "438490");
+
     if (fsync_help_simulated_pulse)
         ERR("HACK: fsync: helping simulated pulse event.\n");
 
@@ -2262,6 +2358,15 @@ static void hacks_init(void)
         setenv("vk_x11_override_min_image_count", "2", 0);
         setenv("vk_x11_strict_image_count", "true", 0);
     }
+
+#ifndef __x86_64__
+    if ((env_str = getenv( "WINE_RES_MEM_LOW_BOUND" )))
+        release_reserved_memory_low_bound = (void *)strtol( env_str, NULL, 0x10 );
+    else if (sgi && (
+                        !strcmp( sgi, "518920" )
+                    ))
+        release_reserved_memory_low_bound = (void *)0x00200000;
+#endif
 }
 
 /***********************************************************************

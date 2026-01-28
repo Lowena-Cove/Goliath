@@ -238,7 +238,8 @@ enum presentation_flags
     SESSION_FLAG_NEEDS_PREROLL = 0x8,
     SESSION_FLAG_SOURCE_SHUTDOWN = 0x10,
     SESSION_FLAG_PENDING_RATE_CHANGE = 0x20,
-    SESSION_FLAG_RESTARTING = 0x80,
+    SESSION_FLAG_RESTARTING = 0x40,
+    SESSION_FLAG_SINKS_SUBSCRIBED = 0x80,
 };
 
 struct media_session
@@ -276,6 +277,8 @@ struct media_session
         /* Latest SetRate() arguments. */
         BOOL thin;
         float rate;
+
+        BOOL thin_committed;
     } presentation;
     struct list topologies;
     struct list commands;
@@ -1028,6 +1031,30 @@ static HRESULT session_subscribe_sources(struct media_session *session)
     return hr;
 }
 
+static HRESULT session_subscribe_sinks(struct media_session *session)
+{
+    struct topo_node *node;
+    HRESULT hr = S_OK;
+
+    if (session->presentation.flags & SESSION_FLAG_SINKS_SUBSCRIBED)
+        return hr;
+
+    LIST_FOR_EACH_ENTRY(node, &session->presentation.nodes, struct topo_node, entry)
+    {
+        if (node->type != MF_TOPOLOGY_OUTPUT_NODE)
+            continue;
+
+        if (FAILED(hr = IMFStreamSink_BeginGetEvent(node->object.sink_stream, &session->events_callback,
+                        node->object.object)))
+        {
+            WARN("Failed to subscribe to stream sink events, hr %#lx.\n", hr);
+        }
+    }
+
+    session->presentation.flags |= SESSION_FLAG_SINKS_SUBSCRIBED;
+    return hr;
+}
+
 static void session_flush_transforms(struct media_session *session)
 {
     struct topo_node *node;
@@ -1517,18 +1544,6 @@ static void session_set_presentation_clock(struct media_session *session)
         if (FAILED(hr))
             WARN("Failed to set time source, hr %#lx.\n", hr);
 
-        LIST_FOR_EACH_ENTRY(node, &session->presentation.nodes, struct topo_node, entry)
-        {
-            if (node->type != MF_TOPOLOGY_OUTPUT_NODE)
-                continue;
-
-            if (FAILED(hr = IMFStreamSink_BeginGetEvent(node->object.sink_stream, &session->events_callback,
-                    node->object.object)))
-            {
-                WARN("Failed to subscribe to stream sink events, hr %#lx.\n", hr);
-            }
-        }
-
         /* Set clock for all topology nodes. */
         LIST_FOR_EACH_ENTRY(source, &session->presentation.sources, struct media_source, entry)
         {
@@ -1572,7 +1587,7 @@ static void session_set_rate(struct media_session *session, BOOL thin, float rat
     if (SUCCEEDED(hr))
         hr = IMFRateControl_GetRate(session->clock_rate_control, NULL, &clock_rate);
 
-    if (SUCCEEDED(hr) && (rate != clock_rate) && SUCCEEDED(hr = session_subscribe_sources(session)))
+    if (SUCCEEDED(hr) && (rate != clock_rate || thin != session->presentation.thin_committed) && SUCCEEDED(hr = session_subscribe_sources(session)))
     {
         LIST_FOR_EACH_ENTRY(source, &session->presentation.sources, struct media_source, entry)
         {
@@ -1585,6 +1600,7 @@ static void session_set_rate(struct media_session *session, BOOL thin, float rat
                 {
                     session->presentation.flags |= SESSION_FLAG_PENDING_RATE_CHANGE;
                     session->presentation.rate = rate;
+                    session->presentation.thin = thin;
                     return;
                 }
             }
@@ -1609,7 +1625,9 @@ static void session_complete_rate_change(struct media_session *session)
     session->presentation.flags &= ~SESSION_FLAG_PENDING_RATE_CHANGE;
     session_set_presentation_clock(session);
 
-    hr = IMFRateControl_SetRate(session->clock_rate_control, session->presentation.thin,
+    session->presentation.thin_committed = session->presentation.thin;
+
+    hr = IMFRateControl_SetRate(session->clock_rate_control, FALSE,
             session->presentation.rate);
 
     param.vt = VT_R4;
@@ -2127,6 +2145,8 @@ static void session_set_topology(struct media_session *session, DWORD flags, IMF
                 hr = IMFTopoLoader_Load(session->topo_loader, topology, &resolved_topology, NULL /* FIXME? */);
             if (SUCCEEDED(hr))
                 hr = session_init_media_types(resolved_topology);
+            else
+                WARN("failed to load topology %p, hr %#lx.\n", topology, hr);
 
             if (SUCCEEDED(hr))
             {
@@ -2156,7 +2176,7 @@ static void session_set_topology(struct media_session *session, DWORD flags, IMF
     session_raise_topology_set(session, topology, hr);
 
     /* With no current topology set it right away, otherwise queue. */
-    if (topology)
+    if (SUCCEEDED(hr) && topology)
     {
         struct queued_topology *queued_topology;
 
@@ -2824,6 +2844,11 @@ static HRESULT WINAPI session_commands_callback_Invoke(IMFAsyncCallback *iface, 
 {
     struct session_op *op = impl_op_from_IUnknown(IMFAsyncResult_GetStateNoAddRef(result));
     struct media_session *session = impl_from_commands_callback_IMFAsyncCallback(iface);
+
+    TRACE("session %p, op %p, command %u.\n", session, op, op->command);
+
+    EnterCriticalSection(&session->cs);
+
     assert( session->command_state == COMMAND_STATE_SUBMITTED );
     list_remove(&op->entry);
 
@@ -3296,6 +3321,7 @@ static void session_set_source_object_state(struct media_session *session, IUnkn
                 }
             }
 
+            session_subscribe_sinks(session);
             session_set_presentation_clock(session);
 
             if ((session->presentation.flags & SESSION_FLAG_NEEDS_PREROLL) && session_is_output_nodes_state(session, OBJ_STATE_STOPPED))
@@ -4852,6 +4878,17 @@ static ULONG WINAPI session_rate_control_Release(IMFRateControl *iface)
     return IMFMediaSession_Release(&session->IMFMediaSession_iface);
 }
 
+static BOOL allow_rate_zero(void)
+{
+    static int allow = -1;
+    if (allow == -1)
+    {
+        const char *sgi = getenv("SteamGameId");
+        allow = sgi && !strcmp(sgi, "2111630") /* JR East Train Simulator */ ;
+    }
+    return allow;
+}
+
 static HRESULT WINAPI session_rate_control_SetRate(IMFRateControl *iface, BOOL thin, float rate)
 {
     struct media_session *session = impl_session_from_IMFRateControl(iface);
@@ -4860,7 +4897,7 @@ static HRESULT WINAPI session_rate_control_SetRate(IMFRateControl *iface, BOOL t
 
     TRACE("%p, %d, %f.\n", iface, thin, rate);
 
-    if (!rate)
+    if (!rate && !allow_rate_zero())
     {
         /* The Anacrusis fails to play its video if we succeed here */
         ERR("Scrubbing not implemented!\n");
@@ -4883,7 +4920,10 @@ static HRESULT WINAPI session_rate_control_GetRate(IMFRateControl *iface, BOOL *
 
     TRACE("%p, %p, %p.\n", iface, thin, rate);
 
-    return IMFRateControl_GetRate(session->clock_rate_control, thin, rate);
+    if (thin)
+        *thin = session->presentation.thin_committed;
+
+    return IMFRateControl_GetRate(session->clock_rate_control, NULL, rate);
 }
 
 static const IMFRateControlVtbl session_rate_control_vtbl =
@@ -5031,6 +5071,8 @@ HRESULT WINAPI MFCreateMediaSession(IMFAttributes *config, IMFMediaSession **ses
     {
         goto failed;
     }
+
+    session_clear_presentation(object);
 
     *session = &object->IMFMediaSession_iface;
 

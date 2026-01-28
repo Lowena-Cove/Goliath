@@ -53,6 +53,7 @@
 @ stdcall EtwEventSetInformation(int64 long ptr long)
 @ stdcall EtwEventUnregister(int64)
 @ stdcall EtwEventWrite(int64 ptr long ptr)
+@ stdcall EtwEventWriteEx(int64 ptr int64 long ptr ptr long ptr)
 @ stdcall EtwEventWriteString(int64 long int64 wstr)
 @ stdcall EtwEventWriteTransfer(int64 ptr ptr ptr long ptr)
 @ stdcall EtwGetTraceEnableFlags(int64)
@@ -528,6 +529,7 @@
 @ stdcall RtlAreBitsSet(ptr long long)
 # @ stub RtlAssert2
 @ stdcall RtlAssert(ptr ptr long str)
+@ stdcall RtlBarrier(ptr long)
 # @ stub RtlCancelTimer
 @ stdcall -norelay RtlCaptureContext(ptr)
 @ stdcall RtlCaptureStackBackTrace(long long ptr ptr)
@@ -613,6 +615,7 @@
 @ stub RtlDelete
 @ stdcall RtlDeleteAce(ptr long)
 @ stdcall RtlDeleteAtomFromAtomTable(ptr long)
+@ stdcall RtlDeleteBarrier(ptr)
 @ stdcall RtlDeleteCriticalSection(ptr)
 @ stdcall -arch=!i386 RtlDeleteGrowableFunctionTable(ptr)
 @ stub RtlDeleteElementGenericTable
@@ -792,6 +795,7 @@
 @ stdcall RtlImpersonateSelf(long)
 @ stdcall RtlInitAnsiString(ptr str)
 @ stdcall RtlInitAnsiStringEx(ptr str)
+@ stdcall RtlInitBarrier(ptr long long)
 @ stdcall RtlInitCodePageTable(ptr ptr)
 # @ stub RtlInitMemoryStream
 @ stdcall RtlInitNlsTables(ptr ptr ptr ptr)
@@ -1746,7 +1750,8 @@
 @ extern -private __wine_unix_call_dispatcher
 @ extern -private -arch=arm64ec __wine_unix_call_dispatcher_arm64ec
 @ extern -private __wine_unixlib_handle
-@ stdcall -syscall __wine_set_unix_env(ptr ptr)
+@ stdcall __wine_get_unix_env(ptr ptr long)
+@ stdcall __wine_set_unix_env(ptr ptr)
 
 # Debugging
 @ stdcall -norelay __wine_dbg_write(ptr long)
@@ -1754,7 +1759,7 @@
 @ cdecl -norelay __wine_dbg_header(long long str)
 @ cdecl -norelay __wine_dbg_output(str)
 @ cdecl -norelay __wine_dbg_strdup(str)
-@ stdcall -syscall -norelay __wine_dbg_ftrace(ptr long long)
+@ stdcall -norelay __wine_dbg_ftrace(ptr long long)
 
 # Version
 @ cdecl wine_get_version()
@@ -1764,4 +1769,3 @@
 # Filesystem
 @ stdcall -syscall wine_nt_to_unix_file_name(ptr ptr ptr long)
 @ stdcall -syscall wine_unix_to_nt_file_name(str ptr ptr)
-@ stdcall -syscall __wine_needs_override_large_address_aware()
