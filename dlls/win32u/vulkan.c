@@ -1652,6 +1652,10 @@ void vulkan_detach_surfaces( struct list *surfaces )
 
 #else /* SONAME_LIBVULKAN */
 
+void vulkan_update_surfaces( HWND hwnd )
+{
+}
+
 void vulkan_detach_surfaces( struct list *surfaces )
 {
 }
