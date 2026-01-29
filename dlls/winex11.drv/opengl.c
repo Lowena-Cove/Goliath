@@ -4405,4 +4405,19 @@ void destroy_gl_drawable( HWND hwnd )
 {
 }
 
+BOOL enable_fullscreen_hack( HWND hwnd, BOOL check_gamma )
+{
+    return FALSE;
+}
+
+BOOL fs_hack_get_gamma_ramp( PHYSDEV dev, void *data )
+{
+    return FALSE;
+}
+
+BOOL fs_hack_set_gamma_ramp( PHYSDEV dev, void *data )
+{
+    return FALSE;
+}
+
 #endif /* defined(SONAME_LIBGL) */
