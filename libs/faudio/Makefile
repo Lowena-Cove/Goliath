@@ -1,23 +1,13 @@
-EXTLIB    = libfaudio.a
-EXTRAINCL = $(FAUDIO_PE_CFLAGS)
-EXTRADEFS = -DFAUDIO_WIN32_PLATFORM -DHAVE_WMADEC -DNDEBUG
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	src/F3DAudio.c \
-	src/FACT.c \
-	src/FACT3D.c \
-	src/FACT_internal.c \
-	src/FAPOBase.c \
-	src/FAPOFX.c \
-	src/FAPOFX_echo.c \
-	src/FAPOFX_eq.c \
-	src/FAPOFX_masteringlimiter.c \
-	src/FAPOFX_reverb.c \
-	src/FAudio.c \
-	src/FAudioFX_reverb.c \
-	src/FAudioFX_volumemeter.c \
-	src/FAudio_internal.c \
-	src/FAudio_internal_simd.c \
-	src/FAudio_operationset.c \
-	src/FAudio_platform_win32.c \
-	src/matrix_defaults.inl
+all:
+clean i386-windows/libfaudio.a i386-windows/src/F3DAudio.o i386-windows/src/FACT.o \
+  i386-windows/src/FACT3D.o i386-windows/src/FACT_internal.o i386-windows/src/FAPOBase.o \
+  i386-windows/src/FAPOFX.o i386-windows/src/FAPOFX_echo.o i386-windows/src/FAPOFX_eq.o \
+  i386-windows/src/FAPOFX_masteringlimiter.o i386-windows/src/FAPOFX_reverb.o \
+  i386-windows/src/FAudio.o i386-windows/src/FAudioFX_reverb.o \
+  i386-windows/src/FAudioFX_volumemeter.o i386-windows/src/FAudio_internal.o \
+  i386-windows/src/FAudio_internal_simd.o i386-windows/src/FAudio_operationset.o \
+  i386-windows/src/FAudio_platform_win32.o:
+	@cd ../.. && $(MAKE) libs/faudio/$@
+.PHONY: clean

@@ -1,0 +1,4 @@
+STATICLIB = libgoliath_core.a
+
+C_SRCS = \
+    core.c

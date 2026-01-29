@@ -1,50 +1,9 @@
-SOURCES = \
-	ar.po \
-	ast.po \
-	bg.po \
-	ca.po \
-	cs.po \
-	da.po \
-	de.po \
-	el.po \
-	en.po \
-	en_US.po \
-	eo.po \
-	es.po \
-	fa.po \
-	fi.po \
-	fr.po \
-	he.po \
-	hi.po \
-	hr.po \
-	hu.po \
-	it.po \
-	ja.po \
-	ka.po \
-	ko.po \
-	lt.po \
-	ml.po \
-	nb_NO.po \
-	nl.po \
-	or.po \
-	pa.po \
-	pl.po \
-	pt_BR.po \
-	pt_PT.po \
-	rm.po \
-	ro.po \
-	ru.po \
-	si.po \
-	sk.po \
-	sl.po \
-	sr_RS@cyrillic.po \
-	sr_RS@latin.po \
-	sv.po \
-	ta.po \
-	te.po \
-	th.po \
-	tr.po \
-	uk.po \
-	wa.po \
-	zh_CN.po \
-	zh_TW.po
+# Auto-generated stub makefile; all rules forward to the top-level makefile
+
+all:
+all clean ar.mo ast.mo bg.mo ca.mo cs.mo da.mo de.mo el.mo en.mo en_US.mo eo.mo es.mo fa.mo fi.mo \
+  fr.mo he.mo hi.mo hr.mo hu.mo it.mo ja.mo ka.mo ko.mo lt.mo ml.mo nb_NO.mo nl.mo or.mo pa.mo pl.mo \
+  pt_BR.mo pt_PT.mo rm.mo ro.mo ru.mo si.mo sk.mo sl.mo sr_RS@cyrillic.mo sr_RS@latin.mo sv.mo ta.mo \
+  te.mo th.mo tr.mo uk.mo wa.mo zh_CN.mo zh_TW.mo:
+	@cd .. && $(MAKE) po/$@
+.PHONY: all clean

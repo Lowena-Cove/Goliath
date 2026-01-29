@@ -174,7 +174,8 @@ a bug.
 
 ## Goliath Compatibility Layer
 
-Goliath unifies Wine (Windows), Darling (macOS), and ATL (Android) to run applications from all major operating systems on Linux.
+Goliath unifies Wine (Windows), Darling (macOS), ATL (Android), ipasim (iOS), Libretro (Consoles), and WSL concepts to run applications from all major operating systems on Linux.
 
 - Use `goliath-launch.sh` to run any supported application.
 - See `documentation/README-goliath.md` for details.
+- See `documentation/upstream-sync/README.md` for how upstream dependencies are tracked.

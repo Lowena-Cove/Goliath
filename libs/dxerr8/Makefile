@@ -1,4 +1,6 @@
-STATICLIB = libdxerr8.a
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	dxerr8.c
+all:
+install install-dev clean libdxerr8.a i386-windows/libdxerr8.a dxerr8.o i386-windows/dxerr8.o:
+	@cd ../.. && $(MAKE) libs/dxerr8/$@
+.PHONY: install install-dev clean

@@ -7,8 +7,8 @@
 #include <gdk/wayland/gdkwayland.h>
 #include <gdk/x11/gdkx.h>
 
-#include "../api-impl-jni/defines.h"
-#include "../api-impl-jni/widgets/android_view_SurfaceView.h"
+#include "api-impl-jni/defines.h"
+#include "api-impl-jni/widgets/android_view_SurfaceView.h"
 
 static EGLDisplay egl_display_gtk = NULL;
 static GdkGLContext *gl_context_gtk = NULL;

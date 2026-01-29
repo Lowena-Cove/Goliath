@@ -1,25 +1,13 @@
-EXTLIB    = liblcms2.a
-EXTRAINCL = $(LCMS2_PE_CFLAGS)
+# Auto-generated stub makefile; all rules forward to the top-level makefile
 
-SOURCES = \
-	src/cmsalpha.c \
-	src/cmscnvrt.c \
-	src/cmserr.c \
-	src/cmsgamma.c \
-	src/cmsgmt.c \
-	src/cmshalf.c \
-	src/cmsintrp.c \
-	src/cmsio0.c \
-	src/cmsio1.c \
-	src/cmslut.c \
-	src/cmsmtrx.c \
-	src/cmsnamed.c \
-	src/cmsopt.c \
-	src/cmspack.c \
-	src/cmspcs.c \
-	src/cmsplugin.c \
-	src/cmssamp.c \
-	src/cmstypes.c \
-	src/cmsvirt.c \
-	src/cmswtpnt.c \
-	src/cmsxform.c
+all:
+clean i386-windows/liblcms2.a i386-windows/src/cmsalpha.o i386-windows/src/cmscnvrt.o \
+  i386-windows/src/cmserr.o i386-windows/src/cmsgamma.o i386-windows/src/cmsgmt.o \
+  i386-windows/src/cmshalf.o i386-windows/src/cmsintrp.o i386-windows/src/cmsio0.o \
+  i386-windows/src/cmsio1.o i386-windows/src/cmslut.o i386-windows/src/cmsmtrx.o \
+  i386-windows/src/cmsnamed.o i386-windows/src/cmsopt.o i386-windows/src/cmspack.o \
+  i386-windows/src/cmspcs.o i386-windows/src/cmsplugin.o i386-windows/src/cmssamp.o \
+  i386-windows/src/cmstypes.o i386-windows/src/cmsvirt.o i386-windows/src/cmswtpnt.o \
+  i386-windows/src/cmsxform.o:
+	@cd ../.. && $(MAKE) libs/lcms2/$@
+.PHONY: clean

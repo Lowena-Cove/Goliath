@@ -1,0 +1,28 @@
+# Integration mapping for Darling (macOS compatibility)
+# Format: upstream_path:goliath_path:action
+# Actions: copy, copy+modify, exclude, manual
+
+# This file tracks how upstream Darling code maps to Goliath's integration.
+# When the upstream sync workflow runs, it uses this file to understand
+# which files to update and which have been customized.
+
+## Core files (direct copy from upstream)
+# src/frameworks/:libs/darling_framework/frameworks/:copy
+# src/kernel/:libs/darling_framework/kernel/:copy
+
+## Modified files (copied but with Goliath-specific changes)
+# Document any modifications here
+
+## Excluded files (not needed for Goliath integration)
+# build/:exclude
+# tests/:exclude
+# docs/:exclude
+
+## Manual integration files (managed by Goliath, not synced)
+# Makefile.in:manual
+# README.md:manual
+
+## Notes
+# - Darling is a large project, we may only integrate specific components
+# - Focus on the Darwin syscall translation layer and Mach-O loader
+# - Full Darling includes kernel emulation which may not be needed

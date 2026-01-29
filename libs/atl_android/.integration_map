@@ -1,0 +1,25 @@
+# Integration mapping for ATL (Android Translation Layer)
+# Format: upstream_path:goliath_path:action
+# Actions: copy, copy+modify, exclude, manual
+
+# This file tracks how upstream ATL code maps to Goliath's integration.
+
+## Core files (direct copy from upstream)
+# src/:libs/atl_android/:copy
+
+## Modified files (copied but with Goliath-specific changes)
+# Document any modifications here
+
+## Excluded files (not needed for Goliath integration)
+# .github/:exclude
+# tests/:exclude
+# examples/:exclude
+
+## Manual integration files (managed by Goliath, not synced)
+# Makefile.in:manual
+# README.md:manual
+
+## Notes
+# - ATL provides Android NDK API translation
+# - Focus on native Android app support
+# - Integration with Wayland for display

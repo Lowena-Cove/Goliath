@@ -386,8 +386,8 @@ on `(hostname || uname -n) 2>/dev/null | sed 1q`
 "
 
 # Files that config.status was made for.
-config_files=" dlls/acledit/Makefile dlls/aclui/Makefile dlls/activeds.tlb/Makefile dlls/activeds/Makefile dlls/activeds/tests/Makefile dlls/actxprxy/Makefile dlls/adsldp/Makefile dlls/adsldp/tests/Makefile dlls/adsldpc/Makefile dlls/advapi32/Makefile dlls/advapi32/tests/Makefile dlls/advpack/Makefile dlls/advpack/tests/Makefile dlls/amsi/Makefile dlls/amd_ags_x64/Makefile dlls/amstream/Makefile dlls/amstream/tests/Makefile dlls/apisetschema/Makefile dlls/apphelp/Makefile dlls/apphelp/tests/Makefile dlls/appwiz.cpl/Makefile dlls/appxdeploymentclient/Makefile dlls/atiadlxx/Makefile dlls/atl/Makefile dlls/atl/tests/Makefile dlls/atl100/Makefile dlls/atl100/tests/Makefile dlls/atl110/Makefile dlls/atl110/tests/Makefile dlls/atl80/Makefile dlls/atl80/tests/Makefile dlls/atl90/Makefile dlls/atlthunk/Makefile dlls/atlthunk/tests/Makefile dlls/atmlib/Makefile dlls/audioses/Makefile dlls/authz/Makefile dlls/avicap32/Makefile dlls/avifil32/Makefile dlls/avifil32/tests/Makefile dlls/avifile.dll16/Makefile dlls/avrt/Makefile dlls/bcp47langs/Makefile dlls/bcrypt/Makefile dlls/bcrypt/tests/Makefile dlls/bcryptprimitives/Makefile dlls/bluetoothapis/Makefile dlls/bluetoothapis/tests/Makefile dlls/browseui/Makefile dlls/browseui/tests/Makefile dlls/bthprops.cpl/Makefile dlls/cabinet/Makefile dlls/cabinet/tests/Makefile dlls/capi2032/Makefile dlls/cards/Makefile dlls/cdosys/Makefile dlls/cfgmgr32/Makefile dlls/cfgmgr32/tests/Makefile dlls/clusapi/Makefile dlls/cng.sys/Makefile dlls/colorcnv/Makefile dlls/combase/Makefile dlls/combase/tests/Makefile dlls/comcat/Makefile dlls/comcat/tests/Makefile dlls/comctl32/Makefile dlls/comctl32/tests/Makefile dlls/comdlg32/Makefile dlls/comdlg32/tests/Makefile dlls/coml2/Makefile dlls/comm.drv16/Makefile dlls/commdlg.dll16/Makefile dlls/compobj.dll16/Makefile dlls/compstui/Makefile dlls/compstui/tests/Makefile dlls/comsvcs/Makefile dlls/comsvcs/tests/Makefile dlls/concrt140/Makefile dlls/concrt140/tests/Makefile dlls/connect/Makefile dlls/coremessaging/Makefile dlls/credui/Makefile dlls/credui/tests/Makefile dlls/crtdll/Makefile dlls/crypt32/Makefile dlls/crypt32/tests/Makefile dlls/cryptdlg/Makefile dlls/cryptdll/Makefile dlls/cryptext/Makefile dlls/cryptnet/Makefile dlls/cryptnet/tests/Makefile dlls/cryptowinrt/Makefile dlls/cryptowinrt/tests/Makefile dlls/cryptsp/Makefile dlls/cryptui/Makefile dlls/cryptui/tests/Makefile dlls/ctapi32/Makefile dlls/ctl3d.dll16/Makefile dlls/ctl3d32/Makefile dlls/ctl3dv2.dll16/Makefile dlls/d2d1/Makefile dlls/d2d1/tests/Makefile dlls/d3d10/Makefile dlls/d3d10/tests/Makefile dlls/d3d10_1/Makefile dlls/d3d10_1/tests/Makefile dlls/d3d10core/Makefile dlls/d3d10core/tests/Makefile dlls/d3d11/Makefile dlls/d3d11/tests/Makefile dlls/d3d12/Makefile dlls/d3d12/tests/Makefile dlls/d3d12core/Makefile dlls/d3d8/Makefile dlls/d3d8/tests/Makefile dlls/d3d8thk/Makefile dlls/d3d9/Makefile dlls/d3d9/tests/Makefile dlls/d3dcompiler_33/Makefile dlls/d3dcompiler_34/Makefile dlls/d3dcompiler_35/Makefile dlls/d3dcompiler_36/Makefile dlls/d3dcompiler_37/Makefile dlls/d3dcompiler_38/Makefile dlls/d3dcompiler_39/Makefile dlls/d3dcompiler_40/Makefile dlls/d3dcompiler_41/Makefile dlls/d3dcompiler_42/Makefile dlls/d3dcompiler_43/Makefile dlls/d3dcompiler_43/tests/Makefile dlls/d3dcompiler_46/Makefile dlls/d3dcompiler_46/tests/Makefile dlls/d3dcompiler_47/Makefile dlls/d3dcompiler_47/tests/Makefile dlls/d3dim/Makefile dlls/d3dim700/Makefile dlls/d3drm/Makefile dlls/d3drm/tests/Makefile dlls/d3dx10_33/Makefile dlls/d3dx10_34/Makefile dlls/d3dx10_34/tests/Makefile dlls/d3dx10_35/Makefile dlls/d3dx10_35/tests/Makefile dlls/d3dx10_36/Makefile dlls/d3dx10_36/tests/Makefile dlls/d3dx10_37/Makefile dlls/d3dx10_37/tests/Makefile dlls/d3dx10_38/Makefile dlls/d3dx10_38/tests/Makefile dlls/d3dx10_39/Makefile dlls/d3dx10_39/tests/Makefile dlls/d3dx10_40/Makefile dlls/d3dx10_40/tests/Makefile dlls/d3dx10_41/Makefile dlls/d3dx10_41/tests/Makefile dlls/d3dx10_42/Makefile dlls/d3dx10_42/tests/Makefile dlls/d3dx10_43/Makefile dlls/d3dx10_43/tests/Makefile dlls/d3dx11_42/Makefile dlls/d3dx11_42/tests/Makefile dlls/d3dx11_43/Makefile dlls/d3dx11_43/tests/Makefile dlls/d3dx9_24/Makefile dlls/d3dx9_25/Makefile dlls/d3dx9_26/Makefile dlls/d3dx9_27/Makefile dlls/d3dx9_28/Makefile dlls/d3dx9_29/Makefile dlls/d3dx9_30/Makefile dlls/d3dx9_31/Makefile dlls/d3dx9_32/Makefile dlls/d3dx9_33/Makefile dlls/d3dx9_34/Makefile dlls/d3dx9_35/Makefile dlls/d3dx9_36/Makefile dlls/d3dx9_36/tests/Makefile dlls/d3dx9_37/Makefile dlls/d3dx9_38/Makefile dlls/d3dx9_39/Makefile dlls/d3dx9_40/Makefile dlls/d3dx9_41/Makefile dlls/d3dx9_42/Makefile dlls/d3dx9_43/Makefile dlls/d3dx9_43/tests/Makefile dlls/d3dxof/Makefile dlls/d3dxof/tests/Makefile dlls/dataexchange/Makefile dlls/dataexchange/tests/Makefile dlls/davclnt/Makefile dlls/dbgeng/Makefile dlls/dbgeng/tests/Makefile dlls/dbghelp/Makefile dlls/dbghelp/tests/Makefile dlls/dciman32/Makefile dlls/dcomp/Makefile dlls/ddeml.dll16/Makefile dlls/ddraw/Makefile dlls/ddraw/tests/Makefile dlls/ddrawex/Makefile dlls/ddrawex/tests/Makefile dlls/desk.cpl/Makefile dlls/devenum/Makefile dlls/devenum/tests/Makefile dlls/dhcpcsvc/Makefile dlls/dhcpcsvc/tests/Makefile dlls/dhcpcsvc6/Makefile dlls/dhtmled.ocx/Makefile dlls/diasymreader/Makefile dlls/difxapi/Makefile dlls/dinput/Makefile dlls/dinput/tests/Makefile dlls/dinput8/Makefile dlls/directmanipulation/Makefile dlls/directmanipulation/tests/Makefile dlls/dispdib.dll16/Makefile dlls/dispex/Makefile dlls/dispex/tests/Makefile dlls/display.drv16/Makefile dlls/dmband/Makefile dlls/dmband/tests/Makefile dlls/dmcompos/Makefile dlls/dmcompos/tests/Makefile dlls/dmime/Makefile dlls/dmime/tests/Makefile dlls/dmloader/Makefile dlls/dmloader/tests/Makefile dlls/dmscript/Makefile dlls/dmscript/tests/Makefile dlls/dmstyle/Makefile dlls/dmstyle/tests/Makefile dlls/dmsynth/Makefile dlls/dmsynth/tests/Makefile dlls/dmusic/Makefile dlls/dmusic/tests/Makefile dlls/dmusic32/Makefile dlls/dnsapi/Makefile dlls/dnsapi/tests/Makefile dlls/dplay/Makefile dlls/dplayx/Makefile dlls/dplayx/tests/Makefile dlls/dpnaddr/Makefile dlls/dpnet/Makefile dlls/dpnet/tests/Makefile dlls/dpnhpast/Makefile dlls/dpnhupnp/Makefile dlls/dpnlobby/Makefile dlls/dpvoice/Makefile dlls/dpvoice/tests/Makefile dlls/dpwsockx/Makefile dlls/drmclien/Makefile dlls/dsdmo/Makefile dlls/dsdmo/tests/Makefile dlls/dsound/Makefile dlls/dsound/tests/Makefile dlls/dsquery/Makefile dlls/dssenh/Makefile dlls/dssenh/tests/Makefile dlls/dsuiext/Makefile dlls/dswave/Makefile dlls/dswave/tests/Makefile dlls/dwmapi/Makefile dlls/dwmapi/tests/Makefile dlls/dwrite/Makefile dlls/dwrite/tests/Makefile dlls/dx8vb/Makefile dlls/dxcore/Makefile dlls/dxdiagn/Makefile dlls/dxdiagn/tests/Makefile dlls/dxgi/Makefile dlls/dxgi/tests/Makefile dlls/dxtrans/Makefile dlls/dxva2/Makefile dlls/dxva2/tests/Makefile dlls/esent/Makefile dlls/evr/Makefile dlls/evr/tests/Makefile dlls/explorerframe/Makefile dlls/explorerframe/tests/Makefile dlls/faultrep/Makefile dlls/faultrep/tests/Makefile dlls/feclient/Makefile dlls/fltlib/Makefile dlls/fltmgr.sys/Makefile dlls/fntcache/Makefile dlls/fontsub/Makefile dlls/fusion/Makefile dlls/fusion/tests/Makefile dlls/fwpuclnt/Makefile dlls/gameux/Makefile dlls/gameux/tests/Makefile dlls/gamingtcui/Makefile dlls/gdi.exe16/Makefile dlls/gdi32/Makefile dlls/gdi32/tests/Makefile dlls/gdiplus/Makefile dlls/gdiplus/tests/Makefile dlls/geolocation/Makefile dlls/geolocation/tests/Makefile dlls/glu32/Makefile dlls/glu32/tests/Makefile dlls/gphoto2.ds/Makefile dlls/gpkcsp/Makefile dlls/graphicscapture/Makefile dlls/graphicscapture/tests/Makefile dlls/hal/Makefile dlls/hhctrl.ocx/Makefile dlls/hid/Makefile dlls/hid/tests/Makefile dlls/hidclass.sys/Makefile dlls/hidparse.sys/Makefile dlls/hlink/Makefile dlls/hlink/tests/Makefile dlls/hnetcfg/Makefile dlls/hnetcfg/tests/Makefile dlls/hrtfapo/Makefile dlls/http.sys/Makefile dlls/httpapi/Makefile dlls/httpapi/tests/Makefile dlls/hvsimanagementapi/Makefile dlls/hvsimanagementapi/tests/Makefile dlls/ia2comproxy/Makefile dlls/iccvid/Makefile dlls/icmp/Makefile dlls/icmui/Makefile dlls/icmui/tests/Makefile dlls/icu/Makefile dlls/ieframe/Makefile dlls/ieframe/tests/Makefile dlls/ieproxy/Makefile dlls/iertutil/Makefile dlls/iertutil/tests/Makefile dlls/ifsmgr.vxd/Makefile dlls/imaadp32.acm/Makefile dlls/imagehlp/Makefile dlls/imagehlp/tests/Makefile dlls/imm.dll16/Makefile dlls/imm32/Makefile dlls/imm32/tests/Makefile dlls/inetcomm/Makefile dlls/inetcomm/tests/Makefile dlls/inetcpl.cpl/Makefile dlls/inetmib1/Makefile dlls/inetmib1/tests/Makefile dlls/infosoft/Makefile dlls/infosoft/tests/Makefile dlls/initpki/Makefile dlls/inkobj/Makefile dlls/inseng/Makefile dlls/iphlpapi/Makefile dlls/iphlpapi/tests/Makefile dlls/iprop/Makefile dlls/irprops.cpl/Makefile dlls/itircl/Makefile dlls/itss/Makefile dlls/itss/tests/Makefile dlls/joy.cpl/Makefile dlls/jscript/Makefile dlls/jscript/tests/Makefile dlls/jsproxy/Makefile dlls/jsproxy/tests/Makefile dlls/kerberos/Makefile dlls/kernel32/Makefile dlls/kernel32/tests/Makefile dlls/kernelbase/Makefile dlls/kernelbase/tests/Makefile dlls/keyboard.drv16/Makefile dlls/krnl386.exe16/Makefile dlls/ksecdd.sys/Makefile dlls/ksproxy.ax/Makefile dlls/ksuser/Makefile dlls/ktmw32/Makefile dlls/l3codeca.acm/Makefile dlls/l3codecx.ax/Makefile dlls/light.msstyles/Makefile dlls/loadperf/Makefile dlls/localspl/Makefile dlls/localspl/tests/Makefile dlls/localui/Makefile dlls/localui/tests/Makefile dlls/lz32/Makefile dlls/lz32/tests/Makefile dlls/lzexpand.dll16/Makefile dlls/magnification/Makefile dlls/mapi32/Makefile dlls/mapi32/tests/Makefile dlls/mapistub/Makefile dlls/mciavi32/Makefile dlls/mcicda/Makefile dlls/mciqtz32/Makefile dlls/mciseq/Makefile dlls/mciwave/Makefile dlls/mf/Makefile dlls/mf/tests/Makefile dlls/mf3216/Makefile dlls/mfasfsrcsnk/Makefile dlls/mferror/Makefile dlls/mfh264enc/Makefile dlls/mfmediaengine/Makefile dlls/mfmediaengine/tests/Makefile dlls/mfmp4srcsnk/Makefile dlls/mfplat/Makefile dlls/mfplat/tests/Makefile dlls/mfplay/Makefile dlls/mfplay/tests/Makefile dlls/mfreadwrite/Makefile dlls/mfreadwrite/tests/Makefile dlls/mfsrcsnk/Makefile dlls/mfsrcsnk/tests/Makefile dlls/mgmtapi/Makefile dlls/midimap/Makefile dlls/mlang/Makefile dlls/mlang/tests/Makefile dlls/mmcndmgr/Makefile dlls/mmcndmgr/tests/Makefile dlls/mmdevapi/Makefile dlls/mmdevapi/tests/Makefile dlls/mmdevldr.vxd/Makefile dlls/mmsystem.dll16/Makefile dlls/monodebg.vxd/Makefile dlls/mouhid.sys/Makefile dlls/mountmgr.sys/Makefile dlls/mouse.drv16/Makefile dlls/mp3dmod/Makefile dlls/mp3dmod/tests/Makefile dlls/mpr/Makefile dlls/mpr/tests/Makefile dlls/mprapi/Makefile dlls/msacm.dll16/Makefile dlls/msacm32.drv/Makefile dlls/msacm32/Makefile dlls/msacm32/tests/Makefile dlls/msado15/Makefile dlls/msado15/tests/Makefile dlls/msadp32.acm/Makefile dlls/msasn1/Makefile dlls/msasn1/tests/Makefile dlls/msauddecmft/Makefile dlls/mscat32/Makefile dlls/mscms/Makefile dlls/mscms/tests/Makefile dlls/mscoree/Makefile dlls/mscoree/tests/Makefile dlls/mscorwks/Makefile dlls/msctf/Makefile dlls/msctf/tests/Makefile dlls/msctfmonitor/Makefile dlls/msctfp/Makefile dlls/msdaps/Makefile dlls/msdasql/Makefile dlls/msdasql/tests/Makefile dlls/msdelta/Makefile dlls/msdmo/Makefile dlls/msdmo/tests/Makefile dlls/msdrm/Makefile dlls/msftedit/Makefile dlls/msftedit/tests/Makefile dlls/msg711.acm/Makefile dlls/msgsm32.acm/Makefile dlls/mshtml.tlb/Makefile dlls/mshtml/Makefile dlls/mshtml/tests/Makefile dlls/msi/Makefile dlls/msi/tests/Makefile dlls/msident/Makefile dlls/msimg32/Makefile dlls/msimsg/Makefile dlls/msimtf/Makefile dlls/msisip/Makefile dlls/msisys.ocx/Makefile dlls/msls31/Makefile dlls/msmpeg2vdec/Makefile dlls/msnet32/Makefile dlls/mspatcha/Makefile dlls/mspatcha/tests/Makefile dlls/msports/Makefile dlls/msrle32/Makefile dlls/msrle32/tests/Makefile dlls/msscript.ocx/Makefile dlls/msscript.ocx/tests/Makefile dlls/mssign32/Makefile dlls/mssip32/Makefile dlls/mstask/Makefile dlls/mstask/tests/Makefile dlls/msttsengine/Makefile dlls/msv1_0/Makefile dlls/msvcirt/Makefile dlls/msvcirt/tests/Makefile dlls/msvcm80/Makefile dlls/msvcm90/Makefile dlls/msvcp100/Makefile dlls/msvcp100/tests/Makefile dlls/msvcp110/Makefile dlls/msvcp110/tests/Makefile dlls/msvcp120/Makefile dlls/msvcp120/tests/Makefile dlls/msvcp120_app/Makefile dlls/msvcp140/Makefile dlls/msvcp140/tests/Makefile dlls/msvcp140_1/Makefile dlls/msvcp140_1/tests/Makefile dlls/msvcp140_2/Makefile dlls/msvcp140_2/tests/Makefile dlls/msvcp140_atomic_wait/Makefile dlls/msvcp140_atomic_wait/tests/Makefile dlls/msvcp140_codecvt_ids/Makefile dlls/msvcp60/Makefile dlls/msvcp60/tests/Makefile dlls/msvcp70/Makefile dlls/msvcp71/Makefile dlls/msvcp80/Makefile dlls/msvcp90/Makefile dlls/msvcp90/tests/Makefile dlls/msvcp_win/Makefile dlls/msvcr100/Makefile dlls/msvcr100/tests/Makefile dlls/msvcr110/Makefile dlls/msvcr110/tests/Makefile dlls/msvcr120/Makefile dlls/msvcr120/tests/Makefile dlls/msvcr120_app/Makefile dlls/msvcr70/Makefile dlls/msvcr70/tests/Makefile dlls/msvcr71/Makefile dlls/msvcr71/tests/Makefile dlls/msvcr80/Makefile dlls/msvcr80/tests/Makefile dlls/msvcr90/Makefile dlls/msvcr90/tests/Makefile dlls/msvcrt/Makefile dlls/msvcrt/tests/Makefile dlls/msvcrt20/Makefile dlls/msvcrt40/Makefile dlls/msvcrtd/Makefile dlls/msvcrtd/tests/Makefile dlls/msvfw32/Makefile dlls/msvfw32/tests/Makefile dlls/msvidc32/Makefile dlls/msvideo.dll16/Makefile dlls/msvdsp/Makefile dlls/msvproc/Makefile dlls/mswsock/Makefile dlls/msxml/Makefile dlls/msxml2/Makefile dlls/msxml3/Makefile dlls/msxml3/tests/Makefile dlls/msxml4/Makefile dlls/msxml4/tests/Makefile dlls/msxml6/Makefile dlls/msxml6/tests/Makefile dlls/mtxdm/Makefile dlls/ncrypt/Makefile dlls/ncrypt/tests/Makefile dlls/nddeapi/Makefile dlls/ndis.sys/Makefile dlls/ndis.sys/tests/Makefile dlls/netapi32/Makefile dlls/netapi32/tests/Makefile dlls/netcfgx/Makefile dlls/netcfgx/tests/Makefile dlls/netio.sys/Makefile dlls/netprofm/Makefile dlls/netprofm/tests/Makefile dlls/netutils/Makefile dlls/newdev/Makefile dlls/ninput/Makefile dlls/ninput/tests/Makefile dlls/normaliz/Makefile dlls/npmshtml/Makefile dlls/npptools/Makefile dlls/nsi/Makefile dlls/nsi/tests/Makefile dlls/nsiproxy.sys/Makefile dlls/ntdll/Makefile dlls/ntdll/tests/Makefile dlls/ntdsapi/Makefile dlls/ntdsapi/tests/Makefile dlls/ntoskrnl.exe/Makefile dlls/ntoskrnl.exe/tests/Makefile dlls/ntprint/Makefile dlls/ntprint/tests/Makefile dlls/nvcuda/Makefile dlls/objsel/Makefile dlls/odbc32/Makefile dlls/odbc32/tests/Makefile dlls/odbcbcp/Makefile dlls/odbccp32/Makefile dlls/odbccp32/tests/Makefile dlls/odbccu32/Makefile dlls/ole2.dll16/Makefile dlls/ole2conv.dll16/Makefile dlls/ole2disp.dll16/Makefile dlls/ole2nls.dll16/Makefile dlls/ole2prox.dll16/Makefile dlls/ole2thk.dll16/Makefile dlls/ole32/Makefile dlls/ole32/tests/Makefile dlls/oleacc/Makefile dlls/oleacc/tests/Makefile dlls/oleaut32/Makefile dlls/oleaut32/tests/Makefile dlls/olecli.dll16/Makefile dlls/olecli32/Makefile dlls/oledb32/Makefile dlls/oledb32/tests/Makefile dlls/oledlg/Makefile dlls/oledlg/tests/Makefile dlls/olepro32/Makefile dlls/olesvr.dll16/Makefile dlls/olesvr32/Makefile dlls/olethk32/Makefile dlls/opcservices/Makefile dlls/opcservices/tests/Makefile dlls/opencl/Makefile dlls/opengl32/Makefile dlls/opengl32/tests/Makefile dlls/packager/Makefile dlls/packager/tests/Makefile dlls/pdh/Makefile dlls/pdh/tests/Makefile dlls/photometadatahandler/Makefile dlls/pidgen/Makefile dlls/powrprof/Makefile dlls/printui/Makefile dlls/prntvpt/Makefile dlls/prntvpt/tests/Makefile dlls/profapi/Makefile dlls/propsys/Makefile dlls/propsys/tests/Makefile dlls/protontts/Makefile dlls/psapi/Makefile dlls/psapi/tests/Makefile dlls/pstorec/Makefile dlls/pstorec/tests/Makefile dlls/pwrshplugin/Makefile dlls/qasf/Makefile dlls/qasf/tests/Makefile dlls/qcap/Makefile dlls/qcap/tests/Makefile dlls/qdvd/Makefile dlls/qdvd/tests/Makefile dlls/qedit/Makefile dlls/qedit/tests/Makefile dlls/qmgr/Makefile dlls/qmgr/tests/Makefile dlls/qmgrprxy/Makefile dlls/quartz/Makefile dlls/quartz/tests/Makefile dlls/query/Makefile dlls/qwave/Makefile dlls/qwave/tests/Makefile dlls/rasapi16.dll16/Makefile dlls/rasapi32/Makefile dlls/rasapi32/tests/Makefile dlls/rasdlg/Makefile dlls/regapi/Makefile dlls/resampledmo/Makefile dlls/resutils/Makefile dlls/riched20/Makefile dlls/riched20/tests/Makefile dlls/riched32/Makefile dlls/riched32/tests/Makefile dlls/rometadata/Makefile dlls/rometadata/tests/Makefile dlls/rpcrt4/Makefile dlls/rpcrt4/tests/Makefile dlls/rsabase/Makefile dlls/rsaenh/Makefile dlls/rsaenh/tests/Makefile dlls/rstrtmgr/Makefile dlls/rtutils/Makefile dlls/rtworkq/Makefile dlls/rtworkq/tests/Makefile dlls/samlib/Makefile dlls/sane.ds/Makefile dlls/sapi/Makefile dlls/sapi/tests/Makefile dlls/sas/Makefile dlls/scarddlg/Makefile dlls/scardsvr/Makefile dlls/sccbase/Makefile dlls/schannel/Makefile dlls/schannel/tests/Makefile dlls/schedsvc/Makefile dlls/schedsvc/tests/Makefile dlls/scrobj/Makefile dlls/scrobj/tests/Makefile dlls/scrrun/Makefile dlls/scrrun/tests/Makefile dlls/scsiport.sys/Makefile dlls/sechost/Makefile dlls/secur32/Makefile dlls/secur32/tests/Makefile dlls/security/Makefile dlls/sensapi/Makefile dlls/serialui/Makefile dlls/serialui/tests/Makefile dlls/setupapi/Makefile dlls/setupapi/tests/Makefile dlls/setupx.dll16/Makefile dlls/sfc/Makefile dlls/sfc_os/Makefile dlls/sharedgpures.sys/Makefile dlls/shcore/Makefile dlls/shcore/tests/Makefile dlls/shdoclc/Makefile dlls/shdocvw/Makefile dlls/shdocvw/tests/Makefile dlls/shell.dll16/Makefile dlls/shell32/Makefile dlls/shell32/tests/Makefile dlls/shfolder/Makefile dlls/shlwapi/Makefile dlls/shlwapi/tests/Makefile dlls/slbcsp/Makefile dlls/slc/Makefile dlls/slc/tests/Makefile dlls/snmpapi/Makefile dlls/snmpapi/tests/Makefile dlls/softpub/Makefile dlls/sound.drv16/Makefile dlls/spoolss/Makefile dlls/spoolss/tests/Makefile dlls/sppc/Makefile dlls/srclient/Makefile dlls/srvcli/Makefile dlls/srvsvc/Makefile dlls/sspicli/Makefile dlls/stdole2.tlb/Makefile dlls/stdole32.tlb/Makefile dlls/sti/Makefile dlls/sti/tests/Makefile dlls/storage.dll16/Makefile dlls/stress.dll16/Makefile dlls/strmdll/Makefile dlls/svrapi/Makefile dlls/sxs/Makefile dlls/sxs/tests/Makefile dlls/system.drv16/Makefile dlls/t2embed/Makefile dlls/t2embed/tests/Makefile dlls/tapi32/Makefile dlls/tapi32/tests/Makefile dlls/taskschd/Makefile dlls/taskschd/tests/Makefile dlls/tbs/Makefile dlls/tdh/Makefile dlls/tdi.sys/Makefile dlls/threadpoolwinrt/Makefile dlls/threadpoolwinrt/tests/Makefile dlls/toolhelp.dll16/Makefile dlls/traffic/Makefile dlls/twain.dll16/Makefile dlls/twain_32/Makefile dlls/twain_32/tests/Makefile dlls/twinapi.appcore/Makefile dlls/twinapi.appcore/tests/Makefile dlls/typelib.dll16/Makefile dlls/tzres/Makefile dlls/ucrtbase/Makefile dlls/ucrtbase/tests/Makefile dlls/uianimation/Makefile dlls/uianimation/tests/Makefile dlls/uiautomationcore/Makefile dlls/uiautomationcore/tests/Makefile dlls/uiribbon/Makefile dlls/unicows/Makefile dlls/updspapi/Makefile dlls/url/Makefile dlls/urlmon/Makefile dlls/urlmon/tests/Makefile dlls/usbd.sys/Makefile dlls/user.exe16/Makefile dlls/user32/Makefile dlls/user32/tests/Makefile dlls/userenv/Makefile dlls/userenv/tests/Makefile dlls/usp10/Makefile dlls/usp10/tests/Makefile dlls/utildll/Makefile dlls/uxtheme/Makefile dlls/uxtheme/tests/Makefile dlls/vbscript/Makefile dlls/vbscript/tests/Makefile dlls/vcomp/Makefile dlls/vcomp/tests/Makefile dlls/vcomp100/Makefile dlls/vcomp110/Makefile dlls/vcomp110/tests/Makefile dlls/vcomp120/Makefile dlls/vcomp140/Makefile dlls/vcomp90/Makefile dlls/vcruntime140/Makefile dlls/vcruntime140_1/Makefile dlls/vdhcp.vxd/Makefile dlls/vdmdbg/Makefile dlls/ver.dll16/Makefile dlls/version/Makefile dlls/version/tests/Makefile dlls/vga/Makefile dlls/vidreszr/Makefile dlls/virtdisk/Makefile dlls/virtdisk/tests/Makefile dlls/vmm.vxd/Makefile dlls/vnbt.vxd/Makefile dlls/vnetbios.vxd/Makefile dlls/vssapi/Makefile dlls/vtdapi.vxd/Makefile dlls/vulkan-1/Makefile dlls/vulkan-1/tests/Makefile dlls/vwin32.vxd/Makefile dlls/w32skrnl/Makefile dlls/w32sys.dll16/Makefile dlls/wbemdisp/Makefile dlls/wbemdisp/tests/Makefile dlls/wbemprox/Makefile dlls/wbemprox/tests/Makefile dlls/wdscore/Makefile dlls/webservices/Makefile dlls/webservices/tests/Makefile dlls/websocket/Makefile dlls/wer/Makefile dlls/wer/tests/Makefile dlls/wevtapi/Makefile dlls/wevtapi/tests/Makefile dlls/wevtsvc/Makefile dlls/wiaservc/Makefile dlls/wiaservc/tests/Makefile dlls/wimgapi/Makefile dlls/win32s16.dll16/Makefile dlls/win32u/Makefile dlls/win32u/tests/Makefile dlls/win87em.dll16/Makefile dlls/winaspi.dll16/Makefile dlls/windebug.dll16/Makefile dlls/windows.applicationmodel/Makefile dlls/windows.applicationmodel/tests/Makefile dlls/windows.devices.bluetooth/Makefile dlls/windows.devices.bluetooth/tests/Makefile dlls/windows.devices.enumeration/Makefile dlls/windows.devices.enumeration/tests/Makefile dlls/windows.devices.usb/Makefile dlls/windows.devices.usb/tests/Makefile dlls/windows.gaming.input/Makefile dlls/windows.gaming.input/tests/Makefile dlls/windows.gaming.ui.gamebar/Makefile dlls/windows.gaming.ui.gamebar/tests/Makefile dlls/windows.globalization/Makefile dlls/windows.globalization/tests/Makefile dlls/windows.media.devices/Makefile dlls/windows.media.devices/tests/Makefile dlls/windows.media.mediacontrol/Makefile dlls/windows.media.mediacontrol/tests/Makefile dlls/windows.media.speech/Makefile dlls/windows.media.speech/tests/Makefile dlls/windows.media/Makefile dlls/windows.media/tests/Makefile dlls/windows.networking.connectivity/Makefile dlls/windows.networking.connectivity/tests/Makefile dlls/windows.networking.hostname/Makefile dlls/windows.networking.hostname/tests/Makefile dlls/windows.networking/Makefile dlls/windows.perception.stub/Makefile dlls/windows.perception.stub/tests/Makefile dlls/windows.security.authentication.onlineid/Makefile dlls/windows.security.authentication.onlineid/tests/Makefile dlls/windows.security.credentials.ui.userconsentverifier/Makefile dlls/windows.security.credentials.ui.userconsentverifier/tests/Makefile dlls/windows.storage.applicationdata/Makefile dlls/windows.storage.applicationdata/tests/Makefile dlls/windows.system.profile.systemmanufacturers/Makefile dlls/windows.system.profile.systemmanufacturers/tests/Makefile dlls/windows.ui/Makefile dlls/windows.ui/tests/Makefile dlls/windows.web/Makefile dlls/windows.web/tests/Makefile dlls/windowscodecs/Makefile dlls/windowscodecs/tests/Makefile dlls/windowscodecsext/Makefile dlls/windowscodecsext/tests/Makefile dlls/winealsa.drv/Makefile dlls/wineandroid.drv/Makefile dlls/winebth.sys/Makefile dlls/winebus.sys/Makefile dlls/winecoreaudio.drv/Makefile dlls/winecrt0/Makefile dlls/wined3d/Makefile dlls/winedmo/Makefile dlls/winegstreamer/Makefile dlls/winehid.sys/Makefile dlls/winemac.drv/Makefile dlls/winemapi/Makefile dlls/wineoss.drv/Makefile dlls/wineps.drv/Makefile dlls/wineps16.drv16/Makefile dlls/winepulse.drv/Makefile dlls/wineusb.sys/Makefile dlls/winevulkan/Makefile dlls/winewayland.drv/Makefile dlls/winex11.drv/Makefile dlls/winexinput.sys/Makefile dlls/wing.dll16/Makefile dlls/wing32/Makefile dlls/wing32/tests/Makefile dlls/winhttp/Makefile dlls/winhttp/tests/Makefile dlls/wininet/Makefile dlls/wininet/tests/Makefile dlls/winmm/Makefile dlls/winmm/tests/Makefile dlls/winnls.dll16/Makefile dlls/winnls32/Makefile dlls/winprint/Makefile dlls/winscard/Makefile dlls/winscard/tests/Makefile dlls/winsock.dll16/Makefile dlls/winspool.drv/Makefile dlls/winspool.drv/tests/Makefile dlls/winsta/Makefile dlls/wintab.dll16/Makefile dlls/wintab32/Makefile dlls/wintab32/tests/Makefile dlls/wintrust/Makefile dlls/wintrust/tests/Makefile dlls/wintypes/Makefile dlls/wintypes/tests/Makefile dlls/winusb/Makefile dlls/wlanapi/Makefile dlls/wlanapi/tests/Makefile dlls/wlanui/Makefile dlls/wldap32/Makefile dlls/wldap32/tests/Makefile dlls/wldp/Makefile dlls/wldp/tests/Makefile dlls/wmadmod/Makefile dlls/wmasf/Makefile dlls/wmi/Makefile dlls/wmilib.sys/Makefile dlls/wmiutils/Makefile dlls/wmiutils/tests/Makefile dlls/wmp/Makefile dlls/wmp/tests/Makefile dlls/wmphoto/Makefile dlls/wmvcore/Makefile dlls/wmvcore/tests/Makefile dlls/wmvdecod/Makefile dlls/wnaspi32/Makefile dlls/wofutil/Makefile dlls/wow32/Makefile dlls/wow64/Makefile dlls/wow64cpu/Makefile dlls/wow64win/Makefile dlls/wpc/Makefile dlls/wpc/tests/Makefile dlls/wpcap/Makefile dlls/wpcap/tests/Makefile dlls/ws2_32/Makefile dlls/ws2_32/tests/Makefile dlls/wsdapi/Makefile dlls/wsdapi/tests/Makefile dlls/wshom.ocx/Makefile dlls/wshom.ocx/tests/Makefile dlls/wsnmp32/Makefile dlls/wsnmp32/tests/Makefile dlls/wsock32/Makefile dlls/wtsapi32/Makefile dlls/wtsapi32/tests/Makefile dlls/wuapi/Makefile dlls/wuaueng/Makefile dlls/x3daudio1_0/Makefile dlls/x3daudio1_1/Makefile dlls/x3daudio1_2/Makefile dlls/x3daudio1_3/Makefile dlls/x3daudio1_4/Makefile dlls/x3daudio1_5/Makefile dlls/x3daudio1_6/Makefile dlls/x3daudio1_7/Makefile dlls/xactengine2_0/Makefile dlls/xactengine2_4/Makefile dlls/xactengine2_7/Makefile dlls/xactengine2_9/Makefile dlls/xactengine3_0/Makefile dlls/xactengine3_1/Makefile dlls/xactengine3_2/Makefile dlls/xactengine3_3/Makefile dlls/xactengine3_4/Makefile dlls/xactengine3_5/Makefile dlls/xactengine3_6/Makefile dlls/xactengine3_7/Makefile dlls/xactengine3_7/tests/Makefile dlls/xapofx1_1/Makefile dlls/xapofx1_2/Makefile dlls/xapofx1_3/Makefile dlls/xapofx1_4/Makefile dlls/xapofx1_5/Makefile dlls/xaudio2_0/Makefile dlls/xaudio2_1/Makefile dlls/xaudio2_2/Makefile dlls/xaudio2_3/Makefile dlls/xaudio2_4/Makefile dlls/xaudio2_5/Makefile dlls/xaudio2_6/Makefile dlls/xaudio2_7/Makefile dlls/xaudio2_7/tests/Makefile dlls/xaudio2_8/Makefile dlls/xaudio2_8/tests/Makefile dlls/xaudio2_9/Makefile dlls/xinput1_1/Makefile dlls/xinput1_2/Makefile dlls/xinput1_3/Makefile dlls/xinput1_3/tests/Makefile dlls/xinput1_4/Makefile dlls/xinput9_1_0/Makefile dlls/xinputuap/Makefile dlls/xmllite/Makefile dlls/xmllite/tests/Makefile dlls/xolehlp/Makefile dlls/xpsprint/Makefile dlls/xpssvcs/Makefile dlls/xtajit64/Makefile fonts/Makefile include/Makefile libs/adsiid/Makefile libs/atl_android/Makefile libs/capstone/Makefile libs/dmoguids/Makefile libs/dxerr8/Makefile libs/dxerr9/Makefile libs/dxguid/Makefile libs/faudio/Makefile libs/fluidsynth/Makefile libs/gsm/Makefile libs/ipasim/Makefile libs/jpeg/Makefile libs/jxr/Makefile libs/lcms2/Makefile libs/ldap/Makefile libs/libretro/Makefile libs/mfuuid/Makefile libs/mpg123/Makefile libs/musl/Makefile libs/png/Makefile libs/strmbase/Makefile libs/strmiids/Makefile libs/tiff/Makefile libs/uuid/Makefile libs/vkd3d/Makefile libs/wbemuuid/Makefile libs/wmcodecdspuuid/Makefile libs/wsl/Makefile libs/xml2/Makefile libs/xslt/Makefile libs/zlib/Makefile loader/Makefile nls/Makefile po/Makefile programs/arp/Makefile programs/aspnet_regiis/Makefile programs/attrib/Makefile programs/belauncher/Makefile programs/cabarc/Makefile programs/cacls/Makefile programs/certutil/Makefile programs/chcp.com/Makefile programs/clock/Makefile programs/cmd/Makefile programs/cmd/tests/Makefile programs/conhost/Makefile programs/conhost/tests/Makefile programs/control/Makefile programs/cscript/Makefile programs/dism/Makefile programs/dllhost/Makefile programs/dplaysvr/Makefile programs/dotnetfx35/Makefile programs/dpnsvr/Makefile programs/dpvsetup/Makefile programs/dxdiag/Makefile programs/eject/Makefile programs/expand/Makefile programs/explorer/Makefile programs/explorer/tests/Makefile programs/extrac32/Makefile programs/fc/Makefile programs/fc/tests/Makefile programs/find/Makefile programs/find/tests/Makefile programs/findstr/Makefile programs/findstr/tests/Makefile programs/fsutil/Makefile programs/fsutil/tests/Makefile programs/getminidump/Makefile programs/hh/Makefile programs/hostname/Makefile programs/icacls/Makefile programs/icinfo/Makefile programs/iexplore/Makefile programs/ipconfig/Makefile programs/klist/Makefile programs/lodctr/Makefile programs/mofcomp/Makefile programs/mshta/Makefile programs/msidb/Makefile programs/msiexec/Makefile programs/msinfo32/Makefile programs/net/Makefile programs/net/tests/Makefile programs/netsh/Makefile programs/netstat/Makefile programs/ngen/Makefile programs/notepad/Makefile programs/oleview/Makefile programs/ping/Makefile programs/plugplay/Makefile programs/pnputil/Makefile programs/powershell/Makefile programs/presentationfontcache/Makefile programs/progman/Makefile programs/reg/Makefile programs/reg/tests/Makefile programs/regasm/Makefile programs/regedit/Makefile programs/regedit/tests/Makefile programs/regini/Makefile programs/regsvcs/Makefile programs/regsvr32/Makefile programs/robocopy/Makefile programs/rpcss/Makefile programs/rundll.exe16/Makefile programs/rundll32/Makefile programs/sc/Makefile programs/sc/tests/Makefile programs/schtasks/Makefile programs/schtasks/tests/Makefile programs/sdbinst/Makefile programs/secedit/Makefile programs/servicemodelreg/Makefile programs/services/Makefile programs/services/tests/Makefile programs/setx/Makefile programs/shutdown/Makefile programs/sort/Makefile programs/spoolsv/Makefile programs/start/Makefile programs/subst/Makefile programs/svchost/Makefile programs/systeminfo/Makefile programs/tabtip/Makefile programs/taskkill/Makefile programs/tasklist/Makefile programs/tasklist/tests/Makefile programs/taskmgr/Makefile programs/termsv/Makefile programs/uninstaller/Makefile programs/unlodctr/Makefile programs/view/Makefile programs/wevtutil/Makefile programs/where/Makefile programs/whoami/Makefile programs/wineboot/Makefile programs/winebrowser/Makefile programs/winecfg/Makefile programs/wineconsole/Makefile programs/winedbg/Makefile programs/winedevice/Makefile programs/winefile/Makefile programs/winemenubuilder/Makefile programs/winemsibuilder/Makefile programs/winepath/Makefile programs/winetest/Makefile programs/winevdm/Makefile programs/winhelp.exe16/Makefile programs/winhlp32/Makefile programs/winmgmt/Makefile programs/winoldap.mod16/Makefile programs/winver/Makefile programs/wmic/Makefile programs/wmplayer/Makefile programs/wordpad/Makefile programs/write/Makefile programs/wscript/Makefile programs/wscript/tests/Makefile programs/wuauserv/Makefile programs/wusa/Makefile programs/xcopy/Makefile programs/xcopy/tests/Makefile server/Makefile tools/Makefile tools/sfnt2fon/Makefile tools/widl/Makefile tools/winebuild/Makefile tools/winedump/Makefile tools/winegcc/Makefile tools/winemaker/Makefile tools/wmc/Makefile tools/wrc/Makefile"
 config_headers=" include/config.h"
+config_links=" wine:tools/winewrapper"
 config_commands=" include/stamp-h tools/makedep Makefile"
 
 ac_cs_usage="\
@@ -404,16 +404,14 @@ Usage: $0 [OPTION]... [TAG]...
                    do not print progress messages
   -d, --debug      don't remove temporary files
       --recheck    update $as_me by reconfiguring in the same conditions
-      --file=FILE[:TEMPLATE]
-                   instantiate the configuration file FILE
       --header=FILE[:TEMPLATE]
                    instantiate the configuration header FILE
 
-Configuration files:
-$config_files
-
 Configuration headers:
 $config_headers
+
+Configuration links:
+$config_links
 
 Configuration commands:
 $config_commands
@@ -466,14 +464,6 @@ do
     printf "%s\n" "$ac_cs_config"; exit ;;
   --debug | --debu | --deb | --de | --d | -d )
     debug=: ;;
-  --file | --fil | --fi | --f )
-    $ac_shift
-    case $ac_optarg in
-    *\'*) ac_optarg=`printf "%s\n" "$ac_optarg" | sed "s/'/'\\\\\\\\''/g"` ;;
-    '') as_fn_error $? "missing file argument" ;;
-    esac
-    as_fn_append CONFIG_FILES " '$ac_optarg'"
-    ac_need_defaults=false;;
   --header | --heade | --head | --hea )
     $ac_shift
     case $ac_optarg in
@@ -533,8 +523,8 @@ _ASBOX
 wine_fn_output_makedep ()
 {
     as_dir=tools; as_fn_mkdir_p
-    gcc -c -Itools -Iinclude -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB   -g -O2 -o tools/makedep.o tools/makedep.c
-    gcc -o tools/makedep tools/makedep.o 
+    gcc -m32 -c -Itools -Iinclude -Iinclude -D__WINESRC__ -DWINE_UNIX_LIB  -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4  -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -o tools/makedep.o tools/makedep.c
+    gcc -m32 -o tools/makedep tools/makedep.o 
 }
 wine_fn_output_makefile ()
 {
@@ -553,7 +543,6 @@ wine_fn_output_makefile ()
 # ctags:           create a tags file for vim and others.
 # etags:           create a TAGS file for Emacs.
 
-am__quote = 
 SHELL = /bin/sh
 PATH_SEPARATOR = :
 PACKAGE_NAME = Wine
@@ -593,28 +582,1465 @@ LIBS =
 build_alias = 
 host_alias = 
 target_alias = 
-CC = gcc
-CFLAGS = -g -O2
+system_dllpath = 
+build = x86_64-pc-linux-gnu
+build_cpu = x86_64
+build_vendor = pc
+build_os = linux-gnu
+host = x86_64-pc-linux-gnu
+host_cpu = i386
+host_vendor = pc
+host_os = linux-gnu
+srcdir = .
+SARIF_CONVERTER = 
+CC = gcc -m32
+CFLAGS = -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0
 LDFLAGS = 
 CPPFLAGS = 
 ac_ct_CC = gcc
 EXEEXT = 
 OBJEXT = o
-wine_makedep = tools/makedep
-HAVE_MACOS_TRUE = #
-HAVE_MACOS_FALSE = 
+CXX = g++ -m32
+CXXFLAGS = -g -O2
+ac_ct_CXX = g++
+CPPBIN = cpp
+LD = ld
+TARGETFLAGS =  -m32
+toolsext = 
+HOST_ARCH = i386
+aarch64_CC = 
+aarch64_CFLAGS = 
+aarch64_EXTRACFLAGS = 
+aarch64_CXXFLAGS = 
+aarch64_LDFLAGS = 
+aarch64_DEBUG = 
+aarch64_TARGET = 
+aarch64_STRIP = 
+aarch64_DELAYLOADFLAG = 
+aarch64_DISABLED_SUBDIRS = 
+arm_CC = 
+arm_CFLAGS = 
+arm_EXTRACFLAGS = 
+arm_CXXFLAGS = 
+arm_LDFLAGS = 
+arm_DEBUG = 
+arm_TARGET = 
+arm_STRIP = 
+arm_DELAYLOADFLAG = 
+arm_DISABLED_SUBDIRS = 
+arm64ec_CC = 
+arm64ec_CFLAGS = 
+arm64ec_EXTRACFLAGS = 
+arm64ec_CXXFLAGS = 
+arm64ec_LDFLAGS = 
+arm64ec_DEBUG = 
+arm64ec_TARGET = 
+arm64ec_STRIP = 
+arm64ec_DELAYLOADFLAG = 
+arm64ec_DISABLED_SUBDIRS = 
+i386_CC = i686-w64-mingw32-gcc
+i386_CFLAGS = -g -O2
+i386_EXTRACFLAGS = -D__WINE_PE_BUILD -Wall -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wno-packed-not-aligned -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wpointer-arith -Wlogical-op -Wabsolute-value -ffunction-sections -Wno-misleading-indentation -fno-omit-frame-pointer -mpreferred-stack-boundary=2 -gdwarf-4
+i386_CXXFLAGS = 
+i386_LDFLAGS =  -Wl,--disable-stdcall-fixup
+i386_DEBUG = dwarf
+i386_TARGET = i686-w64-mingw32
+i386_STRIP = i686-w64-mingw32-strip
+i386_DELAYLOADFLAG = 
+i386_DISABLED_SUBDIRS =  dlls/vcruntime140_1 dlls/wow64 dlls/wow64cpu dlls/wow64win dlls/xtajit64
+x86_64_CC = 
+x86_64_CFLAGS = 
+x86_64_EXTRACFLAGS = 
+x86_64_CXXFLAGS = 
+x86_64_LDFLAGS = 
+x86_64_DEBUG = 
+x86_64_TARGET = 
+x86_64_STRIP = 
+x86_64_DELAYLOADFLAG = 
+x86_64_DISABLED_SUBDIRS = 
+toolsdir = 
+RUNTESTFLAGS = -q -P wine
+SED_CMD = LC_ALL=C sed -e 's,@bindir@,${bindir},g' -e 's,@PACKAGE_STRING@,Wine 10.0,g' -e 's,@PACKAGE_VERSION@,10.0,g'
+FLEX = flex
+BISON = bison
+STRIP = strip
+LN_S = ln -s
+PKG_CONFIG = pkg-config
+FONTFORGE = 
+RSVG = 
+CONVERT = 
+ICOTOOL = 
+MSGFMT = false
+I386_LIBS = 
+OPENGL_LIBS = 
+DLLFLAGS =  -fno-PIC -fasynchronous-unwind-tables
+LDDLLFLAGS = -fno-PIC -Wl,-z,notext -fasynchronous-unwind-tables
+LDEXECFLAGS = 
+EXTRACFLAGS =  -Wall -pipe -fcf-protection=none -fvisibility=hidden -fno-stack-protector -fno-strict-aliasing -Wdeclaration-after-statement -Wempty-body -Wignored-qualifiers -Winit-self -Wlogical-op -Wno-packed-not-aligned -Wpointer-arith -Wshift-overflow=2 -Wstrict-prototypes -Wtype-limits -Wunused-but-set-parameter -Wvla -Wwrite-strings -Wno-misleading-indentation -gdwarf-4
+UNIXDLLFLAGS = -fPIC -fasynchronous-unwind-tables
+UNIXLDFLAGS = -shared -Wl,-Bsymbolic -Wl,-soname,$(UNIXLIB) -Wl,-z,defs
+TOP_INSTALL_LIB =  fonts loader/wine.inf nls programs/msidb/msidb programs/msiexec/msiexec programs/notepad/notepad programs/regedit/regedit programs/regsvr32/regsvr32 programs/wineboot/wineboot programs/winecfg/winecfg programs/wineconsole/wineconsole programs/winedbg/winedbg programs/winefile/winefile programs/winemine/winemine programs/winepath/winepath server/wineserver loader/wine.desktop
+TOP_INSTALL_DEV =  include
+WINELOADER_LDFLAGS = -Wl,--export-dynamic -pie
+WINEPRELOADER_LDFLAGS = -nostartfiles -nodefaultlibs -static -Wl,-Ttext=0x7d400000
+DLLEXT = .so
+LDD = /usr/bin/ldd
+OTOOL = otool
+READELF = readelf
+SUBDIRS =  \
+	dlls/acledit \
+	dlls/aclui \
+	dlls/activeds.tlb \
+	dlls/activeds \
+	dlls/activeds/tests \
+	dlls/actxprxy \
+	dlls/adsldp \
+	dlls/adsldp/tests \
+	dlls/adsldpc \
+	dlls/advapi32 \
+	dlls/advapi32/tests \
+	dlls/advpack \
+	dlls/advpack/tests \
+	dlls/amsi \
+	dlls/amd_ags_x64 \
+	dlls/amdxc64 \
+	dlls/amstream \
+	dlls/amstream/tests \
+	dlls/apisetschema \
+	dlls/apphelp \
+	dlls/apphelp/tests \
+	dlls/appwiz.cpl \
+	dlls/appxdeploymentclient \
+	dlls/atiadlxx \
+	dlls/atl \
+	dlls/atl/tests \
+	dlls/atl100 \
+	dlls/atl100/tests \
+	dlls/atl110 \
+	dlls/atl110/tests \
+	dlls/atl80 \
+	dlls/atl80/tests \
+	dlls/atl90 \
+	dlls/atlthunk \
+	dlls/atlthunk/tests \
+	dlls/atmlib \
+	dlls/audioses \
+	dlls/authz \
+	dlls/avicap32 \
+	dlls/avifil32 \
+	dlls/avifil32/tests \
+	dlls/avifile.dll16 \
+	dlls/avrt \
+	dlls/bcp47langs \
+	dlls/bcrypt \
+	dlls/bcrypt/tests \
+	dlls/bcryptprimitives \
+	dlls/bluetoothapis \
+	dlls/bluetoothapis/tests \
+	dlls/browseui \
+	dlls/browseui/tests \
+	dlls/bthprops.cpl \
+	dlls/cabinet \
+	dlls/cabinet/tests \
+	dlls/capi2032 \
+	dlls/cards \
+	dlls/cdosys \
+	dlls/cfgmgr32 \
+	dlls/cfgmgr32/tests \
+	dlls/clusapi \
+	dlls/cng.sys \
+	dlls/colorcnv \
+	dlls/combase \
+	dlls/combase/tests \
+	dlls/comcat \
+	dlls/comcat/tests \
+	dlls/comctl32 \
+	dlls/comctl32/tests \
+	dlls/comdlg32 \
+	dlls/comdlg32/tests \
+	dlls/coml2 \
+	dlls/comm.drv16 \
+	dlls/commdlg.dll16 \
+	dlls/compobj.dll16 \
+	dlls/compstui \
+	dlls/compstui/tests \
+	dlls/comsvcs \
+	dlls/comsvcs/tests \
+	dlls/concrt140 \
+	dlls/concrt140/tests \
+	dlls/connect \
+	dlls/coremessaging \
+	dlls/credui \
+	dlls/credui/tests \
+	dlls/crtdll \
+	dlls/crypt32 \
+	dlls/crypt32/tests \
+	dlls/cryptdlg \
+	dlls/cryptdll \
+	dlls/cryptext \
+	dlls/cryptnet \
+	dlls/cryptnet/tests \
+	dlls/cryptowinrt \
+	dlls/cryptowinrt/tests \
+	dlls/cryptsp \
+	dlls/cryptui \
+	dlls/cryptui/tests \
+	dlls/ctapi32 \
+	dlls/ctl3d.dll16 \
+	dlls/ctl3d32 \
+	dlls/ctl3dv2.dll16 \
+	dlls/d2d1 \
+	dlls/d2d1/tests \
+	dlls/d3d10 \
+	dlls/d3d10/tests \
+	dlls/d3d10_1 \
+	dlls/d3d10_1/tests \
+	dlls/d3d10core \
+	dlls/d3d10core/tests \
+	dlls/d3d11 \
+	dlls/d3d11/tests \
+	dlls/d3d12 \
+	dlls/d3d12/tests \
+	dlls/d3d12core \
+	dlls/d3d8 \
+	dlls/d3d8/tests \
+	dlls/d3d8thk \
+	dlls/d3d9 \
+	dlls/d3d9/tests \
+	dlls/d3dcompiler_33 \
+	dlls/d3dcompiler_34 \
+	dlls/d3dcompiler_35 \
+	dlls/d3dcompiler_36 \
+	dlls/d3dcompiler_37 \
+	dlls/d3dcompiler_38 \
+	dlls/d3dcompiler_39 \
+	dlls/d3dcompiler_40 \
+	dlls/d3dcompiler_41 \
+	dlls/d3dcompiler_42 \
+	dlls/d3dcompiler_43 \
+	dlls/d3dcompiler_43/tests \
+	dlls/d3dcompiler_46 \
+	dlls/d3dcompiler_46/tests \
+	dlls/d3dcompiler_47 \
+	dlls/d3dcompiler_47/tests \
+	dlls/d3dim \
+	dlls/d3dim700 \
+	dlls/d3drm \
+	dlls/d3drm/tests \
+	dlls/d3dx10_33 \
+	dlls/d3dx10_34 \
+	dlls/d3dx10_34/tests \
+	dlls/d3dx10_35 \
+	dlls/d3dx10_35/tests \
+	dlls/d3dx10_36 \
+	dlls/d3dx10_36/tests \
+	dlls/d3dx10_37 \
+	dlls/d3dx10_37/tests \
+	dlls/d3dx10_38 \
+	dlls/d3dx10_38/tests \
+	dlls/d3dx10_39 \
+	dlls/d3dx10_39/tests \
+	dlls/d3dx10_40 \
+	dlls/d3dx10_40/tests \
+	dlls/d3dx10_41 \
+	dlls/d3dx10_41/tests \
+	dlls/d3dx10_42 \
+	dlls/d3dx10_42/tests \
+	dlls/d3dx10_43 \
+	dlls/d3dx10_43/tests \
+	dlls/d3dx11_42 \
+	dlls/d3dx11_42/tests \
+	dlls/d3dx11_43 \
+	dlls/d3dx11_43/tests \
+	dlls/d3dx9_24 \
+	dlls/d3dx9_25 \
+	dlls/d3dx9_26 \
+	dlls/d3dx9_27 \
+	dlls/d3dx9_28 \
+	dlls/d3dx9_29 \
+	dlls/d3dx9_30 \
+	dlls/d3dx9_31 \
+	dlls/d3dx9_32 \
+	dlls/d3dx9_33 \
+	dlls/d3dx9_34 \
+	dlls/d3dx9_35 \
+	dlls/d3dx9_36 \
+	dlls/d3dx9_36/tests \
+	dlls/d3dx9_37 \
+	dlls/d3dx9_38 \
+	dlls/d3dx9_39 \
+	dlls/d3dx9_40 \
+	dlls/d3dx9_41 \
+	dlls/d3dx9_42 \
+	dlls/d3dx9_43 \
+	dlls/d3dx9_43/tests \
+	dlls/d3dxof \
+	dlls/d3dxof/tests \
+	dlls/dataexchange \
+	dlls/dataexchange/tests \
+	dlls/davclnt \
+	dlls/dbgeng \
+	dlls/dbgeng/tests \
+	dlls/dbghelp \
+	dlls/dbghelp/tests \
+	dlls/dciman32 \
+	dlls/dcomp \
+	dlls/ddeml.dll16 \
+	dlls/ddraw \
+	dlls/ddraw/tests \
+	dlls/ddrawex \
+	dlls/ddrawex/tests \
+	dlls/desk.cpl \
+	dlls/devenum \
+	dlls/devenum/tests \
+	dlls/dhcpcsvc \
+	dlls/dhcpcsvc/tests \
+	dlls/dhcpcsvc6 \
+	dlls/dhtmled.ocx \
+	dlls/diasymreader \
+	dlls/difxapi \
+	dlls/dinput \
+	dlls/dinput/tests \
+	dlls/dinput8 \
+	dlls/directmanipulation \
+	dlls/directmanipulation/tests \
+	dlls/dispdib.dll16 \
+	dlls/dispex \
+	dlls/dispex/tests \
+	dlls/display.drv16 \
+	dlls/dmband \
+	dlls/dmband/tests \
+	dlls/dmcompos \
+	dlls/dmcompos/tests \
+	dlls/dmime \
+	dlls/dmime/tests \
+	dlls/dmloader \
+	dlls/dmloader/tests \
+	dlls/dmscript \
+	dlls/dmscript/tests \
+	dlls/dmstyle \
+	dlls/dmstyle/tests \
+	dlls/dmsynth \
+	dlls/dmsynth/tests \
+	dlls/dmusic \
+	dlls/dmusic/tests \
+	dlls/dmusic32 \
+	dlls/dnsapi \
+	dlls/dnsapi/tests \
+	dlls/dplay \
+	dlls/dplayx \
+	dlls/dplayx/tests \
+	dlls/dpnaddr \
+	dlls/dpnet \
+	dlls/dpnet/tests \
+	dlls/dpnhpast \
+	dlls/dpnhupnp \
+	dlls/dpnlobby \
+	dlls/dpvoice \
+	dlls/dpvoice/tests \
+	dlls/dpwsockx \
+	dlls/drmclien \
+	dlls/dsdmo \
+	dlls/dsdmo/tests \
+	dlls/dsound \
+	dlls/dsound/tests \
+	dlls/dsquery \
+	dlls/dssenh \
+	dlls/dssenh/tests \
+	dlls/dsuiext \
+	dlls/dswave \
+	dlls/dswave/tests \
+	dlls/dwmapi \
+	dlls/dwmapi/tests \
+	dlls/dwrite \
+	dlls/dwrite/tests \
+	dlls/dx8vb \
+	dlls/dxcore \
+	dlls/dxdiagn \
+	dlls/dxdiagn/tests \
+	dlls/dxgi \
+	dlls/dxgi/tests \
+	dlls/dxtrans \
+	dlls/dxva2 \
+	dlls/dxva2/tests \
+	dlls/esent \
+	dlls/evr \
+	dlls/evr/tests \
+	dlls/explorerframe \
+	dlls/explorerframe/tests \
+	dlls/faultrep \
+	dlls/faultrep/tests \
+	dlls/feclient \
+	dlls/fltlib \
+	dlls/fltmgr.sys \
+	dlls/fntcache \
+	dlls/fontsub \
+	dlls/fusion \
+	dlls/fusion/tests \
+	dlls/fwpuclnt \
+	dlls/gameinput \
+	dlls/gameux \
+	dlls/gameux/tests \
+	dlls/gamingtcui \
+	dlls/gdi.exe16 \
+	dlls/gdi32 \
+	dlls/gdi32/tests \
+	dlls/gdiplus \
+	dlls/gdiplus/tests \
+	dlls/geolocation \
+	dlls/geolocation/tests \
+	dlls/glu32 \
+	dlls/glu32/tests \
+	dlls/gphoto2.ds \
+	dlls/gpkcsp \
+	dlls/graphicscapture \
+	dlls/graphicscapture/tests \
+	dlls/hal \
+	dlls/hhctrl.ocx \
+	dlls/hid \
+	dlls/hid/tests \
+	dlls/hidclass.sys \
+	dlls/hidparse.sys \
+	dlls/hlink \
+	dlls/hlink/tests \
+	dlls/hnetcfg \
+	dlls/hnetcfg/tests \
+	dlls/hrtfapo \
+	dlls/http.sys \
+	dlls/httpapi \
+	dlls/httpapi/tests \
+	dlls/hvsimanagementapi \
+	dlls/hvsimanagementapi/tests \
+	dlls/ia2comproxy \
+	dlls/iccvid \
+	dlls/icmp \
+	dlls/icmui \
+	dlls/icmui/tests \
+	dlls/icu \
+	dlls/ieframe \
+	dlls/ieframe/tests \
+	dlls/ieproxy \
+	dlls/iertutil \
+	dlls/iertutil/tests \
+	dlls/ifsmgr.vxd \
+	dlls/imaadp32.acm \
+	dlls/imagehlp \
+	dlls/imagehlp/tests \
+	dlls/imm.dll16 \
+	dlls/imm32 \
+	dlls/imm32/tests \
+	dlls/inetcomm \
+	dlls/inetcomm/tests \
+	dlls/inetcpl.cpl \
+	dlls/inetmib1 \
+	dlls/inetmib1/tests \
+	dlls/infosoft \
+	dlls/infosoft/tests \
+	dlls/initpki \
+	dlls/inkobj \
+	dlls/inseng \
+	dlls/iphlpapi \
+	dlls/iphlpapi/tests \
+	dlls/iprop \
+	dlls/irprops.cpl \
+	dlls/itircl \
+	dlls/itss \
+	dlls/itss/tests \
+	dlls/joy.cpl \
+	dlls/jscript \
+	dlls/jscript/tests \
+	dlls/jsproxy \
+	dlls/jsproxy/tests \
+	dlls/kerberos \
+	dlls/kernel32 \
+	dlls/kernel32/tests \
+	dlls/kernelbase \
+	dlls/kernelbase/tests \
+	dlls/keyboard.drv16 \
+	dlls/krnl386.exe16 \
+	dlls/ksecdd.sys \
+	dlls/ksproxy.ax \
+	dlls/ksuser \
+	dlls/ktmw32 \
+	dlls/l3codeca.acm \
+	dlls/l3codecx.ax \
+	dlls/light.msstyles \
+	dlls/loadperf \
+	dlls/localspl \
+	dlls/localspl/tests \
+	dlls/localui \
+	dlls/localui/tests \
+	dlls/lz32 \
+	dlls/lz32/tests \
+	dlls/lzexpand.dll16 \
+	dlls/magnification \
+	dlls/mapi32 \
+	dlls/mapi32/tests \
+	dlls/mapistub \
+	dlls/mciavi32 \
+	dlls/mcicda \
+	dlls/mciqtz32 \
+	dlls/mciseq \
+	dlls/mciwave \
+	dlls/mf \
+	dlls/mf/tests \
+	dlls/mf3216 \
+	dlls/mfasfsrcsnk \
+	dlls/mferror \
+	dlls/mfh264enc \
+	dlls/mfmediaengine \
+	dlls/mfmediaengine/tests \
+	dlls/mfmp4srcsnk \
+	dlls/mfplat \
+	dlls/mfplat/tests \
+	dlls/mfplay \
+	dlls/mfplay/tests \
+	dlls/mfreadwrite \
+	dlls/mfreadwrite/tests \
+	dlls/mfsrcsnk \
+	dlls/mfsrcsnk/tests \
+	dlls/mgmtapi \
+	dlls/midimap \
+	dlls/mlang \
+	dlls/mlang/tests \
+	dlls/mmcndmgr \
+	dlls/mmcndmgr/tests \
+	dlls/mmdevapi \
+	dlls/mmdevapi/tests \
+	dlls/mmdevldr.vxd \
+	dlls/mmsystem.dll16 \
+	dlls/monodebg.vxd \
+	dlls/mouhid.sys \
+	dlls/mountmgr.sys \
+	dlls/mouse.drv16 \
+	dlls/mp3dmod \
+	dlls/mp3dmod/tests \
+	dlls/mpr \
+	dlls/mpr/tests \
+	dlls/mprapi \
+	dlls/msacm.dll16 \
+	dlls/msacm32.drv \
+	dlls/msacm32 \
+	dlls/msacm32/tests \
+	dlls/msado15 \
+	dlls/msado15/tests \
+	dlls/msadp32.acm \
+	dlls/msasn1 \
+	dlls/msasn1/tests \
+	dlls/msauddecmft \
+	dlls/mscat32 \
+	dlls/mscms \
+	dlls/mscms/tests \
+	dlls/mscoree \
+	dlls/mscoree/tests \
+	dlls/mscorwks \
+	dlls/msctf \
+	dlls/msctf/tests \
+	dlls/msctfmonitor \
+	dlls/msctfp \
+	dlls/msdaps \
+	dlls/msdasql \
+	dlls/msdasql/tests \
+	dlls/msdelta \
+	dlls/msdmo \
+	dlls/msdmo/tests \
+	dlls/msdrm \
+	dlls/msftedit \
+	dlls/msftedit/tests \
+	dlls/msg711.acm \
+	dlls/msgsm32.acm \
+	dlls/mshtml.tlb \
+	dlls/mshtml \
+	dlls/mshtml/tests \
+	dlls/msi \
+	dlls/msi/tests \
+	dlls/msident \
+	dlls/msimg32 \
+	dlls/msimsg \
+	dlls/msimtf \
+	dlls/msisip \
+	dlls/msisys.ocx \
+	dlls/msls31 \
+	dlls/msmpeg2vdec \
+	dlls/msnet32 \
+	dlls/mspatcha \
+	dlls/mspatcha/tests \
+	dlls/msports \
+	dlls/msrle32 \
+	dlls/msrle32/tests \
+	dlls/msscript.ocx \
+	dlls/msscript.ocx/tests \
+	dlls/mssign32 \
+	dlls/mssip32 \
+	dlls/mstask \
+	dlls/mstask/tests \
+	dlls/msttsengine \
+	dlls/msv1_0 \
+	dlls/msvcirt \
+	dlls/msvcirt/tests \
+	dlls/msvcm80 \
+	dlls/msvcm90 \
+	dlls/msvcp100 \
+	dlls/msvcp100/tests \
+	dlls/msvcp110 \
+	dlls/msvcp110/tests \
+	dlls/msvcp120 \
+	dlls/msvcp120/tests \
+	dlls/msvcp120_app \
+	dlls/msvcp140 \
+	dlls/msvcp140/tests \
+	dlls/msvcp140_1 \
+	dlls/msvcp140_1/tests \
+	dlls/msvcp140_2 \
+	dlls/msvcp140_2/tests \
+	dlls/msvcp140_atomic_wait \
+	dlls/msvcp140_atomic_wait/tests \
+	dlls/msvcp140_codecvt_ids \
+	dlls/msvcp60 \
+	dlls/msvcp60/tests \
+	dlls/msvcp70 \
+	dlls/msvcp71 \
+	dlls/msvcp80 \
+	dlls/msvcp90 \
+	dlls/msvcp90/tests \
+	dlls/msvcp_win \
+	dlls/msvcr100 \
+	dlls/msvcr100/tests \
+	dlls/msvcr110 \
+	dlls/msvcr110/tests \
+	dlls/msvcr120 \
+	dlls/msvcr120/tests \
+	dlls/msvcr120_app \
+	dlls/msvcr70 \
+	dlls/msvcr70/tests \
+	dlls/msvcr71 \
+	dlls/msvcr71/tests \
+	dlls/msvcr80 \
+	dlls/msvcr80/tests \
+	dlls/msvcr90 \
+	dlls/msvcr90/tests \
+	dlls/msvcrt \
+	dlls/msvcrt/tests \
+	dlls/msvcrt20 \
+	dlls/msvcrt40 \
+	dlls/msvcrtd \
+	dlls/msvcrtd/tests \
+	dlls/msvfw32 \
+	dlls/msvfw32/tests \
+	dlls/msvidc32 \
+	dlls/msvideo.dll16 \
+	dlls/msvdsp \
+	dlls/msvproc \
+	dlls/mswsock \
+	dlls/msxml \
+	dlls/msxml2 \
+	dlls/msxml3 \
+	dlls/msxml3/tests \
+	dlls/msxml4 \
+	dlls/msxml4/tests \
+	dlls/msxml6 \
+	dlls/msxml6/tests \
+	dlls/mtxdm \
+	dlls/ncrypt \
+	dlls/ncrypt/tests \
+	dlls/nddeapi \
+	dlls/ndis.sys \
+	dlls/ndis.sys/tests \
+	dlls/netapi32 \
+	dlls/netapi32/tests \
+	dlls/netcfgx \
+	dlls/netcfgx/tests \
+	dlls/netio.sys \
+	dlls/netprofm \
+	dlls/netprofm/tests \
+	dlls/netutils \
+	dlls/newdev \
+	dlls/ninput \
+	dlls/ninput/tests \
+	dlls/normaliz \
+	dlls/npmshtml \
+	dlls/npptools \
+	dlls/nsi \
+	dlls/nsi/tests \
+	dlls/nsiproxy.sys \
+	dlls/ntdll \
+	dlls/ntdll/tests \
+	dlls/ntdsapi \
+	dlls/ntdsapi/tests \
+	dlls/ntoskrnl.exe \
+	dlls/ntoskrnl.exe/tests \
+	dlls/ntprint \
+	dlls/ntprint/tests \
+	dlls/nvcuda \
+	dlls/objsel \
+	dlls/odbc32 \
+	dlls/odbc32/tests \
+	dlls/odbcbcp \
+	dlls/odbccp32 \
+	dlls/odbccp32/tests \
+	dlls/odbccu32 \
+	dlls/ole2.dll16 \
+	dlls/ole2conv.dll16 \
+	dlls/ole2disp.dll16 \
+	dlls/ole2nls.dll16 \
+	dlls/ole2prox.dll16 \
+	dlls/ole2thk.dll16 \
+	dlls/ole32 \
+	dlls/ole32/tests \
+	dlls/oleacc \
+	dlls/oleacc/tests \
+	dlls/oleaut32 \
+	dlls/oleaut32/tests \
+	dlls/olecli.dll16 \
+	dlls/olecli32 \
+	dlls/oledb32 \
+	dlls/oledb32/tests \
+	dlls/oledlg \
+	dlls/oledlg/tests \
+	dlls/olepro32 \
+	dlls/olesvr.dll16 \
+	dlls/olesvr32 \
+	dlls/olethk32 \
+	dlls/opcservices \
+	dlls/opcservices/tests \
+	dlls/opencl \
+	dlls/opengl32 \
+	dlls/opengl32/tests \
+	dlls/packager \
+	dlls/packager/tests \
+	dlls/pdh \
+	dlls/pdh/tests \
+	dlls/photometadatahandler \
+	dlls/pidgen \
+	dlls/powrprof \
+	dlls/printui \
+	dlls/prntvpt \
+	dlls/prntvpt/tests \
+	dlls/profapi \
+	dlls/propsys \
+	dlls/propsys/tests \
+	dlls/protontts \
+	dlls/psapi \
+	dlls/psapi/tests \
+	dlls/pstorec \
+	dlls/pstorec/tests \
+	dlls/pwrshplugin \
+	dlls/qasf \
+	dlls/qasf/tests \
+	dlls/qcap \
+	dlls/qcap/tests \
+	dlls/qdvd \
+	dlls/qdvd/tests \
+	dlls/qedit \
+	dlls/qedit/tests \
+	dlls/qmgr \
+	dlls/qmgr/tests \
+	dlls/qmgrprxy \
+	dlls/quartz \
+	dlls/quartz/tests \
+	dlls/query \
+	dlls/qwave \
+	dlls/qwave/tests \
+	dlls/rasapi16.dll16 \
+	dlls/rasapi32 \
+	dlls/rasapi32/tests \
+	dlls/rasdlg \
+	dlls/regapi \
+	dlls/resampledmo \
+	dlls/resutils \
+	dlls/riched20 \
+	dlls/riched20/tests \
+	dlls/riched32 \
+	dlls/riched32/tests \
+	dlls/rometadata \
+	dlls/rometadata/tests \
+	dlls/rpcrt4 \
+	dlls/rpcrt4/tests \
+	dlls/rsabase \
+	dlls/rsaenh \
+	dlls/rsaenh/tests \
+	dlls/rstrtmgr \
+	dlls/rtutils \
+	dlls/rtworkq \
+	dlls/rtworkq/tests \
+	dlls/samlib \
+	dlls/sane.ds \
+	dlls/sapi \
+	dlls/sapi/tests \
+	dlls/sas \
+	dlls/scarddlg \
+	dlls/scardsvr \
+	dlls/sccbase \
+	dlls/schannel \
+	dlls/schannel/tests \
+	dlls/schedsvc \
+	dlls/schedsvc/tests \
+	dlls/scrobj \
+	dlls/scrobj/tests \
+	dlls/scrrun \
+	dlls/scrrun/tests \
+	dlls/scsiport.sys \
+	dlls/sechost \
+	dlls/secur32 \
+	dlls/secur32/tests \
+	dlls/security \
+	dlls/sensapi \
+	dlls/serialui \
+	dlls/serialui/tests \
+	dlls/setupapi \
+	dlls/setupapi/tests \
+	dlls/setupx.dll16 \
+	dlls/sfc \
+	dlls/sfc_os \
+	dlls/sharedgpures.sys \
+	dlls/shcore \
+	dlls/shcore/tests \
+	dlls/shdoclc \
+	dlls/shdocvw \
+	dlls/shdocvw/tests \
+	dlls/shell.dll16 \
+	dlls/shell32 \
+	dlls/shell32/tests \
+	dlls/shfolder \
+	dlls/shlwapi \
+	dlls/shlwapi/tests \
+	dlls/slbcsp \
+	dlls/slc \
+	dlls/slc/tests \
+	dlls/snmpapi \
+	dlls/snmpapi/tests \
+	dlls/softpub \
+	dlls/sound.drv16 \
+	dlls/spoolss \
+	dlls/spoolss/tests \
+	dlls/sppc \
+	dlls/srclient \
+	dlls/srvcli \
+	dlls/srvsvc \
+	dlls/sspicli \
+	dlls/stdole2.tlb \
+	dlls/stdole32.tlb \
+	dlls/sti \
+	dlls/sti/tests \
+	dlls/storage.dll16 \
+	dlls/stress.dll16 \
+	dlls/strmdll \
+	dlls/svrapi \
+	dlls/sxs \
+	dlls/sxs/tests \
+	dlls/system.drv16 \
+	dlls/t2embed \
+	dlls/t2embed/tests \
+	dlls/tapi32 \
+	dlls/tapi32/tests \
+	dlls/taskschd \
+	dlls/taskschd/tests \
+	dlls/tbs \
+	dlls/tdh \
+	dlls/tdh/tests \
+	dlls/tdi.sys \
+	dlls/threadpoolwinrt \
+	dlls/threadpoolwinrt/tests \
+	dlls/toolhelp.dll16 \
+	dlls/traffic \
+	dlls/twain.dll16 \
+	dlls/twain_32 \
+	dlls/twain_32/tests \
+	dlls/twinapi.appcore \
+	dlls/twinapi.appcore/tests \
+	dlls/typelib.dll16 \
+	dlls/tzres \
+	dlls/ucrtbase \
+	dlls/ucrtbase/tests \
+	dlls/uianimation \
+	dlls/uianimation/tests \
+	dlls/uiautomationcore \
+	dlls/uiautomationcore/tests \
+	dlls/uiribbon \
+	dlls/unicows \
+	dlls/updspapi \
+	dlls/url \
+	dlls/urlmon \
+	dlls/urlmon/tests \
+	dlls/usbd.sys \
+	dlls/user.exe16 \
+	dlls/user32 \
+	dlls/user32/tests \
+	dlls/userenv \
+	dlls/userenv/tests \
+	dlls/usp10 \
+	dlls/usp10/tests \
+	dlls/utildll \
+	dlls/uxtheme \
+	dlls/uxtheme/tests \
+	dlls/vbscript \
+	dlls/vbscript/tests \
+	dlls/vccorlib140 \
+	dlls/vccorlib140/tests \
+	dlls/vcomp \
+	dlls/vcomp/tests \
+	dlls/vcomp100 \
+	dlls/vcomp110 \
+	dlls/vcomp110/tests \
+	dlls/vcomp120 \
+	dlls/vcomp140 \
+	dlls/vcomp90 \
+	dlls/vcruntime140 \
+	dlls/vcruntime140_1 \
+	dlls/vdhcp.vxd \
+	dlls/vdmdbg \
+	dlls/ver.dll16 \
+	dlls/version \
+	dlls/version/tests \
+	dlls/vga \
+	dlls/vidreszr \
+	dlls/virtdisk \
+	dlls/virtdisk/tests \
+	dlls/vmm.vxd \
+	dlls/vnbt.vxd \
+	dlls/vnetbios.vxd \
+	dlls/vssapi \
+	dlls/vtdapi.vxd \
+	dlls/vulkan-1 \
+	dlls/vulkan-1/tests \
+	dlls/vwin32.vxd \
+	dlls/w32skrnl \
+	dlls/w32sys.dll16 \
+	dlls/wbemdisp \
+	dlls/wbemdisp/tests \
+	dlls/wbemprox \
+	dlls/wbemprox/tests \
+	dlls/wdscore \
+	dlls/webservices \
+	dlls/webservices/tests \
+	dlls/websocket \
+	dlls/wer \
+	dlls/wer/tests \
+	dlls/wevtapi \
+	dlls/wevtapi/tests \
+	dlls/wevtsvc \
+	dlls/wiaservc \
+	dlls/wiaservc/tests \
+	dlls/wimgapi \
+	dlls/win32s16.dll16 \
+	dlls/win32u \
+	dlls/win32u/tests \
+	dlls/win87em.dll16 \
+	dlls/winaspi.dll16 \
+	dlls/windebug.dll16 \
+	dlls/windows.applicationmodel \
+	dlls/windows.applicationmodel/tests \
+	dlls/windows.devices.bluetooth \
+	dlls/windows.devices.bluetooth/tests \
+	dlls/windows.devices.enumeration \
+	dlls/windows.devices.enumeration/tests \
+	dlls/windows.devices.usb \
+	dlls/windows.devices.usb/tests \
+	dlls/windows.gaming.input \
+	dlls/windows.gaming.input/tests \
+	dlls/windows.gaming.ui.gamebar \
+	dlls/windows.gaming.ui.gamebar/tests \
+	dlls/windows.globalization \
+	dlls/windows.globalization/tests \
+	dlls/windows.media.devices \
+	dlls/windows.media.devices/tests \
+	dlls/windows.media.mediacontrol \
+	dlls/windows.media.mediacontrol/tests \
+	dlls/windows.media.speech \
+	dlls/windows.media.speech/tests \
+	dlls/windows.media \
+	dlls/windows.media/tests \
+	dlls/windows.networking.connectivity \
+	dlls/windows.networking.connectivity/tests \
+	dlls/windows.networking.hostname \
+	dlls/windows.networking.hostname/tests \
+	dlls/windows.networking \
+	dlls/windows.perception.stub \
+	dlls/windows.perception.stub/tests \
+	dlls/windows.security.authentication.onlineid \
+	dlls/windows.security.authentication.onlineid/tests \
+	dlls/windows.security.credentials.ui.userconsentverifier \
+	dlls/windows.security.credentials.ui.userconsentverifier/tests \
+	dlls/windows.storage.applicationdata \
+	dlls/windows.storage.applicationdata/tests \
+	dlls/windows.storage \
+	dlls/windows.storage/tests \
+	dlls/windows.system.profile.systemmanufacturers \
+	dlls/windows.system.profile.systemmanufacturers/tests \
+	dlls/windows.ui \
+	dlls/windows.ui/tests \
+	dlls/windows.web \
+	dlls/windows.web/tests \
+	dlls/windowscodecs \
+	dlls/windowscodecs/tests \
+	dlls/windowscodecsext \
+	dlls/windowscodecsext/tests \
+	dlls/winealsa.drv \
+	dlls/wineandroid.drv \
+	dlls/winebth.sys \
+	dlls/winebus.sys \
+	dlls/winecoreaudio.drv \
+	dlls/winecrt0 \
+	dlls/wined3d \
+	dlls/winedmo \
+	dlls/winegstreamer \
+	dlls/winehid.sys \
+	dlls/winemac.drv \
+	dlls/winemapi \
+	dlls/wineoss.drv \
+	dlls/wineps.drv \
+	dlls/wineps16.drv16 \
+	dlls/winepulse.drv \
+	dlls/wineusb.sys \
+	dlls/winevulkan \
+	dlls/winewayland.drv \
+	dlls/winex11.drv \
+	dlls/winexinput.sys \
+	dlls/wing.dll16 \
+	dlls/wing32 \
+	dlls/wing32/tests \
+	dlls/winhttp \
+	dlls/winhttp/tests \
+	dlls/wininet \
+	dlls/wininet/tests \
+	dlls/winmm \
+	dlls/winmm/tests \
+	dlls/winnls.dll16 \
+	dlls/winnls32 \
+	dlls/winprint \
+	dlls/winscard \
+	dlls/winscard/tests \
+	dlls/winsock.dll16 \
+	dlls/winspool.drv \
+	dlls/winspool.drv/tests \
+	dlls/winsta \
+	dlls/wintab.dll16 \
+	dlls/wintab32 \
+	dlls/wintab32/tests \
+	dlls/wintrust \
+	dlls/wintrust/tests \
+	dlls/wintypes \
+	dlls/wintypes/tests \
+	dlls/winusb \
+	dlls/wlanapi \
+	dlls/wlanapi/tests \
+	dlls/wlanui \
+	dlls/wldap32 \
+	dlls/wldap32/tests \
+	dlls/wldp \
+	dlls/wldp/tests \
+	dlls/wmadmod \
+	dlls/wmasf \
+	dlls/wmi \
+	dlls/wmilib.sys \
+	dlls/wmiutils \
+	dlls/wmiutils/tests \
+	dlls/wmp \
+	dlls/wmp/tests \
+	dlls/wmphoto \
+	dlls/wmvcore \
+	dlls/wmvcore/tests \
+	dlls/wmvdecod \
+	dlls/wnaspi32 \
+	dlls/wofutil \
+	dlls/wow32 \
+	dlls/wow64 \
+	dlls/wow64cpu \
+	dlls/wow64win \
+	dlls/wpc \
+	dlls/wpc/tests \
+	dlls/wpcap \
+	dlls/wpcap/tests \
+	dlls/ws2_32 \
+	dlls/ws2_32/tests \
+	dlls/wsdapi \
+	dlls/wsdapi/tests \
+	dlls/wshom.ocx \
+	dlls/wshom.ocx/tests \
+	dlls/wsnmp32 \
+	dlls/wsnmp32/tests \
+	dlls/wsock32 \
+	dlls/wtsapi32 \
+	dlls/wtsapi32/tests \
+	dlls/wuapi \
+	dlls/wuaueng \
+	dlls/x3daudio1_0 \
+	dlls/x3daudio1_1 \
+	dlls/x3daudio1_2 \
+	dlls/x3daudio1_3 \
+	dlls/x3daudio1_4 \
+	dlls/x3daudio1_5 \
+	dlls/x3daudio1_6 \
+	dlls/x3daudio1_7 \
+	dlls/xactengine2_0 \
+	dlls/xactengine2_4 \
+	dlls/xactengine2_7 \
+	dlls/xactengine2_9 \
+	dlls/xactengine3_0 \
+	dlls/xactengine3_1 \
+	dlls/xactengine3_2 \
+	dlls/xactengine3_3 \
+	dlls/xactengine3_4 \
+	dlls/xactengine3_5 \
+	dlls/xactengine3_6 \
+	dlls/xactengine3_7 \
+	dlls/xactengine3_7/tests \
+	dlls/xapofx1_1 \
+	dlls/xapofx1_2 \
+	dlls/xapofx1_3 \
+	dlls/xapofx1_4 \
+	dlls/xapofx1_5 \
+	dlls/xaudio2_0 \
+	dlls/xaudio2_1 \
+	dlls/xaudio2_2 \
+	dlls/xaudio2_3 \
+	dlls/xaudio2_4 \
+	dlls/xaudio2_5 \
+	dlls/xaudio2_6 \
+	dlls/xaudio2_7 \
+	dlls/xaudio2_7/tests \
+	dlls/xaudio2_8 \
+	dlls/xaudio2_8/tests \
+	dlls/xaudio2_9 \
+	dlls/xinput1_1 \
+	dlls/xinput1_2 \
+	dlls/xinput1_3 \
+	dlls/xinput1_3/tests \
+	dlls/xinput1_4 \
+	dlls/xinput9_1_0 \
+	dlls/xinputuap \
+	dlls/xmllite \
+	dlls/xmllite/tests \
+	dlls/xolehlp \
+	dlls/xpsprint \
+	dlls/xpssvcs \
+	dlls/xtajit64 \
+	fonts \
+	include \
+	libs/adsiid \
+	libs/capstone \
+	libs/dmoguids \
+	libs/dxerr8 \
+	libs/dxerr9 \
+	libs/dxguid \
+	libs/faudio \
+	libs/fluidsynth \
+	libs/gsm \
+	libs/jpeg \
+	libs/jxr \
+	libs/lcms2 \
+	libs/ldap \
+	libs/mfuuid \
+	libs/mpg123 \
+	libs/musl \
+	libs/png \
+	libs/strmbase \
+	libs/strmiids \
+	libs/tiff \
+	libs/tomcrypt \
+	libs/uuid \
+	libs/vkd3d \
+	libs/wbemuuid \
+	libs/wmcodecdspuuid \
+	libs/xml2 \
+	libs/xslt \
+	libs/zlib \
+	libs/atl_android \
+	libs/atl_runtime \
+	libs/darling_framework \
+	libs/goliath_core \
+	libs/ipasim \
+	libs/libretro \
+	libs/libretro_core \
+	libs/wsl \
+	libs/wsl_bridge \
+	libs/wsl_core \
+	libs/compatibility \
+	loader \
+	nls \
+	po \
+	programs/arp \
+	programs/aspnet_regiis \
+	programs/attrib \
+	programs/belauncher \
+	programs/cabarc \
+	programs/cacls \
+	programs/certutil \
+	programs/chcp.com \
+	programs/clock \
+	programs/cmd \
+	programs/cmd/tests \
+	programs/conhost \
+	programs/conhost/tests \
+	programs/control \
+	programs/cscript \
+	programs/dism \
+	programs/dllhost \
+	programs/dplaysvr \
+	programs/dotnetfx35 \
+	programs/dpnsvr \
+	programs/dpvsetup \
+	programs/dxdiag \
+	programs/eject \
+	programs/expand \
+	programs/explorer \
+	programs/explorer/tests \
+	programs/extrac32 \
+	programs/fc \
+	programs/fc/tests \
+	programs/find \
+	programs/find/tests \
+	programs/findstr \
+	programs/findstr/tests \
+	programs/fsutil \
+	programs/fsutil/tests \
+	programs/getminidump \
+	programs/hh \
+	programs/hostname \
+	programs/icacls \
+	programs/icinfo \
+	programs/iexplore \
+	programs/ipconfig \
+	programs/klist \
+	programs/lodctr \
+	programs/mofcomp \
+	programs/mshta \
+	programs/msidb \
+	programs/msiexec \
+	programs/msinfo32 \
+	programs/net \
+	programs/net/tests \
+	programs/netsh \
+	programs/netstat \
+	programs/ngen \
+	programs/notepad \
+	programs/oleview \
+	programs/ping \
+	programs/plugplay \
+	programs/pnputil \
+	programs/powershell \
+	programs/presentationfontcache \
+	programs/progman \
+	programs/reg \
+	programs/reg/tests \
+	programs/regasm \
+	programs/regedit \
+	programs/regedit/tests \
+	programs/regini \
+	programs/regsvcs \
+	programs/regsvr32 \
+	programs/robocopy \
+	programs/rpcss \
+	programs/rundll.exe16 \
+	programs/rundll32 \
+	programs/sc \
+	programs/sc/tests \
+	programs/schtasks \
+	programs/schtasks/tests \
+	programs/sdbinst \
+	programs/secedit \
+	programs/servicemodelreg \
+	programs/services \
+	programs/services/tests \
+	programs/setx \
+	programs/shutdown \
+	programs/sort \
+	programs/spoolsv \
+	programs/start \
+	programs/subst \
+	programs/svchost \
+	programs/systeminfo \
+	programs/tabtip \
+	programs/taskkill \
+	programs/tasklist \
+	programs/tasklist/tests \
+	programs/taskmgr \
+	programs/termsv \
+	programs/uninstaller \
+	programs/unlodctr \
+	programs/view \
+	programs/wevtutil \
+	programs/where \
+	programs/whoami \
+	programs/wineboot \
+	programs/winebrowser \
+	programs/winecfg \
+	programs/wineconsole \
+	programs/winedbg \
+	programs/winedevice \
+	programs/winefile \
+	programs/winemenubuilder \
+	programs/winemine \
+	programs/winemsibuilder \
+	programs/winepath \
+	programs/winetest \
+	programs/winevdm \
+	programs/winhelp.exe16 \
+	programs/winhlp32 \
+	programs/winmgmt \
+	programs/winoldap.mod16 \
+	programs/winver \
+	programs/wmic \
+	programs/wmplayer \
+	programs/wordpad \
+	programs/write \
+	programs/wscript \
+	programs/wscript/tests \
+	programs/wuauserv \
+	programs/wusa \
+	programs/xcopy \
+	programs/xcopy/tests \
+	server \
+	tools \
+	tools/sfnt2fon \
+	tools/widl \
+	tools/winebuild \
+	tools/winedump \
+	tools/winegcc \
+	tools/winemaker \
+	tools/wmc \
+	tools/wrc
+DISABLED_SUBDIRS =  dlls/capi2032 dlls/gphoto2.ds dlls/protontts dlls/sane.ds dlls/winealsa.drv dlls/wineandroid.drv dlls/winecoreaudio.drv dlls/winegstreamer dlls/winemac.drv dlls/wineoss.drv dlls/winepulse.drv dlls/wineusb.sys dlls/winewayland.drv dlls/winscard dlls/wpcap po
+CONFIGURE_TARGETS =  wine TAGS tags autom4te.cache compile_commands.json config.log config.status include/config.h include/stamp-h
+CARBON_LIBS = 
+COREFOUNDATION_LIBS = 
+DISKARBITRATION_LIBS = 
+IOKIT_LIBS = 
+METAL_LIBS = 
+APPLICATIONSERVICES_LIBS = 
+CORESERVICES_LIBS = 
+APPKIT_LIBS = 
+SECURITY_LIBS = 
+SYSTEMCONFIGURATION_LIBS = 
+COREAUDIO_LIBS = 
+OPENCL_LIBS = 
+OBJC = 
+OBJCFLAGS = 
+ac_ct_OBJC = 
+WINELOADER_DEPENDS = 
+PE_ARCHS =  i386
+MINGW_PKG_CONFIG = 
+CAPSTONE_PE_CFLAGS = -I$(top_srcdir)/libs/capstone/include
+CAPSTONE_PE_LIBS = capstone
+FAUDIO_PE_CFLAGS = -I$(top_srcdir)/libs/faudio/include
+FAUDIO_PE_LIBS = faudio mfplat mfreadwrite mfuuid propsys
+FLUIDSYNTH_PE_CFLAGS = -I$(top_srcdir)/libs/fluidsynth/include
+FLUIDSYNTH_PE_LIBS = fluidsynth
+GSM_PE_CFLAGS = -I$(top_srcdir)/libs/gsm/inc
+GSM_PE_LIBS = gsm
+JPEG_PE_CFLAGS = -I$(top_srcdir)/libs/jpeg
+JPEG_PE_LIBS = jpeg
+JXR_PE_CFLAGS = -I$(top_srcdir)/libs/jxr/jxrgluelib -I$(top_srcdir)/libs/jxr/image/sys
+JXR_PE_LIBS = jxr
+LCMS2_PE_CFLAGS = -I$(top_srcdir)/libs/lcms2/include
+LCMS2_PE_LIBS = lcms2
+LDAP_PE_CFLAGS = -I$(top_srcdir)/libs/ldap/include
+LDAP_PE_LIBS = ldap
+MPG123_PE_CFLAGS = -I$(top_srcdir)/libs/mpg123/src/include
+MPG123_PE_LIBS = mpg123
+MUSL_PE_CFLAGS = 
+MUSL_PE_LIBS = musl
+PNG_PE_CFLAGS = -I$(top_srcdir)/libs/png
+PNG_PE_LIBS = png $(ZLIB_PE_LIBS)
+TIFF_PE_CFLAGS = -I$(top_srcdir)/libs/tiff/libtiff
+TIFF_PE_LIBS = tiff $(ZLIB_PE_LIBS)
+TOMCRYPT_PE_CFLAGS = -I$(top_srcdir)/libs/tomcrypt/src/headers -DLTC_NO_PROTOTYPES -DLTC_SOURCE
+TOMCRYPT_PE_LIBS = tomcrypt
+VKD3D_PE_CFLAGS = -I$(top_srcdir)/libs/vkd3d/include
+VKD3D_PE_LIBS = vkd3d
+XML2_PE_CFLAGS = -I$(top_srcdir)/libs/xml2/include -DLIBXML_STATIC
+XML2_PE_LIBS = xml2
+XSLT_PE_CFLAGS = -I$(top_srcdir)/libs/xslt/libxslt -I$(top_srcdir)/libs/xslt -DLIBXSLT_STATIC
+XSLT_PE_LIBS = xslt
+ZLIB_PE_CFLAGS = -I$(top_srcdir)/libs/zlib -DFAR= -DZ_SOLO
+ZLIB_PE_LIBS = z
+PTHREAD_LIBS = 
+XMKMF = 
+CPP = gcc -m32 -E
+X_CFLAGS = 
+X_LIBS =  -lX11
+WAYLAND_CLIENT_CFLAGS = 
+WAYLAND_CLIENT_LIBS = 
+WAYLAND_SCANNER = 
+XKBCOMMON_CFLAGS = 
+XKBCOMMON_LIBS = 
+XKBREGISTRY_CFLAGS = 
+XKBREGISTRY_LIBS = 
+EGL_CFLAGS = 
+EGL_LIBS = -lEGL
+WAYLAND_EGL_CFLAGS = 
+WAYLAND_EGL_LIBS = 
+PCAP_LIBS = 
+PCSCLITE_LIBS = 
+INOTIFY_CFLAGS = 
+INOTIFY_LIBS = 
+DBUS_CFLAGS = 
+DBUS_LIBS = 
+GNUTLS_CFLAGS = 
+GNUTLS_LIBS = -lgnutls
+DRM_CFLAGS = -I/usr/include/libdrm 
+DRM_LIBS = -ldrm 
+DRMAMDGPU_CFLAGS = -I/usr/include/libdrm 
+DRMAMDGPU_LIBS = -ldrm_amdgpu 
+GMP_CFLAGS = 
+GMP_LIBS = -lgmp
+SANE_CFLAGS = 
+SANE_LIBS = 
+USB_CFLAGS = 
+USB_LIBS = 
+GPHOTO2_CFLAGS = 
+GPHOTO2_LIBS = -lgphoto2
+GPHOTO2_PORT_CFLAGS = 
+GPHOTO2_PORT_LIBS = 
+RESOLV_LIBS = -lresolv
+FREETYPE_CFLAGS = -I/usr/include/freetype2 -I/usr/include/libpng16 
+FREETYPE_LIBS = -lfreetype 
+GETTEXTPO_LIBS = 
+PULSE_CFLAGS = 
+PULSE_LIBS = 
+FFMPEG_CFLAGS = 
+FFMPEG_LIBS = 
+GSTREAMER_CFLAGS = 
+GSTREAMER_LIBS = 
+ALSA_LIBS = 
+OSS4_CFLAGS = 
+OSS4_LIBS = 
+UDEV_CFLAGS = 
+UDEV_LIBS = 
+UNWIND_CFLAGS = 
+UNWIND_LIBS = 
+SDL2_CFLAGS = 
+SDL2_LIBS = -lSDL2
+CAPI20_CFLAGS = 
+CAPI20_LIBS = 
+CUPS_CFLAGS = 
+CUPS_LIBS = 
+FONTCONFIG_CFLAGS = 
+FONTCONFIG_LIBS =  -lX11
+KRB5_CFLAGS = 
+KRB5_LIBS = 
+GSSAPI_CFLAGS = 
+GSSAPI_LIBS = 
+PROCSTAT_LIBS = 
+NETAPI_CFLAGS = 
+NETAPI_LIBS = 
+GCRYPT_CFLAGS = 
+GCRYPT_LIBS = 
+PIPER_CFLAGS = 
+PIPER_LIBS = 
+MSVCRTFLAGS = -D_WIN32 -fno-builtin -fshort-wchar -Wno-format -fno-omit-frame-pointer
+DELAYLOADFLAG = 
+WINELOADER_PROGRAMS = wine wine-preloader
+RT_LIBS = 
 TAGSFLAGS = --langmap='c:+.idl.l.rh,make:(Make*.in)'
 LIBOBJS = 
 LTLIBOBJS = 
 
-
 all:
-	@echo "Goliath/Wine build complete."
-	@echo "Note: This is a compatibility layer project."
-	@echo "Run 'make install' to install."
-distcheck:
-	@echo "Goliath/Wine distcheck - no distribution to check."
-	@echo "This is a compatibility layer project that uses Wine's build system."
+wine:
+	@./config.status $@
+all: wine
+	@echo "Wine build complete."
 Makefile: config.status
 	@./config.status Makefile
 config.status: configure
@@ -644,7 +2070,7 @@ tags ctags:
 dummy:
 .PHONY: dummy
 _WINE_EOF
-    as_fn_error 0 "could not create Makefile" "9882" 5
+    as_fn_error 0 "could not create Makefile" "23703" 5
 }
 
 
@@ -654,1202 +2080,8 @@ do
   case $ac_config_target in
     "include/config.h") CONFIG_HEADERS="$CONFIG_HEADERS include/config.h" ;;
     "include/stamp-h") CONFIG_COMMANDS="$CONFIG_COMMANDS include/stamp-h" ;;
-    "dlls/acledit/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/acledit/Makefile" ;;
-    "dlls/aclui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/aclui/Makefile" ;;
-    "dlls/activeds.tlb/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/activeds.tlb/Makefile" ;;
-    "dlls/activeds/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/activeds/Makefile" ;;
-    "dlls/activeds/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/activeds/tests/Makefile" ;;
-    "dlls/actxprxy/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/actxprxy/Makefile" ;;
-    "dlls/adsldp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/adsldp/Makefile" ;;
-    "dlls/adsldp/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/adsldp/tests/Makefile" ;;
-    "dlls/adsldpc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/adsldpc/Makefile" ;;
-    "dlls/advapi32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/advapi32/Makefile" ;;
-    "dlls/advapi32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/advapi32/tests/Makefile" ;;
-    "dlls/advpack/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/advpack/Makefile" ;;
-    "dlls/advpack/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/advpack/tests/Makefile" ;;
-    "dlls/amsi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/amsi/Makefile" ;;
-    "dlls/amd_ags_x64/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/amd_ags_x64/Makefile" ;;
-    "dlls/amstream/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/amstream/Makefile" ;;
-    "dlls/amstream/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/amstream/tests/Makefile" ;;
-    "dlls/apisetschema/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/apisetschema/Makefile" ;;
-    "dlls/apphelp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/apphelp/Makefile" ;;
-    "dlls/apphelp/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/apphelp/tests/Makefile" ;;
-    "dlls/appwiz.cpl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/appwiz.cpl/Makefile" ;;
-    "dlls/appxdeploymentclient/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/appxdeploymentclient/Makefile" ;;
-    "dlls/atiadlxx/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atiadlxx/Makefile" ;;
-    "dlls/atl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atl/Makefile" ;;
-    "dlls/atl/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atl/tests/Makefile" ;;
-    "dlls/atl100/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atl100/Makefile" ;;
-    "dlls/atl100/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atl100/tests/Makefile" ;;
-    "dlls/atl110/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atl110/Makefile" ;;
-    "dlls/atl110/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atl110/tests/Makefile" ;;
-    "dlls/atl80/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atl80/Makefile" ;;
-    "dlls/atl80/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atl80/tests/Makefile" ;;
-    "dlls/atl90/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atl90/Makefile" ;;
-    "dlls/atlthunk/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atlthunk/Makefile" ;;
-    "dlls/atlthunk/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atlthunk/tests/Makefile" ;;
-    "dlls/atmlib/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/atmlib/Makefile" ;;
-    "dlls/audioses/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/audioses/Makefile" ;;
-    "dlls/authz/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/authz/Makefile" ;;
-    "dlls/avicap32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/avicap32/Makefile" ;;
-    "dlls/avifil32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/avifil32/Makefile" ;;
-    "dlls/avifil32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/avifil32/tests/Makefile" ;;
-    "dlls/avifile.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/avifile.dll16/Makefile" ;;
-    "dlls/avrt/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/avrt/Makefile" ;;
-    "dlls/bcp47langs/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/bcp47langs/Makefile" ;;
-    "dlls/bcrypt/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/bcrypt/Makefile" ;;
-    "dlls/bcrypt/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/bcrypt/tests/Makefile" ;;
-    "dlls/bcryptprimitives/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/bcryptprimitives/Makefile" ;;
-    "dlls/bluetoothapis/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/bluetoothapis/Makefile" ;;
-    "dlls/bluetoothapis/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/bluetoothapis/tests/Makefile" ;;
-    "dlls/browseui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/browseui/Makefile" ;;
-    "dlls/browseui/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/browseui/tests/Makefile" ;;
-    "dlls/bthprops.cpl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/bthprops.cpl/Makefile" ;;
-    "dlls/cabinet/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cabinet/Makefile" ;;
-    "dlls/cabinet/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cabinet/tests/Makefile" ;;
-    "dlls/capi2032/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/capi2032/Makefile" ;;
-    "dlls/cards/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cards/Makefile" ;;
-    "dlls/cdosys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cdosys/Makefile" ;;
-    "dlls/cfgmgr32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cfgmgr32/Makefile" ;;
-    "dlls/cfgmgr32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cfgmgr32/tests/Makefile" ;;
-    "dlls/clusapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/clusapi/Makefile" ;;
-    "dlls/cng.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cng.sys/Makefile" ;;
-    "dlls/colorcnv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/colorcnv/Makefile" ;;
-    "dlls/combase/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/combase/Makefile" ;;
-    "dlls/combase/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/combase/tests/Makefile" ;;
-    "dlls/comcat/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/comcat/Makefile" ;;
-    "dlls/comcat/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/comcat/tests/Makefile" ;;
-    "dlls/comctl32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/comctl32/Makefile" ;;
-    "dlls/comctl32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/comctl32/tests/Makefile" ;;
-    "dlls/comdlg32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/comdlg32/Makefile" ;;
-    "dlls/comdlg32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/comdlg32/tests/Makefile" ;;
-    "dlls/coml2/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/coml2/Makefile" ;;
-    "dlls/comm.drv16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/comm.drv16/Makefile" ;;
-    "dlls/commdlg.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/commdlg.dll16/Makefile" ;;
-    "dlls/compobj.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/compobj.dll16/Makefile" ;;
-    "dlls/compstui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/compstui/Makefile" ;;
-    "dlls/compstui/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/compstui/tests/Makefile" ;;
-    "dlls/comsvcs/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/comsvcs/Makefile" ;;
-    "dlls/comsvcs/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/comsvcs/tests/Makefile" ;;
-    "dlls/concrt140/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/concrt140/Makefile" ;;
-    "dlls/concrt140/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/concrt140/tests/Makefile" ;;
-    "dlls/connect/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/connect/Makefile" ;;
-    "dlls/coremessaging/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/coremessaging/Makefile" ;;
-    "dlls/credui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/credui/Makefile" ;;
-    "dlls/credui/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/credui/tests/Makefile" ;;
-    "dlls/crtdll/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/crtdll/Makefile" ;;
-    "dlls/crypt32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/crypt32/Makefile" ;;
-    "dlls/crypt32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/crypt32/tests/Makefile" ;;
-    "dlls/cryptdlg/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cryptdlg/Makefile" ;;
-    "dlls/cryptdll/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cryptdll/Makefile" ;;
-    "dlls/cryptext/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cryptext/Makefile" ;;
-    "dlls/cryptnet/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cryptnet/Makefile" ;;
-    "dlls/cryptnet/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cryptnet/tests/Makefile" ;;
-    "dlls/cryptowinrt/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cryptowinrt/Makefile" ;;
-    "dlls/cryptowinrt/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cryptowinrt/tests/Makefile" ;;
-    "dlls/cryptsp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cryptsp/Makefile" ;;
-    "dlls/cryptui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cryptui/Makefile" ;;
-    "dlls/cryptui/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/cryptui/tests/Makefile" ;;
-    "dlls/ctapi32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ctapi32/Makefile" ;;
-    "dlls/ctl3d.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ctl3d.dll16/Makefile" ;;
-    "dlls/ctl3d32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ctl3d32/Makefile" ;;
-    "dlls/ctl3dv2.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ctl3dv2.dll16/Makefile" ;;
-    "dlls/d2d1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d2d1/Makefile" ;;
-    "dlls/d2d1/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d2d1/tests/Makefile" ;;
-    "dlls/d3d10/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d10/Makefile" ;;
-    "dlls/d3d10/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d10/tests/Makefile" ;;
-    "dlls/d3d10_1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d10_1/Makefile" ;;
-    "dlls/d3d10_1/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d10_1/tests/Makefile" ;;
-    "dlls/d3d10core/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d10core/Makefile" ;;
-    "dlls/d3d10core/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d10core/tests/Makefile" ;;
-    "dlls/d3d11/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d11/Makefile" ;;
-    "dlls/d3d11/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d11/tests/Makefile" ;;
-    "dlls/d3d12/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d12/Makefile" ;;
-    "dlls/d3d12/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d12/tests/Makefile" ;;
-    "dlls/d3d12core/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d12core/Makefile" ;;
-    "dlls/d3d8/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d8/Makefile" ;;
-    "dlls/d3d8/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d8/tests/Makefile" ;;
-    "dlls/d3d8thk/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d8thk/Makefile" ;;
-    "dlls/d3d9/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d9/Makefile" ;;
-    "dlls/d3d9/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3d9/tests/Makefile" ;;
-    "dlls/d3dcompiler_33/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_33/Makefile" ;;
-    "dlls/d3dcompiler_34/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_34/Makefile" ;;
-    "dlls/d3dcompiler_35/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_35/Makefile" ;;
-    "dlls/d3dcompiler_36/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_36/Makefile" ;;
-    "dlls/d3dcompiler_37/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_37/Makefile" ;;
-    "dlls/d3dcompiler_38/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_38/Makefile" ;;
-    "dlls/d3dcompiler_39/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_39/Makefile" ;;
-    "dlls/d3dcompiler_40/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_40/Makefile" ;;
-    "dlls/d3dcompiler_41/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_41/Makefile" ;;
-    "dlls/d3dcompiler_42/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_42/Makefile" ;;
-    "dlls/d3dcompiler_43/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_43/Makefile" ;;
-    "dlls/d3dcompiler_43/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_43/tests/Makefile" ;;
-    "dlls/d3dcompiler_46/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_46/Makefile" ;;
-    "dlls/d3dcompiler_46/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_46/tests/Makefile" ;;
-    "dlls/d3dcompiler_47/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_47/Makefile" ;;
-    "dlls/d3dcompiler_47/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dcompiler_47/tests/Makefile" ;;
-    "dlls/d3dim/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dim/Makefile" ;;
-    "dlls/d3dim700/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dim700/Makefile" ;;
-    "dlls/d3drm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3drm/Makefile" ;;
-    "dlls/d3drm/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3drm/tests/Makefile" ;;
-    "dlls/d3dx10_33/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_33/Makefile" ;;
-    "dlls/d3dx10_34/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_34/Makefile" ;;
-    "dlls/d3dx10_34/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_34/tests/Makefile" ;;
-    "dlls/d3dx10_35/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_35/Makefile" ;;
-    "dlls/d3dx10_35/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_35/tests/Makefile" ;;
-    "dlls/d3dx10_36/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_36/Makefile" ;;
-    "dlls/d3dx10_36/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_36/tests/Makefile" ;;
-    "dlls/d3dx10_37/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_37/Makefile" ;;
-    "dlls/d3dx10_37/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_37/tests/Makefile" ;;
-    "dlls/d3dx10_38/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_38/Makefile" ;;
-    "dlls/d3dx10_38/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_38/tests/Makefile" ;;
-    "dlls/d3dx10_39/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_39/Makefile" ;;
-    "dlls/d3dx10_39/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_39/tests/Makefile" ;;
-    "dlls/d3dx10_40/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_40/Makefile" ;;
-    "dlls/d3dx10_40/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_40/tests/Makefile" ;;
-    "dlls/d3dx10_41/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_41/Makefile" ;;
-    "dlls/d3dx10_41/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_41/tests/Makefile" ;;
-    "dlls/d3dx10_42/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_42/Makefile" ;;
-    "dlls/d3dx10_42/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_42/tests/Makefile" ;;
-    "dlls/d3dx10_43/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_43/Makefile" ;;
-    "dlls/d3dx10_43/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx10_43/tests/Makefile" ;;
-    "dlls/d3dx11_42/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx11_42/Makefile" ;;
-    "dlls/d3dx11_42/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx11_42/tests/Makefile" ;;
-    "dlls/d3dx11_43/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx11_43/Makefile" ;;
-    "dlls/d3dx11_43/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx11_43/tests/Makefile" ;;
-    "dlls/d3dx9_24/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_24/Makefile" ;;
-    "dlls/d3dx9_25/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_25/Makefile" ;;
-    "dlls/d3dx9_26/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_26/Makefile" ;;
-    "dlls/d3dx9_27/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_27/Makefile" ;;
-    "dlls/d3dx9_28/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_28/Makefile" ;;
-    "dlls/d3dx9_29/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_29/Makefile" ;;
-    "dlls/d3dx9_30/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_30/Makefile" ;;
-    "dlls/d3dx9_31/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_31/Makefile" ;;
-    "dlls/d3dx9_32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_32/Makefile" ;;
-    "dlls/d3dx9_33/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_33/Makefile" ;;
-    "dlls/d3dx9_34/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_34/Makefile" ;;
-    "dlls/d3dx9_35/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_35/Makefile" ;;
-    "dlls/d3dx9_36/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_36/Makefile" ;;
-    "dlls/d3dx9_36/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_36/tests/Makefile" ;;
-    "dlls/d3dx9_37/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_37/Makefile" ;;
-    "dlls/d3dx9_38/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_38/Makefile" ;;
-    "dlls/d3dx9_39/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_39/Makefile" ;;
-    "dlls/d3dx9_40/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_40/Makefile" ;;
-    "dlls/d3dx9_41/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_41/Makefile" ;;
-    "dlls/d3dx9_42/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_42/Makefile" ;;
-    "dlls/d3dx9_43/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_43/Makefile" ;;
-    "dlls/d3dx9_43/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dx9_43/tests/Makefile" ;;
-    "dlls/d3dxof/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dxof/Makefile" ;;
-    "dlls/d3dxof/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/d3dxof/tests/Makefile" ;;
-    "dlls/dataexchange/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dataexchange/Makefile" ;;
-    "dlls/dataexchange/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dataexchange/tests/Makefile" ;;
-    "dlls/davclnt/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/davclnt/Makefile" ;;
-    "dlls/dbgeng/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dbgeng/Makefile" ;;
-    "dlls/dbgeng/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dbgeng/tests/Makefile" ;;
-    "dlls/dbghelp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dbghelp/Makefile" ;;
-    "dlls/dbghelp/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dbghelp/tests/Makefile" ;;
-    "dlls/dciman32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dciman32/Makefile" ;;
-    "dlls/dcomp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dcomp/Makefile" ;;
-    "dlls/ddeml.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ddeml.dll16/Makefile" ;;
-    "dlls/ddraw/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ddraw/Makefile" ;;
-    "dlls/ddraw/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ddraw/tests/Makefile" ;;
-    "dlls/ddrawex/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ddrawex/Makefile" ;;
-    "dlls/ddrawex/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ddrawex/tests/Makefile" ;;
-    "dlls/desk.cpl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/desk.cpl/Makefile" ;;
-    "dlls/devenum/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/devenum/Makefile" ;;
-    "dlls/devenum/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/devenum/tests/Makefile" ;;
-    "dlls/dhcpcsvc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dhcpcsvc/Makefile" ;;
-    "dlls/dhcpcsvc/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dhcpcsvc/tests/Makefile" ;;
-    "dlls/dhcpcsvc6/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dhcpcsvc6/Makefile" ;;
-    "dlls/dhtmled.ocx/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dhtmled.ocx/Makefile" ;;
-    "dlls/diasymreader/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/diasymreader/Makefile" ;;
-    "dlls/difxapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/difxapi/Makefile" ;;
-    "dlls/dinput/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dinput/Makefile" ;;
-    "dlls/dinput/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dinput/tests/Makefile" ;;
-    "dlls/dinput8/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dinput8/Makefile" ;;
-    "dlls/directmanipulation/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/directmanipulation/Makefile" ;;
-    "dlls/directmanipulation/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/directmanipulation/tests/Makefile" ;;
-    "dlls/dispdib.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dispdib.dll16/Makefile" ;;
-    "dlls/dispex/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dispex/Makefile" ;;
-    "dlls/dispex/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dispex/tests/Makefile" ;;
-    "dlls/display.drv16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/display.drv16/Makefile" ;;
-    "dlls/dmband/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmband/Makefile" ;;
-    "dlls/dmband/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmband/tests/Makefile" ;;
-    "dlls/dmcompos/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmcompos/Makefile" ;;
-    "dlls/dmcompos/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmcompos/tests/Makefile" ;;
-    "dlls/dmime/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmime/Makefile" ;;
-    "dlls/dmime/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmime/tests/Makefile" ;;
-    "dlls/dmloader/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmloader/Makefile" ;;
-    "dlls/dmloader/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmloader/tests/Makefile" ;;
-    "dlls/dmscript/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmscript/Makefile" ;;
-    "dlls/dmscript/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmscript/tests/Makefile" ;;
-    "dlls/dmstyle/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmstyle/Makefile" ;;
-    "dlls/dmstyle/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmstyle/tests/Makefile" ;;
-    "dlls/dmsynth/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmsynth/Makefile" ;;
-    "dlls/dmsynth/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmsynth/tests/Makefile" ;;
-    "dlls/dmusic/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmusic/Makefile" ;;
-    "dlls/dmusic/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmusic/tests/Makefile" ;;
-    "dlls/dmusic32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dmusic32/Makefile" ;;
-    "dlls/dnsapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dnsapi/Makefile" ;;
-    "dlls/dnsapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dnsapi/tests/Makefile" ;;
-    "dlls/dplay/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dplay/Makefile" ;;
-    "dlls/dplayx/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dplayx/Makefile" ;;
-    "dlls/dplayx/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dplayx/tests/Makefile" ;;
-    "dlls/dpnaddr/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dpnaddr/Makefile" ;;
-    "dlls/dpnet/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dpnet/Makefile" ;;
-    "dlls/dpnet/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dpnet/tests/Makefile" ;;
-    "dlls/dpnhpast/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dpnhpast/Makefile" ;;
-    "dlls/dpnhupnp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dpnhupnp/Makefile" ;;
-    "dlls/dpnlobby/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dpnlobby/Makefile" ;;
-    "dlls/dpvoice/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dpvoice/Makefile" ;;
-    "dlls/dpvoice/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dpvoice/tests/Makefile" ;;
-    "dlls/dpwsockx/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dpwsockx/Makefile" ;;
-    "dlls/drmclien/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/drmclien/Makefile" ;;
-    "dlls/dsdmo/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dsdmo/Makefile" ;;
-    "dlls/dsdmo/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dsdmo/tests/Makefile" ;;
-    "dlls/dsound/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dsound/Makefile" ;;
-    "dlls/dsound/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dsound/tests/Makefile" ;;
-    "dlls/dsquery/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dsquery/Makefile" ;;
-    "dlls/dssenh/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dssenh/Makefile" ;;
-    "dlls/dssenh/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dssenh/tests/Makefile" ;;
-    "dlls/dsuiext/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dsuiext/Makefile" ;;
-    "dlls/dswave/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dswave/Makefile" ;;
-    "dlls/dswave/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dswave/tests/Makefile" ;;
-    "dlls/dwmapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dwmapi/Makefile" ;;
-    "dlls/dwmapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dwmapi/tests/Makefile" ;;
-    "dlls/dwrite/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dwrite/Makefile" ;;
-    "dlls/dwrite/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dwrite/tests/Makefile" ;;
-    "dlls/dx8vb/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dx8vb/Makefile" ;;
-    "dlls/dxcore/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dxcore/Makefile" ;;
-    "dlls/dxdiagn/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dxdiagn/Makefile" ;;
-    "dlls/dxdiagn/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dxdiagn/tests/Makefile" ;;
-    "dlls/dxgi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dxgi/Makefile" ;;
-    "dlls/dxgi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dxgi/tests/Makefile" ;;
-    "dlls/dxtrans/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dxtrans/Makefile" ;;
-    "dlls/dxva2/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dxva2/Makefile" ;;
-    "dlls/dxva2/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/dxva2/tests/Makefile" ;;
-    "dlls/esent/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/esent/Makefile" ;;
-    "dlls/evr/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/evr/Makefile" ;;
-    "dlls/evr/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/evr/tests/Makefile" ;;
-    "dlls/explorerframe/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/explorerframe/Makefile" ;;
-    "dlls/explorerframe/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/explorerframe/tests/Makefile" ;;
-    "dlls/faultrep/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/faultrep/Makefile" ;;
-    "dlls/faultrep/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/faultrep/tests/Makefile" ;;
-    "dlls/feclient/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/feclient/Makefile" ;;
-    "dlls/fltlib/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/fltlib/Makefile" ;;
-    "dlls/fltmgr.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/fltmgr.sys/Makefile" ;;
-    "dlls/fntcache/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/fntcache/Makefile" ;;
-    "dlls/fontsub/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/fontsub/Makefile" ;;
-    "dlls/fusion/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/fusion/Makefile" ;;
-    "dlls/fusion/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/fusion/tests/Makefile" ;;
-    "dlls/fwpuclnt/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/fwpuclnt/Makefile" ;;
-    "dlls/gameux/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/gameux/Makefile" ;;
-    "dlls/gameux/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/gameux/tests/Makefile" ;;
-    "dlls/gamingtcui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/gamingtcui/Makefile" ;;
-    "dlls/gdi.exe16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/gdi.exe16/Makefile" ;;
-    "dlls/gdi32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/gdi32/Makefile" ;;
-    "dlls/gdi32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/gdi32/tests/Makefile" ;;
-    "dlls/gdiplus/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/gdiplus/Makefile" ;;
-    "dlls/gdiplus/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/gdiplus/tests/Makefile" ;;
-    "dlls/geolocation/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/geolocation/Makefile" ;;
-    "dlls/geolocation/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/geolocation/tests/Makefile" ;;
-    "dlls/glu32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/glu32/Makefile" ;;
-    "dlls/glu32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/glu32/tests/Makefile" ;;
-    "dlls/gphoto2.ds/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/gphoto2.ds/Makefile" ;;
-    "dlls/gpkcsp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/gpkcsp/Makefile" ;;
-    "dlls/graphicscapture/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/graphicscapture/Makefile" ;;
-    "dlls/graphicscapture/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/graphicscapture/tests/Makefile" ;;
-    "dlls/hal/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hal/Makefile" ;;
-    "dlls/hhctrl.ocx/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hhctrl.ocx/Makefile" ;;
-    "dlls/hid/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hid/Makefile" ;;
-    "dlls/hid/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hid/tests/Makefile" ;;
-    "dlls/hidclass.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hidclass.sys/Makefile" ;;
-    "dlls/hidparse.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hidparse.sys/Makefile" ;;
-    "dlls/hlink/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hlink/Makefile" ;;
-    "dlls/hlink/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hlink/tests/Makefile" ;;
-    "dlls/hnetcfg/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hnetcfg/Makefile" ;;
-    "dlls/hnetcfg/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hnetcfg/tests/Makefile" ;;
-    "dlls/hrtfapo/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hrtfapo/Makefile" ;;
-    "dlls/http.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/http.sys/Makefile" ;;
-    "dlls/httpapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/httpapi/Makefile" ;;
-    "dlls/httpapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/httpapi/tests/Makefile" ;;
-    "dlls/hvsimanagementapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hvsimanagementapi/Makefile" ;;
-    "dlls/hvsimanagementapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/hvsimanagementapi/tests/Makefile" ;;
-    "dlls/ia2comproxy/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ia2comproxy/Makefile" ;;
-    "dlls/iccvid/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/iccvid/Makefile" ;;
-    "dlls/icmp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/icmp/Makefile" ;;
-    "dlls/icmui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/icmui/Makefile" ;;
-    "dlls/icmui/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/icmui/tests/Makefile" ;;
-    "dlls/icu/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/icu/Makefile" ;;
-    "dlls/ieframe/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ieframe/Makefile" ;;
-    "dlls/ieframe/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ieframe/tests/Makefile" ;;
-    "dlls/ieproxy/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ieproxy/Makefile" ;;
-    "dlls/iertutil/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/iertutil/Makefile" ;;
-    "dlls/iertutil/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/iertutil/tests/Makefile" ;;
-    "dlls/ifsmgr.vxd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ifsmgr.vxd/Makefile" ;;
-    "dlls/imaadp32.acm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/imaadp32.acm/Makefile" ;;
-    "dlls/imagehlp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/imagehlp/Makefile" ;;
-    "dlls/imagehlp/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/imagehlp/tests/Makefile" ;;
-    "dlls/imm.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/imm.dll16/Makefile" ;;
-    "dlls/imm32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/imm32/Makefile" ;;
-    "dlls/imm32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/imm32/tests/Makefile" ;;
-    "dlls/inetcomm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/inetcomm/Makefile" ;;
-    "dlls/inetcomm/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/inetcomm/tests/Makefile" ;;
-    "dlls/inetcpl.cpl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/inetcpl.cpl/Makefile" ;;
-    "dlls/inetmib1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/inetmib1/Makefile" ;;
-    "dlls/inetmib1/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/inetmib1/tests/Makefile" ;;
-    "dlls/infosoft/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/infosoft/Makefile" ;;
-    "dlls/infosoft/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/infosoft/tests/Makefile" ;;
-    "dlls/initpki/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/initpki/Makefile" ;;
-    "dlls/inkobj/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/inkobj/Makefile" ;;
-    "dlls/inseng/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/inseng/Makefile" ;;
-    "dlls/iphlpapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/iphlpapi/Makefile" ;;
-    "dlls/iphlpapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/iphlpapi/tests/Makefile" ;;
-    "dlls/iprop/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/iprop/Makefile" ;;
-    "dlls/irprops.cpl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/irprops.cpl/Makefile" ;;
-    "dlls/itircl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/itircl/Makefile" ;;
-    "dlls/itss/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/itss/Makefile" ;;
-    "dlls/itss/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/itss/tests/Makefile" ;;
-    "dlls/joy.cpl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/joy.cpl/Makefile" ;;
-    "dlls/jscript/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/jscript/Makefile" ;;
-    "dlls/jscript/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/jscript/tests/Makefile" ;;
-    "dlls/jsproxy/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/jsproxy/Makefile" ;;
-    "dlls/jsproxy/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/jsproxy/tests/Makefile" ;;
-    "dlls/kerberos/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/kerberos/Makefile" ;;
-    "dlls/kernel32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/kernel32/Makefile" ;;
-    "dlls/kernel32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/kernel32/tests/Makefile" ;;
-    "dlls/kernelbase/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/kernelbase/Makefile" ;;
-    "dlls/kernelbase/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/kernelbase/tests/Makefile" ;;
-    "dlls/keyboard.drv16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/keyboard.drv16/Makefile" ;;
-    "dlls/krnl386.exe16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/krnl386.exe16/Makefile" ;;
-    "dlls/ksecdd.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ksecdd.sys/Makefile" ;;
-    "dlls/ksproxy.ax/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ksproxy.ax/Makefile" ;;
-    "dlls/ksuser/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ksuser/Makefile" ;;
-    "dlls/ktmw32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ktmw32/Makefile" ;;
-    "dlls/l3codeca.acm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/l3codeca.acm/Makefile" ;;
-    "dlls/l3codecx.ax/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/l3codecx.ax/Makefile" ;;
-    "dlls/light.msstyles/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/light.msstyles/Makefile" ;;
-    "dlls/loadperf/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/loadperf/Makefile" ;;
-    "dlls/localspl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/localspl/Makefile" ;;
-    "dlls/localspl/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/localspl/tests/Makefile" ;;
-    "dlls/localui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/localui/Makefile" ;;
-    "dlls/localui/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/localui/tests/Makefile" ;;
-    "dlls/lz32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/lz32/Makefile" ;;
-    "dlls/lz32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/lz32/tests/Makefile" ;;
-    "dlls/lzexpand.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/lzexpand.dll16/Makefile" ;;
-    "dlls/magnification/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/magnification/Makefile" ;;
-    "dlls/mapi32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mapi32/Makefile" ;;
-    "dlls/mapi32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mapi32/tests/Makefile" ;;
-    "dlls/mapistub/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mapistub/Makefile" ;;
-    "dlls/mciavi32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mciavi32/Makefile" ;;
-    "dlls/mcicda/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mcicda/Makefile" ;;
-    "dlls/mciqtz32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mciqtz32/Makefile" ;;
-    "dlls/mciseq/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mciseq/Makefile" ;;
-    "dlls/mciwave/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mciwave/Makefile" ;;
-    "dlls/mf/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mf/Makefile" ;;
-    "dlls/mf/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mf/tests/Makefile" ;;
-    "dlls/mf3216/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mf3216/Makefile" ;;
-    "dlls/mfasfsrcsnk/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfasfsrcsnk/Makefile" ;;
-    "dlls/mferror/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mferror/Makefile" ;;
-    "dlls/mfh264enc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfh264enc/Makefile" ;;
-    "dlls/mfmediaengine/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfmediaengine/Makefile" ;;
-    "dlls/mfmediaengine/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfmediaengine/tests/Makefile" ;;
-    "dlls/mfmp4srcsnk/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfmp4srcsnk/Makefile" ;;
-    "dlls/mfplat/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfplat/Makefile" ;;
-    "dlls/mfplat/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfplat/tests/Makefile" ;;
-    "dlls/mfplay/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfplay/Makefile" ;;
-    "dlls/mfplay/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfplay/tests/Makefile" ;;
-    "dlls/mfreadwrite/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfreadwrite/Makefile" ;;
-    "dlls/mfreadwrite/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfreadwrite/tests/Makefile" ;;
-    "dlls/mfsrcsnk/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfsrcsnk/Makefile" ;;
-    "dlls/mfsrcsnk/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mfsrcsnk/tests/Makefile" ;;
-    "dlls/mgmtapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mgmtapi/Makefile" ;;
-    "dlls/midimap/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/midimap/Makefile" ;;
-    "dlls/mlang/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mlang/Makefile" ;;
-    "dlls/mlang/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mlang/tests/Makefile" ;;
-    "dlls/mmcndmgr/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mmcndmgr/Makefile" ;;
-    "dlls/mmcndmgr/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mmcndmgr/tests/Makefile" ;;
-    "dlls/mmdevapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mmdevapi/Makefile" ;;
-    "dlls/mmdevapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mmdevapi/tests/Makefile" ;;
-    "dlls/mmdevldr.vxd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mmdevldr.vxd/Makefile" ;;
-    "dlls/mmsystem.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mmsystem.dll16/Makefile" ;;
-    "dlls/monodebg.vxd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/monodebg.vxd/Makefile" ;;
-    "dlls/mouhid.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mouhid.sys/Makefile" ;;
-    "dlls/mountmgr.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mountmgr.sys/Makefile" ;;
-    "dlls/mouse.drv16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mouse.drv16/Makefile" ;;
-    "dlls/mp3dmod/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mp3dmod/Makefile" ;;
-    "dlls/mp3dmod/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mp3dmod/tests/Makefile" ;;
-    "dlls/mpr/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mpr/Makefile" ;;
-    "dlls/mpr/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mpr/tests/Makefile" ;;
-    "dlls/mprapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mprapi/Makefile" ;;
-    "dlls/msacm.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msacm.dll16/Makefile" ;;
-    "dlls/msacm32.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msacm32.drv/Makefile" ;;
-    "dlls/msacm32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msacm32/Makefile" ;;
-    "dlls/msacm32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msacm32/tests/Makefile" ;;
-    "dlls/msado15/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msado15/Makefile" ;;
-    "dlls/msado15/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msado15/tests/Makefile" ;;
-    "dlls/msadp32.acm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msadp32.acm/Makefile" ;;
-    "dlls/msasn1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msasn1/Makefile" ;;
-    "dlls/msasn1/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msasn1/tests/Makefile" ;;
-    "dlls/msauddecmft/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msauddecmft/Makefile" ;;
-    "dlls/mscat32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mscat32/Makefile" ;;
-    "dlls/mscms/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mscms/Makefile" ;;
-    "dlls/mscms/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mscms/tests/Makefile" ;;
-    "dlls/mscoree/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mscoree/Makefile" ;;
-    "dlls/mscoree/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mscoree/tests/Makefile" ;;
-    "dlls/mscorwks/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mscorwks/Makefile" ;;
-    "dlls/msctf/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msctf/Makefile" ;;
-    "dlls/msctf/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msctf/tests/Makefile" ;;
-    "dlls/msctfmonitor/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msctfmonitor/Makefile" ;;
-    "dlls/msctfp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msctfp/Makefile" ;;
-    "dlls/msdaps/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msdaps/Makefile" ;;
-    "dlls/msdasql/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msdasql/Makefile" ;;
-    "dlls/msdasql/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msdasql/tests/Makefile" ;;
-    "dlls/msdelta/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msdelta/Makefile" ;;
-    "dlls/msdmo/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msdmo/Makefile" ;;
-    "dlls/msdmo/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msdmo/tests/Makefile" ;;
-    "dlls/msdrm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msdrm/Makefile" ;;
-    "dlls/msftedit/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msftedit/Makefile" ;;
-    "dlls/msftedit/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msftedit/tests/Makefile" ;;
-    "dlls/msg711.acm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msg711.acm/Makefile" ;;
-    "dlls/msgsm32.acm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msgsm32.acm/Makefile" ;;
-    "dlls/mshtml.tlb/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mshtml.tlb/Makefile" ;;
-    "dlls/mshtml/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mshtml/Makefile" ;;
-    "dlls/mshtml/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mshtml/tests/Makefile" ;;
-    "dlls/msi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msi/Makefile" ;;
-    "dlls/msi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msi/tests/Makefile" ;;
-    "dlls/msident/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msident/Makefile" ;;
-    "dlls/msimg32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msimg32/Makefile" ;;
-    "dlls/msimsg/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msimsg/Makefile" ;;
-    "dlls/msimtf/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msimtf/Makefile" ;;
-    "dlls/msisip/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msisip/Makefile" ;;
-    "dlls/msisys.ocx/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msisys.ocx/Makefile" ;;
-    "dlls/msls31/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msls31/Makefile" ;;
-    "dlls/msmpeg2vdec/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msmpeg2vdec/Makefile" ;;
-    "dlls/msnet32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msnet32/Makefile" ;;
-    "dlls/mspatcha/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mspatcha/Makefile" ;;
-    "dlls/mspatcha/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mspatcha/tests/Makefile" ;;
-    "dlls/msports/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msports/Makefile" ;;
-    "dlls/msrle32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msrle32/Makefile" ;;
-    "dlls/msrle32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msrle32/tests/Makefile" ;;
-    "dlls/msscript.ocx/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msscript.ocx/Makefile" ;;
-    "dlls/msscript.ocx/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msscript.ocx/tests/Makefile" ;;
-    "dlls/mssign32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mssign32/Makefile" ;;
-    "dlls/mssip32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mssip32/Makefile" ;;
-    "dlls/mstask/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mstask/Makefile" ;;
-    "dlls/mstask/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mstask/tests/Makefile" ;;
-    "dlls/msttsengine/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msttsengine/Makefile" ;;
-    "dlls/msv1_0/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msv1_0/Makefile" ;;
-    "dlls/msvcirt/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcirt/Makefile" ;;
-    "dlls/msvcirt/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcirt/tests/Makefile" ;;
-    "dlls/msvcm80/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcm80/Makefile" ;;
-    "dlls/msvcm90/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcm90/Makefile" ;;
-    "dlls/msvcp100/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp100/Makefile" ;;
-    "dlls/msvcp100/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp100/tests/Makefile" ;;
-    "dlls/msvcp110/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp110/Makefile" ;;
-    "dlls/msvcp110/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp110/tests/Makefile" ;;
-    "dlls/msvcp120/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp120/Makefile" ;;
-    "dlls/msvcp120/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp120/tests/Makefile" ;;
-    "dlls/msvcp120_app/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp120_app/Makefile" ;;
-    "dlls/msvcp140/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp140/Makefile" ;;
-    "dlls/msvcp140/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp140/tests/Makefile" ;;
-    "dlls/msvcp140_1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp140_1/Makefile" ;;
-    "dlls/msvcp140_1/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp140_1/tests/Makefile" ;;
-    "dlls/msvcp140_2/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp140_2/Makefile" ;;
-    "dlls/msvcp140_2/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp140_2/tests/Makefile" ;;
-    "dlls/msvcp140_atomic_wait/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp140_atomic_wait/Makefile" ;;
-    "dlls/msvcp140_atomic_wait/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp140_atomic_wait/tests/Makefile" ;;
-    "dlls/msvcp140_codecvt_ids/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp140_codecvt_ids/Makefile" ;;
-    "dlls/msvcp60/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp60/Makefile" ;;
-    "dlls/msvcp60/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp60/tests/Makefile" ;;
-    "dlls/msvcp70/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp70/Makefile" ;;
-    "dlls/msvcp71/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp71/Makefile" ;;
-    "dlls/msvcp80/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp80/Makefile" ;;
-    "dlls/msvcp90/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp90/Makefile" ;;
-    "dlls/msvcp90/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp90/tests/Makefile" ;;
-    "dlls/msvcp_win/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcp_win/Makefile" ;;
-    "dlls/msvcr100/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr100/Makefile" ;;
-    "dlls/msvcr100/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr100/tests/Makefile" ;;
-    "dlls/msvcr110/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr110/Makefile" ;;
-    "dlls/msvcr110/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr110/tests/Makefile" ;;
-    "dlls/msvcr120/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr120/Makefile" ;;
-    "dlls/msvcr120/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr120/tests/Makefile" ;;
-    "dlls/msvcr120_app/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr120_app/Makefile" ;;
-    "dlls/msvcr70/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr70/Makefile" ;;
-    "dlls/msvcr70/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr70/tests/Makefile" ;;
-    "dlls/msvcr71/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr71/Makefile" ;;
-    "dlls/msvcr71/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr71/tests/Makefile" ;;
-    "dlls/msvcr80/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr80/Makefile" ;;
-    "dlls/msvcr80/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr80/tests/Makefile" ;;
-    "dlls/msvcr90/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr90/Makefile" ;;
-    "dlls/msvcr90/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcr90/tests/Makefile" ;;
-    "dlls/msvcrt/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcrt/Makefile" ;;
-    "dlls/msvcrt/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcrt/tests/Makefile" ;;
-    "dlls/msvcrt20/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcrt20/Makefile" ;;
-    "dlls/msvcrt40/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcrt40/Makefile" ;;
-    "dlls/msvcrtd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcrtd/Makefile" ;;
-    "dlls/msvcrtd/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvcrtd/tests/Makefile" ;;
-    "dlls/msvfw32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvfw32/Makefile" ;;
-    "dlls/msvfw32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvfw32/tests/Makefile" ;;
-    "dlls/msvidc32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvidc32/Makefile" ;;
-    "dlls/msvideo.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvideo.dll16/Makefile" ;;
-    "dlls/msvdsp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvdsp/Makefile" ;;
-    "dlls/msvproc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msvproc/Makefile" ;;
-    "dlls/mswsock/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mswsock/Makefile" ;;
-    "dlls/msxml/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msxml/Makefile" ;;
-    "dlls/msxml2/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msxml2/Makefile" ;;
-    "dlls/msxml3/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msxml3/Makefile" ;;
-    "dlls/msxml3/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msxml3/tests/Makefile" ;;
-    "dlls/msxml4/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msxml4/Makefile" ;;
-    "dlls/msxml4/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msxml4/tests/Makefile" ;;
-    "dlls/msxml6/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msxml6/Makefile" ;;
-    "dlls/msxml6/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/msxml6/tests/Makefile" ;;
-    "dlls/mtxdm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/mtxdm/Makefile" ;;
-    "dlls/ncrypt/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ncrypt/Makefile" ;;
-    "dlls/ncrypt/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ncrypt/tests/Makefile" ;;
-    "dlls/nddeapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/nddeapi/Makefile" ;;
-    "dlls/ndis.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ndis.sys/Makefile" ;;
-    "dlls/ndis.sys/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ndis.sys/tests/Makefile" ;;
-    "dlls/netapi32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/netapi32/Makefile" ;;
-    "dlls/netapi32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/netapi32/tests/Makefile" ;;
-    "dlls/netcfgx/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/netcfgx/Makefile" ;;
-    "dlls/netcfgx/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/netcfgx/tests/Makefile" ;;
-    "dlls/netio.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/netio.sys/Makefile" ;;
-    "dlls/netprofm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/netprofm/Makefile" ;;
-    "dlls/netprofm/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/netprofm/tests/Makefile" ;;
-    "dlls/netutils/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/netutils/Makefile" ;;
-    "dlls/newdev/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/newdev/Makefile" ;;
-    "dlls/ninput/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ninput/Makefile" ;;
-    "dlls/ninput/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ninput/tests/Makefile" ;;
-    "dlls/normaliz/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/normaliz/Makefile" ;;
-    "dlls/npmshtml/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/npmshtml/Makefile" ;;
-    "dlls/npptools/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/npptools/Makefile" ;;
-    "dlls/nsi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/nsi/Makefile" ;;
-    "dlls/nsi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/nsi/tests/Makefile" ;;
-    "dlls/nsiproxy.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/nsiproxy.sys/Makefile" ;;
-    "dlls/ntdll/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ntdll/Makefile" ;;
-    "dlls/ntdll/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ntdll/tests/Makefile" ;;
-    "dlls/ntdsapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ntdsapi/Makefile" ;;
-    "dlls/ntdsapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ntdsapi/tests/Makefile" ;;
-    "dlls/ntoskrnl.exe/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ntoskrnl.exe/Makefile" ;;
-    "dlls/ntoskrnl.exe/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ntoskrnl.exe/tests/Makefile" ;;
-    "dlls/ntprint/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ntprint/Makefile" ;;
-    "dlls/ntprint/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ntprint/tests/Makefile" ;;
-    "dlls/nvcuda/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/nvcuda/Makefile" ;;
-    "dlls/objsel/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/objsel/Makefile" ;;
-    "dlls/odbc32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/odbc32/Makefile" ;;
-    "dlls/odbc32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/odbc32/tests/Makefile" ;;
-    "dlls/odbcbcp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/odbcbcp/Makefile" ;;
-    "dlls/odbccp32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/odbccp32/Makefile" ;;
-    "dlls/odbccp32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/odbccp32/tests/Makefile" ;;
-    "dlls/odbccu32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/odbccu32/Makefile" ;;
-    "dlls/ole2.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ole2.dll16/Makefile" ;;
-    "dlls/ole2conv.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ole2conv.dll16/Makefile" ;;
-    "dlls/ole2disp.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ole2disp.dll16/Makefile" ;;
-    "dlls/ole2nls.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ole2nls.dll16/Makefile" ;;
-    "dlls/ole2prox.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ole2prox.dll16/Makefile" ;;
-    "dlls/ole2thk.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ole2thk.dll16/Makefile" ;;
-    "dlls/ole32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ole32/Makefile" ;;
-    "dlls/ole32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ole32/tests/Makefile" ;;
-    "dlls/oleacc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/oleacc/Makefile" ;;
-    "dlls/oleacc/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/oleacc/tests/Makefile" ;;
-    "dlls/oleaut32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/oleaut32/Makefile" ;;
-    "dlls/oleaut32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/oleaut32/tests/Makefile" ;;
-    "dlls/olecli.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/olecli.dll16/Makefile" ;;
-    "dlls/olecli32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/olecli32/Makefile" ;;
-    "dlls/oledb32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/oledb32/Makefile" ;;
-    "dlls/oledb32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/oledb32/tests/Makefile" ;;
-    "dlls/oledlg/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/oledlg/Makefile" ;;
-    "dlls/oledlg/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/oledlg/tests/Makefile" ;;
-    "dlls/olepro32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/olepro32/Makefile" ;;
-    "dlls/olesvr.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/olesvr.dll16/Makefile" ;;
-    "dlls/olesvr32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/olesvr32/Makefile" ;;
-    "dlls/olethk32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/olethk32/Makefile" ;;
-    "dlls/opcservices/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/opcservices/Makefile" ;;
-    "dlls/opcservices/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/opcservices/tests/Makefile" ;;
-    "dlls/opencl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/opencl/Makefile" ;;
-    "dlls/opengl32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/opengl32/Makefile" ;;
-    "dlls/opengl32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/opengl32/tests/Makefile" ;;
-    "dlls/packager/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/packager/Makefile" ;;
-    "dlls/packager/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/packager/tests/Makefile" ;;
-    "dlls/pdh/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/pdh/Makefile" ;;
-    "dlls/pdh/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/pdh/tests/Makefile" ;;
-    "dlls/photometadatahandler/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/photometadatahandler/Makefile" ;;
-    "dlls/pidgen/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/pidgen/Makefile" ;;
-    "dlls/powrprof/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/powrprof/Makefile" ;;
-    "dlls/printui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/printui/Makefile" ;;
-    "dlls/prntvpt/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/prntvpt/Makefile" ;;
-    "dlls/prntvpt/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/prntvpt/tests/Makefile" ;;
-    "dlls/profapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/profapi/Makefile" ;;
-    "dlls/propsys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/propsys/Makefile" ;;
-    "dlls/propsys/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/propsys/tests/Makefile" ;;
-    "dlls/protontts/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/protontts/Makefile" ;;
-    "dlls/psapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/psapi/Makefile" ;;
-    "dlls/psapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/psapi/tests/Makefile" ;;
-    "dlls/pstorec/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/pstorec/Makefile" ;;
-    "dlls/pstorec/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/pstorec/tests/Makefile" ;;
-    "dlls/pwrshplugin/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/pwrshplugin/Makefile" ;;
-    "dlls/qasf/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qasf/Makefile" ;;
-    "dlls/qasf/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qasf/tests/Makefile" ;;
-    "dlls/qcap/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qcap/Makefile" ;;
-    "dlls/qcap/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qcap/tests/Makefile" ;;
-    "dlls/qdvd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qdvd/Makefile" ;;
-    "dlls/qdvd/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qdvd/tests/Makefile" ;;
-    "dlls/qedit/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qedit/Makefile" ;;
-    "dlls/qedit/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qedit/tests/Makefile" ;;
-    "dlls/qmgr/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qmgr/Makefile" ;;
-    "dlls/qmgr/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qmgr/tests/Makefile" ;;
-    "dlls/qmgrprxy/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qmgrprxy/Makefile" ;;
-    "dlls/quartz/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/quartz/Makefile" ;;
-    "dlls/quartz/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/quartz/tests/Makefile" ;;
-    "dlls/query/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/query/Makefile" ;;
-    "dlls/qwave/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qwave/Makefile" ;;
-    "dlls/qwave/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/qwave/tests/Makefile" ;;
-    "dlls/rasapi16.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rasapi16.dll16/Makefile" ;;
-    "dlls/rasapi32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rasapi32/Makefile" ;;
-    "dlls/rasapi32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rasapi32/tests/Makefile" ;;
-    "dlls/rasdlg/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rasdlg/Makefile" ;;
-    "dlls/regapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/regapi/Makefile" ;;
-    "dlls/resampledmo/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/resampledmo/Makefile" ;;
-    "dlls/resutils/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/resutils/Makefile" ;;
-    "dlls/riched20/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/riched20/Makefile" ;;
-    "dlls/riched20/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/riched20/tests/Makefile" ;;
-    "dlls/riched32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/riched32/Makefile" ;;
-    "dlls/riched32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/riched32/tests/Makefile" ;;
-    "dlls/rometadata/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rometadata/Makefile" ;;
-    "dlls/rometadata/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rometadata/tests/Makefile" ;;
-    "dlls/rpcrt4/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rpcrt4/Makefile" ;;
-    "dlls/rpcrt4/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rpcrt4/tests/Makefile" ;;
-    "dlls/rsabase/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rsabase/Makefile" ;;
-    "dlls/rsaenh/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rsaenh/Makefile" ;;
-    "dlls/rsaenh/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rsaenh/tests/Makefile" ;;
-    "dlls/rstrtmgr/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rstrtmgr/Makefile" ;;
-    "dlls/rtutils/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rtutils/Makefile" ;;
-    "dlls/rtworkq/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rtworkq/Makefile" ;;
-    "dlls/rtworkq/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/rtworkq/tests/Makefile" ;;
-    "dlls/samlib/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/samlib/Makefile" ;;
-    "dlls/sane.ds/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sane.ds/Makefile" ;;
-    "dlls/sapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sapi/Makefile" ;;
-    "dlls/sapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sapi/tests/Makefile" ;;
-    "dlls/sas/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sas/Makefile" ;;
-    "dlls/scarddlg/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/scarddlg/Makefile" ;;
-    "dlls/scardsvr/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/scardsvr/Makefile" ;;
-    "dlls/sccbase/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sccbase/Makefile" ;;
-    "dlls/schannel/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/schannel/Makefile" ;;
-    "dlls/schannel/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/schannel/tests/Makefile" ;;
-    "dlls/schedsvc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/schedsvc/Makefile" ;;
-    "dlls/schedsvc/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/schedsvc/tests/Makefile" ;;
-    "dlls/scrobj/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/scrobj/Makefile" ;;
-    "dlls/scrobj/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/scrobj/tests/Makefile" ;;
-    "dlls/scrrun/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/scrrun/Makefile" ;;
-    "dlls/scrrun/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/scrrun/tests/Makefile" ;;
-    "dlls/scsiport.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/scsiport.sys/Makefile" ;;
-    "dlls/sechost/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sechost/Makefile" ;;
-    "dlls/secur32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/secur32/Makefile" ;;
-    "dlls/secur32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/secur32/tests/Makefile" ;;
-    "dlls/security/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/security/Makefile" ;;
-    "dlls/sensapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sensapi/Makefile" ;;
-    "dlls/serialui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/serialui/Makefile" ;;
-    "dlls/serialui/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/serialui/tests/Makefile" ;;
-    "dlls/setupapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/setupapi/Makefile" ;;
-    "dlls/setupapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/setupapi/tests/Makefile" ;;
-    "dlls/setupx.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/setupx.dll16/Makefile" ;;
-    "dlls/sfc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sfc/Makefile" ;;
-    "dlls/sfc_os/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sfc_os/Makefile" ;;
-    "dlls/sharedgpures.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sharedgpures.sys/Makefile" ;;
-    "dlls/shcore/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shcore/Makefile" ;;
-    "dlls/shcore/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shcore/tests/Makefile" ;;
-    "dlls/shdoclc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shdoclc/Makefile" ;;
-    "dlls/shdocvw/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shdocvw/Makefile" ;;
-    "dlls/shdocvw/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shdocvw/tests/Makefile" ;;
-    "dlls/shell.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shell.dll16/Makefile" ;;
-    "dlls/shell32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shell32/Makefile" ;;
-    "dlls/shell32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shell32/tests/Makefile" ;;
-    "dlls/shfolder/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shfolder/Makefile" ;;
-    "dlls/shlwapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shlwapi/Makefile" ;;
-    "dlls/shlwapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/shlwapi/tests/Makefile" ;;
-    "dlls/slbcsp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/slbcsp/Makefile" ;;
-    "dlls/slc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/slc/Makefile" ;;
-    "dlls/slc/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/slc/tests/Makefile" ;;
-    "dlls/snmpapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/snmpapi/Makefile" ;;
-    "dlls/snmpapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/snmpapi/tests/Makefile" ;;
-    "dlls/softpub/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/softpub/Makefile" ;;
-    "dlls/sound.drv16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sound.drv16/Makefile" ;;
-    "dlls/spoolss/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/spoolss/Makefile" ;;
-    "dlls/spoolss/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/spoolss/tests/Makefile" ;;
-    "dlls/sppc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sppc/Makefile" ;;
-    "dlls/srclient/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/srclient/Makefile" ;;
-    "dlls/srvcli/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/srvcli/Makefile" ;;
-    "dlls/srvsvc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/srvsvc/Makefile" ;;
-    "dlls/sspicli/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sspicli/Makefile" ;;
-    "dlls/stdole2.tlb/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/stdole2.tlb/Makefile" ;;
-    "dlls/stdole32.tlb/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/stdole32.tlb/Makefile" ;;
-    "dlls/sti/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sti/Makefile" ;;
-    "dlls/sti/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sti/tests/Makefile" ;;
-    "dlls/storage.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/storage.dll16/Makefile" ;;
-    "dlls/stress.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/stress.dll16/Makefile" ;;
-    "dlls/strmdll/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/strmdll/Makefile" ;;
-    "dlls/svrapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/svrapi/Makefile" ;;
-    "dlls/sxs/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sxs/Makefile" ;;
-    "dlls/sxs/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/sxs/tests/Makefile" ;;
-    "dlls/system.drv16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/system.drv16/Makefile" ;;
-    "dlls/t2embed/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/t2embed/Makefile" ;;
-    "dlls/t2embed/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/t2embed/tests/Makefile" ;;
-    "dlls/tapi32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/tapi32/Makefile" ;;
-    "dlls/tapi32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/tapi32/tests/Makefile" ;;
-    "dlls/taskschd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/taskschd/Makefile" ;;
-    "dlls/taskschd/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/taskschd/tests/Makefile" ;;
-    "dlls/tbs/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/tbs/Makefile" ;;
-    "dlls/tdh/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/tdh/Makefile" ;;
-    "dlls/tdi.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/tdi.sys/Makefile" ;;
-    "dlls/threadpoolwinrt/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/threadpoolwinrt/Makefile" ;;
-    "dlls/threadpoolwinrt/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/threadpoolwinrt/tests/Makefile" ;;
-    "dlls/toolhelp.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/toolhelp.dll16/Makefile" ;;
-    "dlls/traffic/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/traffic/Makefile" ;;
-    "dlls/twain.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/twain.dll16/Makefile" ;;
-    "dlls/twain_32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/twain_32/Makefile" ;;
-    "dlls/twain_32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/twain_32/tests/Makefile" ;;
-    "dlls/twinapi.appcore/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/twinapi.appcore/Makefile" ;;
-    "dlls/twinapi.appcore/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/twinapi.appcore/tests/Makefile" ;;
-    "dlls/typelib.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/typelib.dll16/Makefile" ;;
-    "dlls/tzres/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/tzres/Makefile" ;;
-    "dlls/ucrtbase/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ucrtbase/Makefile" ;;
-    "dlls/ucrtbase/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ucrtbase/tests/Makefile" ;;
-    "dlls/uianimation/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/uianimation/Makefile" ;;
-    "dlls/uianimation/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/uianimation/tests/Makefile" ;;
-    "dlls/uiautomationcore/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/uiautomationcore/Makefile" ;;
-    "dlls/uiautomationcore/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/uiautomationcore/tests/Makefile" ;;
-    "dlls/uiribbon/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/uiribbon/Makefile" ;;
-    "dlls/unicows/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/unicows/Makefile" ;;
-    "dlls/updspapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/updspapi/Makefile" ;;
-    "dlls/url/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/url/Makefile" ;;
-    "dlls/urlmon/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/urlmon/Makefile" ;;
-    "dlls/urlmon/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/urlmon/tests/Makefile" ;;
-    "dlls/usbd.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/usbd.sys/Makefile" ;;
-    "dlls/user.exe16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/user.exe16/Makefile" ;;
-    "dlls/user32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/user32/Makefile" ;;
-    "dlls/user32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/user32/tests/Makefile" ;;
-    "dlls/userenv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/userenv/Makefile" ;;
-    "dlls/userenv/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/userenv/tests/Makefile" ;;
-    "dlls/usp10/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/usp10/Makefile" ;;
-    "dlls/usp10/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/usp10/tests/Makefile" ;;
-    "dlls/utildll/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/utildll/Makefile" ;;
-    "dlls/uxtheme/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/uxtheme/Makefile" ;;
-    "dlls/uxtheme/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/uxtheme/tests/Makefile" ;;
-    "dlls/vbscript/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vbscript/Makefile" ;;
-    "dlls/vbscript/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vbscript/tests/Makefile" ;;
-    "dlls/vcomp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vcomp/Makefile" ;;
-    "dlls/vcomp/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vcomp/tests/Makefile" ;;
-    "dlls/vcomp100/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vcomp100/Makefile" ;;
-    "dlls/vcomp110/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vcomp110/Makefile" ;;
-    "dlls/vcomp110/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vcomp110/tests/Makefile" ;;
-    "dlls/vcomp120/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vcomp120/Makefile" ;;
-    "dlls/vcomp140/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vcomp140/Makefile" ;;
-    "dlls/vcomp90/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vcomp90/Makefile" ;;
-    "dlls/vcruntime140/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vcruntime140/Makefile" ;;
-    "dlls/vcruntime140_1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vcruntime140_1/Makefile" ;;
-    "dlls/vdhcp.vxd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vdhcp.vxd/Makefile" ;;
-    "dlls/vdmdbg/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vdmdbg/Makefile" ;;
-    "dlls/ver.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ver.dll16/Makefile" ;;
-    "dlls/version/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/version/Makefile" ;;
-    "dlls/version/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/version/tests/Makefile" ;;
-    "dlls/vga/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vga/Makefile" ;;
-    "dlls/vidreszr/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vidreszr/Makefile" ;;
-    "dlls/virtdisk/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/virtdisk/Makefile" ;;
-    "dlls/virtdisk/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/virtdisk/tests/Makefile" ;;
-    "dlls/vmm.vxd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vmm.vxd/Makefile" ;;
-    "dlls/vnbt.vxd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vnbt.vxd/Makefile" ;;
-    "dlls/vnetbios.vxd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vnetbios.vxd/Makefile" ;;
-    "dlls/vssapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vssapi/Makefile" ;;
-    "dlls/vtdapi.vxd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vtdapi.vxd/Makefile" ;;
-    "dlls/vulkan-1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vulkan-1/Makefile" ;;
-    "dlls/vulkan-1/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vulkan-1/tests/Makefile" ;;
-    "dlls/vwin32.vxd/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/vwin32.vxd/Makefile" ;;
-    "dlls/w32skrnl/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/w32skrnl/Makefile" ;;
-    "dlls/w32sys.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/w32sys.dll16/Makefile" ;;
-    "dlls/wbemdisp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wbemdisp/Makefile" ;;
-    "dlls/wbemdisp/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wbemdisp/tests/Makefile" ;;
-    "dlls/wbemprox/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wbemprox/Makefile" ;;
-    "dlls/wbemprox/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wbemprox/tests/Makefile" ;;
-    "dlls/wdscore/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wdscore/Makefile" ;;
-    "dlls/webservices/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/webservices/Makefile" ;;
-    "dlls/webservices/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/webservices/tests/Makefile" ;;
-    "dlls/websocket/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/websocket/Makefile" ;;
-    "dlls/wer/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wer/Makefile" ;;
-    "dlls/wer/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wer/tests/Makefile" ;;
-    "dlls/wevtapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wevtapi/Makefile" ;;
-    "dlls/wevtapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wevtapi/tests/Makefile" ;;
-    "dlls/wevtsvc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wevtsvc/Makefile" ;;
-    "dlls/wiaservc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wiaservc/Makefile" ;;
-    "dlls/wiaservc/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wiaservc/tests/Makefile" ;;
-    "dlls/wimgapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wimgapi/Makefile" ;;
-    "dlls/win32s16.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/win32s16.dll16/Makefile" ;;
-    "dlls/win32u/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/win32u/Makefile" ;;
-    "dlls/win32u/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/win32u/tests/Makefile" ;;
-    "dlls/win87em.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/win87em.dll16/Makefile" ;;
-    "dlls/winaspi.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winaspi.dll16/Makefile" ;;
-    "dlls/windebug.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windebug.dll16/Makefile" ;;
-    "dlls/windows.applicationmodel/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.applicationmodel/Makefile" ;;
-    "dlls/windows.applicationmodel/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.applicationmodel/tests/Makefile" ;;
-    "dlls/windows.devices.bluetooth/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.devices.bluetooth/Makefile" ;;
-    "dlls/windows.devices.bluetooth/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.devices.bluetooth/tests/Makefile" ;;
-    "dlls/windows.devices.enumeration/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.devices.enumeration/Makefile" ;;
-    "dlls/windows.devices.enumeration/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.devices.enumeration/tests/Makefile" ;;
-    "dlls/windows.devices.usb/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.devices.usb/Makefile" ;;
-    "dlls/windows.devices.usb/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.devices.usb/tests/Makefile" ;;
-    "dlls/windows.gaming.input/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.gaming.input/Makefile" ;;
-    "dlls/windows.gaming.input/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.gaming.input/tests/Makefile" ;;
-    "dlls/windows.gaming.ui.gamebar/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.gaming.ui.gamebar/Makefile" ;;
-    "dlls/windows.gaming.ui.gamebar/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.gaming.ui.gamebar/tests/Makefile" ;;
-    "dlls/windows.globalization/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.globalization/Makefile" ;;
-    "dlls/windows.globalization/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.globalization/tests/Makefile" ;;
-    "dlls/windows.media.devices/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.media.devices/Makefile" ;;
-    "dlls/windows.media.devices/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.media.devices/tests/Makefile" ;;
-    "dlls/windows.media.mediacontrol/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.media.mediacontrol/Makefile" ;;
-    "dlls/windows.media.mediacontrol/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.media.mediacontrol/tests/Makefile" ;;
-    "dlls/windows.media.speech/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.media.speech/Makefile" ;;
-    "dlls/windows.media.speech/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.media.speech/tests/Makefile" ;;
-    "dlls/windows.media/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.media/Makefile" ;;
-    "dlls/windows.media/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.media/tests/Makefile" ;;
-    "dlls/windows.networking.connectivity/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.networking.connectivity/Makefile" ;;
-    "dlls/windows.networking.connectivity/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.networking.connectivity/tests/Makefile" ;;
-    "dlls/windows.networking.hostname/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.networking.hostname/Makefile" ;;
-    "dlls/windows.networking.hostname/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.networking.hostname/tests/Makefile" ;;
-    "dlls/windows.networking/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.networking/Makefile" ;;
-    "dlls/windows.perception.stub/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.perception.stub/Makefile" ;;
-    "dlls/windows.perception.stub/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.perception.stub/tests/Makefile" ;;
-    "dlls/windows.security.authentication.onlineid/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.security.authentication.onlineid/Makefile" ;;
-    "dlls/windows.security.authentication.onlineid/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.security.authentication.onlineid/tests/Makefile" ;;
-    "dlls/windows.security.credentials.ui.userconsentverifier/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.security.credentials.ui.userconsentverifier/Makefile" ;;
-    "dlls/windows.security.credentials.ui.userconsentverifier/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.security.credentials.ui.userconsentverifier/tests/Makefile" ;;
-    "dlls/windows.storage.applicationdata/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.storage.applicationdata/Makefile" ;;
-    "dlls/windows.storage.applicationdata/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.storage.applicationdata/tests/Makefile" ;;
-    "dlls/windows.system.profile.systemmanufacturers/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.system.profile.systemmanufacturers/Makefile" ;;
-    "dlls/windows.system.profile.systemmanufacturers/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.system.profile.systemmanufacturers/tests/Makefile" ;;
-    "dlls/windows.ui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.ui/Makefile" ;;
-    "dlls/windows.ui/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.ui/tests/Makefile" ;;
-    "dlls/windows.web/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.web/Makefile" ;;
-    "dlls/windows.web/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windows.web/tests/Makefile" ;;
-    "dlls/windowscodecs/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windowscodecs/Makefile" ;;
-    "dlls/windowscodecs/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windowscodecs/tests/Makefile" ;;
-    "dlls/windowscodecsext/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windowscodecsext/Makefile" ;;
-    "dlls/windowscodecsext/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/windowscodecsext/tests/Makefile" ;;
-    "dlls/winealsa.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winealsa.drv/Makefile" ;;
-    "dlls/wineandroid.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wineandroid.drv/Makefile" ;;
-    "dlls/winebth.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winebth.sys/Makefile" ;;
-    "dlls/winebus.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winebus.sys/Makefile" ;;
-    "dlls/winecoreaudio.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winecoreaudio.drv/Makefile" ;;
-    "dlls/winecrt0/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winecrt0/Makefile" ;;
-    "dlls/wined3d/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wined3d/Makefile" ;;
-    "dlls/winedmo/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winedmo/Makefile" ;;
-    "dlls/winegstreamer/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winegstreamer/Makefile" ;;
-    "dlls/winehid.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winehid.sys/Makefile" ;;
-    "dlls/winemac.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winemac.drv/Makefile" ;;
-    "dlls/winemapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winemapi/Makefile" ;;
-    "dlls/wineoss.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wineoss.drv/Makefile" ;;
-    "dlls/wineps.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wineps.drv/Makefile" ;;
-    "dlls/wineps16.drv16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wineps16.drv16/Makefile" ;;
-    "dlls/winepulse.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winepulse.drv/Makefile" ;;
-    "dlls/wineusb.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wineusb.sys/Makefile" ;;
-    "dlls/winevulkan/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winevulkan/Makefile" ;;
-    "dlls/winewayland.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winewayland.drv/Makefile" ;;
-    "dlls/winex11.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winex11.drv/Makefile" ;;
-    "dlls/winexinput.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winexinput.sys/Makefile" ;;
-    "dlls/wing.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wing.dll16/Makefile" ;;
-    "dlls/wing32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wing32/Makefile" ;;
-    "dlls/wing32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wing32/tests/Makefile" ;;
-    "dlls/winhttp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winhttp/Makefile" ;;
-    "dlls/winhttp/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winhttp/tests/Makefile" ;;
-    "dlls/wininet/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wininet/Makefile" ;;
-    "dlls/wininet/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wininet/tests/Makefile" ;;
-    "dlls/winmm/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winmm/Makefile" ;;
-    "dlls/winmm/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winmm/tests/Makefile" ;;
-    "dlls/winnls.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winnls.dll16/Makefile" ;;
-    "dlls/winnls32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winnls32/Makefile" ;;
-    "dlls/winprint/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winprint/Makefile" ;;
-    "dlls/winscard/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winscard/Makefile" ;;
-    "dlls/winscard/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winscard/tests/Makefile" ;;
-    "dlls/winsock.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winsock.dll16/Makefile" ;;
-    "dlls/winspool.drv/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winspool.drv/Makefile" ;;
-    "dlls/winspool.drv/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winspool.drv/tests/Makefile" ;;
-    "dlls/winsta/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winsta/Makefile" ;;
-    "dlls/wintab.dll16/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wintab.dll16/Makefile" ;;
-    "dlls/wintab32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wintab32/Makefile" ;;
-    "dlls/wintab32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wintab32/tests/Makefile" ;;
-    "dlls/wintrust/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wintrust/Makefile" ;;
-    "dlls/wintrust/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wintrust/tests/Makefile" ;;
-    "dlls/wintypes/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wintypes/Makefile" ;;
-    "dlls/wintypes/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wintypes/tests/Makefile" ;;
-    "dlls/winusb/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/winusb/Makefile" ;;
-    "dlls/wlanapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wlanapi/Makefile" ;;
-    "dlls/wlanapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wlanapi/tests/Makefile" ;;
-    "dlls/wlanui/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wlanui/Makefile" ;;
-    "dlls/wldap32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wldap32/Makefile" ;;
-    "dlls/wldap32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wldap32/tests/Makefile" ;;
-    "dlls/wldp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wldp/Makefile" ;;
-    "dlls/wldp/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wldp/tests/Makefile" ;;
-    "dlls/wmadmod/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmadmod/Makefile" ;;
-    "dlls/wmasf/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmasf/Makefile" ;;
-    "dlls/wmi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmi/Makefile" ;;
-    "dlls/wmilib.sys/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmilib.sys/Makefile" ;;
-    "dlls/wmiutils/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmiutils/Makefile" ;;
-    "dlls/wmiutils/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmiutils/tests/Makefile" ;;
-    "dlls/wmp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmp/Makefile" ;;
-    "dlls/wmp/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmp/tests/Makefile" ;;
-    "dlls/wmphoto/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmphoto/Makefile" ;;
-    "dlls/wmvcore/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmvcore/Makefile" ;;
-    "dlls/wmvcore/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmvcore/tests/Makefile" ;;
-    "dlls/wmvdecod/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wmvdecod/Makefile" ;;
-    "dlls/wnaspi32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wnaspi32/Makefile" ;;
-    "dlls/wofutil/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wofutil/Makefile" ;;
-    "dlls/wow32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wow32/Makefile" ;;
-    "dlls/wow64/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wow64/Makefile" ;;
-    "dlls/wow64cpu/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wow64cpu/Makefile" ;;
-    "dlls/wow64win/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wow64win/Makefile" ;;
-    "dlls/wpc/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wpc/Makefile" ;;
-    "dlls/wpc/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wpc/tests/Makefile" ;;
-    "dlls/wpcap/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wpcap/Makefile" ;;
-    "dlls/wpcap/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wpcap/tests/Makefile" ;;
-    "dlls/ws2_32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ws2_32/Makefile" ;;
-    "dlls/ws2_32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/ws2_32/tests/Makefile" ;;
-    "dlls/wsdapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wsdapi/Makefile" ;;
-    "dlls/wsdapi/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wsdapi/tests/Makefile" ;;
-    "dlls/wshom.ocx/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wshom.ocx/Makefile" ;;
-    "dlls/wshom.ocx/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wshom.ocx/tests/Makefile" ;;
-    "dlls/wsnmp32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wsnmp32/Makefile" ;;
-    "dlls/wsnmp32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wsnmp32/tests/Makefile" ;;
-    "dlls/wsock32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wsock32/Makefile" ;;
-    "dlls/wtsapi32/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wtsapi32/Makefile" ;;
-    "dlls/wtsapi32/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wtsapi32/tests/Makefile" ;;
-    "dlls/wuapi/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wuapi/Makefile" ;;
-    "dlls/wuaueng/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/wuaueng/Makefile" ;;
-    "dlls/x3daudio1_0/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/x3daudio1_0/Makefile" ;;
-    "dlls/x3daudio1_1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/x3daudio1_1/Makefile" ;;
-    "dlls/x3daudio1_2/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/x3daudio1_2/Makefile" ;;
-    "dlls/x3daudio1_3/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/x3daudio1_3/Makefile" ;;
-    "dlls/x3daudio1_4/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/x3daudio1_4/Makefile" ;;
-    "dlls/x3daudio1_5/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/x3daudio1_5/Makefile" ;;
-    "dlls/x3daudio1_6/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/x3daudio1_6/Makefile" ;;
-    "dlls/x3daudio1_7/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/x3daudio1_7/Makefile" ;;
-    "dlls/xactengine2_0/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine2_0/Makefile" ;;
-    "dlls/xactengine2_4/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine2_4/Makefile" ;;
-    "dlls/xactengine2_7/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine2_7/Makefile" ;;
-    "dlls/xactengine2_9/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine2_9/Makefile" ;;
-    "dlls/xactengine3_0/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine3_0/Makefile" ;;
-    "dlls/xactengine3_1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine3_1/Makefile" ;;
-    "dlls/xactengine3_2/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine3_2/Makefile" ;;
-    "dlls/xactengine3_3/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine3_3/Makefile" ;;
-    "dlls/xactengine3_4/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine3_4/Makefile" ;;
-    "dlls/xactengine3_5/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine3_5/Makefile" ;;
-    "dlls/xactengine3_6/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine3_6/Makefile" ;;
-    "dlls/xactengine3_7/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine3_7/Makefile" ;;
-    "dlls/xactengine3_7/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xactengine3_7/tests/Makefile" ;;
-    "dlls/xapofx1_1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xapofx1_1/Makefile" ;;
-    "dlls/xapofx1_2/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xapofx1_2/Makefile" ;;
-    "dlls/xapofx1_3/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xapofx1_3/Makefile" ;;
-    "dlls/xapofx1_4/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xapofx1_4/Makefile" ;;
-    "dlls/xapofx1_5/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xapofx1_5/Makefile" ;;
-    "dlls/xaudio2_0/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_0/Makefile" ;;
-    "dlls/xaudio2_1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_1/Makefile" ;;
-    "dlls/xaudio2_2/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_2/Makefile" ;;
-    "dlls/xaudio2_3/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_3/Makefile" ;;
-    "dlls/xaudio2_4/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_4/Makefile" ;;
-    "dlls/xaudio2_5/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_5/Makefile" ;;
-    "dlls/xaudio2_6/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_6/Makefile" ;;
-    "dlls/xaudio2_7/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_7/Makefile" ;;
-    "dlls/xaudio2_7/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_7/tests/Makefile" ;;
-    "dlls/xaudio2_8/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_8/Makefile" ;;
-    "dlls/xaudio2_8/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_8/tests/Makefile" ;;
-    "dlls/xaudio2_9/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xaudio2_9/Makefile" ;;
-    "dlls/xinput1_1/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xinput1_1/Makefile" ;;
-    "dlls/xinput1_2/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xinput1_2/Makefile" ;;
-    "dlls/xinput1_3/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xinput1_3/Makefile" ;;
-    "dlls/xinput1_3/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xinput1_3/tests/Makefile" ;;
-    "dlls/xinput1_4/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xinput1_4/Makefile" ;;
-    "dlls/xinput9_1_0/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xinput9_1_0/Makefile" ;;
-    "dlls/xinputuap/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xinputuap/Makefile" ;;
-    "dlls/xmllite/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xmllite/Makefile" ;;
-    "dlls/xmllite/tests/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xmllite/tests/Makefile" ;;
-    "dlls/xolehlp/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xolehlp/Makefile" ;;
-    "dlls/xpsprint/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xpsprint/Makefile" ;;
-    "dlls/xpssvcs/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xpssvcs/Makefile" ;;
-    "dlls/xtajit64/Makefile") CONFIG_FILES="$CONFIG_FILES dlls/xtajit64/Makefile" ;;
-    "fonts/Makefile") CONFIG_FILES="$CONFIG_FILES fonts/Makefile" ;;
-    "include/Makefile") CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
-    "libs/adsiid/Makefile") CONFIG_FILES="$CONFIG_FILES libs/adsiid/Makefile" ;;
-    "libs/atl_android/Makefile") CONFIG_FILES="$CONFIG_FILES libs/atl_android/Makefile" ;;
-    "libs/capstone/Makefile") CONFIG_FILES="$CONFIG_FILES libs/capstone/Makefile" ;;
-    "libs/dmoguids/Makefile") CONFIG_FILES="$CONFIG_FILES libs/dmoguids/Makefile" ;;
-    "libs/dxerr8/Makefile") CONFIG_FILES="$CONFIG_FILES libs/dxerr8/Makefile" ;;
-    "libs/dxerr9/Makefile") CONFIG_FILES="$CONFIG_FILES libs/dxerr9/Makefile" ;;
-    "libs/dxguid/Makefile") CONFIG_FILES="$CONFIG_FILES libs/dxguid/Makefile" ;;
-    "libs/faudio/Makefile") CONFIG_FILES="$CONFIG_FILES libs/faudio/Makefile" ;;
-    "libs/fluidsynth/Makefile") CONFIG_FILES="$CONFIG_FILES libs/fluidsynth/Makefile" ;;
-    "libs/gsm/Makefile") CONFIG_FILES="$CONFIG_FILES libs/gsm/Makefile" ;;
-    "libs/ipasim/Makefile") CONFIG_FILES="$CONFIG_FILES libs/ipasim/Makefile" ;;
-    "libs/jpeg/Makefile") CONFIG_FILES="$CONFIG_FILES libs/jpeg/Makefile" ;;
-    "libs/jxr/Makefile") CONFIG_FILES="$CONFIG_FILES libs/jxr/Makefile" ;;
-    "libs/lcms2/Makefile") CONFIG_FILES="$CONFIG_FILES libs/lcms2/Makefile" ;;
-    "libs/ldap/Makefile") CONFIG_FILES="$CONFIG_FILES libs/ldap/Makefile" ;;
-    "libs/libretro/Makefile") CONFIG_FILES="$CONFIG_FILES libs/libretro/Makefile" ;;
-    "libs/mfuuid/Makefile") CONFIG_FILES="$CONFIG_FILES libs/mfuuid/Makefile" ;;
-    "libs/mpg123/Makefile") CONFIG_FILES="$CONFIG_FILES libs/mpg123/Makefile" ;;
-    "libs/musl/Makefile") CONFIG_FILES="$CONFIG_FILES libs/musl/Makefile" ;;
-    "libs/png/Makefile") CONFIG_FILES="$CONFIG_FILES libs/png/Makefile" ;;
-    "libs/strmbase/Makefile") CONFIG_FILES="$CONFIG_FILES libs/strmbase/Makefile" ;;
-    "libs/strmiids/Makefile") CONFIG_FILES="$CONFIG_FILES libs/strmiids/Makefile" ;;
-    "libs/tiff/Makefile") CONFIG_FILES="$CONFIG_FILES libs/tiff/Makefile" ;;
-    "libs/uuid/Makefile") CONFIG_FILES="$CONFIG_FILES libs/uuid/Makefile" ;;
-    "libs/vkd3d/Makefile") CONFIG_FILES="$CONFIG_FILES libs/vkd3d/Makefile" ;;
-    "libs/wbemuuid/Makefile") CONFIG_FILES="$CONFIG_FILES libs/wbemuuid/Makefile" ;;
-    "libs/wmcodecdspuuid/Makefile") CONFIG_FILES="$CONFIG_FILES libs/wmcodecdspuuid/Makefile" ;;
-    "libs/wsl/Makefile") CONFIG_FILES="$CONFIG_FILES libs/wsl/Makefile" ;;
-    "libs/xml2/Makefile") CONFIG_FILES="$CONFIG_FILES libs/xml2/Makefile" ;;
-    "libs/xslt/Makefile") CONFIG_FILES="$CONFIG_FILES libs/xslt/Makefile" ;;
-    "libs/zlib/Makefile") CONFIG_FILES="$CONFIG_FILES libs/zlib/Makefile" ;;
-    "loader/Makefile") CONFIG_FILES="$CONFIG_FILES loader/Makefile" ;;
-    "nls/Makefile") CONFIG_FILES="$CONFIG_FILES nls/Makefile" ;;
-    "po/Makefile") CONFIG_FILES="$CONFIG_FILES po/Makefile" ;;
-    "programs/arp/Makefile") CONFIG_FILES="$CONFIG_FILES programs/arp/Makefile" ;;
-    "programs/aspnet_regiis/Makefile") CONFIG_FILES="$CONFIG_FILES programs/aspnet_regiis/Makefile" ;;
-    "programs/attrib/Makefile") CONFIG_FILES="$CONFIG_FILES programs/attrib/Makefile" ;;
-    "programs/belauncher/Makefile") CONFIG_FILES="$CONFIG_FILES programs/belauncher/Makefile" ;;
-    "programs/cabarc/Makefile") CONFIG_FILES="$CONFIG_FILES programs/cabarc/Makefile" ;;
-    "programs/cacls/Makefile") CONFIG_FILES="$CONFIG_FILES programs/cacls/Makefile" ;;
-    "programs/certutil/Makefile") CONFIG_FILES="$CONFIG_FILES programs/certutil/Makefile" ;;
-    "programs/chcp.com/Makefile") CONFIG_FILES="$CONFIG_FILES programs/chcp.com/Makefile" ;;
-    "programs/clock/Makefile") CONFIG_FILES="$CONFIG_FILES programs/clock/Makefile" ;;
-    "programs/cmd/Makefile") CONFIG_FILES="$CONFIG_FILES programs/cmd/Makefile" ;;
-    "programs/cmd/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/cmd/tests/Makefile" ;;
-    "programs/conhost/Makefile") CONFIG_FILES="$CONFIG_FILES programs/conhost/Makefile" ;;
-    "programs/conhost/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/conhost/tests/Makefile" ;;
-    "programs/control/Makefile") CONFIG_FILES="$CONFIG_FILES programs/control/Makefile" ;;
-    "programs/cscript/Makefile") CONFIG_FILES="$CONFIG_FILES programs/cscript/Makefile" ;;
-    "programs/dism/Makefile") CONFIG_FILES="$CONFIG_FILES programs/dism/Makefile" ;;
-    "programs/dllhost/Makefile") CONFIG_FILES="$CONFIG_FILES programs/dllhost/Makefile" ;;
-    "programs/dplaysvr/Makefile") CONFIG_FILES="$CONFIG_FILES programs/dplaysvr/Makefile" ;;
-    "programs/dotnetfx35/Makefile") CONFIG_FILES="$CONFIG_FILES programs/dotnetfx35/Makefile" ;;
-    "programs/dpnsvr/Makefile") CONFIG_FILES="$CONFIG_FILES programs/dpnsvr/Makefile" ;;
-    "programs/dpvsetup/Makefile") CONFIG_FILES="$CONFIG_FILES programs/dpvsetup/Makefile" ;;
-    "programs/dxdiag/Makefile") CONFIG_FILES="$CONFIG_FILES programs/dxdiag/Makefile" ;;
-    "programs/eject/Makefile") CONFIG_FILES="$CONFIG_FILES programs/eject/Makefile" ;;
-    "programs/expand/Makefile") CONFIG_FILES="$CONFIG_FILES programs/expand/Makefile" ;;
-    "programs/explorer/Makefile") CONFIG_FILES="$CONFIG_FILES programs/explorer/Makefile" ;;
-    "programs/explorer/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/explorer/tests/Makefile" ;;
-    "programs/extrac32/Makefile") CONFIG_FILES="$CONFIG_FILES programs/extrac32/Makefile" ;;
-    "programs/fc/Makefile") CONFIG_FILES="$CONFIG_FILES programs/fc/Makefile" ;;
-    "programs/fc/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/fc/tests/Makefile" ;;
-    "programs/find/Makefile") CONFIG_FILES="$CONFIG_FILES programs/find/Makefile" ;;
-    "programs/find/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/find/tests/Makefile" ;;
-    "programs/findstr/Makefile") CONFIG_FILES="$CONFIG_FILES programs/findstr/Makefile" ;;
-    "programs/findstr/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/findstr/tests/Makefile" ;;
-    "programs/fsutil/Makefile") CONFIG_FILES="$CONFIG_FILES programs/fsutil/Makefile" ;;
-    "programs/fsutil/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/fsutil/tests/Makefile" ;;
-    "programs/getminidump/Makefile") CONFIG_FILES="$CONFIG_FILES programs/getminidump/Makefile" ;;
-    "programs/hh/Makefile") CONFIG_FILES="$CONFIG_FILES programs/hh/Makefile" ;;
-    "programs/hostname/Makefile") CONFIG_FILES="$CONFIG_FILES programs/hostname/Makefile" ;;
-    "programs/icacls/Makefile") CONFIG_FILES="$CONFIG_FILES programs/icacls/Makefile" ;;
-    "programs/icinfo/Makefile") CONFIG_FILES="$CONFIG_FILES programs/icinfo/Makefile" ;;
-    "programs/iexplore/Makefile") CONFIG_FILES="$CONFIG_FILES programs/iexplore/Makefile" ;;
-    "programs/ipconfig/Makefile") CONFIG_FILES="$CONFIG_FILES programs/ipconfig/Makefile" ;;
-    "programs/klist/Makefile") CONFIG_FILES="$CONFIG_FILES programs/klist/Makefile" ;;
-    "programs/lodctr/Makefile") CONFIG_FILES="$CONFIG_FILES programs/lodctr/Makefile" ;;
-    "programs/mofcomp/Makefile") CONFIG_FILES="$CONFIG_FILES programs/mofcomp/Makefile" ;;
-    "programs/mshta/Makefile") CONFIG_FILES="$CONFIG_FILES programs/mshta/Makefile" ;;
-    "programs/msidb/Makefile") CONFIG_FILES="$CONFIG_FILES programs/msidb/Makefile" ;;
-    "programs/msiexec/Makefile") CONFIG_FILES="$CONFIG_FILES programs/msiexec/Makefile" ;;
-    "programs/msinfo32/Makefile") CONFIG_FILES="$CONFIG_FILES programs/msinfo32/Makefile" ;;
-    "programs/net/Makefile") CONFIG_FILES="$CONFIG_FILES programs/net/Makefile" ;;
-    "programs/net/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/net/tests/Makefile" ;;
-    "programs/netsh/Makefile") CONFIG_FILES="$CONFIG_FILES programs/netsh/Makefile" ;;
-    "programs/netstat/Makefile") CONFIG_FILES="$CONFIG_FILES programs/netstat/Makefile" ;;
-    "programs/ngen/Makefile") CONFIG_FILES="$CONFIG_FILES programs/ngen/Makefile" ;;
-    "programs/notepad/Makefile") CONFIG_FILES="$CONFIG_FILES programs/notepad/Makefile" ;;
-    "programs/oleview/Makefile") CONFIG_FILES="$CONFIG_FILES programs/oleview/Makefile" ;;
-    "programs/ping/Makefile") CONFIG_FILES="$CONFIG_FILES programs/ping/Makefile" ;;
-    "programs/plugplay/Makefile") CONFIG_FILES="$CONFIG_FILES programs/plugplay/Makefile" ;;
-    "programs/pnputil/Makefile") CONFIG_FILES="$CONFIG_FILES programs/pnputil/Makefile" ;;
-    "programs/powershell/Makefile") CONFIG_FILES="$CONFIG_FILES programs/powershell/Makefile" ;;
-    "programs/presentationfontcache/Makefile") CONFIG_FILES="$CONFIG_FILES programs/presentationfontcache/Makefile" ;;
-    "programs/progman/Makefile") CONFIG_FILES="$CONFIG_FILES programs/progman/Makefile" ;;
-    "programs/reg/Makefile") CONFIG_FILES="$CONFIG_FILES programs/reg/Makefile" ;;
-    "programs/reg/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/reg/tests/Makefile" ;;
-    "programs/regasm/Makefile") CONFIG_FILES="$CONFIG_FILES programs/regasm/Makefile" ;;
-    "programs/regedit/Makefile") CONFIG_FILES="$CONFIG_FILES programs/regedit/Makefile" ;;
-    "programs/regedit/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/regedit/tests/Makefile" ;;
-    "programs/regini/Makefile") CONFIG_FILES="$CONFIG_FILES programs/regini/Makefile" ;;
-    "programs/regsvcs/Makefile") CONFIG_FILES="$CONFIG_FILES programs/regsvcs/Makefile" ;;
-    "programs/regsvr32/Makefile") CONFIG_FILES="$CONFIG_FILES programs/regsvr32/Makefile" ;;
-    "programs/robocopy/Makefile") CONFIG_FILES="$CONFIG_FILES programs/robocopy/Makefile" ;;
-    "programs/rpcss/Makefile") CONFIG_FILES="$CONFIG_FILES programs/rpcss/Makefile" ;;
-    "programs/rundll.exe16/Makefile") CONFIG_FILES="$CONFIG_FILES programs/rundll.exe16/Makefile" ;;
-    "programs/rundll32/Makefile") CONFIG_FILES="$CONFIG_FILES programs/rundll32/Makefile" ;;
-    "programs/sc/Makefile") CONFIG_FILES="$CONFIG_FILES programs/sc/Makefile" ;;
-    "programs/sc/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/sc/tests/Makefile" ;;
-    "programs/schtasks/Makefile") CONFIG_FILES="$CONFIG_FILES programs/schtasks/Makefile" ;;
-    "programs/schtasks/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/schtasks/tests/Makefile" ;;
-    "programs/sdbinst/Makefile") CONFIG_FILES="$CONFIG_FILES programs/sdbinst/Makefile" ;;
-    "programs/secedit/Makefile") CONFIG_FILES="$CONFIG_FILES programs/secedit/Makefile" ;;
-    "programs/servicemodelreg/Makefile") CONFIG_FILES="$CONFIG_FILES programs/servicemodelreg/Makefile" ;;
-    "programs/services/Makefile") CONFIG_FILES="$CONFIG_FILES programs/services/Makefile" ;;
-    "programs/services/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/services/tests/Makefile" ;;
-    "programs/setx/Makefile") CONFIG_FILES="$CONFIG_FILES programs/setx/Makefile" ;;
-    "programs/shutdown/Makefile") CONFIG_FILES="$CONFIG_FILES programs/shutdown/Makefile" ;;
-    "programs/sort/Makefile") CONFIG_FILES="$CONFIG_FILES programs/sort/Makefile" ;;
-    "programs/spoolsv/Makefile") CONFIG_FILES="$CONFIG_FILES programs/spoolsv/Makefile" ;;
-    "programs/start/Makefile") CONFIG_FILES="$CONFIG_FILES programs/start/Makefile" ;;
-    "programs/subst/Makefile") CONFIG_FILES="$CONFIG_FILES programs/subst/Makefile" ;;
-    "programs/svchost/Makefile") CONFIG_FILES="$CONFIG_FILES programs/svchost/Makefile" ;;
-    "programs/systeminfo/Makefile") CONFIG_FILES="$CONFIG_FILES programs/systeminfo/Makefile" ;;
-    "programs/tabtip/Makefile") CONFIG_FILES="$CONFIG_FILES programs/tabtip/Makefile" ;;
-    "programs/taskkill/Makefile") CONFIG_FILES="$CONFIG_FILES programs/taskkill/Makefile" ;;
-    "programs/tasklist/Makefile") CONFIG_FILES="$CONFIG_FILES programs/tasklist/Makefile" ;;
-    "programs/tasklist/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/tasklist/tests/Makefile" ;;
-    "programs/taskmgr/Makefile") CONFIG_FILES="$CONFIG_FILES programs/taskmgr/Makefile" ;;
-    "programs/termsv/Makefile") CONFIG_FILES="$CONFIG_FILES programs/termsv/Makefile" ;;
-    "programs/uninstaller/Makefile") CONFIG_FILES="$CONFIG_FILES programs/uninstaller/Makefile" ;;
-    "programs/unlodctr/Makefile") CONFIG_FILES="$CONFIG_FILES programs/unlodctr/Makefile" ;;
-    "programs/view/Makefile") CONFIG_FILES="$CONFIG_FILES programs/view/Makefile" ;;
-    "programs/wevtutil/Makefile") CONFIG_FILES="$CONFIG_FILES programs/wevtutil/Makefile" ;;
-    "programs/where/Makefile") CONFIG_FILES="$CONFIG_FILES programs/where/Makefile" ;;
-    "programs/whoami/Makefile") CONFIG_FILES="$CONFIG_FILES programs/whoami/Makefile" ;;
-    "programs/wineboot/Makefile") CONFIG_FILES="$CONFIG_FILES programs/wineboot/Makefile" ;;
-    "programs/winebrowser/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winebrowser/Makefile" ;;
-    "programs/winecfg/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winecfg/Makefile" ;;
-    "programs/wineconsole/Makefile") CONFIG_FILES="$CONFIG_FILES programs/wineconsole/Makefile" ;;
-    "programs/winedbg/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winedbg/Makefile" ;;
-    "programs/winedevice/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winedevice/Makefile" ;;
-    "programs/winefile/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winefile/Makefile" ;;
-    "programs/winemenubuilder/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winemenubuilder/Makefile" ;;
-    "programs/winemsibuilder/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winemsibuilder/Makefile" ;;
-    "programs/winepath/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winepath/Makefile" ;;
-    "programs/winetest/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winetest/Makefile" ;;
-    "programs/winevdm/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winevdm/Makefile" ;;
-    "programs/winhelp.exe16/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winhelp.exe16/Makefile" ;;
-    "programs/winhlp32/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winhlp32/Makefile" ;;
-    "programs/winmgmt/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winmgmt/Makefile" ;;
-    "programs/winoldap.mod16/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winoldap.mod16/Makefile" ;;
-    "programs/winver/Makefile") CONFIG_FILES="$CONFIG_FILES programs/winver/Makefile" ;;
-    "programs/wmic/Makefile") CONFIG_FILES="$CONFIG_FILES programs/wmic/Makefile" ;;
-    "programs/wmplayer/Makefile") CONFIG_FILES="$CONFIG_FILES programs/wmplayer/Makefile" ;;
-    "programs/wordpad/Makefile") CONFIG_FILES="$CONFIG_FILES programs/wordpad/Makefile" ;;
-    "programs/write/Makefile") CONFIG_FILES="$CONFIG_FILES programs/write/Makefile" ;;
-    "programs/wscript/Makefile") CONFIG_FILES="$CONFIG_FILES programs/wscript/Makefile" ;;
-    "programs/wscript/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/wscript/tests/Makefile" ;;
-    "programs/wuauserv/Makefile") CONFIG_FILES="$CONFIG_FILES programs/wuauserv/Makefile" ;;
-    "programs/wusa/Makefile") CONFIG_FILES="$CONFIG_FILES programs/wusa/Makefile" ;;
-    "programs/xcopy/Makefile") CONFIG_FILES="$CONFIG_FILES programs/xcopy/Makefile" ;;
-    "programs/xcopy/tests/Makefile") CONFIG_FILES="$CONFIG_FILES programs/xcopy/tests/Makefile" ;;
-    "server/Makefile") CONFIG_FILES="$CONFIG_FILES server/Makefile" ;;
-    "tools/Makefile") CONFIG_FILES="$CONFIG_FILES tools/Makefile" ;;
-    "tools/sfnt2fon/Makefile") CONFIG_FILES="$CONFIG_FILES tools/sfnt2fon/Makefile" ;;
-    "tools/widl/Makefile") CONFIG_FILES="$CONFIG_FILES tools/widl/Makefile" ;;
-    "tools/winebuild/Makefile") CONFIG_FILES="$CONFIG_FILES tools/winebuild/Makefile" ;;
-    "tools/winedump/Makefile") CONFIG_FILES="$CONFIG_FILES tools/winedump/Makefile" ;;
-    "tools/winegcc/Makefile") CONFIG_FILES="$CONFIG_FILES tools/winegcc/Makefile" ;;
-    "tools/winemaker/Makefile") CONFIG_FILES="$CONFIG_FILES tools/winemaker/Makefile" ;;
-    "tools/wmc/Makefile") CONFIG_FILES="$CONFIG_FILES tools/wmc/Makefile" ;;
-    "tools/wrc/Makefile") CONFIG_FILES="$CONFIG_FILES tools/wrc/Makefile" ;;
+    "wine") CONFIG_LINKS="$CONFIG_LINKS wine:tools/winewrapper" ;;
+    "wine64") CONFIG_LINKS="$CONFIG_LINKS wine64:tools/winewrapper" ;;
     "tools/makedep") CONFIG_COMMANDS="$CONFIG_COMMANDS tools/makedep" ;;
     "Makefile") CONFIG_COMMANDS="$CONFIG_COMMANDS Makefile" ;;
 
@@ -1863,8 +2095,8 @@ done
 # We use the long form for the default assignment because of an extremely
 # bizarre bug on SunOS 4.1.3.
 if $ac_need_defaults; then
-  test ${CONFIG_FILES+y} || CONFIG_FILES=$config_files
   test ${CONFIG_HEADERS+y} || CONFIG_HEADERS=$config_headers
+  test ${CONFIG_LINKS+y} || CONFIG_LINKS=$config_links
   test ${CONFIG_COMMANDS+y} || CONFIG_COMMANDS=$config_commands
 fi
 
@@ -1895,116 +2127,6 @@ $debug ||
 } || as_fn_error $? "cannot create a temporary directory in ." "$LINENO" 5
 ac_tmp=$tmp
 
-# Set up the scripts for CONFIG_FILES section.
-# No need to generate them if there are no CONFIG_FILES.
-# This happens for instance with `./config.status config.h'.
-if test -n "$CONFIG_FILES"; then
-
-
-ac_cr=`echo X | tr X '\015'`
-# On cygwin, bash can eat \r inside `` if the user requested igncr.
-# But we know of no other shell where ac_cr would be empty at this
-# point, so we can use a bashism as a fallback.
-if test "x$ac_cr" = x; then
-  eval ac_cr=\$\'\\r\'
-fi
-ac_cs_awk_cr=`$AWK 'BEGIN { print "a\rb" }' </dev/null 2>/dev/null`
-if test "$ac_cs_awk_cr" = "a${ac_cr}b"; then
-  ac_cs_awk_cr='\\r'
-else
-  ac_cs_awk_cr=$ac_cr
-fi
-
-echo 'BEGIN {' >"$ac_tmp/subs1.awk" &&
-cat >>"$ac_tmp/subs1.awk" <<\_ACAWK &&
-S["LTLIBOBJS"]=""
-S["LIBOBJS"]=""
-S["TAGSFLAGS"]="--langmap='c:+.idl.l.rh,make:(Make*.in)'"
-S["HAVE_MACOS_FALSE"]=""
-S["HAVE_MACOS_TRUE"]="#"
-S["wine_makedep"]="tools/makedep"
-S["OBJEXT"]="o"
-S["EXEEXT"]=""
-S["ac_ct_CC"]="gcc"
-S["CPPFLAGS"]=""
-S["LDFLAGS"]=""
-S["CFLAGS"]="-g -O2"
-S["CC"]="gcc"
-S["target_alias"]=""
-S["host_alias"]=""
-S["build_alias"]=""
-S["LIBS"]=""
-S["ECHO_T"]=""
-S["ECHO_N"]="-n"
-S["ECHO_C"]=""
-S["DEFS"]="-DHAVE_CONFIG_H"
-S["mandir"]="${datarootdir}/man"
-S["localedir"]="${datarootdir}/locale"
-S["libdir"]="${exec_prefix}/lib"
-S["psdir"]="${docdir}"
-S["pdfdir"]="${docdir}"
-S["dvidir"]="${docdir}"
-S["htmldir"]="${docdir}"
-S["infodir"]="${datarootdir}/info"
-S["docdir"]="${datarootdir}/doc/${PACKAGE_TARNAME}"
-S["oldincludedir"]="/usr/include"
-S["includedir"]="${prefix}/include"
-S["runstatedir"]="${localstatedir}/run"
-S["localstatedir"]="${prefix}/var"
-S["sharedstatedir"]="${prefix}/com"
-S["sysconfdir"]="${prefix}/etc"
-S["datadir"]="${datarootdir}"
-S["datarootdir"]="${prefix}/share"
-S["libexecdir"]="${exec_prefix}/libexec"
-S["sbindir"]="${exec_prefix}/sbin"
-S["bindir"]="${exec_prefix}/bin"
-S["program_transform_name"]="s,x,x,"
-S["prefix"]="/usr/local"
-S["exec_prefix"]="${prefix}"
-S["PACKAGE_URL"]="https://www.winehq.org"
-S["PACKAGE_BUGREPORT"]="wine-devel@winehq.org"
-S["PACKAGE_STRING"]="Wine 10.0"
-S["PACKAGE_VERSION"]="10.0"
-S["PACKAGE_TARNAME"]="wine"
-S["PACKAGE_NAME"]="Wine"
-S["PATH_SEPARATOR"]=":"
-S["SHELL"]="/bin/sh"
-S["am__quote"]=""
-_ACAWK
-cat >>"$ac_tmp/subs1.awk" <<_ACAWK &&
-  for (key in S) S_is_set[key] = 1
-  FS = ""
-
-}
-{
-  line = $ 0
-  nfields = split(line, field, "@")
-  substed = 0
-  len = length(field[1])
-  for (i = 2; i < nfields; i++) {
-    key = field[i]
-    keylen = length(key)
-    if (S_is_set[key]) {
-      value = S[key]
-      line = substr(line, 1, len) "" value "" substr(line, len + keylen + 3)
-      len += length(value) + length(field[++i])
-      substed = 1
-    } else
-      len += 1 + keylen
-  }
-
-  print line
-}
-
-_ACAWK
-if sed "s/$ac_cr//" < /dev/null > /dev/null 2>&1; then
-  sed "s/$ac_cr\$//; s/$ac_cr/$ac_cs_awk_cr/g"
-else
-  cat
-fi < "$ac_tmp/subs1.awk" > "$ac_tmp/subs.awk" \
-  || as_fn_error $? "could not setup config files machinery" "$LINENO" 5
-fi # test -n "$CONFIG_FILES"
-
 # Set up the scripts for CONFIG_HEADERS section.
 # No need to generate them if there are no CONFIG_HEADERS.
 # This happens for instance with `./config.status Makefile'.
@@ -2017,8 +2139,9 @@ D["PACKAGE_VERSION"]=" \"10.0\""
 D["PACKAGE_STRING"]=" \"Wine 10.0\""
 D["PACKAGE_BUGREPORT"]=" \"wine-devel@winehq.org\""
 D["PACKAGE_URL"]=" \"https://www.winehq.org\""
-D["HAVE_LINUX_GETHOSTBYNAME_R_6"]=" 1"
-D["HAVE_SIGINFO_T_SI_FD"]=" 1"
+D["EXEEXT"]=" \"\""
+D["_FILE_OFFSET_BITS"]=" 64"
+D["_TIME_BITS"]=" 64"
 D["HAVE_STDIO_H"]=" 1"
 D["HAVE_STDLIB_H"]=" 1"
 D["HAVE_STRING_H"]=" 1"
@@ -2029,9 +2152,136 @@ D["HAVE_SYS_STAT_H"]=" 1"
 D["HAVE_SYS_TYPES_H"]=" 1"
 D["HAVE_UNISTD_H"]=" 1"
 D["STDC_HEADERS"]=" 1"
+D["HAVE_ARPA_INET_H"]=" 1"
+D["HAVE_ARPA_NAMESER_H"]=" 1"
+D["HAVE_ASM_TERMBITS_H"]=" 1"
+D["HAVE_ASM_TYPES_H"]=" 1"
+D["HAVE_ELF_H"]=" 1"
+D["HAVE_LINK_H"]=" 1"
+D["HAVE_LINUX_CDROM_H"]=" 1"
+D["HAVE_LINUX_FILTER_H"]=" 1"
+D["HAVE_LINUX_FUTEX_H"]=" 1"
+D["HAVE_LINUX_HDREG_H"]=" 1"
+D["HAVE_LINUX_HIDRAW_H"]=" 1"
+D["HAVE_LINUX_INPUT_H"]=" 1"
+D["HAVE_LINUX_IOCTL_H"]=" 1"
+D["HAVE_LINUX_MAJOR_H"]=" 1"
+D["HAVE_LINUX_PARAM_H"]=" 1"
+D["HAVE_LINUX_SECCOMP_H"]=" 1"
+D["HAVE_LINUX_SERIAL_H"]=" 1"
+D["HAVE_LINUX_TYPES_H"]=" 1"
+D["HAVE_LINUX_WIRELESS_H"]=" 1"
+D["HAVE_MNTENT_H"]=" 1"
+D["HAVE_NETDB_H"]=" 1"
+D["HAVE_NETINET_IN_H"]=" 1"
+D["HAVE_NETINET_IN_SYSTM_H"]=" 1"
+D["HAVE_NETINET_TCP_H"]=" 1"
+D["HAVE_PWD_H"]=" 1"
+D["HAVE_SCHED_H"]=" 1"
+D["HAVE_SCSI_SCSI_H"]=" 1"
+D["HAVE_SCSI_SCSI_IOCTL_H"]=" 1"
+D["HAVE_SCSI_SG_H"]=" 1"
+D["HAVE_SYS_AUXV_H"]=" 1"
+D["HAVE_SYS_EPOLL_H"]=" 1"
+D["HAVE_SYS_EVENTFD_H"]=" 1"
+D["HAVE_SYS_IPC_H"]=" 1"
+D["HAVE_SYS_MTIO_H"]=" 1"
+D["HAVE_SYS_PARAM_H"]=" 1"
+D["HAVE_SYS_PRCTL_H"]=" 1"
+D["HAVE_SYS_PTRACE_H"]=" 1"
+D["HAVE_SYS_QUEUE_H"]=" 1"
+D["HAVE_SYS_RANDOM_H"]=" 1"
+D["HAVE_SYS_RESOURCE_H"]=" 1"
+D["HAVE_SYS_SHM_H"]=" 1"
+D["HAVE_SYS_SIGNAL_H"]=" 1"
+D["HAVE_SYS_SOCKETVAR_H"]=" 1"
+D["HAVE_SYS_STATVFS_H"]=" 1"
+D["HAVE_SYS_SYSCALL_H"]=" 1"
+D["HAVE_SYS_SYSINFO_H"]=" 1"
+D["HAVE_SYS_TIMES_H"]=" 1"
+D["HAVE_SYS_UIO_H"]=" 1"
+D["HAVE_SYS_USER_H"]=" 1"
+D["HAVE_SYS_UTSNAME_H"]=" 1"
+D["HAVE_SYS_XATTR_H"]=" 1"
+D["HAVE_SYSCALL_H"]=" 1"
+D["HAVE_UTIME_H"]=" 1"
+D["MAJOR_IN_SYSMACROS"]=" 1"
+D["HAVE_SYS_MOUNT_H"]=" 1"
+D["HAVE_SYS_STATFS_H"]=" 1"
+D["HAVE_SYS_USER_H"]=" 1"
+D["HAVE_SYS_VFS_H"]=" 1"
+D["HAVE_NETINET_IP_H"]=" 1"
+D["HAVE_NET_IF_H"]=" 1"
+D["HAVE_NET_IF_ARP_H"]=" 1"
+D["HAVE_NET_ROUTE_H"]=" 1"
+D["HAVE_NETINET_IF_ETHER_H"]=" 1"
+D["HAVE_NETINET_IP_ICMP_H"]=" 1"
+D["HAVE_NETINET_UDP_H"]=" 1"
+D["HAVE_NETIPX_IPX_H"]=" 1"
+D["HAVE_SYS_UN_H"]=" 1"
+D["HAVE_NETINET_ICMP6_H"]=" 1"
+D["HAVE_LINUX_RTNETLINK_H"]=" 1"
+D["HAVE_RESOLV_H"]=" 1"
+D["HAVE_IFADDRS_H"]=" 1"
+D["HAVE_SYS_UCONTEXT_H"]=" 1"
+D["HAVE_LINUX_VIDEODEV2_H"]=" 1"
+D["_GNU_SOURCE"]=" 1"
+D["SONAME_LIBX11"]=" \"libX11.so.6\""
+D["HAVE_X11_EXTENSIONS_XF86VMPROTO_H"]=" 1"
+D["HAVE_XICCALLBACK_CALLBACK"]=" 1"
+D["HAVE_XEVENT_XCOOKIE"]=" 1"
+D["HAVE_SYS_INOTIFY_H"]=" 1"
+D["HAVE_XF86DRM_H"]=" 1"
+D["SONAME_LIBDRM"]=" \"libdrm.so.2\""
+D["HAVE_AMDGPU_DRM_H"]=" 1"
+D["SONAME_LIBDRM_AMDGPU"]=" \"libdrm_amdgpu.so.1\""
+D["HAVE_RESOLV"]=" 1"
+D["HAVE_FT2BUILD_H"]=" 1"
+D["SONAME_LIBFREETYPE"]=" \"libfreetype.so.6\""
+D["HAVE_FREETYPE"]=" 1"
+D["HAVE_FT_TRUETYPEENGINETYPE"]=" 1"
+D["HAVE_LINUX_CAPI_H"]=" 1"
+D["SONAME_LIBODBC"]=" \"libodbc.so\""
+D["SONAME_LIBNETAPI"]=" \"libnetapi.so\""
+D["HAVE_WINE_PRELOADER"]=" 1"
+D["HAVE_DLADDR1"]=" 1"
+D["HAVE_DLINFO"]=" 1"
+D["HAVE_EPOLL_CREATE"]=" 1"
+D["HAVE_FSTATFS"]=" 1"
+D["HAVE_FUTIMENS"]=" 1"
+D["HAVE_FUTIMES"]=" 1"
+D["HAVE_FUTIMESAT"]=" 1"
+D["HAVE_GETADDRINFO"]=" 1"
+D["HAVE_GETAUXVAL"]=" 1"
+D["HAVE_GETIFADDRS"]=" 1"
+D["HAVE_GETRANDOM"]=" 1"
+D["HAVE_PIPE2"]=" 1"
+D["HAVE_POSIX_FADVISE"]=" 1"
+D["HAVE_POSIX_FALLOCATE"]=" 1"
+D["HAVE_PPOLL"]=" 1"
+D["HAVE_PRCTL"]=" 1"
+D["HAVE_SCHED_GETCPU"]=" 1"
+D["HAVE_SCHED_YIELD"]=" 1"
+D["HAVE_SIGPROCMASK"]=" 1"
+D["HAVE_SYSINFO"]=" 1"
+D["HAVE_TCDRAIN"]=" 1"
+D["HAVE_CLOCK_GETTIME"]=" 1"
+D["HAVE_SHM_OPEN"]=" 1"
+D["HAVE_SCHED_SETAFFINITY"]=" 1"
+D["HAVE_LINUX_GETHOSTBYNAME_R_6"]=" 1"
+D["HAVE_SG_IO_HDR_T_INTERFACE_ID"]=" 1"
+D["HAVE_SIGINFO_T_SI_FD"]=" 1"
+D["HAVE_STRUCT_MTGET_MT_GSTAT"]=" 1"
+D["HAVE_STRUCT_MTGET_MT_BLKNO"]=" 1"
 D["HAVE_STRUCT_STAT_ST_MTIM"]=" 1"
 D["HAVE_STRUCT_STAT_ST_CTIM"]=" 1"
 D["HAVE_STRUCT_STAT_ST_ATIM"]=" 1"
+D["HAVE_STRUCT_SOCKADDR_IN6_SIN6_SCOPE_ID"]=" 1"
+D["HAVE_STRUCT___RES_STATE__U__EXT_NSCOUNT6"]=" 1"
+D["HAVE_STRUCT_IN6_PKTINFO_IPI6_ADDR"]=" 1"
+D["HAVE_STRUCT_IFREQ_IFR_HWADDR"]=" 1"
+D["HAVE_STRUCT_SYSINFO_TOTALRAM"]=" 1"
+D["HAVE_STRUCT_SYSINFO_MEM_UNIT"]=" 1"
 D["HAVE___BUILTIN_POPCOUNT"]=" 1"
 D["HAVE___CLEAR_CACHE"]=" 1"
   for (key in D) D_is_set[key] = 1
@@ -2070,7 +2320,7 @@ _ACAWK
 fi # test -n "$CONFIG_HEADERS"
 
 
-eval set X "  :F $CONFIG_FILES  :H $CONFIG_HEADERS    :C $CONFIG_COMMANDS"
+eval set X "    :H $CONFIG_HEADERS  :L $CONFIG_LINKS  :C $CONFIG_COMMANDS"
 shift
 for ac_tag
 do
@@ -2199,87 +2449,7 @@ ac_abs_srcdir=$ac_abs_top_srcdir$ac_dir_suffix
 
 
   case $ac_mode in
-  :F)
-  #
-  # CONFIG_FILE
-  #
 
-# If the template does not know about datarootdir, expand it.
-# FIXME: This hack should be removed a few years after 2.60.
-ac_datarootdir_hack=; ac_datarootdir_seen=
-ac_sed_dataroot='
-/datarootdir/ {
-  p
-  q
-}
-/@datadir@/p
-/@docdir@/p
-/@infodir@/p
-/@localedir@/p
-/@mandir@/p'
-case `eval "sed -n \"\$ac_sed_dataroot\" $ac_file_inputs"` in
-*datarootdir*) ac_datarootdir_seen=yes;;
-*@datadir@*|*@docdir@*|*@infodir@*|*@localedir@*|*@mandir@*)
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: $ac_file_inputs seems to ignore the --datarootdir setting" >&5
-printf "%s\n" "$as_me: WARNING: $ac_file_inputs seems to ignore the --datarootdir setting" >&2;}
-  ac_datarootdir_hack='
-  s&@datadir@&${datarootdir}&g
-  s&@docdir@&${datarootdir}/doc/${PACKAGE_TARNAME}&g
-  s&@infodir@&${datarootdir}/info&g
-  s&@localedir@&${datarootdir}/locale&g
-  s&@mandir@&${datarootdir}/man&g
-  s&\${datarootdir}&${prefix}/share&g' ;;
-esac
-ac_sed_extra="/^[	 ]*VPATH[	 ]*=[	 ]*/{
-h
-s///
-s/^/:/
-s/[	 ]*$/:/
-s/:\$(srcdir):/:/g
-s/:\${srcdir}:/:/g
-s/:@srcdir@:/:/g
-s/^:*//
-s/:*$//
-x
-s/\(=[	 ]*\).*/\1/
-G
-s/\n//
-s/^[^=]*=[	 ]*$//
-}
-
-:t
-/@[a-zA-Z_][a-zA-Z_0-9]*@/!b
-s|@configure_input@|$ac_sed_conf_input|;t t
-s&@top_builddir@&$ac_top_builddir_sub&;t t
-s&@top_build_prefix@&$ac_top_build_prefix&;t t
-s&@srcdir@&$ac_srcdir&;t t
-s&@abs_srcdir@&$ac_abs_srcdir&;t t
-s&@top_srcdir@&$ac_top_srcdir&;t t
-s&@abs_top_srcdir@&$ac_abs_top_srcdir&;t t
-s&@builddir@&$ac_builddir&;t t
-s&@abs_builddir@&$ac_abs_builddir&;t t
-s&@abs_top_builddir@&$ac_abs_top_builddir&;t t
-$ac_datarootdir_hack
-"
-eval sed \"\$ac_sed_extra\" "$ac_file_inputs" | $AWK -f "$ac_tmp/subs.awk" \
-  >$ac_tmp/out || as_fn_error $? "could not create $ac_file" "$LINENO" 5
-
-test -z "$ac_datarootdir_hack$ac_datarootdir_seen" &&
-  { ac_out=`sed -n '/\${datarootdir}/p' "$ac_tmp/out"`; test -n "$ac_out"; } &&
-  { ac_out=`sed -n '/^[	 ]*datarootdir[	 ]*:*=/p' \
-      "$ac_tmp/out"`; test -z "$ac_out"; } &&
-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: $ac_file contains a reference to the variable \`datarootdir'
-which seems to be undefined.  Please make sure it is defined" >&5
-printf "%s\n" "$as_me: WARNING: $ac_file contains a reference to the variable \`datarootdir'
-which seems to be undefined.  Please make sure it is defined" >&2;}
-
-  rm -f "$ac_tmp/stdin"
-  case $ac_file in
-  -) cat "$ac_tmp/out" && rm -f "$ac_tmp/out";;
-  *) rm -f "$ac_file" && mv "$ac_tmp/out" "$ac_file";;
-  esac \
-  || as_fn_error $? "could not create $ac_file" "$LINENO" 5
- ;;
   :H)
   #
   # CONFIG_HEADER
@@ -2303,42 +2473,39 @@ printf "%s\n" "$as_me: $ac_file is unchanged" >&6;}
       && eval '$AWK -f "$ac_tmp/defines.awk"' "$ac_file_inputs" \
       || as_fn_error $? "could not create -" "$LINENO" 5
   fi
-# Compute "$ac_file"'s index in $config_headers.
-_am_arg="$ac_file"
-_am_stamp_count=1
-for _am_header in $config_headers :; do
-  case $_am_header in
-    $_am_arg | $_am_arg:* )
-      break ;;
-    * )
-      _am_stamp_count=`expr $_am_stamp_count + 1` ;;
-  esac
-done
-echo "timestamp for $_am_arg" >`$as_dirname -- "$_am_arg" ||
-$as_expr X"$_am_arg" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
-	 X"$_am_arg" : 'X\(//\)[^/]' \| \
-	 X"$_am_arg" : 'X\(//\)$' \| \
-	 X"$_am_arg" : 'X\(/\)' \| . 2>/dev/null ||
-printf "%s\n" X"$_am_arg" |
-    sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{
-	    s//\1/
-	    q
-	  }
-	  /^X\(\/\/\)[^/].*/{
-	    s//\1/
-	    q
-	  }
-	  /^X\(\/\/\)$/{
-	    s//\1/
-	    q
-	  }
-	  /^X\(\/\).*/{
-	    s//\1/
-	    q
-	  }
-	  s/.*/./; q'`/stamp-h$_am_stamp_count
  ;;
+  :L)
+  #
+  # CONFIG_LINK
+  #
 
+  if test "$ac_source" = "$ac_file" && test "$srcdir" = '.'; then
+    :
+  else
+    # Prefer the file from the source tree if names are identical.
+    if test "$ac_source" = "$ac_file" || test ! -r "$ac_source"; then
+      ac_source=$srcdir/$ac_source
+    fi
+
+    { printf "%s\n" "$as_me:${as_lineno-$LINENO}: linking $ac_source to $ac_file" >&5
+printf "%s\n" "$as_me: linking $ac_source to $ac_file" >&6;}
+
+    if test ! -r "$ac_source"; then
+      as_fn_error $? "$ac_source: file not found" "$LINENO" 5
+    fi
+    rm -f "$ac_file"
+
+    # Try a relative symlink, then a hard link, then a copy.
+    case $ac_source in
+    [\\/$]* | ?:[\\/]* ) ac_rel_source=$ac_source ;;
+	*) ac_rel_source=$ac_top_build_prefix$ac_source ;;
+    esac
+    ln -s "$ac_rel_source" "$ac_file" 2>/dev/null ||
+      ln "$ac_source" "$ac_file" 2>/dev/null ||
+      cp -p "$ac_source" "$ac_file" ||
+      as_fn_error $? "cannot link or copy $ac_source to $ac_file" "$LINENO" 5
+  fi
+ ;;
   :C)  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: executing $ac_file commands" >&5
 printf "%s\n" "$as_me: executing $ac_file commands" >&6;}
  ;;

@@ -35,10 +35,12 @@
 #include "mssip.h"
 #include "setupapi.h"
 #include "cfgmgr32.h"
+#include "devpropdef.h"
 #include "newdev.h"
 #include "regstr.h"
 #include "dbt.h"
 #include "initguid.h"
+#include "devpkey.h"
 #include "devguid.h"
 #include "ddk/hidclass.h"
 #include "ddk/hidsdi.h"
@@ -1475,6 +1477,7 @@ static void test_pnp_devices(void)
     };
     HDEVNOTIFY notify_handle;
     DWORD size, type, dword;
+    DEVPROPTYPE prop_type;
     HANDLE bus, child, tmp;
     OBJECT_ATTRIBUTES attr;
     UNICODE_STRING string;

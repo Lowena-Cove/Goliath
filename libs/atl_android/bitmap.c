@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 // FIXME: put the header in a common place
-#include "../api-impl-jni/defines.h"
+#include "api-impl-jni/defines.h"
 
 #define ANDROID_BITMAP_RESULT_SUCCESS 0
 

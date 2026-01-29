@@ -2827,7 +2827,9 @@ BOOL X11DRV_CreateWindow( HWND hwnd )
             if (!wcscmp( winstation_name, winsta0 ))
             {
                 /* listen to raw xinput event in the desktop window thread */
+#ifdef HAVE_X11_EXTENSIONS_XINPUT2_H
                 data->xinput2_rawinput = TRUE;
+#endif
                 x11drv_xinput2_enable( data->display, DefaultRootWindow( data->display ) );
             }
         }

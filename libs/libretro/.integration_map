@@ -1,0 +1,29 @@
+# Integration mapping for Libretro (Console emulation)
+# Format: upstream_path:goliath_path:action
+# Actions: copy, copy+modify, exclude, manual
+
+# This file tracks how upstream Libretro code maps to Goliath's integration.
+
+## Core files (direct copy from upstream)
+# Most libretro-common files are copied directly
+# include/:libs/libretro/include/:copy
+# features/:libs/libretro/features/:copy
+# file/:libs/libretro/file/:copy
+# streams/:libs/libretro/streams/:copy
+
+## Modified files (copied but with Goliath-specific changes)
+# Document any modifications here
+
+## Excluded files (not needed for Goliath integration)
+# .github/:exclude
+# audio/:exclude (may not need audio mixing in core)
+# net/:exclude (networking handled separately)
+
+## Manual integration files (managed by Goliath, not synced)
+# Makefile.in:manual
+
+## Notes
+# - Libretro provides common code for emulators
+# - Used for console ROM support
+# - Works with retroarch for actual emulation
+# - We integrate the common library, not specific cores
