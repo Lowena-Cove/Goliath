@@ -1,10 +1,21 @@
-/* Stub atl_runtime.h for ATL runtime integration
- * This is a minimal stub until full ATL source is synced from upstream
+/* atl_runtime.h for ATL runtime integration
+ * Android Translation Layer runtime initialization
  */
 
 #ifndef ATL_RUNTIME_H
 #define ATL_RUNTIME_H
 
-/* Stub definitions */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Initialize the ATL runtime
+ * Returns 0 on success, non-zero on failure
+ */
+int atl_runtime_init(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* ATL_RUNTIME_H */
