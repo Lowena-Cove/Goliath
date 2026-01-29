@@ -1,8 +1,10 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = cryptui.dll
+IMPORTS   = uuid crypt32 ole32 comctl32 comdlg32 user32 gdi32 advapi32
+DELAYIMPORTS = wintrust urlmon
+IMPORTLIB = cryptui
 
-all:
-all install install-lib install-dev clean libcryptui.a i386-windows/libcryptui.a \
-  i386-windows/libcryptui.delay.a cryptui.res i386-windows/main.o i386-windows/cryptui.dll \
-  cryptui.pot:
-	@cd ../.. && $(MAKE) dlls/cryptui/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	cryptui.rc \
+	main.c

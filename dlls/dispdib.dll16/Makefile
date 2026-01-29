@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dispdib.dll16
+EXTRADLLFLAGS = -m16
 
-all:
-all install install-lib clean i386-windows/dispdib.o i386-windows/dispdib.dll16:
-	@cd ../.. && $(MAKE) dlls/dispdib.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	dispdib.c

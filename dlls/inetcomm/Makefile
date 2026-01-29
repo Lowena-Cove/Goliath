@@ -1,10 +1,18 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -D_MIMEOLE_
+MODULE    = inetcomm.dll
+IMPORTLIB = inetcomm
+IMPORTS   = uuid urlmon propsys oleaut32 ole32 ws2_32 user32 advapi32
 
-all:
-all install install-lib install-dev clean libinetcomm.a i386-windows/libinetcomm.a \
-  i386-windows/libinetcomm.delay.a inetcomm.res i386-windows/imaptransport.o \
-  i386-windows/inetcomm_main.o i386-windows/internettransport.o i386-windows/mimeintl.o \
-  i386-windows/mimeole.o i386-windows/pop3transport.o i386-windows/protocol.o \
-  i386-windows/smtptransport.o i386-windows/inetcomm_r.res i386-windows/inetcomm.dll:
-	@cd ../.. && $(MAKE) dlls/inetcomm/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	imaptransport.c \
+	inetcomm.idl \
+	inetcomm.rc \
+	inetcomm_main.c \
+	internettransport.c \
+	mimeintl.c \
+	mimeole.c \
+	pop3transport.c \
+	protocol.c \
+	smtptransport.c

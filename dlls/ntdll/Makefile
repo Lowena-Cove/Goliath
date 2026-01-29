@@ -1,20 +1,82 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -D_NTSYSTEM_ -D_ACRTIMP= -DWINBASEAPI=
+MODULE    = ntdll.dll
+UNIXLIB   = ntdll.so
+IMPORTLIB = ntdll
+IMPORTS   = $(MUSL_PE_LIBS) winecrt0
+UNIX_CFLAGS  = $(UNWIND_CFLAGS)
+UNIX_LIBS    = $(IOKIT_LIBS) $(COREFOUNDATION_LIBS) $(CORESERVICES_LIBS) $(RT_LIBS) $(PTHREAD_LIBS) $(UNWIND_LIBS) $(I386_LIBS) $(PROCSTAT_LIBS)
 
-all:
-all install install-lib install-dev clean unix/version.c libntdll.a i386-windows/libntdll.a \
-  version.res ntdll.so i386-windows/actctx.o i386-windows/atom.o i386-windows/crypt.o \
-  i386-windows/debugbuffer.o i386-windows/env.o i386-windows/error.o i386-windows/exception.o \
-  i386-windows/handletable.o i386-windows/heap.o i386-windows/large_int.o i386-windows/loader.o \
-  i386-windows/locale.o i386-windows/math.o i386-windows/misc.o i386-windows/path.o \
-  i386-windows/printf.o i386-windows/process.o i386-windows/reg.o i386-windows/relay.o \
-  i386-windows/resource.o i386-windows/rtl.o i386-windows/rtlbitmap.o i386-windows/rtlstr.o \
-  i386-windows/sec.o i386-windows/signal_arm.o i386-windows/signal_arm64.o \
-  i386-windows/signal_arm64ec.o i386-windows/signal_i386.o i386-windows/signal_x86_64.o \
-  i386-windows/string.o i386-windows/sync.o i386-windows/thread.o i386-windows/threadpool.o \
-  i386-windows/time.o i386-windows/unwind.o i386-windows/version.o i386-windows/wcstring.o \
-  i386-windows/ntdll.dll unix/cdrom.o unix/debug.o unix/env.o unix/esync.o unix/file.o unix/fsync.o \
-  unix/loader.o unix/loadorder.o unix/process.o unix/registry.o unix/security.o unix/serial.o \
-  unix/server.o unix/signal_arm.o unix/signal_arm64.o unix/signal_i386.o unix/signal_x86_64.o \
-  unix/socket.o unix/sync.o unix/system.o unix/tape.o unix/thread.o unix/virtual.o unix/version.o:
-	@cd ../.. && $(MAKE) dlls/ntdll/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -nodefaultlibs
+i386_EXTRADLLFLAGS = -Wl,--image-base,0x7bc00000
+x86_64_EXTRADLLFLAGS = -Wl,--image-base,0x170000000
+
+SOURCES = \
+	actctx.c \
+	atom.c \
+	crypt.c \
+	debugbuffer.c \
+	env.c \
+	error.c \
+	exception.c \
+	handletable.c \
+	heap.c \
+	large_int.c \
+	loader.c \
+	locale.c \
+	math.c \
+	misc.c \
+	path.c \
+	printf.c \
+	process.c \
+	reg.c \
+	relay.c \
+	resource.c \
+	rtl.c \
+	rtlbitmap.c \
+	rtlstr.c \
+	sec.c \
+	signal_arm.c \
+	signal_arm64.c \
+	signal_arm64ec.c \
+	signal_i386.c \
+	signal_x86_64.c \
+	string.c \
+	sync.c \
+	thread.c \
+	threadpool.c \
+	time.c \
+	unix/cdrom.c \
+	unix/debug.c \
+	unix/env.c \
+	unix/esync.c \
+	unix/file.c \
+	unix/fsync.c \
+	unix/loader.c \
+	unix/loadorder.c \
+	unix/process.c \
+	unix/registry.c \
+	unix/security.c \
+	unix/serial.c \
+	unix/server.c \
+	unix/signal_arm.c \
+	unix/signal_arm64.c \
+	unix/signal_i386.c \
+	unix/signal_x86_64.c \
+	unix/socket.c \
+	unix/sync.c \
+	unix/system.c \
+	unix/tape.c \
+	unix/thread.c \
+	unix/virtual.c \
+	unwind.c \
+	version.c \
+	version.rc \
+	wcstring.c
+
+EXTRA_OBJS = unix/version.o
+
+unix_loader_EXTRADEFS = \
+	-DBINDIR=\"${bindir}\" \
+	-DLIBDIR=\"${libdir}\" \
+	-DDATADIR=\"${datadir}\" \
+	-DSYSTEMDLLPATH=\"${system_dllpath}\"

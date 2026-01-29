@@ -1,7 +1,11 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mmsystem.dll16
+IMPORTS   = winmm user32
 
-all:
-all install install-lib clean i386-windows/driver.o i386-windows/mci16.o i386-windows/message16.o \
-  i386-windows/mmio16.o i386-windows/mmsystem.o i386-windows/mmsystem.dll16:
-	@cd ../.. && $(MAKE) dlls/mmsystem.dll16/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -m16 -Wb,--main-module,winmm.dll
+
+SOURCES = \
+	driver.c \
+	mci16.c \
+	message16.c \
+	mmio16.c \
+	mmsystem.c

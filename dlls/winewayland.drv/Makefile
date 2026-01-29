@@ -1,9 +1,24 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE = winewayland.drv
+UNIXLIB = winewayland.so
+UNIX_CFLAGS = $(EGL_CFLAGS) $(WAYLAND_CLIENT_CFLAGS) $(WAYLAND_EGL_CFLAGS) $(XKBCOMMON_CFLAGS) $(XKBREGISTRY_CFLAGS)
+UNIX_LIBS = -lwin32u $(WAYLAND_CLIENT_LIBS) $(WAYLAND_EGL_LIBS) $(XKBCOMMON_LIBS) $(XKBREGISTRY_LIBS) $(PTHREAD_LIBS) -lm
 
-all:
-all clean pointer-constraints-unstable-v1-protocol.c relative-pointer-unstable-v1-protocol.c \
-  viewporter-protocol.c xdg-output-unstable-v1-protocol.c xdg-shell-protocol.c \
-  pointer-constraints-unstable-v1-client-protocol.h relative-pointer-unstable-v1-client-protocol.h \
-  viewporter-client-protocol.h xdg-output-unstable-v1-client-protocol.h xdg-shell-client-protocol.h:
-	@cd ../.. && $(MAKE) dlls/winewayland.drv/$@
-.PHONY: all clean
+SOURCES = \
+	display.c \
+	dllmain.c \
+	opengl.c \
+	pointer-constraints-unstable-v1.xml \
+	relative-pointer-unstable-v1.xml \
+	version.rc \
+	viewporter.xml \
+	vulkan.c \
+	wayland.c \
+	wayland_keyboard.c \
+	wayland_output.c \
+	wayland_pointer.c \
+	wayland_surface.c \
+	waylanddrv_main.c \
+	window.c \
+	window_surface.c \
+	xdg-output-unstable-v1.xml \
+	xdg-shell.xml

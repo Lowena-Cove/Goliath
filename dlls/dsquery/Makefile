@@ -1,7 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE = dsquery.dll
+IMPORTS = uuid
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/dsquery_r.res \
-  i386-windows/dsquery.dll:
-	@cd ../.. && $(MAKE) dlls/dsquery/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	dsquery.idl \
+	main.c

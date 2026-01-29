@@ -1,6 +1,3 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE = dhcpcsvc6.dll
 
-all:
-all install install-lib clean i386-windows/dhcpcsvc6.dll:
-	@cd ../.. && $(MAKE) dlls/dhcpcsvc6/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native

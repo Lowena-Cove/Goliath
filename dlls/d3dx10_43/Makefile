@@ -1,9 +1,19 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -DD3DX_D3D_VERSION=10
+MODULE    = d3dx10_43.dll
+IMPORTLIB = d3dx10
+IMPORTS   = d3d10_1 d3dcompiler dxguid uuid gdi32 ole32
+PARENTSRC = ../d3dx9_36
+DELAYIMPORTS = windowscodecs
 
-all:
-all install install-lib install-dev clean libd3dx10.a i386-windows/libd3dx10.a version.res \
-  i386-windows/async.o i386-windows/compiler.o i386-windows/d3dx_helpers.o \
-  i386-windows/d3dx10_43_main.o i386-windows/font.o i386-windows/mesh.o i386-windows/sprite.o \
-  i386-windows/texture.o i386-windows/d3dx10_43.dll:
-	@cd ../.. && $(MAKE) dlls/d3dx10_43/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	async.c \
+	compiler.c \
+	d3dx_helpers.c \
+	d3dx10_43_main.c \
+	font.c \
+	mesh.c \
+	sprite.c \
+	texture.c \
+	version.rc

@@ -1,7 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -D_INTSHCUT_
+MODULE    = url.dll
+IMPORTLIB = url
+IMPORTS   = shell32 shlwapi
 
-all:
-all install install-lib install-dev clean liburl.a i386-windows/liburl.a i386-windows/url_main.o \
-  i386-windows/url.dll:
-	@cd ../.. && $(MAKE) dlls/url/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	url_main.c

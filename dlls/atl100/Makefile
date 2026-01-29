@@ -1,7 +1,11 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = atl100.dll
+IMPORTLIB = atl100
+IMPORTS   = uuid ole32 oleaut32 user32 gdi32 advapi32 shlwapi
+EXTRADEFS = -D_ATL_VER=_ATL_VER_100
+PARENTSRC = ../atl
 
-all:
-all install install-lib install-dev clean libatl100.a i386-windows/libatl100.a i386-windows/atl.o \
-  i386-windows/atl_ax.o i386-windows/registrar.o i386-windows/atl_lib_t.res i386-windows/atl100.dll:
-	@cd ../.. && $(MAKE) dlls/atl100/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	atl.c \
+	atl_ax.c \
+	atl_lib.idl \
+	registrar.c

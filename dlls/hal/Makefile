@@ -1,7 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = hal.dll
+IMPORTLIB = hal
+IMPORTS   = ntoskrnl
 
-all:
-all install install-lib install-dev clean libhal.a i386-windows/libhal.a version.res \
-  i386-windows/hal.o i386-windows/hal.dll:
-	@cd ../.. && $(MAKE) dlls/hal/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	hal.c \
+	version.rc

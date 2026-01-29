@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dllhost.exe
+IMPORTS   = ole32 uuid
 
-all:
-all install install-lib clean i386-windows/dllhost.o i386-windows/dllhost.exe:
-	@cd ../.. && $(MAKE) programs/dllhost/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	dllhost.c

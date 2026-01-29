@@ -1,7 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = ddrawex.dll
+IMPORTS   = dxguid uuid ddraw ole32 advapi32
 
-all:
-all install install-lib clean version.res i386-windows/ddraw.o i386-windows/main.o \
-  i386-windows/surface.o i386-windows/ddrawex_r.res i386-windows/ddrawex.dll:
-	@cd ../.. && $(MAKE) dlls/ddrawex/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	ddraw.c \
+	ddrawex.idl \
+	main.c \
+	surface.c \
+	version.rc

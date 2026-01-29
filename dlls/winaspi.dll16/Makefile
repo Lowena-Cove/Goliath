@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winaspi.dll16
+IMPORTS   = wnaspi32 advapi32
+EXTRADLLFLAGS = -m16 -Wb,--main-module,wnaspi32.dll
 
-all:
-all install install-lib clean i386-windows/winaspi.o i386-windows/winaspi.dll16:
-	@cd ../.. && $(MAKE) dlls/winaspi.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	winaspi.c

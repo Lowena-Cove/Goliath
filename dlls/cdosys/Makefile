@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = cdosys.dll
+IMPORTS   = uuid ole32
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/cdosys.dll:
-	@cd ../.. && $(MAKE) dlls/cdosys/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	main.c

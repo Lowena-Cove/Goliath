@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = unlodctr.exe
+IMPORTS   = loadperf
 
-all:
-all install install-lib clean i386-windows/unlodctr_main.o i386-windows/unlodctr.exe:
-	@cd ../.. && $(MAKE) programs/unlodctr/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole
+
+SOURCES = \
+	unlodctr_main.c

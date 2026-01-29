@@ -35,6 +35,8 @@
 #include "mssip.h"
 #include "setupapi.h"
 #include "cfgmgr32.h"
+#include "devpropdef.h"
+#include "devpkey.h"
 #include "newdev.h"
 #include "regstr.h"
 #include "dbt.h"

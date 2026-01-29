@@ -1,7 +1,4 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL = vcomp.dll
 
-all:
-all clean check test testclean i386-windows/vcomp_test-stripped.exe i386-windows/vcomp.ok \
-  i386-windows/vcomp.o i386-windows/testlist.o i386-windows/vcomp_test.exe:
-	@cd ../../.. && $(MAKE) dlls/vcomp/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	vcomp.c

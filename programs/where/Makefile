@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = where.exe
+IMPORTS   = shlwapi
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/where.exe:
-	@cd ../.. && $(MAKE) programs/where/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole -municode
+
+SOURCES = \
+	main.c

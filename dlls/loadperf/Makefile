@@ -1,7 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = loadperf.dll
+IMPORTLIB = loadperf
 
-all:
-all install install-lib install-dev clean libloadperf.a i386-windows/libloadperf.a \
-  i386-windows/loadperf_main.o i386-windows/loadperf.dll:
-	@cd ../.. && $(MAKE) dlls/loadperf/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	loadperf_main.c

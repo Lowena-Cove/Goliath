@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winepath.exe
 
-all:
-all install install-lib clean winepath.man i386-windows/winepath.o i386-windows/winepath.exe:
-	@cd ../.. && $(MAKE) programs/winepath/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole -municode
+
+SOURCES = \
+	winepath.c \
+	winepath.man.in

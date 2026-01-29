@@ -1,12 +1,26 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dmime.dll
+IMPORTS   = dxguid uuid dsound ole32 user32 advapi32
+PARENTSRC = ../dmusic
 
-all:
-all install install-lib clean version.res i386-windows/audiopath.o i386-windows/band.o \
-  i386-windows/dmime_main.o i386-windows/dmobject.o i386-windows/graph.o i386-windows/lyricstrack.o \
-  i386-windows/markertrack.o i386-windows/midi.o i386-windows/paramcontroltrack.o \
-  i386-windows/performance.o i386-windows/segment.o i386-windows/segmentstate.o \
-  i386-windows/segtriggertrack.o i386-windows/seqtrack.o i386-windows/sysextrack.o \
-  i386-windows/tempotrack.o i386-windows/timesigtrack.o i386-windows/wave.o i386-windows/wavetrack.o \
-  i386-windows/dmime_r.res i386-windows/dmime.dll:
-	@cd ../.. && $(MAKE) dlls/dmime/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	audiopath.c \
+	band.c \
+	dmime.idl \
+	dmime_main.c \
+	dmobject.c \
+	graph.c \
+	lyricstrack.c \
+	markertrack.c \
+	midi.c \
+	paramcontroltrack.c \
+	performance.c \
+	segment.c \
+	segmentstate.c \
+	segtriggertrack.c \
+	seqtrack.c \
+	sysextrack.c \
+	tempotrack.c \
+	timesigtrack.c \
+	version.rc \
+	wave.c \
+	wavetrack.c

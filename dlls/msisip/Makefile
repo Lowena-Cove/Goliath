@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = msisip.dll
+IMPORTS   = crypt32 ole32
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/msisip.dll:
-	@cd ../.. && $(MAKE) dlls/msisip/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	main.c

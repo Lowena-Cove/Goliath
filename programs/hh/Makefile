@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = hh.exe
 
-all:
-all install install-lib clean hh.res i386-windows/main.o i386-windows/hh.exe:
-	@cd ../.. && $(MAKE) programs/hh/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows
+
+SOURCES = \
+	hh.rc \
+	main.c \
+	winhelp.svg

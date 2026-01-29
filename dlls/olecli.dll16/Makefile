@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = olecli.dll16
+IMPORTS   = gdi32
+EXTRADLLFLAGS = -m16 -Wb,--main-module,olecli32.dll
 
-all:
-all install install-lib clean i386-windows/olecli.o i386-windows/olecli.dll16:
-	@cd ../.. && $(MAKE) dlls/olecli.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	olecli.c

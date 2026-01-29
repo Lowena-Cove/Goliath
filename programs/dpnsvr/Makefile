@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dpnsvr.exe
 
-all:
-all install install-lib clean version.res i386-windows/main.o i386-windows/dpnsvr.exe:
-	@cd ../.. && $(MAKE) programs/dpnsvr/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	main.c \
+	version.rc

@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = authz.dll
 
-all:
-all install install-lib clean i386-windows/authz.o i386-windows/authz.dll:
-	@cd ../.. && $(MAKE) dlls/authz/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	authz.c

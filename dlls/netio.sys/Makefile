@@ -1,7 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = netio.sys
+IMPORTLIB = netio
+IMPORTS   = ntoskrnl ws2_32
 
-all:
-all install install-lib install-dev clean libnetio.a i386-windows/libnetio.a i386-windows/netio.o \
-  i386-windows/netio.sys:
-	@cd ../.. && $(MAKE) dlls/netio.sys/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wl,--subsystem,native
+
+SOURCES = \
+	netio.c \
+	netio.sys.spec

@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = svchost.exe
+IMPORTS   = advapi32
 
-all:
-all install install-lib clean i386-windows/svchost.o i386-windows/svchost.exe:
-	@cd ../.. && $(MAKE) programs/svchost/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	svchost.c

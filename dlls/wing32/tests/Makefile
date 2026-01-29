@@ -1,7 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL = wing32.dll
+IMPORTS = wing32 gdi32
 
-all:
-all clean check test testclean i386-windows/wing32_test-stripped.exe i386-windows/wing32.ok \
-  i386-windows/wing32.o i386-windows/testlist.o i386-windows/wing32_test.exe:
-	@cd ../../.. && $(MAKE) dlls/wing32/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	wing32.c

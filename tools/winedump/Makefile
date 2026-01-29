@@ -1,8 +1,31 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+PROGRAMS = winedump
+SCRIPTS  = function_grep.pl
 
-all:
-all install install-dev clean debug.o dos.o dump.o emf.o emfspool.o font.o le.o lib.o lnk.o main.o \
-  mf.o minidump.o misc.o msc.o msmangle.o ne.o nls.o output.o pdb.o pe.o reg.o search.o symbol.o \
-  tlb.o winedump.man winedump:
-	@cd ../.. && $(MAKE) tools/winedump/$@
-.PHONY: all install install-dev clean
+SOURCES = \
+	debug.c \
+	dos.c \
+	dump.c \
+	emf.c \
+	emfspool.c \
+	font.c \
+	le.c \
+	lib.c \
+	lnk.c \
+	main.c \
+	mf.c \
+	minidump.c \
+	misc.c \
+	msc.c \
+	msmangle.c \
+	ne.c \
+	nls.c \
+	output.c \
+	pdb.c \
+	pe.c \
+	reg.c \
+	search.c \
+	symbol.c \
+	tlb.c \
+	winedump.man.in
+
+INSTALL_DEV = $(PROGRAMS) $(SCRIPTS)

@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = rundll32.exe
+IMPORTS   = user32 kernelbase
 
-all:
-all install install-lib clean i386-windows/rundll32.o i386-windows/rundll32.exe:
-	@cd ../.. && $(MAKE) programs/rundll32/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	rundll32.c

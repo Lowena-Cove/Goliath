@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dssenh.dll
+IMPORTS   = bcrypt crypt32 advapi32
 
-all:
-all install install-lib clean rsrc.res i386-windows/main.o i386-windows/dssenh.dll:
-	@cd ../.. && $(MAKE) dlls/dssenh/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	main.c \
+	rsrc.rc

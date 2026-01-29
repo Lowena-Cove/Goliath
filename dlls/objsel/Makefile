@@ -1,7 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = objsel.dll
+IMPORTS   = strmiids uuid ole32 advapi32
 
-all:
-all install install-lib clean objsel.res i386-windows/objsel.o i386-windows/objsel_classes_r.res \
-  i386-windows/objsel.dll:
-	@cd ../.. && $(MAKE) dlls/objsel/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	objsel.c \
+	objsel.rc \
+	objsel_classes.idl

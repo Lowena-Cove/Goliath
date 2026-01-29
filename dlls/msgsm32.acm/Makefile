@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = msgsm32.acm
+IMPORTS   = $(GSM_PE_LIBS) winmm user32
+EXTRAINCL = $(GSM_PE_CFLAGS)
 
-all:
-all install install-lib clean i386-windows/msgsm32.o i386-windows/msgsm32.acm:
-	@cd ../.. && $(MAKE) dlls/msgsm32.acm/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	msgsm32.c

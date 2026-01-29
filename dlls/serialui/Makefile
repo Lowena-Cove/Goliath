@@ -1,7 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = serialui.dll
+IMPORTS   = user32 advapi32
 
-all:
-all install install-lib clean serialui.res i386-windows/confdlg.o i386-windows/serialui.dll \
-  serialui.pot:
-	@cd ../.. && $(MAKE) dlls/serialui/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	confdlg.c \
+	serialui.rc

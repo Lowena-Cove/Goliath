@@ -1,6 +1,10 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = iexplore.exe
+IMPORTS   = ieframe
+DELAYIMPORTS = advpack version user32
 
-all:
-all install install-lib clean iexplore.res i386-windows/main.o i386-windows/iexplore.exe:
-	@cd ../.. && $(MAKE) programs/iexplore/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode -Wl,--large-address-aware
+
+SOURCES = \
+	iexplore.rc \
+	iexplore.svg \
+	main.c

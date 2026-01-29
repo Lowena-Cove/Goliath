@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = lodctr.exe
+IMPORTS   = loadperf
 
-all:
-all install install-lib clean i386-windows/lodctr_main.o i386-windows/lodctr.exe:
-	@cd ../.. && $(MAKE) programs/lodctr/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole
+
+SOURCES = \
+	lodctr_main.c

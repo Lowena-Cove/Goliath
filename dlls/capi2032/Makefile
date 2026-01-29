@@ -1,6 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = capi2032.dll
+UNIXLIB   = capi2032.so
+IMPORTLIB = capi2032
+UNIX_LIBS    = $(CAPI20_LIBS)
+UNIX_CFLAGS  = $(CAPI20_CFLAGS)
 
-all:
-clean i386-windows/libcapi2032.a:
-	@cd ../.. && $(MAKE) dlls/capi2032/$@
-.PHONY: clean
+SOURCES = \
+	cap20wxx.c \
+	unixlib.c

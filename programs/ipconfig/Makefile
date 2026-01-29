@@ -1,7 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = ipconfig.exe
+IMPORTS   = iphlpapi ws2_32 user32
 
-all:
-all install install-lib clean ipconfig.res i386-windows/ipconfig.o i386-windows/ipconfig.exe \
-  ipconfig.pot:
-	@cd ../.. && $(MAKE) programs/ipconfig/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole -municode
+
+SOURCES = \
+	ipconfig.c \
+	ipconfig.rc

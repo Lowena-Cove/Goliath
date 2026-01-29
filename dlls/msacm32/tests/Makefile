@@ -1,7 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL   = msacm32.dll
+IMPORTS   = msacm32 winmm
 
-all:
-all clean check test testclean i386-windows/msacm32_test-stripped.exe i386-windows/msacm.ok \
-  i386-windows/msacm.o i386-windows/testlist.o i386-windows/msacm32_test.exe:
-	@cd ../../.. && $(MAKE) dlls/msacm32/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	msacm.c

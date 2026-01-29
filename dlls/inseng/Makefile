@@ -1,7 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = inseng.dll
+IMPORTS   = uuid ole32 advapi32
 
-all:
-all install install-lib clean i386-windows/inseng_main.o i386-windows/inseng_classes_r.res \
-  i386-windows/inseng.dll:
-	@cd ../.. && $(MAKE) dlls/inseng/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	inseng_classes.idl \
+	inseng_main.c

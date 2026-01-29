@@ -1,7 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = msvdsp.dll
+IMPORTS   = combase mfplat msdmo mfuuid dmoguids strmiids wmcodecdspuuid uuid
 
-all:
-all install install-lib clean i386-windows/msvdsp.o i386-windows/msvdsp_r.res \
-  i386-windows/msvdsp.dll:
-	@cd ../.. && $(MAKE) dlls/msvdsp/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	msvdsp.c \
+	msvdsp.idl

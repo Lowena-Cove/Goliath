@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = kerberos.dll
+UNIXLIB   = kerberos.so
+UNIX_CFLAGS = $(KRB5_CFLAGS) $(GSSAPI_CFLAGS)
 
-all:
-all install install-lib clean kerberos.so i386-windows/krb5_ap.o i386-windows/kerberos.dll unixlib.o:
-	@cd ../.. && $(MAKE) dlls/kerberos/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	krb5_ap.c \
+	unixlib.c

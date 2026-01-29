@@ -1,7 +1,10 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = commdlg.dll16
+IMPORTS   = comdlg32 user32 gdi32
+EXTRADLLFLAGS = -m16 -Wb,--main-module,comdlg32.dll
 
-all:
-all install install-lib clean i386-windows/colordlg.o i386-windows/filedlg.o i386-windows/finddlg.o \
-  i386-windows/fontdlg.o i386-windows/printdlg.o i386-windows/commdlg.dll16:
-	@cd ../.. && $(MAKE) dlls/commdlg.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	colordlg.c \
+	filedlg.c \
+	finddlg.c \
+	fontdlg.c \
+	printdlg.c

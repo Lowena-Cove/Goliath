@@ -1,7 +1,11 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = qdvd.dll
+IMPORTS   = strmbase strmiids uuid ole32 msvcrt
 
-all:
-all install install-lib clean version.res i386-windows/graph.o i386-windows/navigator.o \
-  i386-windows/qdvd_main.o i386-windows/qdvd_classes_r.res i386-windows/qdvd.dll:
-	@cd ../.. && $(MAKE) dlls/qdvd/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	graph.c \
+	navigator.c \
+	qdvd_classes.idl \
+	qdvd_main.c \
+	version.rc

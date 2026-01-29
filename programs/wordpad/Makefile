@@ -1,7 +1,15 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = wordpad.exe
+IMPORTS   = comdlg32 uuid ole32 shell32 user32 gdi32 advapi32 comctl32
 
-all:
-all install install-lib clean wordpad.res i386-windows/olecallback.o i386-windows/print.o \
-  i386-windows/registry.o i386-windows/wordpad.o i386-windows/wordpad.exe wordpad.pot:
-	@cd ../.. && $(MAKE) programs/wordpad/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows
+
+SOURCES = \
+	formatbar.svg \
+	olecallback.c \
+	print.c \
+	registry.c \
+	toolbar.svg \
+	wordpad.c \
+	wordpad.rc \
+	wordpad.svg \
+	zoom.svg

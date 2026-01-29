@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = net.exe
+IMPORTS   = netapi32 user32 advapi32
 
-all:
-all install install-lib clean net.res i386-windows/net.o i386-windows/net.exe net.pot:
-	@cd ../.. && $(MAKE) programs/net/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole -municode
+
+SOURCES = \
+	net.c \
+	net.rc

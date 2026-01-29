@@ -1,7 +1,11 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mfasfsrcsnk.dll
+IMPORTS   = advapi32 ole32 mfplat mfuuid uuid winedmo
+PARENTSRC = ../mfsrcsnk
 
-all:
-all install install-lib clean mfasfsrcsnk.res i386-windows/media_source.o i386-windows/mfasfsrcsnk.o \
-  i386-windows/mfasfsrcsnk_r.res i386-windows/mfasfsrcsnk.dll:
-	@cd ../.. && $(MAKE) dlls/mfasfsrcsnk/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	media_source.c \
+	mfasfsrcsnk.c \
+	mfasfsrcsnk.idl \
+	mfasfsrcsnk.rc

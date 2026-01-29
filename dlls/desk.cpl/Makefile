@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = desk.cpl
+IMPORTS   = advapi32 ole32 comctl32 user32 gdi32
 
-all:
-all install install-lib clean desk.res i386-windows/main.o i386-windows/desk.cpl desk.pot:
-	@cd ../.. && $(MAKE) dlls/desk.cpl/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	desk.rc \
+	desk.svg \
+	main.c

@@ -1,7 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = l3codecx.ax
+IMPORTS   = combase msdmo dmoguids strmiids wmcodecdspuuid uuid
 
-all:
-all install install-lib clean i386-windows/l3codecx.o i386-windows/l3codecx_r.res \
-  i386-windows/l3codecx.ax:
-	@cd ../.. && $(MAKE) dlls/l3codecx.ax/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	l3codecx.c \
+	l3codecx.idl

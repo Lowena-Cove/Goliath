@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = rsabase.dll
+IMPORTS   = rsaenh
 
-all:
-all install install-lib clean version.res i386-windows/rsabase.dll:
-	@cd ../.. && $(MAKE) dlls/rsabase/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	version.rc

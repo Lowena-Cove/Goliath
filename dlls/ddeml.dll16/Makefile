@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = ddeml.dll16
+IMPORTS   = user32
+EXTRADLLFLAGS = -m16
 
-all:
-all install install-lib clean i386-windows/ddeml.o i386-windows/ddeml.dll16:
-	@cd ../.. && $(MAKE) dlls/ddeml.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	ddeml.c

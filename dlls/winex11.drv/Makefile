@@ -1,9 +1,31 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winex11.drv
+UNIXLIB   = winex11.so
+IMPORTS   = uuid user32 gdi32 win32u
+UNIX_CFLAGS  = $(X_CFLAGS)
+UNIX_LIBS    = -lwin32u $(X_LIBS) $(PTHREAD_LIBS) -lm
 
-all:
-all install install-lib clean version.res winex11.so i386-windows/dllmain.o i386-windows/winex11.drv \
-  bitblt.o brush.o clipboard.o desktop.o display.o event.o graphics.o init.o keyboard.o mouse.o \
-  opengl.o palette.o pen.o vulkan.o window.o wintab.o x11drv_main.o xim.o xinerama.o xrandr.o \
-  xrender.o xvidmode.o:
-	@cd ../.. && $(MAKE) dlls/winex11.drv/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	bitblt.c \
+	brush.c \
+	clipboard.c \
+	desktop.c \
+	display.c \
+	dllmain.c \
+	event.c \
+	graphics.c \
+	init.c \
+	keyboard.c \
+	mouse.c \
+	opengl.c \
+	palette.c \
+	pen.c \
+	version.rc \
+	vulkan.c \
+	window.c \
+	wintab.c \
+	x11drv_main.c \
+	xim.c \
+	xinerama.c \
+	xrandr.c \
+	xrender.c \
+	xvidmode.c

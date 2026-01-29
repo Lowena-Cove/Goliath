@@ -1,14 +1,29 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -D_GDI32_
+MODULE    = gdi32.dll
+IMPORTLIB = gdi32
+IMPORTS   = user32 advapi32 win32u
+DELAYIMPORTS = winspool
 
-all:
-all install install-lib install-dev clean libgdi32.a i386-windows/libgdi32.a \
-  i386-windows/libgdi32.delay.a gdi32.res i386-windows/dc.o i386-windows/emfdc.o \
-  i386-windows/enhmetafile.o i386-windows/icm.o i386-windows/metadc.o i386-windows/metafile.o \
-  i386-windows/objects.o i386-windows/opengl.o i386-windows/text.o i386-windows/uniscribe/bidi.o \
-  i386-windows/uniscribe/bracket.o i386-windows/uniscribe/breaking.o \
-  i386-windows/uniscribe/direction.o i386-windows/uniscribe/indic.o \
-  i386-windows/uniscribe/indicsyllable.o i386-windows/uniscribe/linebreak.o \
-  i386-windows/uniscribe/mirror.o i386-windows/uniscribe/opentype.o i386-windows/uniscribe/shape.o \
-  i386-windows/uniscribe/shaping.o i386-windows/uniscribe/usp10.o i386-windows/gdi32.dll gdi32.pot:
-	@cd ../.. && $(MAKE) dlls/gdi32/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	dc.c \
+	emfdc.c \
+	enhmetafile.c \
+	gdi32.rc \
+	icm.c \
+	metadc.c \
+	metafile.c \
+	objects.c \
+	opengl.c \
+	text.c \
+	uniscribe/bidi.c \
+	uniscribe/bracket.c \
+	uniscribe/breaking.c \
+	uniscribe/direction.c \
+	uniscribe/indic.c \
+	uniscribe/indicsyllable.c \
+	uniscribe/linebreak.c \
+	uniscribe/mirror.c \
+	uniscribe/opentype.c \
+	uniscribe/shape.c \
+	uniscribe/shaping.c \
+	uniscribe/usp10.c

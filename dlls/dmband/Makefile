@@ -1,8 +1,11 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dmband.dll
+IMPORTS   = dxguid uuid ole32 advapi32
+PARENTSRC = ../dmusic
 
-all:
-all install install-lib clean version.res i386-windows/band.o i386-windows/bandtrack.o \
-  i386-windows/dmband_main.o i386-windows/dmobject.o i386-windows/dmband_r.res \
-  i386-windows/dmband.dll:
-	@cd ../.. && $(MAKE) dlls/dmband/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	band.c \
+	bandtrack.c \
+	dmband.idl \
+	dmband_main.c \
+	dmobject.c \
+	version.rc

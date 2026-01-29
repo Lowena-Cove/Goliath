@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = system.drv16
+EXTRADLLFLAGS = -m16
 
-all:
-all install install-lib clean i386-windows/system.o i386-windows/system.drv16:
-	@cd ../.. && $(MAKE) dlls/system.drv16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	system.c

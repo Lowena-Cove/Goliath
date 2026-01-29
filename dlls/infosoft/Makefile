@@ -1,7 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = infosoft.dll
+IMPORTS   = uuid advapi32
 
-all:
-all install install-lib clean infosoft.h i386-windows/infosoft_main.o i386-windows/wordbreaker.o \
-  i386-windows/infosoft_r.res i386-windows/infosoft.dll:
-	@cd ../.. && $(MAKE) dlls/infosoft/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	infosoft.idl \
+	infosoft_main.c \
+	wordbreaker.c

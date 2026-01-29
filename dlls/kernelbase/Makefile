@@ -1,11 +1,28 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -DWINBASEAPI= -DWINADVAPI= -DWINUSERAPI= -DWINSHLWAPI=
+MODULE    = kernelbase.dll
+IMPORTLIB = kernelbase
+IMPORTS   = uuid ntdll winecrt0
 
-all:
-all install install-lib install-dev clean libkernelbase.a i386-windows/libkernelbase.a \
-  kernelbase.res winerror.res i386-windows/console.o i386-windows/debug.o i386-windows/file.o \
-  i386-windows/loader.o i386-windows/locale.o i386-windows/main.o i386-windows/memory.o \
-  i386-windows/path.o i386-windows/process.o i386-windows/registry.o i386-windows/security.o \
-  i386-windows/string.o i386-windows/sync.o i386-windows/thread.o i386-windows/version.o \
-  i386-windows/volume.o i386-windows/kernelbase.dll kernelbase.pot winerror.pot:
-	@cd ../.. && $(MAKE) dlls/kernelbase/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -nodefaultlibs -nostartfiles
+i386_EXTRADLLFLAGS = -Wl,--image-base,0x7b000000
+x86_64_EXTRADLLFLAGS = -Wl,--image-base,0x174000000
+
+SOURCES = \
+	console.c \
+	debug.c \
+	file.c \
+	kernelbase.rc \
+	loader.c \
+	locale.c \
+	main.c \
+	memory.c \
+	path.c \
+	process.c \
+	registry.c \
+	security.c \
+	string.c \
+	sync.c \
+	thread.c \
+	version.c \
+	volume.c \
+	winerror.mc

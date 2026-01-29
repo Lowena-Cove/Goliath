@@ -1,7 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = jsproxy.dll
+IMPORTS   = uuid oleaut32 ole32 ws2_32
+IMPORTLIB = jsproxy
 
-all:
-all install install-lib install-dev clean libjsproxy.a i386-windows/libjsproxy.a rsrc.res \
-  i386-windows/main.o i386-windows/jsproxy.dll:
-	@cd ../.. && $(MAKE) dlls/jsproxy/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	main.c \
+	rsrc.rc

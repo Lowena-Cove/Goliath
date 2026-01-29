@@ -1,6 +1,3 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = msls31.dll
 
-all:
-all install install-lib clean i386-windows/msls31.dll:
-	@cd ../.. && $(MAKE) dlls/msls31/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native

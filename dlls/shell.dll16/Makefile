@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = shell.dll16
+IMPORTS   = shell32 user32 gdi32 advapi32
 
-all:
-all install install-lib clean version.res i386-windows/shell.o i386-windows/shell.dll16:
-	@cd ../.. && $(MAKE) dlls/shell.dll16/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -m16 -Wb,--main-module,shell32.dll
+
+SOURCES = \
+	shell.c \
+	version.rc

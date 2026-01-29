@@ -1,8 +1,13 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = atl80.dll
+IMPORTLIB = atl80
+IMPORTS   = oleaut32 user32 ole32 gdi32 advapi32 uuid shlwapi
+EXTRADEFS = -D_ATL_VER=_ATL_VER_80
+PARENTSRC = ../atl
 
-all:
-all install install-lib install-dev clean libatl80.a i386-windows/libatl80.a atl80.res \
-  i386-windows/atl.o i386-windows/atl80.o i386-windows/atl_ax.o i386-windows/registrar.o \
-  i386-windows/atl_lib_t.res i386-windows/atl80.dll:
-	@cd ../.. && $(MAKE) dlls/atl80/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	atl.c \
+	atl80.c \
+	atl80.rc \
+	atl_ax.c \
+	atl_lib.idl \
+	registrar.c

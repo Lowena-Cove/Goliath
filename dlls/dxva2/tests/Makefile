@@ -1,7 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL   = dxva2.dll
+IMPORTS   = dxva2 user32 d3d9 ole32
 
-all:
-all clean check test testclean i386-windows/dxva2_test-stripped.exe i386-windows/dxva2.ok \
-  i386-windows/dxva2.o i386-windows/testlist.o i386-windows/dxva2_test.exe:
-	@cd ../../.. && $(MAKE) dlls/dxva2/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	dxva2.c

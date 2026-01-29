@@ -1,7 +1,10 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -DD3DX11_SDK_VERSION=42
+MODULE    = d3dx11_42.dll
+IMPORTLIB = d3dx11_42
+IMPORTS = d3dcompiler d3dx11
 
-all:
-all install install-lib install-dev clean libd3dx11_42.a i386-windows/libd3dx11_42.a version.res \
-  i386-windows/d3dx11_42_main.o i386-windows/d3dx11_42.dll:
-	@cd ../.. && $(MAKE) dlls/d3dx11_42/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	d3dx11_42_main.c \
+	version.rc

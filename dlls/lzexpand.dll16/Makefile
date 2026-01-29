@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = lzexpand.dll16
+IMPORTS   = lz32
+EXTRADLLFLAGS = -m16 -Wb,--main-module,lz32.dll
 
-all:
-all install install-lib clean i386-windows/lzexpand.o i386-windows/lzexpand.dll16:
-	@cd ../.. && $(MAKE) dlls/lzexpand.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	lzexpand.c

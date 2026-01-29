@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = l3codeca.acm
+IMPORTS   = $(MPG123_PE_LIBS) winmm user32 kernelbase
+EXTRAINCL = $(MPG123_PE_CFLAGS)
+EXTRADEFS = -DMPG123_NO_LARGENAME
 
-all:
-all install install-lib clean i386-windows/mpegl3.o i386-windows/l3codeca.acm:
-	@cd ../.. && $(MAKE) dlls/l3codeca.acm/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	mpegl3.c

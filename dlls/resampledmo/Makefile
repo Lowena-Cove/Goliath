@@ -1,7 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = resampledmo.dll
+IMPORTS   = combase mfplat msdmo mfuuid dmoguids strmiids wmcodecdspuuid uuid
 
-all:
-all install install-lib clean i386-windows/resampledmo.o i386-windows/resampledmo_r.res \
-  i386-windows/resampledmo.dll:
-	@cd ../.. && $(MAKE) dlls/resampledmo/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	resampledmo.c \
+	resampledmo.idl

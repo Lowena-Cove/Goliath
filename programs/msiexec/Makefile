@@ -1,7 +1,11 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = msiexec.exe
+IMPORTS   = msi ole32 advapi32 user32 comctl32
 
-all:
-all install install-lib clean rsrc.res msiexec.man i386-windows/msiexec.o i386-windows/service.o \
-  i386-windows/msiexec.exe:
-	@cd ../.. && $(MAKE) programs/msiexec/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows
+
+SOURCES = \
+	msiexec.c \
+	msiexec.man.in \
+	msiexec.svg \
+	rsrc.rc \
+	service.c

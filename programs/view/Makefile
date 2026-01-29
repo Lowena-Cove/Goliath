@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = view.exe
+IMPORTS   = comdlg32 user32 gdi32 comctl32
 
-all:
-all install install-lib clean view.res i386-windows/view.o i386-windows/view.exe view.pot:
-	@cd ../.. && $(MAKE) programs/view/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	view.c \
+	view.rc

@@ -1,7 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = tdh.dll
 
-all:
-all install install-lib install-dev clean libtdh.a i386-windows/libtdh.a version.res \
-  i386-windows/tdh_main.o i386-windows/tdh.dll:
-	@cd ../.. && $(MAKE) dlls/tdh/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	tdh_main.c \
+	version.rc

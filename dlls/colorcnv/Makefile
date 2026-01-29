@@ -1,7 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = colorcnv.dll
+IMPORTS   = combase mfplat msdmo mfuuid dmoguids strmiids wmcodecdspuuid uuid
 
-all:
-all install install-lib clean i386-windows/colorcnv.o i386-windows/colorcnv_r.res \
-  i386-windows/colorcnv.dll:
-	@cd ../.. && $(MAKE) dlls/colorcnv/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	colorcnv.c \
+	colorcnv.idl

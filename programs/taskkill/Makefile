@@ -1,7 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = taskkill.exe
+IMPORTS   = user32
 
-all:
-all install install-lib clean taskkill.res i386-windows/taskkill.o i386-windows/taskkill.exe \
-  taskkill.pot:
-	@cd ../.. && $(MAKE) programs/taskkill/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole -municode
+
+SOURCES = \
+	taskkill.c \
+	taskkill.rc

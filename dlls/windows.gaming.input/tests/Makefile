@@ -1,8 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL = windows.gaming.input.dll
+IMPORTS = combase uuid
 
-all:
-all clean check test testclean i386-windows/windows.gaming.input_test-stripped.exe \
-  i386-windows/input.ok i386-windows/input.o i386-windows/testlist.o \
-  i386-windows/windows.gaming.input_test.exe:
-	@cd ../../.. && $(MAKE) dlls/windows.gaming.input/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	input.c

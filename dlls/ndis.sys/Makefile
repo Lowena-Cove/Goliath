@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = ndis.sys
+IMPORTS   = advapi32 ntoskrnl iphlpapi
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/ndis.sys:
-	@cd ../.. && $(MAKE) dlls/ndis.sys/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wl,--subsystem,native
+
+SOURCES = \
+	main.c \
+	ndis.sys.spec

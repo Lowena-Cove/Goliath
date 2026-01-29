@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dotnetfx35.exe
+IMPORTS   =
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/dotnetfx35.exe:
-	@cd ../.. && $(MAKE) programs/dotnetfx35/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -mno-cygwin
+
+SOURCES = \
+	main.c

@@ -1,13 +1,20 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL   = dinput.dll
+IMPORTS   = dinput dinput8 ole32 version user32 advapi32 hid uuid crypt32 newdev setupapi wintrust winmm
 
-all:
-all clean check test testclean i386-windows/driver_bus.o i386-windows/driver_bus.dll \
-  i386-windows/driver_hid.o i386-windows/driver_hid.dll i386-windows/driver_hid_poll.o \
-  i386-windows/driver_hid_poll.dll i386-windows/dinput_test-stripped.exe i386-windows/device8.ok \
-  i386-windows/dinput.ok i386-windows/force_feedback.ok i386-windows/hid.ok i386-windows/hotplug.ok \
-  i386-windows/joystick8.ok i386-windows/device8.o i386-windows/dinput.o \
-  i386-windows/force_feedback.o i386-windows/hid.o i386-windows/hotplug.o i386-windows/joystick8.o \
-  i386-windows/testlist.o i386-windows/driver_bus.dll.res i386-windows/driver_hid.dll.res \
-  i386-windows/driver_hid_poll.dll.res i386-windows/dinput_test.exe:
-	@cd ../../.. && $(MAKE) dlls/dinput/tests/$@
-.PHONY: all clean check test testclean
+driver_bus_IMPORTS = winecrt0 ntoskrnl hal
+driver_bus_EXTRADLLFLAGS = -nodefaultlibs -nostartfiles -Wl,--subsystem,native
+driver_hid_IMPORTS = winecrt0 ntoskrnl hal hidclass
+driver_hid_EXTRADLLFLAGS = -nodefaultlibs -nostartfiles -Wl,--subsystem,native
+driver_hid_poll_IMPORTS = winecrt0 ntoskrnl hal hidclass
+driver_hid_poll_EXTRADLLFLAGS = -nodefaultlibs -nostartfiles -Wl,--subsystem,native
+
+SOURCES = \
+	device8.c \
+	dinput.c \
+	driver_bus.c \
+	driver_hid.c \
+	driver_hid_poll.c \
+	force_feedback.c \
+	hid.c \
+	hotplug.c \
+	joystick8.c

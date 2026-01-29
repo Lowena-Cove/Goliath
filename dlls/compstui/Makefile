@@ -1,7 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = compstui.dll
+IMPORTLIB = compstui
+IMPORTS   = comctl32 user32
 
-all:
-all install install-lib install-dev clean libcompstui.a i386-windows/libcompstui.a compstui.res \
-  i386-windows/compstui_main.o i386-windows/compstui.dll compstui.pot:
-	@cd ../.. && $(MAKE) dlls/compstui/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	compstui.rc \
+	compstui_main.c

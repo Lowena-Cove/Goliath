@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = shdoclc.dll
 
-all:
-all install install-lib clean shdoclc.res i386-windows/shdoclc.dll shdoclc.pot:
-	@cd ../.. && $(MAKE) dlls/shdoclc/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--data-only
+
+SOURCES = \
+	shdoclc.rc

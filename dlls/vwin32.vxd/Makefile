@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = vwin32.vxd
+IMPORTS   = kernel
 
-all:
-all install install-lib clean i386-windows/vwin32.o i386-windows/vwin32.vxd:
-	@cd ../.. && $(MAKE) dlls/vwin32.vxd/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	vwin32.c

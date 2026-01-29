@@ -1,8 +1,13 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mscms.dll
+IMPORTLIB = mscms
+IMPORTS   = $(LCMS2_PE_LIBS) shlwapi advapi32
+EXTRAINCL = $(LCMS2_PE_CFLAGS)
 
-all:
-all install install-lib install-dev clean libmscms.a i386-windows/libmscms.a version.res \
-  i386-windows/handle.o i386-windows/icc.o i386-windows/mscms_main.o i386-windows/profile.o \
-  i386-windows/stub.o i386-windows/transform.o i386-windows/mscms.dll:
-	@cd ../.. && $(MAKE) dlls/mscms/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	handle.c \
+	icc.c \
+	mscms_main.c \
+	profile.c \
+	stub.c \
+	transform.c \
+	version.rc

@@ -1,9 +1,19 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = d3drm.dll
+IMPORTLIB = d3drm
+IMPORTS   = d3dxof ddraw
 
-all:
-all install install-lib install-dev clean libd3drm.a i386-windows/libd3drm.a version.res \
-  i386-windows/d3drm.o i386-windows/d3drm_main.o i386-windows/device.o i386-windows/face.o \
-  i386-windows/frame.o i386-windows/light.o i386-windows/material.o i386-windows/math.o \
-  i386-windows/meshbuilder.o i386-windows/texture.o i386-windows/viewport.o i386-windows/d3drm.dll:
-	@cd ../.. && $(MAKE) dlls/d3drm/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	d3drm.c \
+	d3drm_main.c \
+	device.c \
+	face.c \
+	frame.c \
+	light.c \
+	material.c \
+	math.c \
+	meshbuilder.c \
+	texture.c \
+	version.rc \
+	viewport.c

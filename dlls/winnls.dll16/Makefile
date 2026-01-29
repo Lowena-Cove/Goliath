@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winnls.dll16
+IMPORTS   = winnls32
+EXTRADLLFLAGS = -m16 -Wb,--main-module,winnls32.dll
 
-all:
-all install install-lib clean i386-windows/winnls.o i386-windows/winnls.dll16:
-	@cd ../.. && $(MAKE) dlls/winnls.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	winnls.c

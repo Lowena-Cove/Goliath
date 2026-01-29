@@ -1,6 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winscard.dll
+IMPORTLIB = winscard
+UNIXLIB   = winscard.so
+UNIX_LIBS = $(PCSCLITE_LIBS)
 
-all:
-clean i386-windows/libwinscard.a:
-	@cd ../.. && $(MAKE) dlls/winscard/$@
-.PHONY: clean
+SOURCES = \
+	rsrc.rc \
+	unixlib.c \
+	winscard.c

@@ -1,8 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = imm32.dll
+IMPORTLIB = imm32
+IMPORTS   = user32 gdi32 advapi32 kernelbase win32u
+DELAYIMPORTS = ole32
 
-all:
-all install install-lib install-dev clean libimm32.a i386-windows/libimm32.a \
-  i386-windows/libimm32.delay.a version.res i386-windows/ime.o i386-windows/imm.o \
-  i386-windows/imm32.dll:
-	@cd ../.. && $(MAKE) dlls/imm32/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	ime.c \
+	imm.c \
+	version.rc

@@ -1,7 +1,12 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mfmp4srcsnk.dll
+IMPORTS   = advapi32 ole32 mfplat mfuuid uuid winedmo
+PARENTSRC = ../mfsrcsnk
 
-all:
-all install install-lib clean mfmp4srcsnk.res i386-windows/media_sink.o i386-windows/media_source.o \
-  i386-windows/mfmp4srcsnk.o i386-windows/mfmp4srcsnk_r.res i386-windows/mfmp4srcsnk.dll:
-	@cd ../.. && $(MAKE) dlls/mfmp4srcsnk/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	media_sink.c \
+	media_source.c \
+	mfmp4srcsnk.c \
+	mfmp4srcsnk.idl \
+	mfmp4srcsnk.rc

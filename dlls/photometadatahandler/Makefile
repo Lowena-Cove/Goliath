@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE = photometadatahandler.dll
 
-all:
-all install install-lib clean photometadatahandler.res i386-windows/photometadatahandler.dll:
-	@cd ../.. && $(MAKE) dlls/photometadatahandler/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	photometadatahandler.rc

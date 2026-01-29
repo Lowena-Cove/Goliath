@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = olesvr.dll16
+IMPORTS   = gdi32
+EXTRADLLFLAGS = -m16 -Wb,--main-module,olesvr32.dll
 
-all:
-all install install-lib clean i386-windows/olesvr.o i386-windows/olesvr.dll16:
-	@cd ../.. && $(MAKE) dlls/olesvr.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	olesvr.c

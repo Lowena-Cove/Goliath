@@ -1,9 +1,19 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winedmo.dll
+UNIXLIB   = winedmo.so
+IMPORTLIB = winedmo
+IMPORTS   = mfuuid
+UNIX_CFLAGS  = $(FFMPEG_CFLAGS)
+UNIX_LIBS    = $(FFMPEG_LIBS) $(PTHREAD_LIBS)
+PARENTSRC = ../winegstreamer
+EXTRADEFS = -D_WINEDMO
 
-all:
-all install install-lib install-dev clean libwinedmo.a i386-windows/libwinedmo.a winedmo.so \
-  i386-windows/main.o i386-windows/winedmo.dll media-converter/fossilize.o media-converter/murmur3.o \
-  media-converter/lib.o libavcodec/pcm_byte_order_reverse_bsf.o unix_demuxer.o \
-  unix_demuxer_mediaconv.o unix_media_type.o unixlib.o:
-	@cd ../.. && $(MAKE) dlls/winedmo/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	main.c \
+	media-converter/fossilize.c \
+	media-converter/murmur3.c \
+	media-converter/lib.c \
+	libavcodec/pcm_byte_order_reverse_bsf.c \
+	unix_demuxer.c \
+	unix_demuxer_mediaconv.c \
+	unix_media_type.c \
+	unixlib.c

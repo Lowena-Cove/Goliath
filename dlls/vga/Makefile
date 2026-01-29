@@ -1,6 +1,4 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = vga.dll
 
-all:
-all install install-lib clean version.res i386-windows/vga.dll:
-	@cd ../.. && $(MAKE) dlls/vga/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	version.rc

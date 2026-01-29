@@ -1,6 +1,4 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mscat32.dll
+IMPORTS   = wintrust
 
-all:
-all install install-lib clean i386-windows/mscat32.dll:
-	@cd ../.. && $(MAKE) dlls/mscat32/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native

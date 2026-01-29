@@ -1,8 +1,12 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -D_PROPSYS_
+MODULE    = propsys.dll
+IMPORTLIB = propsys
+IMPORTS   = ole32 oleaut32 uuid
 
-all:
-all install install-lib install-dev clean libpropsys.a i386-windows/libpropsys.a \
-  i386-windows/propstore.o i386-windows/propsys_main.o i386-windows/propvar.o \
-  i386-windows/propsys_classes_r.res i386-windows/propsys.dll:
-	@cd ../.. && $(MAKE) dlls/propsys/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	propstore.c \
+	propsys_classes.idl \
+	propsys_main.c \
+	propvar.c

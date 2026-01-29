@@ -1,6 +1,3 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = drmclien.dll
 
-all:
-all install install-lib clean i386-windows/drmclien.dll:
-	@cd ../.. && $(MAKE) dlls/drmclien/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native

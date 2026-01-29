@@ -1,7 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = rtworkq.dll
+IMPORTLIB = rtworkq
+IMPORTS   = ole32
 
-all:
-all install install-lib install-dev clean librtworkq.a i386-windows/librtworkq.a \
-  i386-windows/queue.o i386-windows/rtworkq.dll:
-	@cd ../.. && $(MAKE) dlls/rtworkq/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	queue.c

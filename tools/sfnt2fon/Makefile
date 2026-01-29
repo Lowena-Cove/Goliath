@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+PROGRAMS = sfnt2fon
+UNIX_LIBS   = $(FREETYPE_LIBS)
+UNIX_CFLAGS = $(FREETYPE_CFLAGS)
 
-all:
-all clean sfnt2fon.o sfnt2fon:
-	@cd ../.. && $(MAKE) tools/sfnt2fon/$@
-.PHONY: all clean
+SOURCES = \
+	sfnt2fon.c

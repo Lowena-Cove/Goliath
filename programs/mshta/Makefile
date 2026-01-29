@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mshta.exe
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/mshta.exe:
-	@cd ../.. && $(MAKE) programs/mshta/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	main.c

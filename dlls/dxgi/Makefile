@@ -1,9 +1,15 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dxgi.dll
+IMPORTLIB = dxgi
+IMPORTS   = gdi32 dxguid uuid wined3d user32 win32u
+EXTRAINCL = $(VKD3D_PE_CFLAGS)
 
-all:
-all install install-lib install-dev clean libdxgi.a i386-windows/libdxgi.a version.res \
-  i386-windows/adapter.o i386-windows/device.o i386-windows/dxgi_main.o i386-windows/factory.o \
-  i386-windows/output.o i386-windows/resource.o i386-windows/swapchain.o i386-windows/utils.o \
-  i386-windows/dxgi.dll:
-	@cd ../.. && $(MAKE) dlls/dxgi/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	adapter.c \
+	device.c \
+	dxgi_main.c \
+	factory.c \
+	output.c \
+	resource.c \
+	swapchain.c \
+	utils.c \
+	version.rc

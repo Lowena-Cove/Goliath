@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = control.exe
+IMPORTS   = shell32 user32 comctl32
 
-all:
-all install install-lib clean control.res i386-windows/control.o i386-windows/control.exe:
-	@cd ../.. && $(MAKE) programs/control/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	control.c \
+	control.rc

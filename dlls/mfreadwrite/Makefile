@@ -1,8 +1,11 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mfreadwrite.dll
+IMPORTLIB = mfreadwrite
+IMPORTS   = mfuuid uuid mfplat ole32 kernelbase
+DELAYIMPORTS = mf
 
-all:
-all install install-lib install-dev clean libmfreadwrite.a i386-windows/libmfreadwrite.a \
-  i386-windows/reader.o i386-windows/writer.o i386-windows/mf_classes_r.res \
-  i386-windows/mfreadwrite.dll:
-	@cd ../.. && $(MAKE) dlls/mfreadwrite/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	mf_classes.idl \
+	reader.c \
+	writer.c

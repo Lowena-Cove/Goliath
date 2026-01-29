@@ -1,7 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = uninstaller.exe
+IMPORTS   = advapi32
+DELAYIMPORTS = shlwapi shell32 user32 gdi32 comctl32
 
-all:
-all install install-lib clean uninstaller.res i386-windows/main.o i386-windows/uninstaller.exe \
-  uninstaller.pot:
-	@cd ../.. && $(MAKE) programs/uninstaller/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	main.c \
+	uninstaller.rc

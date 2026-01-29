@@ -1,12 +1,24 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dwrite.dll
+IMPORTLIB = dwrite
+UNIXLIB   = dwrite.so
+IMPORTS   = user32 gdi32 advapi32
+UNIX_CFLAGS = $(FREETYPE_CFLAGS)
 
-all:
-all install install-lib install-dev clean libdwrite.a i386-windows/libdwrite.a \
-  i386-windows/libdwrite.delay.a dwrite.so i386-windows/analyzer.o i386-windows/bidi.o \
-  i386-windows/bracket.o i386-windows/direction.o i386-windows/font.o i386-windows/format.o \
-  i386-windows/gdiinterop.o i386-windows/layout.o i386-windows/linebreak.o i386-windows/main.o \
-  i386-windows/mirror.o i386-windows/opentype.o i386-windows/scripts.o i386-windows/shape.o \
-  i386-windows/shapers/arabic.o i386-windows/shapers/arabic_table.o i386-windows/dwrite.dll \
-  freetype.o:
-	@cd ../.. && $(MAKE) dlls/dwrite/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	analyzer.c \
+	bidi.c \
+	bracket.c \
+	direction.c \
+	font.c \
+	format.c \
+	freetype.c \
+	gdiinterop.c \
+	layout.c \
+	linebreak.c \
+	main.c \
+	mirror.c \
+	opentype.c \
+	scripts.c \
+	shape.c \
+	shapers/arabic.c \
+	shapers/arabic_table.c

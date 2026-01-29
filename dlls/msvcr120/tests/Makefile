@@ -1,7 +1,4 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL   = msvcr120.dll
 
-all:
-all clean check test testclean i386-windows/msvcr120_test-stripped.exe i386-windows/msvcr120.ok \
-  i386-windows/msvcr120.o i386-windows/testlist.o i386-windows/msvcr120_test.exe:
-	@cd ../../.. && $(MAKE) dlls/msvcr120/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	msvcr120.c

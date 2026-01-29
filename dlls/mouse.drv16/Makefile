@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mouse.drv16
+IMPORTS   = user32
 
-all:
-all install install-lib clean mouse.res i386-windows/mouse.o i386-windows/mouse.drv16:
-	@cd ../.. && $(MAKE) dlls/mouse.drv16/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -m16
+
+SOURCES = \
+	mouse.c \
+	mouse.rc

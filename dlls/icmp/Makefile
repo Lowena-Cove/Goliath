@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = icmp.dll
 
-all:
-all install install-lib clean i386-windows/icmp.dll:
-	@cd ../.. && $(MAKE) dlls/icmp/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--data-only
+
+SOURCES = \
+	icmp.spec

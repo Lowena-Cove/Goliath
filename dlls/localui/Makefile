@@ -1,7 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = localui.dll
+IMPORTS   = winspool user32
 
-all:
-all install install-lib clean localui.res i386-windows/localui.o i386-windows/localui.dll \
-  localui.pot:
-	@cd ../.. && $(MAKE) dlls/localui/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	localui.c \
+	localui.rc

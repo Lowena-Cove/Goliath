@@ -1,7 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL   = odbc32.dll
+IMPORTS   = odbc32
 
-all:
-all clean check test testclean i386-windows/odbc32_test-stripped.exe i386-windows/odbc32.ok \
-  i386-windows/odbc32.o i386-windows/testlist.o i386-windows/odbc32_test.exe:
-	@cd ../../.. && $(MAKE) dlls/odbc32/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	odbc32.c

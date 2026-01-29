@@ -1,7 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = hidclass.sys
+IMPORTLIB = hidclass
+IMPORTS   = hal ntoskrnl user32 hidparse win32u
 
-all:
-all install install-lib install-dev clean libhidclass.a i386-windows/libhidclass.a hidclass.res \
-  i386-windows/device.o i386-windows/pnp.o i386-windows/hidclass.sys:
-	@cd ../.. && $(MAKE) dlls/hidclass.sys/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	device.c \
+	hidclass.rc \
+	pnp.c

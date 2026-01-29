@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = wing.dll16
+IMPORTS   = gdi32
+EXTRADLLFLAGS = -m16
 
-all:
-all install install-lib clean i386-windows/wing.o i386-windows/wing.dll16:
-	@cd ../.. && $(MAKE) dlls/wing.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	wing.c

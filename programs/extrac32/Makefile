@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = extrac32.exe
+IMPORTS   = shell32 setupapi shlwapi user32 comctl32
 
-all:
-all install install-lib clean extrac32.res i386-windows/extrac32.o i386-windows/extrac32.exe:
-	@cd ../.. && $(MAKE) programs/extrac32/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	extrac32.c \
+	extrac32.rc

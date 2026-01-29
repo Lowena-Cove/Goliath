@@ -1,7 +1,10 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = opcservices.dll
+IMPORTS   = $(ZLIB_PE_LIBS) uuid ole32 advapi32 urlmon xmllite oleaut32
+EXTRAINCL = $(ZLIB_PE_CFLAGS)
 
-all:
-all install install-lib clean i386-windows/compress.o i386-windows/factory.o i386-windows/package.o \
-  i386-windows/uri.o i386-windows/opcservices_r.res i386-windows/opcservices.dll:
-	@cd ../.. && $(MAKE) dlls/opcservices/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	compress.c \
+	factory.c \
+	opcservices.idl \
+	package.c \
+	uri.c

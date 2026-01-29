@@ -1,7 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dhtmled.ocx
+IMPORTS   = uuid ole32 oleaut32 user32 gdi32
 
-all:
-all install install-lib clean dhtmled.res i386-windows/edit.o i386-windows/main.o \
-  i386-windows/dhtmled_tlb_t.res i386-windows/dhtmled.ocx:
-	@cd ../.. && $(MAKE) dlls/dhtmled.ocx/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	dhtmled.rc \
+	dhtmled_tlb.idl \
+	edit.c \
+	main.c

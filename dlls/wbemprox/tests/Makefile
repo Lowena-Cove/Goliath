@@ -1,8 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL   = wbemprox.dll
+IMPORTS   = uuid oleaut32 ole32 user32 advapi32
 
-all:
-all clean check test testclean i386-windows/wbemprox_test-stripped.exe i386-windows/query.ok \
-  i386-windows/services.ok i386-windows/query.o i386-windows/services.o i386-windows/testlist.o \
-  i386-windows/wbemprox_test.exe:
-	@cd ../../.. && $(MAKE) dlls/wbemprox/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	query.c \
+	services.c

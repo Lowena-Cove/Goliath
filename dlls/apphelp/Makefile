@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE = apphelp.dll
 
-all:
-all install install-lib clean i386-windows/apphelp.o i386-windows/apphelp.dll:
-	@cd ../.. && $(MAKE) dlls/apphelp/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	apphelp.c

@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = spoolsv.exe
+IMPORTS   = advapi32
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/spoolsv.exe:
-	@cd ../.. && $(MAKE) programs/spoolsv/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows
+
+SOURCES = \
+	main.c

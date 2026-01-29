@@ -1,7 +1,12 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = wmp.dll
+IMPORTS   = oleaut32 ole32 urlmon shlwapi user32 gdi32
 
-all:
-all install install-lib clean rsrc.res i386-windows/events.o i386-windows/oleobj.o \
-  i386-windows/player.o i386-windows/wmp_main.o i386-windows/wmp_typelib_t.res i386-windows/wmp.dll:
-	@cd ../.. && $(MAKE) dlls/wmp/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	events.c \
+	oleobj.c \
+	player.c \
+	rsrc.rc \
+	wmp_main.c \
+	wmp_typelib.idl

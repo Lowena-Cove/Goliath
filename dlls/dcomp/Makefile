@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dcomp.dll
 
-all:
-all install install-lib clean version.res i386-windows/device.o i386-windows/dcomp.dll:
-	@cd ../.. && $(MAKE) dlls/dcomp/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	device.c \
+	version.rc

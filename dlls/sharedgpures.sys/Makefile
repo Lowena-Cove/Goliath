@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = sharedgpures.sys
+IMPORTS   = ntoskrnl
+EXTRADLLFLAGS = -Wl,--subsystem,native
 
-all:
-all install install-lib clean i386-windows/shared_resource.o i386-windows/sharedgpures.sys:
-	@cd ../.. && $(MAKE) dlls/sharedgpures.sys/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	shared_resource.c

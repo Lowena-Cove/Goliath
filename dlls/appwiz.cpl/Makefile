@@ -1,7 +1,11 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = appwiz.cpl
+IMPORTS   = uuid urlmon advpack comctl32 advapi32 shell32 ole32 user32 comdlg32 bcrypt kernelbase
+DELAYIMPORTS = msi
 
-all:
-all install install-lib clean appwiz.res i386-windows/addons.o i386-windows/appwiz.o \
-  i386-windows/appwiz.cpl appwiz.pot:
-	@cd ../.. && $(MAKE) dlls/appwiz.cpl/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	addons.c \
+	appwiz.c \
+	appwiz.rc \
+	appwiz.svg
+
+addons_EXTRADEFS = -DINSTALL_DATADIR="\"${datadir}\""

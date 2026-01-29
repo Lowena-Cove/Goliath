@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dpnaddr.dll
+IMPORTS   = dpnet
 
-all:
-all install install-lib clean version.res i386-windows/dpnaddr.dll:
-	@cd ../.. && $(MAKE) dlls/dpnaddr/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	version.rc

@@ -1,7 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mciavi32.dll
+IMPORTS   = msvfw32 winmm user32 gdi32
 
-all:
-all install install-lib clean mciavi_res.res i386-windows/info.o i386-windows/mciavi.o \
-  i386-windows/mmoutput.o i386-windows/wnd.o i386-windows/mciavi32.dll:
-	@cd ../.. && $(MAKE) dlls/mciavi32/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	info.c \
+	mciavi.c \
+	mciavi_res.rc \
+	mmoutput.c \
+	wnd.c

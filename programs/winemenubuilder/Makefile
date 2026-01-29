@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winemenubuilder.exe
+IMPORTS   = uuid windowscodecs shell32 shlwapi ole32 user32 advapi32
 
-all:
-all install install-lib clean i386-windows/winemenubuilder.o i386-windows/winemenubuilder.exe:
-	@cd ../.. && $(MAKE) programs/winemenubuilder/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	winemenubuilder.c

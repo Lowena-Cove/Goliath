@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = setx.exe
 
-all:
-all install install-lib clean version.res i386-windows/main.o i386-windows/setx.exe:
-	@cd ../.. && $(MAKE) programs/setx/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole -municode
+
+SOURCES = \
+	main.c \
+	version.rc

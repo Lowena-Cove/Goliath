@@ -1,7 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = vulkan-1.dll
+IMPORTS   = user32
+IMPORTLIB = vulkan-1
 
-all:
-all install install-lib install-dev clean libvulkan-1.a i386-windows/libvulkan-1.a version.res \
-  i386-windows/vulkan.o i386-windows/vulkan-1.dll:
-	@cd ../.. && $(MAKE) dlls/vulkan-1/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	version.rc \
+	vulkan.c

@@ -1,8 +1,14 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = user.exe16
+IMPORTS   = mpr user32 gdi32 win32u
+EXTRADLLFLAGS = -m16 -Wb,--main-module,user32.dll,--heap,65520
 
-all:
-all install install-lib clean version.res i386-windows/bidi.o i386-windows/comm.o \
-  i386-windows/dialog.o i386-windows/hook.o i386-windows/message.o i386-windows/network.o \
-  i386-windows/user.o i386-windows/window.o i386-windows/user.exe16:
-	@cd ../.. && $(MAKE) dlls/user.exe16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	bidi.c \
+	comm.c \
+	dialog.c \
+	hook.c \
+	message.c \
+	network.c \
+	user.c \
+	version.rc \
+	window.c

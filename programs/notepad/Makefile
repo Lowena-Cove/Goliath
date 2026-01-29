@@ -1,7 +1,11 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = notepad.exe
+IMPORTS   = comdlg32 shell32 shlwapi user32 gdi32 advapi32 comctl32
 
-all:
-all install install-lib clean notepad.res notepad.man i386-windows/dialog.o i386-windows/main.o \
-  i386-windows/notepad.exe notepad.pot:
-	@cd ../.. && $(MAKE) programs/notepad/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows
+
+SOURCES = \
+	dialog.c \
+	main.c \
+	notepad.man.in \
+	notepad.rc \
+	notepad.svg

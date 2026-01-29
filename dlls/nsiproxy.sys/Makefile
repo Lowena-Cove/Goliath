@@ -1,7 +1,15 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = nsiproxy.sys
+UNIXLIB   = nsiproxy.so
+IMPORTS   = ntoskrnl
+UNIX_LIBS = $(PROCSTAT_LIBS)
 
-all:
-all install install-lib clean nsiproxy.so i386-windows/device.o i386-windows/nsiproxy.sys \
-  icmp_echo.o ip.o ndis.o nsi.o tcp.o udp.o:
-	@cd ../.. && $(MAKE) dlls/nsiproxy.sys/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wl,--subsystem,native
+
+SOURCES = \
+	device.c \
+	icmp_echo.c \
+	ip.c \
+	ndis.c \
+	nsi.c \
+	tcp.c \
+	udp.c

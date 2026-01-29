@@ -1,19 +1,43 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = windowscodecs.dll
+IMPORTLIB = windowscodecs
+IMPORTS   = $(TIFF_PE_LIBS) $(JPEG_PE_LIBS) $(PNG_PE_LIBS) windowscodecs uuid ole32 oleaut32 propsys rpcrt4 shlwapi user32 gdi32 advapi32
+EXTRAINCL = $(TIFF_PE_CFLAGS) $(JPEG_PE_CFLAGS) $(PNG_PE_CFLAGS)
 
-all:
-all install install-lib install-dev clean windowscodecs_wincodec.h \
-  i386-windows/windowscodecs_wincodec_p.c dlldata.c libwindowscodecs.a \
-  i386-windows/libwindowscodecs.a i386-windows/libwindowscodecs.delay.a uuid.o version.res \
-  i386-windows/bitmap.o i386-windows/bmpdecode.o i386-windows/bmpencode.o i386-windows/clipper.o \
-  i386-windows/clsfactory.o i386-windows/colorcontext.o i386-windows/colortransform.o \
-  i386-windows/converter.o i386-windows/ddsformat.o i386-windows/decoder.o i386-windows/encoder.o \
-  i386-windows/fliprotate.o i386-windows/gifformat.o i386-windows/icoformat.o \
-  i386-windows/imgfactory.o i386-windows/info.o i386-windows/libjpeg.o i386-windows/libpng.o \
-  i386-windows/libtiff.o i386-windows/main.o i386-windows/metadatahandler.o \
-  i386-windows/metadataquery.o i386-windows/palette.o i386-windows/pngformat.o \
-  i386-windows/propertybag.o i386-windows/proxy.o i386-windows/regsvr.o i386-windows/scaler.o \
-  i386-windows/stream.o i386-windows/tgaformat.o i386-windows/ungif.o \
-  i386-windows/wincodecs_common.o i386-windows/windowscodecs_wincodec_p.o i386-windows/dlldata.o \
-  i386-windows/uuid.o i386-windows/windowscodecs_wincodec_r.res i386-windows/windowscodecs.dll:
-	@cd ../.. && $(MAKE) dlls/windowscodecs/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	bitmap.c \
+	bmpdecode.c \
+	bmpencode.c \
+	clipper.c \
+	clsfactory.c \
+	colorcontext.c \
+	colortransform.c \
+	converter.c \
+	ddsformat.c \
+	decoder.c \
+	encoder.c \
+	fliprotate.c \
+	gifformat.c \
+	icoformat.c \
+	imgfactory.c \
+	info.c \
+	libjpeg.c \
+	libpng.c \
+	libtiff.c \
+	main.c \
+	metadatahandler.c \
+	metadataquery.c \
+	palette.c \
+	pngformat.c \
+	propertybag.c \
+	proxy.c \
+	regsvr.c \
+	scaler.c \
+	stream.c \
+	tgaformat.c \
+	ungif.c \
+	uuid.c \
+	version.rc \
+	wincodecs_common.c \
+	windowscodecs_wincodec.idl
+
+dlldata_EXTRADEFS = -DENTRY_PREFIX=WIC_ -DPROXY_DELEGATION -DWINE_REGISTER_DLL

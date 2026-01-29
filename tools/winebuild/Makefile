@@ -1,7 +1,15 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+PROGRAMS = winebuild
 
-all:
-all install install-dev clean import.o main.o parser.o relay.o res16.o res32.o spec16.o spec32.o \
-  utils.o winebuild.man winebuild:
-	@cd ../.. && $(MAKE) tools/winebuild/$@
-.PHONY: all install install-dev clean
+SOURCES = \
+	import.c \
+	main.c \
+	parser.c \
+	relay.c \
+	res16.c \
+	res32.c \
+	spec16.c \
+	spec32.c \
+	utils.c \
+	winebuild.man.in
+
+INSTALL_DEV = $(PROGRAMS)

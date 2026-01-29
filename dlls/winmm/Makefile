@@ -1,10 +1,18 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -D_WINMM_
+MODULE    = winmm.dll
+IMPORTLIB = winmm
+IMPORTS   = uuid user32 advapi32 ole32 msacm32
+DELAYIMPORTS = dinput8
 
-all:
-all install install-lib install-dev clean libwinmm.a i386-windows/libwinmm.a \
-  i386-windows/libwinmm.delay.a winmm.res winmm_res.res i386-windows/driver.o \
-  i386-windows/joystick.o i386-windows/lolvldrv.o i386-windows/mci.o i386-windows/mmio.o \
-  i386-windows/playsound.o i386-windows/time.o i386-windows/waveform.o i386-windows/winmm.o \
-  i386-windows/winmm.dll winmm.pot:
-	@cd ../.. && $(MAKE) dlls/winmm/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	driver.c \
+	joystick.c \
+	lolvldrv.c \
+	mci.c \
+	mmio.c \
+	playsound.c \
+	time.c \
+	waveform.c \
+	winmm.c \
+	winmm.rc \
+	winmm_res.rc

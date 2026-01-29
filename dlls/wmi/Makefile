@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -D_WMI_SOURCE_
+MODULE    = wmi.dll
+IMPORTS   = advapi32
 
-all:
-all install install-lib clean i386-windows/wmi.dll:
-	@cd ../.. && $(MAKE) dlls/wmi/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--data-only
+
+SOURCES = \
+	wmi.spec

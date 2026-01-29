@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winmgmt.exe
+IMPORTS   = advapi32
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/winmgmt.exe:
-	@cd ../.. && $(MAKE) programs/winmgmt/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole -municode
+
+SOURCES = \
+	main.c

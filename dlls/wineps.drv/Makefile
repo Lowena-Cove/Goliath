@@ -1,30 +1,68 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = wineps.drv
+UNIXLIB   = wineps.so
+IMPORTS   = user32 gdi32 winspool advapi32 win32u
+UNIX_LIBS = -lwin32u -lm
 
-all:
-all install install-lib clean wineps.res wineps.so i386-windows/afm.o i386-windows/bitblt.o \
-  i386-windows/bitmap.o i386-windows/brush.o i386-windows/builtin.o i386-windows/clipping.o \
-  i386-windows/color.o i386-windows/data/AvantGarde_Book.o \
-  i386-windows/data/AvantGarde_BookOblique.o i386-windows/data/AvantGarde_Demi.o \
-  i386-windows/data/AvantGarde_DemiOblique.o i386-windows/data/Bookman_Demi.o \
-  i386-windows/data/Bookman_DemiItalic.o i386-windows/data/Bookman_Light.o \
-  i386-windows/data/Bookman_LightItalic.o i386-windows/data/Courier.o \
-  i386-windows/data/Courier_Bold.o i386-windows/data/Courier_BoldOblique.o \
-  i386-windows/data/Courier_Oblique.o i386-windows/data/Helvetica.o \
-  i386-windows/data/Helvetica_Bold.o i386-windows/data/Helvetica_BoldOblique.o \
-  i386-windows/data/Helvetica_Narrow.o i386-windows/data/Helvetica_Narrow_Bold.o \
-  i386-windows/data/Helvetica_Narrow_BoldOblique.o i386-windows/data/Helvetica_Narrow_Oblique.o \
-  i386-windows/data/Helvetica_Oblique.o i386-windows/data/NewCenturySchlbk_Bold.o \
-  i386-windows/data/NewCenturySchlbk_BoldItalic.o i386-windows/data/NewCenturySchlbk_Italic.o \
-  i386-windows/data/NewCenturySchlbk_Roman.o i386-windows/data/Palatino_Bold.o \
-  i386-windows/data/Palatino_BoldItalic.o i386-windows/data/Palatino_Italic.o \
-  i386-windows/data/Palatino_Roman.o i386-windows/data/Symbol.o i386-windows/data/Times_Bold.o \
-  i386-windows/data/Times_BoldItalic.o i386-windows/data/Times_Italic.o \
-  i386-windows/data/Times_Roman.o i386-windows/data/ZapfChancery_MediumItalic.o \
-  i386-windows/data/ZapfDingbats.o i386-windows/data/agl.o i386-windows/direction.o \
-  i386-windows/download.o i386-windows/driver.o i386-windows/encode.o i386-windows/escape.o \
-  i386-windows/font.o i386-windows/graphics.o i386-windows/init.o i386-windows/pen.o \
-  i386-windows/ppd.o i386-windows/printproc.o i386-windows/ps.o i386-windows/text.o \
-  i386-windows/type1.o i386-windows/type1afm.o i386-windows/type42.o i386-windows/vertical.o \
-  i386-windows/wineps.drv unixlib.o wineps.pot:
-	@cd ../.. && $(MAKE) dlls/wineps.drv/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	afm.c \
+	bitblt.c \
+	bitmap.c \
+	brush.c \
+	builtin.c \
+	clipping.c \
+	color.c \
+	data/AvantGarde_Book.c \
+	data/AvantGarde_BookOblique.c \
+	data/AvantGarde_Demi.c \
+	data/AvantGarde_DemiOblique.c \
+	data/Bookman_Demi.c \
+	data/Bookman_DemiItalic.c \
+	data/Bookman_Light.c \
+	data/Bookman_LightItalic.c \
+	data/Courier.c \
+	data/Courier_Bold.c \
+	data/Courier_BoldOblique.c \
+	data/Courier_Oblique.c \
+	data/Helvetica.c \
+	data/Helvetica_Bold.c \
+	data/Helvetica_BoldOblique.c \
+	data/Helvetica_Narrow.c \
+	data/Helvetica_Narrow_Bold.c \
+	data/Helvetica_Narrow_BoldOblique.c \
+	data/Helvetica_Narrow_Oblique.c \
+	data/Helvetica_Oblique.c \
+	data/NewCenturySchlbk_Bold.c \
+	data/NewCenturySchlbk_BoldItalic.c \
+	data/NewCenturySchlbk_Italic.c \
+	data/NewCenturySchlbk_Roman.c \
+	data/Palatino_Bold.c \
+	data/Palatino_BoldItalic.c \
+	data/Palatino_Italic.c \
+	data/Palatino_Roman.c \
+	data/Symbol.c \
+	data/Times_Bold.c \
+	data/Times_BoldItalic.c \
+	data/Times_Italic.c \
+	data/Times_Roman.c \
+	data/ZapfChancery_MediumItalic.c \
+	data/ZapfDingbats.c \
+	data/agl.c \
+	direction.c \
+	download.c \
+	driver.c \
+	encode.c \
+	escape.c \
+	font.c \
+	graphics.c \
+	init.c \
+	pen.c \
+	ppd.c \
+	printproc.c \
+	ps.c \
+	text.c \
+	type1.c \
+	type1afm.c \
+	type42.c \
+	unixlib.c \
+	vertical.c \
+	wineps.rc

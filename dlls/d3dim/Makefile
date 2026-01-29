@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = d3dim.dll
 
-all:
-all install install-lib clean version.res i386-windows/d3dim.dll:
-	@cd ../.. && $(MAKE) dlls/d3dim/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	version.rc

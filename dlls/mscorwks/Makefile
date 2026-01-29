@@ -1,6 +1,3 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mscorwks.dll
 
-all:
-all install install-lib clean i386-windows/mscorwks.dll:
-	@cd ../.. && $(MAKE) dlls/mscorwks/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native

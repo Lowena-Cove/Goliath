@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = ctl3d.dll16
+IMPORTS   = user32
+EXTRADLLFLAGS = -m16 -Wb,--main-module,ctl3d32.dll
 
-all:
-all install install-lib clean i386-windows/ctl3d.o i386-windows/ctl3d.dll16:
-	@cd ../.. && $(MAKE) dlls/ctl3d.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	ctl3d.c

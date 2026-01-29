@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = msctfmonitor.dll
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/msctfmonitor.dll:
-	@cd ../.. && $(MAKE) dlls/msctfmonitor/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	main.c

@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = ctapi32.dll
+UNIXLIB   = ctapi32.so
+IMPORTS   = advapi32
 
-all:
-all install install-lib clean ctapi32.so i386-windows/ctapi32.o i386-windows/ctapi32.dll unixlib.o:
-	@cd ../.. && $(MAKE) dlls/ctapi32/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	ctapi32.c \
+	unixlib.c

@@ -1,7 +1,10 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winefile.exe
+IMPORTS   = uuid shell32 comdlg32 comctl32 ole32 mpr version user32 gdi32 advapi32 shlwapi
 
-all:
-all install install-lib clean winefile.res winefile.man i386-windows/winefile.o \
-  i386-windows/winefile.exe winefile.pot:
-	@cd ../.. && $(MAKE) programs/winefile/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	winefile.c \
+	winefile.man.in \
+	winefile.rc \
+	winefile.svg

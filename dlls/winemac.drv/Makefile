@@ -1,6 +1,41 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winemac.drv
+UNIXLIB   = winemac.so
+IMPORTS   = uuid rpcrt4 user32 gdi32 win32u
+DELAYIMPORTS = ole32 shell32 imm32
+UNIX_LIBS    = \
+	-lwin32u \
+	-framework AppKit \
+	-framework Carbon \
+	-framework CoreVideo \
+	-framework Foundation \
+	-framework IOKit \
+	-framework OpenGL \
+	-framework QuartzCore \
+	-framework Security \
+	$(METAL_LIBS)
 
-all:
-clean winemac.pot:
-	@cd ../.. && $(MAKE) dlls/winemac.drv/$@
-.PHONY: clean
+SOURCES = \
+	clipboard.c \
+	cocoa_app.m \
+	cocoa_clipboard.m \
+	cocoa_cursorclipping.m \
+	cocoa_display.m \
+	cocoa_event.m \
+	cocoa_main.m \
+	cocoa_opengl.m \
+	cocoa_status_item.m \
+	cocoa_window.m \
+	display.c \
+	dllmain.c \
+	event.c \
+	gdi.c \
+	image.c \
+	keyboard.c \
+	macdrv_main.c \
+	mouse.c \
+	opengl.c \
+	surface.c \
+	systray.c \
+	vulkan.c \
+	window.c \
+	winemac.rc

@@ -1,7 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = msinfo32.exe
+IMPORTS   = shell32 user32 comctl32
 
-all:
-all install install-lib clean msinfo32.res i386-windows/main.o i386-windows/msinfo32.exe \
-  msinfo32.pot:
-	@cd ../.. && $(MAKE) programs/msinfo32/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	main.c \
+	msinfo32.rc

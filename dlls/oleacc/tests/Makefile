@@ -1,7 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL   = oleacc.dll
+IMPORTS   = ole32 oleacc oleaut32 user32
 
-all:
-all clean check test testclean i386-windows/oleacc_test-stripped.exe i386-windows/main.ok \
-  i386-windows/main.o i386-windows/testlist.o i386-windows/oleacc_test.exe:
-	@cd ../../.. && $(MAKE) dlls/oleacc/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	main.c

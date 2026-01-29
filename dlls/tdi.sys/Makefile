@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = tdi.sys
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/tdi.sys:
-	@cd ../.. && $(MAKE) dlls/tdi.sys/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wl,--subsystem,native
+
+SOURCES = \
+	main.c \
+	tdi.sys.spec

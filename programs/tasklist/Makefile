@@ -1,7 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = tasklist.exe
+IMPORTS   = user32
 
-all:
-all install install-lib clean tasklist.res i386-windows/tasklist.o i386-windows/tasklist.exe \
-  tasklist.pot:
-	@cd ../.. && $(MAKE) programs/tasklist/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole -municode
+
+SOURCES = \
+	tasklist.c \
+	tasklist.rc

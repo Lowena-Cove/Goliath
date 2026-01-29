@@ -1,6 +1,4 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = sspicli.dll
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/sspicli.dll:
-	@cd ../.. && $(MAKE) dlls/sspicli/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	main.c

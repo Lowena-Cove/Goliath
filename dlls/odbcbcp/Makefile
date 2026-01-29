@@ -1,6 +1,3 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = odbcbcp.dll
 
-all:
-all install install-lib clean i386-windows/odbcbcp.dll:
-	@cd ../.. && $(MAKE) dlls/odbcbcp/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native

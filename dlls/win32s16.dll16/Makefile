@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = win32s16.dll16
+EXTRADLLFLAGS = -m16 -Wb,--main-module,w32skrnl.dll
 
-all:
-all install install-lib clean i386-windows/win32s16.o i386-windows/win32s16.dll16:
-	@cd ../.. && $(MAKE) dlls/win32s16.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	win32s16.c

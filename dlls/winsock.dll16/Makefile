@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = winsock.dll16
+IMPORTS   = ws2_32
+DELAYIMPORTS = user32
+EXTRADLLFLAGS = -m16 -Wb,--main-module,ws2_32.dll
 
-all:
-all install install-lib clean i386-windows/socket.o i386-windows/winsock.dll16:
-	@cd ../.. && $(MAKE) dlls/winsock.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	socket.c

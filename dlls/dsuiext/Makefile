@@ -1,7 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE  = dsuiext.dll
+IMPORTS = ole32 uuid
 
-all:
-all install install-lib clean i386-windows/dsuiext.o i386-windows/dsuiext_r.res \
-  i386-windows/dsuiext.dll:
-	@cd ../.. && $(MAKE) dlls/dsuiext/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	dsuiext.c \
+	dsuiext.idl

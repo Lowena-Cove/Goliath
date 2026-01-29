@@ -1,8 +1,16 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = d3d10.dll
+IMPORTLIB = d3d10
+IMPORTS   = uuid d3d10core d3dcompiler_39 dxgi wined3d
+EXTRADEFS = -DD3D_COMPILER_VERSION=0
+PARENTSRC = ../d3dcompiler_43
+EXTRAINCL = $(VKD3D_PE_CFLAGS)
 
-all:
-all install install-lib install-dev clean libd3d10.a i386-windows/libd3d10.a version.res \
-  i386-windows/blob.o i386-windows/d3d10_main.o i386-windows/effect.o i386-windows/reflection.o \
-  i386-windows/shader.o i386-windows/stateblock.o i386-windows/utils.o i386-windows/d3d10.dll:
-	@cd ../.. && $(MAKE) dlls/d3d10/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	blob.c \
+	d3d10_main.c \
+	effect.c \
+	reflection.c \
+	shader.c \
+	stateblock.c \
+	utils.c \
+	version.rc

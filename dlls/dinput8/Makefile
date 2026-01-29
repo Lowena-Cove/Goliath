@@ -1,10 +1,20 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dinput8.dll
+IMPORTLIB = dinput8
+IMPORTS   = dinput8 dxguid uuid comctl32 ole32 user32 advapi32 hid setupapi
+EXTRADEFS = -DDIRECTINPUT_VERSION=0x0800
+EXTRADLLFLAGS = -Wb,--prefer-native
+PARENTSRC = ../dinput
 
-all:
-all install install-lib install-dev clean libdinput8.a i386-windows/libdinput8.a \
-  i386-windows/libdinput8.delay.a data_formats.o dinput.res version.res i386-windows/ansi.o \
-  i386-windows/config.o i386-windows/device.o i386-windows/dinput.o i386-windows/dinput_main.o \
-  i386-windows/joystick_hid.o i386-windows/keyboard.o i386-windows/mouse.o \
-  i386-windows/data_formats.o i386-windows/dinput8_r.res i386-windows/dinput8.dll dinput.pot:
-	@cd ../.. && $(MAKE) dlls/dinput8/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	ansi.c \
+	config.c \
+	data_formats.c \
+	device.c \
+	dinput.c \
+	dinput.rc \
+	dinput8.idl \
+	dinput_main.c \
+	joystick_hid.c \
+	keyboard.c \
+	mouse.c \
+	version.rc

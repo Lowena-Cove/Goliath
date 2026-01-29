@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = rstrtmgr.dll
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/rstrtmgr.dll:
-	@cd ../.. && $(MAKE) dlls/rstrtmgr/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	main.c

@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = typelib.dll16
+IMPORTS   = oleaut32 advapi32
+EXTRADLLFLAGS = -m16 -Wb,--main-module,oleaut32.dll
 
-all:
-all install install-lib clean i386-windows/typelib.o i386-windows/typelib.dll16:
-	@cd ../.. && $(MAKE) dlls/typelib.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	typelib.c

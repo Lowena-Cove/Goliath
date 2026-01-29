@@ -1,7 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = prntvpt.dll
+IMPORTLIB = prntvpt
+IMPORTS   = winspool ole32 oleaut32
 
-all:
-all install install-lib install-dev clean libprntvpt.a i386-windows/libprntvpt.a i386-windows/main.o \
-  i386-windows/ticket.o i386-windows/prntvpt.dll:
-	@cd ../.. && $(MAKE) dlls/prntvpt/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	main.c \
+	ticket.c

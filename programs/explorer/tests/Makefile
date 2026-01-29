@@ -1,7 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL = explorer.exe
+IMPORTS = user32
 
-all:
-all clean check test testclean i386-windows/explorer.exe_test-stripped.exe i386-windows/explorer.ok \
-  i386-windows/explorer.o i386-windows/testlist.o i386-windows/explorer.exe_test.exe:
-	@cd ../../.. && $(MAKE) programs/explorer/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	explorer.c

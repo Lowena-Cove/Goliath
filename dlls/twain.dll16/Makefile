@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = twain.dll16
+EXTRADLLFLAGS = -m16 -Wb,--main-module,twain_32.dll
 
-all:
-all install install-lib clean i386-windows/twain.o i386-windows/twain.dll16:
-	@cd ../.. && $(MAKE) dlls/twain.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	twain.c

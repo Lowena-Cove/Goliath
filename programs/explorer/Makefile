@@ -1,8 +1,13 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = explorer.exe
+IMPORTS   = rpcrt4 user32 gdi32 advapi32 win32u
+DELAYIMPORTS = comctl32 shell32 oleaut32 ole32 shlwapi
 
-all:
-all install install-lib clean explorer.res i386-windows/appbar.o i386-windows/desktop.o \
-  i386-windows/explorer.o i386-windows/startmenu.o i386-windows/systray.o i386-windows/explorer.exe \
-  explorer.pot:
-	@cd ../.. && $(MAKE) programs/explorer/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	appbar.c \
+	desktop.c \
+	explorer.c \
+	explorer.rc \
+	startmenu.c \
+	systray.c

@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dplay.dll
+IMPORTS   = dplayx
 
-all:
-all install install-lib clean version.res i386-windows/dplay.dll:
-	@cd ../.. && $(MAKE) dlls/dplay/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	version.rc

@@ -1,8 +1,9 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = mlang.dll
+IMPORTLIB = mlang
+IMPORTS   = uuid ole32 gdi32 advapi32
+DELAYIMPORTS = oleaut32
 
-all:
-all install install-lib install-dev clean libmlang.a i386-windows/libmlang.a \
-  i386-windows/libmlang.delay.a mlang.res i386-windows/mlang.o i386-windows/mlang_classes_r.res \
-  i386-windows/mlang.dll:
-	@cd ../.. && $(MAKE) dlls/mlang/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	mlang.c \
+	mlang.rc \
+	mlang_classes.idl

@@ -1,7 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = scrobj.dll
+IMPORTS   = uuid urlmon ole32 oleaut32 xmllite advapi32
 
-all:
-all install install-lib clean scrobj.h i386-windows/scrobj.o i386-windows/scrobj_t.res \
-  i386-windows/scrobj.dll:
-	@cd ../.. && $(MAKE) dlls/scrobj/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	scrobj.c \
+	scrobj.idl

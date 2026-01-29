@@ -1,7 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = qwave.dll
+IMPORTLIB = qwave
 
-all:
-all install install-lib install-dev clean libqwave.a i386-windows/libqwave.a i386-windows/main.o \
-  i386-windows/qwave.dll:
-	@cd ../.. && $(MAKE) dlls/qwave/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	main.c

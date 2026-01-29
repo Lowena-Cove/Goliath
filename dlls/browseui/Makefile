@@ -1,8 +1,13 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = browseui.dll
+IMPORTS   = uuid ole32 comctl32 user32 advapi32
 
-all:
-all install install-lib clean browseui.res i386-windows/aclmulti.o i386-windows/aclsource.o \
-  i386-windows/browseui_main.o i386-windows/compcatcachedaemon.o i386-windows/progressdlg.o \
-  i386-windows/browseui_classes_r.res i386-windows/browseui.dll browseui.pot:
-	@cd ../.. && $(MAKE) dlls/browseui/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	aclmulti.c \
+	aclsource.c \
+	browseui.rc \
+	browseui_classes.idl \
+	browseui_main.c \
+	compcatcachedaemon.c \
+	progressdlg.c

@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = msdrm.dll
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/msdrm.dll:
-	@cd ../.. && $(MAKE) dlls/msdrm/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	main.c

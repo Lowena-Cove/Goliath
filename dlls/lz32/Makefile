@@ -1,7 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = lz32.dll
+IMPORTLIB = lz32
 
-all:
-all install install-lib install-dev clean liblz32.a i386-windows/liblz32.a version.res \
-  i386-windows/lz32.dll:
-	@cd ../.. && $(MAKE) dlls/lz32/$@
-.PHONY: all install install-lib install-dev clean
+EXTRADLLFLAGS = -Wb,--data-only
+
+SOURCES = \
+	lz32.spec \
+	version.rc

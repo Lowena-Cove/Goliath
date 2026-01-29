@@ -1,7 +1,10 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dxdiag.exe
+IMPORTS   = dxguid ole32 oleaut32 user32 comctl32
 
-all:
-all install install-lib clean dxdiag.res i386-windows/information.o i386-windows/main.o \
-  i386-windows/output.o i386-windows/dxdiag.exe dxdiag.pot:
-	@cd ../.. && $(MAKE) programs/dxdiag/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	dxdiag.rc \
+	information.c \
+	main.c \
+	output.c

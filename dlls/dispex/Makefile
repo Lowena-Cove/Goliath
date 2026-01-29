@@ -1,7 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dispex.dll
+IMPORTS   = uuid oleaut32 ole32 rpcrt4 advapi32
 
-all:
-all install install-lib clean disp_ex.h i386-windows/disp_ex_p.c dlldata.c i386-windows/usrmarshal.o \
-  i386-windows/disp_ex_p.o i386-windows/dlldata.o i386-windows/disp_ex_r.res i386-windows/dispex.dll:
-	@cd ../.. && $(MAKE) dlls/dispex/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	disp_ex.idl \
+	usrmarshal.c
+
+dlldata_EXTRADEFS = -DWINE_REGISTER_DLL -DPROXY_DELEGATION

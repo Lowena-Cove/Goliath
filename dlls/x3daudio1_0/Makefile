@@ -1,6 +1,10 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -DX3DAUDIO1_VER=0 -DXAUDIO2_VER=0
+MODULE    = x3daudio1_0.dll
+PARENTSRC = ../xaudio2_7
+IMPORTS   = $(FAUDIO_PE_LIBS)
+EXTRAINCL = $(FAUDIO_PE_CFLAGS)
 
-all:
-all install install-lib clean i386-windows/x3daudio.o i386-windows/x3daudio1_0.dll:
-	@cd ../.. && $(MAKE) dlls/x3daudio1_0/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	x3daudio.c

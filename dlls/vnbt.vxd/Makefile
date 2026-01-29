@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = vnbt.vxd
+IMPORTS   = iphlpapi ws2_32
 
-all:
-all install install-lib clean i386-windows/vnbt.o i386-windows/vnbt.vxd:
-	@cd ../.. && $(MAKE) dlls/vnbt.vxd/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	vnbt.c

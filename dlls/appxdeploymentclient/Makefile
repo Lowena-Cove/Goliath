@@ -1,7 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE  = appxdeploymentclient.dll
+IMPORTS = combase
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/package.o i386-windows/classes_r.res \
-  i386-windows/appxdeploymentclient.dll:
-	@cd ../.. && $(MAKE) dlls/appxdeploymentclient/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	classes.idl \
+	main.c \
+	package.c

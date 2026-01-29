@@ -1,6 +1,6 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = shutdown.exe
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/shutdown.exe:
-	@cd ../.. && $(MAKE) programs/shutdown/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole -municode
+
+SOURCES = \
+	main.c

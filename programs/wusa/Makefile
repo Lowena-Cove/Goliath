@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = wusa.exe
+IMPORTS   = cabinet shlwapi ole32 oleaut32 advapi32 shell32
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/manifest.o i386-windows/wusa.exe:
-	@cd ../.. && $(MAKE) programs/wusa/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mwindows -municode
+
+SOURCES = \
+	main.c \
+	manifest.c

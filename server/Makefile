@@ -1,11 +1,55 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+PROGRAMS = wineserver
 
-all:
-all install install-lib clean async.o atom.o change.o class.o clipboard.o completion.o console.o \
-  debugger.o device.o directory.o esync.o event.o fd.o file.o fsync.o handle.o hook.o mach.o \
-  mailslot.o main.o mapping.o mutex.o named_pipe.o object.o process.o procfs.o ptrace.o queue.o \
-  region.o registry.o request.o semaphore.o serial.o signal.o sock.o symlink.o thread.o timer.o \
-  token.o trace.o unicode.o user.o window.o winstation.o wineserver.de.UTF-8.man \
-  wineserver.fr.UTF-8.man wineserver.man wineserver:
-	@cd .. && $(MAKE) server/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	async.c \
+	atom.c \
+	change.c \
+	class.c \
+	clipboard.c \
+	completion.c \
+	console.c \
+	debugger.c \
+	device.c \
+	directory.c \
+	esync.c \
+	event.c \
+	fd.c \
+	file.c \
+	fsync.c \
+	goliath.c \
+	handle.c \
+	hook.c \
+	mach.c \
+	mailslot.c \
+	main.c \
+	mapping.c \
+	mutex.c \
+	named_pipe.c \
+	object.c \
+	process.c \
+	procfs.c \
+	ptrace.c \
+	queue.c \
+	region.c \
+	registry.c \
+	request.c \
+	semaphore.c \
+	serial.c \
+	signal.c \
+	sock.c \
+	symlink.c \
+	thread.c \
+	timer.c \
+	token.c \
+	trace.c \
+	unicode.c \
+	user.c \
+	window.c \
+	wineserver.de.UTF-8.man.in \
+	wineserver.fr.UTF-8.man.in \
+	wineserver.man.in \
+	winstation.c
+
+UNIX_LIBS = $(LDEXECFLAGS) $(RT_LIBS) $(INOTIFY_LIBS) $(PROCSTAT_LIBS)
+
+unicode_EXTRADEFS = -DBINDIR="\"${bindir}\"" -DDATADIR="\"${datadir}\""

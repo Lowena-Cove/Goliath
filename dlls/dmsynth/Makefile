@@ -1,7 +1,11 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = dmsynth.dll
+IMPORTS   = $(FLUIDSYNTH_PE_LIBS) dxguid uuid ole32 advapi32 user32
+EXTRAINCL = $(FLUIDSYNTH_PE_CFLAGS)
+PARENTSRC = ../dmusic
 
-all:
-all install install-lib clean version.res i386-windows/dmsynth_main.o i386-windows/synth.o \
-  i386-windows/synthsink.o i386-windows/dmsynth_r.res i386-windows/dmsynth.dll:
-	@cd ../.. && $(MAKE) dlls/dmsynth/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	dmsynth.idl \
+	dmsynth_main.c \
+	synth.c \
+	synthsink.c \
+	version.rc

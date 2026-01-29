@@ -1,16 +1,53 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -D_COMCTL32_
+MODULE    = comctl32.dll
+IMPORTLIB = comctl32
+IMPORTS   = uuid user32 gdi32 advapi32 imm32 kernelbase
+DELAYIMPORTS = winmm uxtheme
 
-all:
-all install install-lib install-dev clean libcomctl32.a i386-windows/libcomctl32.a \
-  i386-windows/libcomctl32.delay.a comctl32.res i386-windows/animate.o i386-windows/button.o \
-  i386-windows/combo.o i386-windows/comboex.o i386-windows/commctrl.o i386-windows/datetime.o \
-  i386-windows/dpa.o i386-windows/draglist.o i386-windows/dsa.o i386-windows/edit.o \
-  i386-windows/flatsb.o i386-windows/header.o i386-windows/hotkey.o i386-windows/imagelist.o \
-  i386-windows/ipaddress.o i386-windows/listbox.o i386-windows/listview.o i386-windows/monthcal.o \
-  i386-windows/nativefont.o i386-windows/pager.o i386-windows/progress.o i386-windows/propsheet.o \
-  i386-windows/rebar.o i386-windows/smoothscroll.o i386-windows/static.o i386-windows/status.o \
-  i386-windows/string.o i386-windows/syslink.o i386-windows/tab.o i386-windows/taskdialog.o \
-  i386-windows/toolbar.o i386-windows/tooltips.o i386-windows/trackbar.o i386-windows/treeview.o \
-  i386-windows/updown.o i386-windows/comctl32.dll comctl32.pot:
-	@cd ../.. && $(MAKE) dlls/comctl32/$@
-.PHONY: all install install-lib install-dev clean
+SOURCES = \
+	animate.c \
+	button.c \
+	combo.c \
+	comboex.c \
+	comctl32.rc \
+	commctrl.c \
+	datetime.c \
+	dpa.c \
+	draglist.c \
+	dsa.c \
+	edit.c \
+	flatsb.c \
+	header.c \
+	hotkey.c \
+	idb_hist_large.svg \
+	idb_hist_small.svg \
+	idb_std_large.svg \
+	idb_std_small.svg \
+	idb_view_large.svg \
+	idb_view_small.svg \
+	idc_copy.svg \
+	idc_divider.svg \
+	idc_divideropen.svg \
+	idc_movebutton.svg \
+	imagelist.c \
+	ipaddress.c \
+	listbox.c \
+	listview.c \
+	monthcal.c \
+	nativefont.c \
+	pager.c \
+	progress.c \
+	propsheet.c \
+	rebar.c \
+	smoothscroll.c \
+	static.c \
+	status.c \
+	string.c \
+	syslink.c \
+	tab.c \
+	taskdialog.c \
+	toolbar.c \
+	tooltips.c \
+	trackbar.c \
+	treeview.c \
+	updown.c

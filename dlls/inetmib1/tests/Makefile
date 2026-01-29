@@ -1,7 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+TESTDLL   = inetmib1.dll
+IMPORTS   = snmpapi
 
-all:
-all clean check test testclean i386-windows/inetmib1_test-stripped.exe i386-windows/main.ok \
-  i386-windows/main.o i386-windows/testlist.o i386-windows/inetmib1_test.exe:
-	@cd ../../.. && $(MAKE) dlls/inetmib1/tests/$@
-.PHONY: all clean check test testclean
+SOURCES = \
+	main.c

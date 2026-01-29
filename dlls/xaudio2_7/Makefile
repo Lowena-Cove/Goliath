@@ -1,8 +1,14 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+EXTRADEFS = -DXAUDIO2_VER=7
+MODULE    = xaudio2_7.dll
+IMPORTS   = $(FAUDIO_PE_LIBS) advapi32 ole32 user32 uuid
+EXTRAINCL = $(FAUDIO_PE_CFLAGS)
 
-all:
-all install install-lib clean xaudio_classes.h i386-windows/x3daudio.o i386-windows/xapo.o \
-  i386-windows/xapofx.o i386-windows/xaudio_allocator.o i386-windows/xaudio_dll.o \
-  i386-windows/xaudio_classes_r.res i386-windows/xaudio2_7.dll:
-	@cd ../.. && $(MAKE) dlls/xaudio2_7/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	x3daudio.c \
+	xapo.c \
+	xapofx.c \
+	xaudio_allocator.c \
+	xaudio_classes.idl \
+	xaudio_dll.c

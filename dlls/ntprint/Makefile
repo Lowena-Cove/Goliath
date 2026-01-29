@@ -1,6 +1,8 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = ntprint.dll
+IMPORTS   = winspool
 
-all:
-all install install-lib clean ntprint.res i386-windows/ntprint.o i386-windows/ntprint.dll:
-	@cd ../.. && $(MAKE) dlls/ntprint/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	ntprint.c \
+	ntprint.rc

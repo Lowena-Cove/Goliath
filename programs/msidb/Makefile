@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = msidb.exe
+IMPORTS   = msi shlwapi
 
-all:
-all install install-lib clean i386-windows/main.o i386-windows/msidb.exe:
-	@cd ../.. && $(MAKE) programs/msidb/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -mconsole -municode
+
+SOURCES = \
+	main.c

@@ -1,6 +1,7 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = query.dll
+IMPORTS   = uuid
 
-all:
-all install install-lib clean i386-windows/query_main.o i386-windows/query.dll:
-	@cd ../.. && $(MAKE) dlls/query/$@
-.PHONY: all install install-lib clean
+EXTRADLLFLAGS = -Wb,--prefer-native
+
+SOURCES = \
+	query_main.c

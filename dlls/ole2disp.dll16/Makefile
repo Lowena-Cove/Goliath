@@ -1,6 +1,5 @@
-# Auto-generated stub makefile; all rules forward to the top-level makefile
+MODULE    = ole2disp.dll16
+EXTRADLLFLAGS = -m16 -Wb,--main-module,oleaut32.dll
 
-all:
-all install install-lib clean i386-windows/ole2disp.o i386-windows/ole2disp.dll16:
-	@cd ../.. && $(MAKE) dlls/ole2disp.dll16/$@
-.PHONY: all install install-lib clean
+SOURCES = \
+	ole2disp.c
