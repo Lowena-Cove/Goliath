@@ -340,7 +340,7 @@ static void test_DirectorySearch(void)
         L"LDAP://ldap.forumsys.com/OU=scientists,DC=example,DC=com", ADS_SCOPE_BASE,
         {
             { L"uniqueMember", ADSTYPE_CASE_IGNORE_STRING, { L"uid=einstein,dc=example,dc=com",
-              L"uid=galieleo,dc=example,dc=com", L"uid=tesla,dc=example,dc=com", L"uid=newton,dc=example,dc=com",
+              L"uid=tesla,dc=example,dc=com", L"uid=newton,dc=example,dc=com", L"uid=galileo,dc=example,dc=com",
               L"uid=training,dc=example,dc=com", L"uid=jmacy,dc=example,dc=com", NULL } },
             { L"ou", ADSTYPE_CASE_IGNORE_STRING, { L"scientists", NULL } },
             { L"cn", ADSTYPE_CASE_IGNORE_STRING, { L"Scientists", NULL } },
@@ -354,7 +354,7 @@ static void test_DirectorySearch(void)
         L"LDAP://ldap.forumsys.com/OU=scientists,DC=example,DC=com", ADS_SCOPE_SUBTREE,
         {
             { L"uniqueMember", ADSTYPE_CASE_IGNORE_STRING, { L"uid=einstein,dc=example,dc=com",
-              L"uid=galieleo,dc=example,dc=com", L"uid=tesla,dc=example,dc=com", L"uid=newton,dc=example,dc=com",
+              L"uid=tesla,dc=example,dc=com", L"uid=newton,dc=example,dc=com", L"uid=galileo,dc=example,dc=com",
               L"uid=training,dc=example,dc=com", L"uid=jmacy,dc=example,dc=com", NULL } },
             { L"ou", ADSTYPE_CASE_IGNORE_STRING, { L"scientists", NULL } },
             { L"cn", ADSTYPE_CASE_IGNORE_STRING, { L"Scientists", NULL } },
