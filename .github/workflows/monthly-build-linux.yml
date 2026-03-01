@@ -1,0 +1,157 @@
+name: Monthly Build – Linux
+
+on:
+  schedule:
+    # Run on the 1st of every month at 02:00 UTC
+    - cron: '0 2 1 * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      build_status: ${{ steps.set_status.outputs.status }}
+      test_status: ${{ steps.set_test_status.outputs.status }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: monthly-linux-${{ github.run_id }}
+
+      - name: Install dependencies
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y \
+            autoconf \
+            automake \
+            libtool \
+            build-essential \
+            pkg-config \
+            python3 \
+            libxml2-dev \
+            libxml2-utils \
+            gcc-multilib \
+            g++-multilib \
+            flex \
+            bison \
+            libx11-dev \
+            libx11-dev:i386 \
+            libfreetype-dev \
+            libfreetype-dev:i386 \
+            libdrm-dev \
+            libdrm-dev:i386 \
+            mingw-w64 \
+            clang-14 \
+            lld-14
+          sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-14 100
+          sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-14 100
+
+      - name: Generate configure script
+        run: ./autogen.sh
+
+      - name: Configure
+        # On Linux: Wine layer is active, macOS (Darling) and iOS (ipasim) layers are disabled.
+        run: |
+          export PATH="/usr/lib/ccache:$PATH"
+          ./configure CC="ccache gcc" CXX="ccache g++" \
+            --disable-darling \
+            --disable-ipasim
+
+      - name: Build
+        id: build_step
+        run: make -j$(nproc) 2>&1 | tee /tmp/build-linux.log; exit ${PIPESTATUS[0]}
+
+      - name: Set build status
+        id: set_status
+        if: always()
+        run: |
+          if [ "${{ steps.build_step.outcome }}" = "success" ]; then
+            echo "status=success" >> $GITHUB_OUTPUT
+          else
+            echo "status=failure" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run tests
+        id: test_step
+        # Tests may connect to external servers; mark as continue-on-error.
+        continue-on-error: true
+        run: make -j$(nproc) check 2>&1 | tee /tmp/test-linux.log; exit ${PIPESTATUS[0]}
+
+      - name: Set test status
+        id: set_test_status
+        if: always()
+        run: |
+          if [ "${{ steps.test_step.outcome }}" = "success" ]; then
+            echo "status=success" >> $GITHUB_OUTPUT
+          else
+            echo "status=failure" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-build-logs-${{ github.run_id }}
+          path: |
+            /tmp/build-linux.log
+            /tmp/test-linux.log
+          if-no-files-found: ignore
+
+  report-errors:
+    runs-on: ubuntu-latest
+    needs: build
+    if: always() && (needs.build.outputs.build_status == 'failure' || needs.build.outputs.test_status == 'failure')
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download logs
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-build-logs-${{ github.run_id }}
+          path: /tmp/logs/
+
+      - name: Create error report issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BUILD_STATUS="${{ needs.build.outputs.build_status }}"
+          TEST_STATUS="${{ needs.build.outputs.test_status }}"
+
+          TITLE="🔴 Monthly Linux Build Failed – $(date +'%B %Y')"
+
+          BODY="## Monthly Linux Build Report
+
+          **Date:** $(date -u +'%Y-%m-%d %H:%M UTC')
+          **Build Status:** ${BUILD_STATUS}
+          **Test Status:** ${TEST_STATUS}
+          **Workflow Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          ### Build Log Excerpt
+
+          \`\`\`
+          $(tail -100 /tmp/logs/build-linux.log 2>/dev/null || echo 'No build log available')
+          \`\`\`
+
+          ### Test Log Excerpt
+
+          \`\`\`
+          $(grep -E '^(FAIL|ERROR|make.*Error|Test failed)' /tmp/logs/test-linux.log 2>/dev/null | head -50 || echo 'No test errors found')
+          \`\`\`
+
+          ### Next Steps
+
+          1. Review the full workflow logs linked above.
+          2. Check for upstream changes that may have broken the build.
+          3. Run the [upstream-sync workflow](../../actions/workflows/upstream-sync.yml) to pull latest upstream code.
+
+          *This issue was automatically created by the monthly Linux build workflow.*"
+
+          gh issue create \
+            --title "${TITLE}" \
+            --body "${BODY}" \
+            --label "build-failure,automated" || echo "Failed to create issue (labels may not exist)"

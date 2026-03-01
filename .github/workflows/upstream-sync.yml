@@ -2,12 +2,12 @@ name: Sync Upstream Dependencies
 
 on:
   schedule:
-    # Run weekly on Monday at 00:00 UTC
-    - cron: '0 0 * * 1'
+    # Run monthly on the 1st at 01:00 UTC
+    - cron: '0 1 1 * *'
   workflow_dispatch:
     inputs:
       project:
-        description: 'Specific project to sync (all, darling, atl, wsl, libretro, ipasim)'
+        description: 'Specific project to sync (all, wine, darling, atl, wsl, libretro, ipasim)'
         required: false
         default: 'all'
 
@@ -15,63 +15,78 @@ jobs:
   check-updates:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         include:
+          - name: wine
+            repo: wine/wine
+            path: upstream/wine
+            branch: master
+            is_gitlab: true
+            gitlab_host: gitlab.winehq.org
           - name: darling
             repo: darlinghq/darling
-            path: libs/darling_framework
+            path: upstream/darlin-upstream
             branch: master
           - name: atl
             repo: android_translation_layer/android_translation_layer
-            path: libs/atl_android
+            path: upstream/atl-upstream
             branch: main
             is_gitlab: true
+            gitlab_host: gitlab.com
           - name: wsl
             repo: microsoft/WSL
-            path: libs/wsl
+            path: upstream/wsl-upstream
             branch: master
           - name: libretro
             repo: libretro/libretro-common
-            path: libs/libretro
+            path: upstream/libretro-upstream
             branch: master
           - name: ipasim
             repo: ipasimulator/ipasim
             path: libs/ipasim
             branch: master
-    
+
     steps:
       - name: Checkout Goliath
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Set up Git
         run: |
           git config user.name "Goliath Upstream Sync Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-      
+
       - name: Check if project should be synced
         id: should_sync
         run: |
-          if [ "${{ github.event.inputs.project }}" = "all" ] || [ "${{ github.event.inputs.project }}" = "${{ matrix.name }}" ] || [ -z "${{ github.event.inputs.project }}" ]; then
+          INPUT="${{ github.event.inputs.project }}"
+          if [ -z "${INPUT}" ] || [ "${INPUT}" = "all" ] || [ "${INPUT}" = "${{ matrix.name }}" ]; then
             echo "sync=true" >> $GITHUB_OUTPUT
           else
             echo "sync=false" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Clone upstream repository (GitHub)
         if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab != 'true'
         run: |
           mkdir -p /tmp/upstream
           git clone --depth 50 https://github.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}
-      
-      - name: Clone upstream repository (GitLab)
-        if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab == 'true'
+
+      - name: Clone upstream repository (GitLab – winehq.org)
+        if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab == 'true' && matrix.gitlab_host == 'gitlab.winehq.org'
+        run: |
+          mkdir -p /tmp/upstream
+          git clone --depth 50 https://gitlab.winehq.org/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}
+
+      - name: Clone upstream repository (GitLab – gitlab.com)
+        if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab == 'true' && matrix.gitlab_host == 'gitlab.com'
         run: |
           mkdir -p /tmp/upstream
           git clone --depth 50 https://gitlab.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}
-      
+
       - name: Get latest upstream commit
         if: steps.should_sync.outputs.sync == 'true'
         id: upstream_commit
@@ -84,7 +99,7 @@ jobs:
           echo "short_commit=${SHORT_COMMIT}" >> $GITHUB_OUTPUT
           echo "commit_msg=${COMMIT_MSG}" >> $GITHUB_OUTPUT
           echo "Upstream commit: ${COMMIT}"
-      
+
       - name: Check current integration version
         if: steps.should_sync.outputs.sync == 'true'
         id: current_version
@@ -97,50 +112,48 @@ jobs:
             echo "version=none" >> $GITHUB_OUTPUT
             echo "No version file found"
           fi
-      
+
       - name: Compare versions
         if: steps.should_sync.outputs.sync == 'true'
         id: compare
         run: |
           if [ "${{ steps.current_version.outputs.version }}" = "${{ steps.upstream_commit.outputs.commit }}" ]; then
             echo "needs_update=false" >> $GITHUB_OUTPUT
-            echo "No update needed - already at latest version"
+            echo "No update needed – already at latest version"
           else
             echo "needs_update=true" >> $GITHUB_OUTPUT
             echo "Update available!"
           fi
-      
+
       - name: Create update branch
         if: steps.should_sync.outputs.sync == 'true' && steps.compare.outputs.needs_update == 'true'
         run: |
           BRANCH_NAME="upstream-sync/${{ matrix.name }}-${{ steps.upstream_commit.outputs.short_commit }}"
           git checkout -b "${BRANCH_NAME}"
           echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
-      
+
       - name: Sync changes from upstream
         if: steps.should_sync.outputs.sync == 'true' && steps.compare.outputs.needs_update == 'true'
         run: |
-          # Create integration mapping file if it doesn't exist
           if [ ! -f "${{ matrix.path }}/.integration_map" ]; then
             echo "# Integration mapping for ${{ matrix.name }}" > "${{ matrix.path }}/.integration_map"
-            echo "# Format: upstream_path:goliath_path" >> "${{ matrix.path }}/.integration_map"
-            echo "# This maps files from upstream to our integration" >> "${{ matrix.path }}/.integration_map"
+            echo "# Format: upstream_path:goliath_path:action" >> "${{ matrix.path }}/.integration_map"
           fi
-          
-          # Copy new/updated files from upstream based on mapping
-          # For now, we'll create a report of changes
+
           cd /tmp/upstream/${{ matrix.name }}
-          
-          # Get list of changed files since last sync
+
           if [ "${{ steps.current_version.outputs.version }}" != "none" ]; then
             echo "Files changed since last sync:" > /tmp/changes_${{ matrix.name }}.txt
-            git diff --name-status ${{ steps.current_version.outputs.version }}..HEAD >> /tmp/changes_${{ matrix.name }}.txt || echo "Could not get diff" >> /tmp/changes_${{ matrix.name }}.txt
+            git diff --name-status ${{ steps.current_version.outputs.version }}..HEAD \
+              >> /tmp/changes_${{ matrix.name }}.txt 2>/dev/null \
+              || echo "Could not get diff (shallow clone may not have the old commit)" \
+              >> /tmp/changes_${{ matrix.name }}.txt
           else
-            echo "Initial sync - all files are new" > /tmp/changes_${{ matrix.name }}.txt
+            echo "Initial sync – all files are new" > /tmp/changes_${{ matrix.name }}.txt
           fi
-          
+
           cat /tmp/changes_${{ matrix.name }}.txt
-      
+
       - name: Update version tracking file
         if: steps.should_sync.outputs.sync == 'true' && steps.compare.outputs.needs_update == 'true'
         run: |
@@ -148,96 +161,131 @@ jobs:
           echo "${{ steps.upstream_commit.outputs.commit }}" > "${{ matrix.path }}/.upstream_version"
           echo "${{ matrix.repo }}" > "${{ matrix.path }}/.upstream_repo"
           date -u +"%Y-%m-%d %H:%M:%S UTC" > "${{ matrix.path }}/.last_sync"
-          
-          # Create/update integration notes
+
+          GITLAB_URL=""
+          if [ "${{ matrix.is_gitlab }}" = "true" ] && [ "${{ matrix.gitlab_host }}" = "gitlab.winehq.org" ]; then
+            GITLAB_URL="https://gitlab.winehq.org/${{ matrix.repo }}"
+          elif [ "${{ matrix.is_gitlab }}" = "true" ]; then
+            GITLAB_URL="https://gitlab.com/${{ matrix.repo }}"
+          fi
+          REPO_URL="${GITLAB_URL:-https://github.com/${{ matrix.repo }}}"
+
           cat > "${{ matrix.path }}/UPSTREAM_SYNC.md" << EOF
-          # Upstream Sync Information for ${{ matrix.name }}
-          
-          **Last Synced:** $(cat ${{ matrix.path }}/.last_sync)
-          **Upstream Repository:** ${{ matrix.repo }}
-          **Upstream Commit:** ${{ steps.upstream_commit.outputs.commit }}
-          **Upstream Commit Message:** ${{ steps.upstream_commit.outputs.commit_msg }}
-          
-          ## Recent Changes
-          
-          See the changes report in this PR for details on what was updated from upstream.
-          
-          ## Integration Notes
-          
-          This integration is automatically tracked and updated from the upstream repository.
-          Manual modifications should be documented in .integration_map to avoid conflicts.
-          
-          EOF
-          
-          # Attach changes report if it exists
+# Upstream Sync Information for ${{ matrix.name }}
+
+**Last Synced:** $(cat ${{ matrix.path }}/.last_sync)
+**Upstream Repository:** ${REPO_URL}
+**Upstream Commit:** ${{ steps.upstream_commit.outputs.commit }}
+**Upstream Commit Message:** ${{ steps.upstream_commit.outputs.commit_msg }}
+
+## Recent Changes
+
+See the changes report below for details on what was updated from upstream.
+
+## Integration Notes
+
+This integration is automatically tracked and updated monthly from the upstream repository.
+Manual modifications should be documented in \`.integration_map\` to avoid conflicts.
+
+## Platform Exclusions
+
+| Layer    | Linux | Windows | macOS |
+|----------|-------|---------|-------|
+| Wine     | ✅    | ❌      | ✅    |
+| Darling  | ❌    | ❌      | ✅    |
+| WSL      | ✅    | ❌      | ❌    |
+| Libretro | ✅    | ✅      | ✅    |
+| ipasim   | ❌    | ❌      | ✅    |
+| ATL      | ✅    | ❌      | ❌    |
+
+EOF
+
           if [ -f /tmp/changes_${{ matrix.name }}.txt ]; then
             cat >> "${{ matrix.path }}/UPSTREAM_SYNC.md" << EOF
-          ## Changes in This Sync
-          
-          \`\`\`
-          $(cat /tmp/changes_${{ matrix.name }}.txt)
-          \`\`\`
-          EOF
+## Changes in This Sync
+
+\`\`\`
+$(cat /tmp/changes_${{ matrix.name }}.txt)
+\`\`\`
+EOF
           fi
-      
+
       - name: Commit changes
         if: steps.should_sync.outputs.sync == 'true' && steps.compare.outputs.needs_update == 'true'
         run: |
           git add "${{ matrix.path }}"
           git commit -m "sync: Update ${{ matrix.name }} to upstream ${{ steps.upstream_commit.outputs.short_commit }}
 
-          Upstream: ${{ matrix.repo }}
-          Commit: ${{ steps.upstream_commit.outputs.commit }}
-          Message: ${{ steps.upstream_commit.outputs.commit_msg }}
-          
-          This is an automated sync from the upstream repository.
-          See ${{ matrix.path }}/UPSTREAM_SYNC.md for details."
-      
+Upstream: ${{ matrix.repo }}
+Commit: ${{ steps.upstream_commit.outputs.commit }}
+Message: ${{ steps.upstream_commit.outputs.commit_msg }}
+
+Automated monthly sync from the upstream repository.
+See ${{ matrix.path }}/UPSTREAM_SYNC.md for details."
+
       - name: Push changes and create PR
         if: steps.should_sync.outputs.sync == 'true' && steps.compare.outputs.needs_update == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git push origin "${BRANCH_NAME}"
-          
-          # Create PR
+
+          GITLAB_URL=""
+          if [ "${{ matrix.is_gitlab }}" = "true" ] && [ "${{ matrix.gitlab_host }}" = "gitlab.winehq.org" ]; then
+            GITLAB_URL="https://gitlab.winehq.org/${{ matrix.repo }}"
+          elif [ "${{ matrix.is_gitlab }}" = "true" ]; then
+            GITLAB_URL="https://gitlab.com/${{ matrix.repo }}"
+          fi
+          REPO_URL="${GITLAB_URL:-https://github.com/${{ matrix.repo }}}"
+
           gh pr create \
             --title "🔄 Sync ${{ matrix.name }} from upstream (${{ steps.upstream_commit.outputs.short_commit }})" \
             --body "## Upstream Sync: ${{ matrix.name }}
 
-          This PR automatically syncs changes from the upstream repository.
+This PR automatically syncs changes from the upstream repository.
 
-          **Upstream Repository:** https://github.com/${{ matrix.repo }}
-          **Upstream Commit:** ${{ steps.upstream_commit.outputs.commit }}
-          **Commit Message:** ${{ steps.upstream_commit.outputs.commit_msg }}
-          
-          ### Changes Summary
-          
-          See \`${{ matrix.path }}/UPSTREAM_SYNC.md\` for detailed change information.
-          
-          ### Integration Status
-          
-          - [x] Version tracking updated
-          - [x] Sync metadata generated
-          - [ ] Build verification needed
-          - [ ] Integration testing needed
-          
-          ### Review Checklist
-          
-          - [ ] Verify no breaking changes in API
-          - [ ] Check for new dependencies
-          - [ ] Ensure integration still works
-          - [ ] Update documentation if needed
-          - [ ] Run full test suite
-          
-          ---
-          
-          *This is an automated PR created by the Upstream Sync workflow.*
-          *Issues with this PR? Check the workflow logs or .integration_map file.*" \
+**Upstream Repository:** ${REPO_URL}
+**Upstream Commit:** ${{ steps.upstream_commit.outputs.commit }}
+**Commit Message:** ${{ steps.upstream_commit.outputs.commit_msg }}
+
+### Changes Summary
+
+See \`${{ matrix.path }}/UPSTREAM_SYNC.md\` for detailed change information.
+
+### Integration Status
+
+- [x] Version tracking updated
+- [x] Sync metadata generated
+- [ ] Build verification needed
+- [ ] Integration testing needed
+
+### Platform Exclusion Matrix
+
+| Layer    | Linux | Windows | macOS |
+|----------|-------|---------|-------|
+| Wine     | ✅    | ❌      | ✅    |
+| Darling  | ❌    | ❌      | ✅    |
+| WSL      | ✅    | ❌      | ❌    |
+| Libretro | ✅    | ✅      | ✅    |
+| ipasim   | ❌    | ❌      | ✅    |
+| ATL      | ✅    | ❌      | ❌    |
+
+### Review Checklist
+
+- [ ] Verify no breaking changes in API
+- [ ] Check for new dependencies
+- [ ] Ensure integration still works
+- [ ] Update documentation if needed
+- [ ] Run full test suite
+
+---
+
+*Automated PR created by the monthly Upstream Sync workflow.*
+*Issues with this PR? Check the workflow logs or \`.integration_map\` file.*" \
             --label "upstream-sync" \
             --label "automated" \
-            --base dev || echo "PR might already exist"
-      
+            --base dev || echo "PR might already exist or could not be created"
+
       - name: Summary
         if: steps.should_sync.outputs.sync == 'true'
         run: |
@@ -252,145 +300,95 @@ jobs:
     runs-on: ubuntu-latest
     needs: check-updates
     if: always()
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Create/Update integration documentation
         run: |
           mkdir -p documentation/upstream-sync
-          
+
           cat > documentation/upstream-sync/README.md << 'EOF'
-          # Upstream Synchronization
-          
-          This directory contains documentation for how Goliath tracks and integrates updates from upstream projects.
-          
-          ## Tracked Projects
-          
-          Goliath integrates code from the following upstream projects:
-          
-          1. **Darling** (macOS compatibility)
-             - Repository: https://github.com/darlinghq/darling
-             - Integration path: `libs/darling_framework/`
-             - Auto-sync: Weekly
-          
-          2. **ATL** (Android Translation Layer)
-             - Repository: https://gitlab.com/android_translation_layer/android_translation_layer
-             - Integration path: `libs/atl_android/`
-             - Auto-sync: Weekly
-          
-          3. **WSL** (Windows Subsystem for Linux concepts)
-             - Repository: https://github.com/microsoft/WSL
-             - Integration path: `libs/wsl/`
-             - Auto-sync: Weekly
-          
-          4. **Libretro** (Console emulation)
-             - Repository: https://github.com/libretro/libretro-common
-             - Integration path: `libs/libretro/`
-             - Auto-sync: Weekly
-          
-          5. **ipasim** (iOS simulation)
-             - Repository: https://github.com/ipasimulator/ipasim
-             - Integration path: `libs/ipasim/`
-             - Auto-sync: Weekly
-          
-          ## How It Works
-          
-          The `upstream-sync.yml` workflow automatically:
-          
-          1. **Checks** each upstream repository weekly
-          2. **Compares** the latest upstream commit with our integrated version
-          3. **Creates** a PR when updates are available
-          4. **Tracks** version information in `.upstream_version` files
-          5. **Documents** changes in `UPSTREAM_SYNC.md` files
-          
-          ## Manual Sync
-          
-          You can manually trigger a sync for specific projects:
-          
-          ```bash
-          # Via GitHub Actions UI
-          # Go to Actions → Sync Upstream Dependencies → Run workflow
-          # Select the project to sync
-          ```
-          
-          Or use the GitHub CLI:
-          
-          ```bash
-          gh workflow run upstream-sync.yml -f project=darling
-          ```
-          
-          ## Integration Mapping
-          
-          Each integrated library has an `.integration_map` file that documents:
-          
-          - Which upstream files map to which Goliath files
-          - Custom modifications made to upstream code
-          - Files that should be excluded from sync
-          
-          Example `.integration_map`:
-          
-          ```
-          # Integration mapping for darling
-          # Format: upstream_path:goliath_path:action
-          src/core/loader.c:loader.c:copy
-          include/darwin/mach.h:mach.h:copy+modify
-          tests/:tests/:exclude
-          ```
-          
-          ## Version Tracking
-          
-          Each library directory contains:
-          
-          - `.upstream_version` - The current upstream commit hash
-          - `.upstream_repo` - The upstream repository URL
-          - `.last_sync` - Timestamp of last successful sync
-          - `UPSTREAM_SYNC.md` - Human-readable sync report
-          
-          ## Handling Conflicts
-          
-          When upstream changes conflict with local modifications:
-          
-          1. The workflow creates a PR with the changes
-          2. Manual review identifies conflicts
-          3. Update `.integration_map` to document resolutions
-          4. Apply custom patches as needed
-          5. Document in `UPSTREAM_SYNC.md`
-          
-          ## Best Practices
-          
-          1. **Minimal Modifications**: Keep changes to upstream code minimal
-          2. **Document Changes**: Use `.integration_map` to track all modifications
-          3. **Regular Syncs**: Don't let integrations get too stale
-          4. **Test Thoroughly**: Always test after syncing
-          5. **Keep Patches**: Maintain separate patch files for customizations
-          
-          ## Troubleshooting
-          
-          ### Sync workflow failed
-          
-          - Check workflow logs in GitHub Actions
-          - Verify upstream repository is accessible
-          - Ensure no breaking API changes
-          
-          ### PR contains too many changes
-          
-          - May indicate integration has been stale for too long
-          - Review changes carefully before merging
-          - Consider syncing more frequently
-          
-          ### Build breaks after sync
-          
-          - Upstream may have introduced breaking changes
-          - Check for new dependencies
-          - Update Goliath integration code as needed
-          - Document required changes in integration notes
-          
-          EOF
-          
+# Upstream Synchronization
+
+This directory contains documentation for how Goliath tracks and integrates
+updates from upstream projects.
+
+## Tracked Projects
+
+Goliath integrates code from the following upstream projects:
+
+1. **Wine** (Windows app compatibility – primary foundation)
+   - Repository: https://gitlab.winehq.org/wine/wine
+   - Integration path: `upstream/wine/`
+   - Auto-sync: Monthly
+
+2. **Darling** (macOS/Darwin compatibility)
+   - Repository: https://github.com/darlinghq/darling
+   - Integration path: `upstream/darlin-upstream/`
+   - Auto-sync: Monthly
+
+3. **ATL** (Android Translation Layer)
+   - Repository: https://gitlab.com/android_translation_layer/android_translation_layer
+   - Integration path: `upstream/atl-upstream/`
+   - Auto-sync: Monthly
+
+4. **WSL** (Windows Subsystem for Linux concepts)
+   - Repository: https://github.com/microsoft/WSL
+   - Integration path: `upstream/wsl-upstream/`
+   - Auto-sync: Monthly
+
+5. **Libretro** (Console emulation common library)
+   - Repository: https://github.com/libretro/libretro-common
+   - Integration path: `upstream/libretro-upstream/`
+   - Auto-sync: Monthly
+
+6. **ipasim** (iOS simulation)
+   - Repository: https://github.com/ipasimulator/ipasim
+   - Integration path: `libs/ipasim/`
+   - Auto-sync: Monthly
+
+## Platform Exclusion Matrix
+
+| Layer    | Linux | Windows | macOS | Notes |
+|----------|:-----:|:-------:|:-----:|-------|
+| Wine     | ✅    | ❌      | ✅    | Wine runs Windows apps on Unix; redundant on Windows itself |
+| Darling  | ❌    | ❌      | ✅    | macOS/Darwin compatibility layer |
+| WSL      | ✅    | ❌      | ❌    | Linux-specific WSL concepts |
+| Libretro | ✅    | ✅      | ✅    | Cross-platform; always included |
+| ipasim   | ❌    | ❌      | ✅    | iOS simulation (requires macOS/Darwin) |
+| ATL      | ✅    | ❌      | ❌    | Android Translation Layer for Linux |
+
+## How It Works
+
+The `upstream-sync.yml` workflow automatically:
+
+1. **Checks** each upstream repository monthly
+2. **Compares** the latest upstream commit with our integrated version
+3. **Creates** a PR when updates are available
+4. **Tracks** version information in `.upstream_version` files
+5. **Documents** changes in `UPSTREAM_SYNC.md` files
+
+## Manual Sync
+
+```bash
+gh workflow run upstream-sync.yml -f project=wine
+gh workflow run upstream-sync.yml -f project=all
+```
+
+## Version Tracking
+
+Each library directory contains:
+
+- `.upstream_version` – The current upstream commit hash
+- `.upstream_repo` – The upstream repository path
+- `.last_sync` – Timestamp of last successful sync
+- `UPSTREAM_SYNC.md` – Human-readable sync report
+EOF
+
           echo "Integration documentation updated"
-      
+
       - name: Commit documentation
         run: |
           git config user.name "Goliath Upstream Sync Bot"

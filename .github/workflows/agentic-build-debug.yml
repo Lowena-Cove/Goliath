@@ -1,0 +1,252 @@
+name: Agentic Build Debug
+
+# This workflow runs after each monthly build (on all platforms) and any time it
+# is manually triggered.  It aggregates build/test logs, categorises failures
+# using pattern-matching heuristics and posts a structured GitHub Issue with
+# root-cause analysis and suggested remediation steps.
+
+on:
+  # Triggered by the monthly build workflows via repository-dispatch
+  repository_dispatch:
+    types: [monthly-build-complete]
+
+  # Also runs independently on the 1st of every month (after all platform builds)
+  schedule:
+    - cron: '0 8 1 * *'
+
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Workflow run ID to analyse (leave blank to use latest)'
+        required: false
+        default: ''
+
+jobs:
+  analyse-and-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install analysis tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq curl
+
+      # -----------------------------------------------------------------------
+      # 1. Collect recent workflow runs for all monthly build workflows
+      # -----------------------------------------------------------------------
+      - name: Collect recent monthly build runs
+        id: collect_runs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p /tmp/debug_report
+
+          for WF in monthly-build-linux monthly-build-windows monthly-build-macos; do
+            echo "=== Fetching runs for ${WF} ===" | tee -a /tmp/debug_report/summary.txt
+
+            gh run list \
+              --workflow "${WF}.yml" \
+              --limit 3 \
+              --json databaseId,status,conclusion,createdAt,displayTitle \
+              --jq '.[] | "\(.databaseId) \(.status) \(.conclusion) \(.createdAt) \(.displayTitle)"' \
+              2>/dev/null >> /tmp/debug_report/runs_${WF}.txt || true
+
+            cat /tmp/debug_report/runs_${WF}.txt >> /tmp/debug_report/summary.txt || true
+          done
+
+      # -----------------------------------------------------------------------
+      # 2. Download artefacts from the most recent failed runs
+      # -----------------------------------------------------------------------
+      - name: Download build logs from failed runs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p /tmp/debug_report/logs
+
+          for WF in monthly-build-linux monthly-build-windows monthly-build-macos; do
+            # Get the ID of the most recent failed run for this workflow
+            FAILED_RUN=$(gh run list \
+              --workflow "${WF}.yml" \
+              --limit 5 \
+              --json databaseId,conclusion \
+              --jq '.[] | select(.conclusion == "failure") | .databaseId' \
+              2>/dev/null | head -1)
+
+            if [ -n "${FAILED_RUN}" ]; then
+              echo "Downloading logs for ${WF} run ${FAILED_RUN}"
+              gh run download "${FAILED_RUN}" \
+                --dir "/tmp/debug_report/logs/${WF}_${FAILED_RUN}" \
+                2>/dev/null || echo "No downloadable artifacts for run ${FAILED_RUN}"
+            else
+              echo "No recent failures found for ${WF}"
+            fi
+          done
+
+      # -----------------------------------------------------------------------
+      # 3. Categorise failures with heuristic pattern matching
+      # -----------------------------------------------------------------------
+      - name: Categorise failures
+        id: categorise
+        run: |
+          REPORT_FILE="/tmp/debug_report/categorised.md"
+          echo "# Failure Categorisation Report" > "${REPORT_FILE}"
+          echo "" >> "${REPORT_FILE}"
+          echo "Generated: $(date -u +'%Y-%m-%d %H:%M UTC')" >> "${REPORT_FILE}"
+          echo "" >> "${REPORT_FILE}"
+
+          HAS_FAILURES=false
+
+          # Patterns → categories
+          declare -A PATTERNS=(
+            ["configure.*error"]="Configure / autoconf failure"
+            ["error:.*undeclared.*identifier"]="Missing symbol / include"
+            ["error:.*undefined reference"]="Linker error – missing library or symbol"
+            ["error:.*no such file"]="Missing file or header"
+            ["make.*Error [0-9]"]="Make build error"
+            ["Test failed:"]="Test assertion failure"
+            ["FAIL:"]="Test failure"
+            ["server is down"]="External test server unreachable"
+            ["could not find dependent assembly"]="Missing Windows manifest dependency"
+            ["no.*support.*expect problems"]="Missing optional library at runtime"
+          )
+
+          for LOG in $(find /tmp/debug_report/logs -name "*.log" 2>/dev/null); do
+            PLATFORM=$(basename "$(dirname "${LOG}")")
+            echo "## Platform: ${PLATFORM}" >> "${REPORT_FILE}"
+            echo "" >> "${REPORT_FILE}"
+
+            for PATTERN in "${!PATTERNS[@]}"; do
+              CATEGORY="${PATTERNS[$PATTERN]}"
+              MATCHES=$(grep -iE "${PATTERN}" "${LOG}" 2>/dev/null | head -5)
+              if [ -n "${MATCHES}" ]; then
+                HAS_FAILURES=true
+                echo "### ⚠️ ${CATEGORY}" >> "${REPORT_FILE}"
+                echo "\`\`\`" >> "${REPORT_FILE}"
+                echo "${MATCHES}" >> "${REPORT_FILE}"
+                echo "\`\`\`" >> "${REPORT_FILE}"
+                echo "" >> "${REPORT_FILE}"
+              fi
+            done
+          done
+
+          if [ "${HAS_FAILURES}" = "false" ]; then
+            echo "✅ No failures detected in recent build logs." >> "${REPORT_FILE}"
+          fi
+
+          echo "has_failures=${HAS_FAILURES}" >> $GITHUB_OUTPUT
+          cat "${REPORT_FILE}"
+
+      # -----------------------------------------------------------------------
+      # 4. Generate AI-assisted remediation suggestions (heuristic rules)
+      # -----------------------------------------------------------------------
+      - name: Generate remediation suggestions
+        id: remediation
+        run: |
+          REMEDIATION_FILE="/tmp/debug_report/remediation.md"
+          echo "## Suggested Remediation Steps" > "${REMEDIATION_FILE}"
+          echo "" >> "${REMEDIATION_FILE}"
+
+          # Rule-based suggestions for known error patterns
+          LOGS=$(find /tmp/debug_report/logs -name "*.log" 2>/dev/null)
+
+          if grep -rqiE "undefined reference" ${LOGS} 2>/dev/null; then
+            echo "- **Linker errors**: Run \`./configure\` again after installing missing libraries." >> "${REMEDIATION_FILE}"
+            echo "  Check that all \`--with-*\` flags are correct and the required packages are installed." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if grep -rqiE "no such file or directory" ${LOGS} 2>/dev/null; then
+            echo "- **Missing files**: Run \`./autogen.sh\` to regenerate build system files," >> "${REMEDIATION_FILE}"
+            echo "  then re-run \`./configure\`." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if grep -rqiE "server is down" ${LOGS} 2>/dev/null; then
+            echo "- **External server tests**: Some tests contact external servers (e.g. ldap.forumsys.com)." >> "${REMEDIATION_FILE}"
+            echo "  These failures are transient and should be skipped in CI via \`continue-on-error: true\`." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if grep -rqiE "Test failed:.*uniqueMember|ldap.c:[0-9]+: Test failed" ${LOGS} 2>/dev/null; then
+            echo "- **LDAP test ordering**: The \`adsldp\` LDAP tests expect \`uniqueMember\` values" >> "${REMEDIATION_FILE}"
+            echo "  in a specific order from \`ldap.forumsys.com\`. The public test server may return" >> "${REMEDIATION_FILE}"
+            echo "  results in a different order. Update expected values in" >> "${REMEDIATION_FILE}"
+            echo "  \`dlls/adsldp/tests/ldap.c\` to match the current server state." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if grep -rqiE "no.*vulkan.*support|no.*schannel.*support|no.*kerberos.*support" ${LOGS} 2>/dev/null; then
+            echo "- **Optional library warnings**: Vulkan, Schannel, and Kerberos warnings are" >> "${REMEDIATION_FILE}"
+            echo "  non-fatal. Install the corresponding dev packages to silence them:" >> "${REMEDIATION_FILE}"
+            echo "  \`libvulkan-dev\`, \`libkrb5-dev\`, \`libgnutls28-dev\`." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          # Default message if no specific patterns found
+          if [ ! -s "${REMEDIATION_FILE}" ] || [ "$(wc -l < ${REMEDIATION_FILE})" -le 2 ]; then
+            echo "- Review the full workflow logs for details on the failure." >> "${REMEDIATION_FILE}"
+            echo "- Ensure all upstream dependencies are synced: run the **Sync Upstream Dependencies** workflow." >> "${REMEDIATION_FILE}"
+            echo "- Check for recently merged PRs that may have introduced regressions." >> "${REMEDIATION_FILE}"
+          fi
+
+          cat "${REMEDIATION_FILE}"
+
+      # -----------------------------------------------------------------------
+      # 5. Post a structured GitHub Issue with the full report
+      # -----------------------------------------------------------------------
+      - name: Post debug report as GitHub Issue
+        if: steps.categorise.outputs.has_failures == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="🤖 Agentic Build Debug Report – $(date +'%B %Y')"
+
+          BODY="## Agentic Build Debug Report
+
+          **Date:** $(date -u +'%Y-%m-%d %H:%M UTC')
+          **Triggered by:** ${{ github.event_name }}
+
+          This report is automatically generated by the **Agentic Build Debug** workflow.
+          It aggregates errors from the monthly platform builds and suggests fixes.
+
+          ---
+
+          $(cat /tmp/debug_report/categorised.md)
+
+          ---
+
+          $(cat /tmp/debug_report/remediation.md)
+
+          ---
+
+          ### Monthly Build Run Summary
+
+          \`\`\`
+          $(cat /tmp/debug_report/summary.txt 2>/dev/null || echo 'No summary available')
+          \`\`\`
+
+          ---
+
+          ### What to do next
+
+          1. Review each failed build run linked in the summary above.
+          2. Apply the suggested remediation steps.
+          3. If the errors are due to stale upstream code, trigger the
+             [Sync Upstream Dependencies](${{ github.server_url }}/${{ github.repository }}/actions/workflows/upstream-sync.yml) workflow.
+          4. After fixing, re-run the relevant monthly build workflow to confirm the fix.
+
+          *Automatically generated – no human action was taken to create this report.*"
+
+          gh issue create \
+            --title "${TITLE}" \
+            --body "${BODY}" \
+            --label "build-failure,automated,agentic-debug" || \
+          echo "Could not create issue – labels may not exist. Printing report to stdout:" && \
+          echo "${BODY}"
+
+      - name: Summary (no failures)
+        if: steps.categorise.outputs.has_failures != 'true'
+        run: |
+          echo "✅ All recent monthly builds passed – no failures to report."
