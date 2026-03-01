@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       build_status: ${{ steps.set_status.outputs.status }}
       test_status: ${{ steps.set_test_status.outputs.status }}
@@ -63,7 +65,9 @@ jobs:
 
       - name: Build
         id: build_step
-        run: make -j$(nproc) 2>&1 | tee /tmp/build-linux.log; exit ${PIPESTATUS[0]}
+        run: |
+          make -j$(nproc) 2>&1 | tee /tmp/build-linux.log
+          exit ${PIPESTATUS[0]}
 
       - name: Set build status
         id: set_status
@@ -79,7 +83,9 @@ jobs:
         id: test_step
         # Tests may connect to external servers; mark as continue-on-error.
         continue-on-error: true
-        run: make -j$(nproc) check 2>&1 | tee /tmp/test-linux.log; exit ${PIPESTATUS[0]}
+        run: |
+          make -j$(nproc) check 2>&1 | tee /tmp/test-linux.log
+          exit ${PIPESTATUS[0]}
 
       - name: Set test status
         id: set_test_status
@@ -105,6 +111,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     if: always() && (needs.build.outputs.build_status == 'failure' || needs.build.outputs.test_status == 'failure')
+    permissions:
+      contents: read
+      issues: write
 
     steps:
       - uses: actions/checkout@v4

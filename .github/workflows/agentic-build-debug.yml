@@ -24,6 +24,10 @@ on:
 jobs:
   analyse-and-report:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      actions: read
 
     steps:
       - uses: actions/checkout@v4
@@ -98,37 +102,27 @@ jobs:
 
           HAS_FAILURES=false
 
-          # Patterns → categories
-          declare -A PATTERNS=(
-            ["configure.*error"]="Configure / autoconf failure"
-            ["error:.*undeclared.*identifier"]="Missing symbol / include"
-            ["error:.*undefined reference"]="Linker error – missing library or symbol"
-            ["error:.*no such file"]="Missing file or header"
-            ["make.*Error [0-9]"]="Make build error"
-            ["Test failed:"]="Test assertion failure"
-            ["FAIL:"]="Test failure"
-            ["server is down"]="External test server unreachable"
-            ["could not find dependent assembly"]="Missing Windows manifest dependency"
-            ["no.*support.*expect problems"]="Missing optional library at runtime"
-          )
+          # Combined grep pattern for a single-pass scan per log file.
+          COMBINED_PATTERN="configure.*error|error:.*undeclared.*identifier|error:.*undefined reference|error:.*no such file|make.*Error [0-9]|Test failed:|FAIL:|server is down|could not find dependent assembly|no.*support.*expect problems"
 
           for LOG in $(find /tmp/debug_report/logs -name "*.log" 2>/dev/null); do
             PLATFORM=$(basename "$(dirname "${LOG}")")
             echo "## Platform: ${PLATFORM}" >> "${REPORT_FILE}"
             echo "" >> "${REPORT_FILE}"
 
-            for PATTERN in "${!PATTERNS[@]}"; do
-              CATEGORY="${PATTERNS[$PATTERN]}"
-              MATCHES=$(grep -iE "${PATTERN}" "${LOG}" 2>/dev/null | head -5)
-              if [ -n "${MATCHES}" ]; then
-                HAS_FAILURES=true
-                echo "### ⚠️ ${CATEGORY}" >> "${REPORT_FILE}"
-                echo "\`\`\`" >> "${REPORT_FILE}"
-                echo "${MATCHES}" >> "${REPORT_FILE}"
-                echo "\`\`\`" >> "${REPORT_FILE}"
-                echo "" >> "${REPORT_FILE}"
-              fi
-            done
+            # Single grep pass across all patterns
+            MATCHES=$(grep -iE "${COMBINED_PATTERN}" "${LOG}" 2>/dev/null | head -50)
+            if [ -n "${MATCHES}" ]; then
+              HAS_FAILURES=true
+              echo "### ⚠️ Build / Test Errors" >> "${REPORT_FILE}"
+              echo "\`\`\`" >> "${REPORT_FILE}"
+              echo "${MATCHES}" >> "${REPORT_FILE}"
+              echo "\`\`\`" >> "${REPORT_FILE}"
+              echo "" >> "${REPORT_FILE}"
+            else
+              echo "✅ No known error patterns detected." >> "${REPORT_FILE}"
+              echo "" >> "${REPORT_FILE}"
+            fi
           done
 
           if [ "${HAS_FAILURES}" = "false" ]; then

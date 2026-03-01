@@ -14,6 +14,9 @@ on:
 jobs:
   check-updates:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     strategy:
       fail-fast: false
       matrix:
@@ -300,6 +303,8 @@ See \`${{ matrix.path }}/UPSTREAM_SYNC.md\` for detailed change information.
     runs-on: ubuntu-latest
     needs: check-updates
     if: always()
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
