@@ -4,6 +4,14 @@ on:
   schedule:
     # Run monthly on the 1st at 01:00 UTC
     - cron: '0 1 1 * *'
+  push:
+    branches: [ "dev" ]
+    paths:
+      - '.github/workflows/upstream-sync.yml'
+  pull_request:
+    branches: [ "dev" ]
+    paths:
+      - '.github/workflows/upstream-sync.yml'
   workflow_dispatch:
     inputs:
       project:
