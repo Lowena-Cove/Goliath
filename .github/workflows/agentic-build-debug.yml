@@ -1,0 +1,276 @@
+name: Agentic Build Debug
+
+# This workflow uses GitHub Agentic Workflows (gh-aw) to analyse monthly
+# build failures.  The agent's instructions live in agentic-build-debug.md
+# (same directory).  This YAML file bootstraps gh-aw, compiles the Markdown
+# workflow into a runnable action, and executes the agent.
+#
+# Install gh-aw locally:  gh extension install github/gh-aw
+# Docs: https://github.github.com/gh-aw/setup/quick-start/
+
+on:
+  # Triggered by the monthly build workflows via repository_dispatch
+  repository_dispatch:
+    types: [monthly-build-complete]
+
+  # Also runs independently on the 1st of every month (after all platform builds)
+  schedule:
+    - cron: '0 8 1 * *'
+
+  push:
+    branches: [ "dev" ]
+    paths:
+      - '.github/workflows/agentic-build-debug.yml'
+      - '.github/workflows/agentic-build-debug.md'
+  pull_request:
+    branches: [ "dev" ]
+    paths:
+      - '.github/workflows/agentic-build-debug.yml'
+      - '.github/workflows/agentic-build-debug.md'
+
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Workflow run ID to analyse (leave blank to use latest)'
+        required: false
+        default: ''
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Job 1: Run the gh-aw agent to analyse build failures
+  # ---------------------------------------------------------------------------
+  agent-analyse:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      actions: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install gh-aw extension
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh extension install github/gh-aw || true
+          gh aw --version 2>/dev/null || echo "gh-aw installed (or not yet available)"
+
+      - name: Compile agentic workflow
+        id: compile
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh aw compile .github/workflows/agentic-build-debug.md \
+               --output /tmp/agentic-compiled.yml 2>/dev/null; then
+            echo "compiled=true" >> $GITHUB_OUTPUT
+          else
+            echo "compiled=false" >> $GITHUB_OUTPUT
+            echo "gh-aw compile not available — will use fallback analysis"
+          fi
+
+      - name: Run agentic analysis (gh-aw)
+        if: steps.compile.outputs.compiled == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh aw run .github/workflows/agentic-build-debug.md
+
+      # -----------------------------------------------------------------------
+      # Fallback: built-in heuristic analysis (runs when gh-aw is unavailable)
+      # -----------------------------------------------------------------------
+      - name: "Fallback: Collect recent monthly build runs"
+        if: steps.compile.outputs.compiled != 'true'
+        id: collect_runs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p /tmp/debug_report
+
+          for WF in monthly-build-linux monthly-build-windows monthly-build-macos; do
+            echo "=== Fetching runs for ${WF} ===" | tee -a /tmp/debug_report/summary.txt
+
+            gh run list \
+              --workflow "${WF}.yml" \
+              --limit 3 \
+              --json databaseId,status,conclusion,createdAt,displayTitle \
+              --jq '.[] | "\(.databaseId) \(.status) \(.conclusion) \(.createdAt) \(.displayTitle)"' \
+              2>/dev/null >> /tmp/debug_report/runs_${WF}.txt || true
+
+            cat /tmp/debug_report/runs_${WF}.txt >> /tmp/debug_report/summary.txt || true
+          done
+
+      - name: "Fallback: Download build logs from failed runs"
+        if: steps.compile.outputs.compiled != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p /tmp/debug_report/logs
+
+          for WF in monthly-build-linux monthly-build-windows monthly-build-macos; do
+            FAILED_RUN=$(gh run list \
+              --workflow "${WF}.yml" \
+              --limit 5 \
+              --json databaseId,conclusion \
+              --jq '.[] | select(.conclusion == "failure") | .databaseId' \
+              2>/dev/null | head -1)
+
+            if [ -n "${FAILED_RUN}" ]; then
+              echo "Downloading logs for ${WF} run ${FAILED_RUN}"
+              gh run download "${FAILED_RUN}" \
+                --dir "/tmp/debug_report/logs/${WF}_${FAILED_RUN}" \
+                2>/dev/null || echo "No downloadable artifacts for run ${FAILED_RUN}"
+            else
+              echo "No recent failures found for ${WF}"
+            fi
+          done
+
+      - name: "Fallback: Categorise failures"
+        if: steps.compile.outputs.compiled != 'true'
+        id: categorise
+        run: |
+          REPORT_FILE="/tmp/debug_report/categorised.md"
+          echo "# Failure Categorisation Report" > "${REPORT_FILE}"
+          echo "" >> "${REPORT_FILE}"
+          echo "Generated: $(date -u +'%Y-%m-%d %H:%M UTC')" >> "${REPORT_FILE}"
+          echo "" >> "${REPORT_FILE}"
+
+          HAS_FAILURES=false
+
+          COMBINED_PATTERN="configure.*error|error:.*undeclared.*identifier|error:.*undefined reference|error:.*no such file|make.*Error [0-9]|Test failed:|FAIL:|server is down|could not find dependent assembly|no.*support.*expect problems"
+
+          for LOG in $(find /tmp/debug_report/logs -name "*.log" 2>/dev/null); do
+            PLATFORM=$(basename "$(dirname "${LOG}")")
+            echo "## Platform: ${PLATFORM}" >> "${REPORT_FILE}"
+            echo "" >> "${REPORT_FILE}"
+
+            MATCHES=$(grep -iE "${COMBINED_PATTERN}" "${LOG}" 2>/dev/null | head -50)
+            if [ -n "${MATCHES}" ]; then
+              HAS_FAILURES=true
+              echo "### ⚠️ Build / Test Errors" >> "${REPORT_FILE}"
+              echo '```' >> "${REPORT_FILE}"
+              echo "${MATCHES}" >> "${REPORT_FILE}"
+              echo '```' >> "${REPORT_FILE}"
+              echo "" >> "${REPORT_FILE}"
+            else
+              echo "✅ No known error patterns detected." >> "${REPORT_FILE}"
+              echo "" >> "${REPORT_FILE}"
+            fi
+          done
+
+          if [ "${HAS_FAILURES}" = "false" ]; then
+            echo "✅ No failures detected in recent build logs." >> "${REPORT_FILE}"
+          fi
+
+          echo "has_failures=${HAS_FAILURES}" >> $GITHUB_OUTPUT
+          cat "${REPORT_FILE}"
+
+      - name: "Fallback: Generate remediation suggestions"
+        if: steps.compile.outputs.compiled != 'true'
+        id: remediation
+        run: |
+          REMEDIATION_FILE="/tmp/debug_report/remediation.md"
+          echo "## Suggested Remediation Steps" > "${REMEDIATION_FILE}"
+          echo "" >> "${REMEDIATION_FILE}"
+
+          LOGS=$(find /tmp/debug_report/logs -name "*.log" 2>/dev/null)
+
+          if grep -rqiE "FreeType.*not found|freetype.*development files" ${LOGS} 2>/dev/null; then
+            echo "- **FreeType missing**: Install \`mingw-w64-x86_64-freetype\` (Windows/MSYS2) or \`libfreetype-dev\` (Linux)." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if grep -rqiE "xf86drm.h.*not found|xf86drm.h.*No such file" ${LOGS} 2>/dev/null; then
+            echo "- **DRM headers (Linux-only)**: \`xf86drm.h\` is not available on macOS. Use \`make -k\` to continue past amd_ags_x64 failures." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if grep -rqiE "undefined reference" ${LOGS} 2>/dev/null; then
+            echo "- **Linker errors**: Re-run \`./configure\` after installing missing libraries." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if grep -rqiE "no such file or directory" ${LOGS} 2>/dev/null; then
+            echo "- **Missing files**: Run \`./autogen.sh\` then re-run \`./configure\`." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if grep -rqiE "server is down" ${LOGS} 2>/dev/null; then
+            echo "- **External server tests**: Transient failures. Use \`continue-on-error: true\`." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if grep -rqiE "Test failed:.*uniqueMember|ldap.c:[0-9]+: Test failed" ${LOGS} 2>/dev/null; then
+            echo "- **LDAP test ordering**: Update expected values in \`dlls/adsldp/tests/ldap.c\`." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if grep -rqiE "no.*vulkan.*support|no.*schannel.*support|no.*kerberos.*support" ${LOGS} 2>/dev/null; then
+            echo "- **Optional library warnings**: Install \`libvulkan-dev\`, \`libkrb5-dev\`, \`libgnutls28-dev\`." >> "${REMEDIATION_FILE}"
+            echo "" >> "${REMEDIATION_FILE}"
+          fi
+
+          if [ "$(wc -l < "${REMEDIATION_FILE}")" -le 2 ]; then
+            echo "- Review the full workflow logs for details." >> "${REMEDIATION_FILE}"
+            echo "- Run the **Sync Upstream Dependencies** workflow to pull latest upstream code." >> "${REMEDIATION_FILE}"
+          fi
+
+          cat "${REMEDIATION_FILE}"
+
+      - name: "Fallback: Post debug report as GitHub Issue"
+        if: steps.compile.outputs.compiled != 'true' && steps.categorise.outputs.has_failures == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="🤖 Agentic Build Debug Report – $(date +'%B %Y')"
+
+          cat > /tmp/debug_report/issue_body.md << 'ISSUE_HEADER'
+          ## Agentic Build Debug Report
+          ISSUE_HEADER
+
+          cat >> /tmp/debug_report/issue_body.md << ISSUE_META
+          **Date:** $(date -u +'%Y-%m-%d %H:%M UTC')
+          **Triggered by:** ${{ github.event_name }}
+          **Powered by:** [GitHub Agentic Workflows (gh-aw)](https://github.github.com/gh-aw/)
+
+          This report is automatically generated by the **Agentic Build Debug** workflow.
+          It aggregates errors from the monthly platform builds and suggests fixes.
+
+          ---
+          ISSUE_META
+
+          cat /tmp/debug_report/categorised.md >> /tmp/debug_report/issue_body.md
+          echo -e "\n---\n" >> /tmp/debug_report/issue_body.md
+          cat /tmp/debug_report/remediation.md >> /tmp/debug_report/issue_body.md
+
+          cat >> /tmp/debug_report/issue_body.md << ISSUE_FOOTER
+
+          ---
+
+          ### Monthly Build Run Summary
+
+          $(cat /tmp/debug_report/summary.txt 2>/dev/null || echo 'No summary available')
+
+          ---
+
+          ### What to do next
+
+          1. Review each failed build run linked in the summary above.
+          2. Apply the suggested remediation steps.
+          3. If errors are due to stale upstream code, trigger the
+             [Sync Upstream Dependencies](${{ github.server_url }}/${{ github.repository }}/actions/workflows/upstream-sync.yml) workflow.
+          4. After fixing, re-run the relevant monthly build workflow.
+
+          *Automatically generated by the Agentic Build Debug workflow — no human action was taken.*
+          ISSUE_FOOTER
+
+          gh issue create \
+            --title "${TITLE}" \
+            --body-file /tmp/debug_report/issue_body.md \
+            --label "build-failure,automated,agentic-debug" || \
+          echo "Could not create issue (labels may not exist). Report printed above."
+
+      - name: Summary (no failures)
+        if: steps.compile.outputs.compiled != 'true' && steps.categorise.outputs.has_failures != 'true'
+        run: |
+          echo "✅ All recent monthly builds passed – no failures to report."

@@ -1,0 +1,175 @@
+name: Monthly Build – macOS
+
+on:
+  schedule:
+    # Run on the 1st of every month at 04:00 UTC
+    - cron: '0 4 1 * *'
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    permissions:
+      contents: read
+    outputs:
+      build_status: ${{ steps.set_status.outputs.status }}
+      test_status: ${{ steps.set_test_status.outputs.status }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: monthly-macos-${{ github.run_id }}
+
+      - name: Install dependencies
+        run: |
+          brew install \
+            autoconf \
+            automake \
+            libtool \
+            pkg-config \
+            python3 \
+            libxml2 \
+            flex \
+            bison \
+            mingw-w64 \
+            ccache
+
+      - name: Generate configure script
+        run: ./autogen.sh
+
+      - name: Configure
+        # On macOS: explicitly target x86_64 PE only.
+        # --enable-archs=x86_64 avoids requiring aarch64 cross-compilation tools
+        # (needed because macos-latest is Apple Silicon; --enable-win64 alone would
+        # trigger an aarch64-windows PE requirement).
+        run: |
+          export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
+          export PATH="/opt/homebrew/opt/flex/bin:/opt/homebrew/opt/bison/bin:$PATH"
+          ./configure CC="ccache gcc" CXX="ccache g++" \
+            --enable-archs=x86_64
+
+      - name: Build
+        id: build_step
+        run: |
+          export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
+          export PATH="/opt/homebrew/opt/bison/bin:/opt/homebrew/opt/flex/bin:$PATH"
+          # Use -k to keep building past individual module failures (e.g. amd_ags_x64
+          # requires Linux-only xf86drm.h which is not available on macOS).
+          make -k -j$(sysctl -n hw.ncpu) 2>&1 | tee /tmp/build-macos.log; rc=${PIPESTATUS[0]}
+          # Count critical failures (exclude known Linux-only modules)
+          CRITICAL=$(grep -cE '^make:.*Error' /tmp/build-macos.log || true)
+          KNOWN=$(grep -cE 'amd_ags_x64|amdxc64' /tmp/build-macos.log || true)
+          if [ "$rc" -ne 0 ] && [ "$CRITICAL" -gt "$KNOWN" ]; then
+            exit "$rc"
+          fi
+
+      - name: Set build status
+        id: set_status
+        if: always()
+        run: |
+          if [ "${{ steps.build_step.outcome }}" = "success" ]; then
+            echo "status=success" >> $GITHUB_OUTPUT
+          else
+            echo "status=failure" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run tests
+        id: test_step
+        # Tests may connect to external servers; mark as continue-on-error.
+        continue-on-error: true
+        run: |
+          export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
+          export PATH="/opt/homebrew/opt/bison/bin:/opt/homebrew/opt/flex/bin:$PATH"
+          make -j$(sysctl -n hw.ncpu) check 2>&1 | tee /tmp/test-macos.log
+          exit ${PIPESTATUS[0]}
+
+      - name: Set test status
+        id: set_test_status
+        if: always()
+        run: |
+          if [ "${{ steps.test_step.outcome }}" = "success" ]; then
+            echo "status=success" >> $GITHUB_OUTPUT
+          else
+            echo "status=failure" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-build-logs-${{ github.run_id }}
+          path: |
+            /tmp/build-macos.log
+            /tmp/test-macos.log
+          if-no-files-found: ignore
+
+  report-errors:
+    runs-on: ubuntu-latest
+    needs: build
+    if: always() && (needs.build.outputs.build_status == 'failure' || needs.build.outputs.test_status == 'failure')
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download logs
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-build-logs-${{ github.run_id }}
+          path: /tmp/logs/
+
+      - name: Create error report issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BUILD_STATUS="${{ needs.build.outputs.build_status }}"
+          TEST_STATUS="${{ needs.build.outputs.test_status }}"
+
+          TITLE="🔴 Monthly macOS Build Failed – $(date +'%B %Y')"
+
+          BODY="## Monthly macOS Build Report
+
+          **Date:** $(date -u +'%Y-%m-%d %H:%M UTC')
+          **Build Status:** ${BUILD_STATUS}
+          **Test Status:** ${TEST_STATUS}
+          **Workflow Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          ### Build Log Excerpt
+
+          \`\`\`
+          $(tail -100 /tmp/logs/build-macos.log 2>/dev/null || echo 'No build log available')
+          \`\`\`
+
+          ### Test Log Excerpt
+
+          \`\`\`
+          $(grep -E '^(FAIL|ERROR|make.*Error|Test failed)' /tmp/logs/test-macos.log 2>/dev/null | head -50 || echo 'No test errors found')
+          \`\`\`
+
+          ### Platform Notes
+
+          - Wine layer is **enabled** (runs Windows apps on macOS).
+          - Darling macOS framework is **enabled**.
+          - WSL is **disabled** (Linux-specific).
+
+          ### Next Steps
+
+          1. Review the full workflow logs linked above.
+          2. Check for macOS SDK changes (Xcode updates can break builds).
+          3. Verify Darling integration is up to date.
+
+          *This issue was automatically created by the monthly macOS build workflow.*"
+
+          gh issue create \
+            --title "${TITLE}" \
+            --body "${BODY}" \
+            --label "build-failure,automated" || echo "Failed to create issue (labels may not exist)"
