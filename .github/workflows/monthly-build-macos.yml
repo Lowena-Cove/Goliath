@@ -123,6 +123,7 @@ jobs:
 
       - name: Download logs
         uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           name: macos-build-logs-${{ github.run_id }}
           path: /tmp/logs/

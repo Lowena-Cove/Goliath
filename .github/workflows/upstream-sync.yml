@@ -90,19 +90,34 @@ jobs:
         if: steps.should_sync.outputs.sync == 'true' && !matrix.is_gitlab
         run: |
           mkdir -p /tmp/upstream
-          git clone --depth 50 https://github.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}
+          for i in 1 2 3; do
+            git clone --depth 50 https://github.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }} && break
+            echo "Clone attempt $i failed – retrying in 15s..."
+            rm -rf /tmp/upstream/${{ matrix.name }}
+            sleep 15
+          done
 
       - name: Clone upstream repository (GitLab – winehq.org)
         if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab && matrix.gitlab_host == 'gitlab.winehq.org'
         run: |
           mkdir -p /tmp/upstream
-          git clone --depth 50 https://gitlab.winehq.org/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}
+          for i in 1 2 3; do
+            git clone --depth 50 https://gitlab.winehq.org/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }} && break
+            echo "Clone attempt $i failed – retrying in 15s..."
+            rm -rf /tmp/upstream/${{ matrix.name }}
+            sleep 15
+          done
 
       - name: Clone upstream repository (GitLab – gitlab.com)
         if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab && matrix.gitlab_host == 'gitlab.com'
         run: |
           mkdir -p /tmp/upstream
-          git clone --depth 50 https://gitlab.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}
+          for i in 1 2 3; do
+            git clone --depth 50 https://gitlab.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }} && break
+            echo "Clone attempt $i failed – retrying in 15s..."
+            rm -rf /tmp/upstream/${{ matrix.name }}
+            sleep 15
+          done
 
       - name: Get latest upstream commit
         if: steps.should_sync.outputs.sync == 'true'
@@ -338,7 +353,8 @@ jobs:
   create-integration-docs:
     runs-on: ubuntu-latest
     needs: check-updates
-    if: always()
+    # Only push docs on schedule/dispatch/push – PRs use a detached merge commit
+    if: always() && github.event_name != 'pull_request'
     permissions:
       contents: write
 
