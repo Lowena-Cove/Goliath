@@ -45,13 +45,15 @@ jobs:
         run: ./autogen.sh
 
       - name: Configure
-        # On macOS: build Win64 only to skip the 32-bit library requirement.
-        # GitHub Actions macos-latest uses Apple Silicon; homebrew is at /opt/homebrew.
+        # On macOS: explicitly target x86_64 PE only.
+        # --enable-archs=x86_64 avoids requiring aarch64 cross-compilation tools
+        # (needed because macos-latest is Apple Silicon; --enable-win64 alone would
+        # trigger an aarch64-windows PE requirement).
         run: |
           export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
           export PATH="/opt/homebrew/opt/flex/bin:/opt/homebrew/opt/bison/bin:$PATH"
           ./configure CC="ccache gcc" CXX="ccache g++" \
-            --enable-win64
+            --enable-archs=x86_64
 
       - name: Build
         id: build_step

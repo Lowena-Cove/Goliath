@@ -81,19 +81,19 @@ jobs:
           fi
 
       - name: Clone upstream repository (GitHub)
-        if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab != 'true'
+        if: steps.should_sync.outputs.sync == 'true' && !matrix.is_gitlab
         run: |
           mkdir -p /tmp/upstream
           git clone --depth 50 https://github.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}
 
       - name: Clone upstream repository (GitLab – winehq.org)
-        if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab == 'true' && matrix.gitlab_host == 'gitlab.winehq.org'
+        if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab && matrix.gitlab_host == 'gitlab.winehq.org'
         run: |
           mkdir -p /tmp/upstream
           git clone --depth 50 https://gitlab.winehq.org/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}
 
       - name: Clone upstream repository (GitLab – gitlab.com)
-        if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab == 'true' && matrix.gitlab_host == 'gitlab.com'
+        if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab && matrix.gitlab_host == 'gitlab.com'
         run: |
           mkdir -p /tmp/upstream
           git clone --depth 50 https://gitlab.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}
@@ -116,7 +116,7 @@ jobs:
         id: current_version
         run: |
           if [ -f "${{ matrix.path }}/.upstream_version" ]; then
-            CURRENT=$(cat "${{ matrix.path }}/.upstream_version")
+            CURRENT=$(head -1 "${{ matrix.path }}/.upstream_version" | tr -d '\r')
             echo "version=${CURRENT}" >> $GITHUB_OUTPUT
             echo "Current version: ${CURRENT}"
           else
@@ -213,12 +213,12 @@ jobs:
 
           if [ -f /tmp/changes_${{ matrix.name }}.txt ]; then
             cat >> "${{ matrix.path }}/UPSTREAM_SYNC.md" << CHANGES_EOF
-            
-            ## Changes in This Sync
-            
-            $(cat /tmp/changes_${{ matrix.name }}.txt)
-            
-            CHANGES_EOF
+          
+          ## Changes in This Sync
+          
+          $(cat /tmp/changes_${{ matrix.name }}.txt)
+          
+          CHANGES_EOF
           fi
 
       - name: Commit changes

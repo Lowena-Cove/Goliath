@@ -45,10 +45,13 @@ jobs:
 
       - name: Configure
         shell: msys2 {0}
-        # On Windows: build Win64 only (--enable-win64) to skip 32-bit library requirement.
+        # Use bash explicitly: Wine's configure uses syntax that MSYS2's default /bin/sh
+        # (which may be a minimal POSIX sh) doesn't handle correctly (nested backticks
+        # in autoconf-generated configure scripts).
+        # --enable-archs=x86_64 targets 64-bit Windows PE only, avoiding 32-bit lib requirement.
         run: |
-          ./configure \
-            --enable-win64
+          bash ./configure \
+            --enable-archs=x86_64
 
       - name: Build
         id: build_step
