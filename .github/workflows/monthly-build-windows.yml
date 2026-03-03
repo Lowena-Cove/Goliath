@@ -45,14 +45,10 @@ jobs:
 
       - name: Configure
         shell: msys2 {0}
-        # On Windows: Wine compatibility layer is NOT needed (Wine runs Windows apps on Unix;
-        # building natively on Windows makes it redundant). Darling (macOS layer) and
-        # ipasim (iOS layer) are also not applicable on Windows.
+        # On Windows: build Win64 only (--enable-win64) to skip 32-bit library requirement.
         run: |
           ./configure \
-            --disable-wine \
-            --disable-darling \
-            --disable-ipasim
+            --enable-win64
 
       - name: Build
         id: build_step

@@ -45,20 +45,18 @@ jobs:
         run: ./autogen.sh
 
       - name: Configure
-        # On macOS: Wine and Darling (macOS compat) layers are active.
-        # WSL (Windows Subsystem for Linux) is not applicable on macOS.
-        # ipasim (iOS simulation) may be enabled for iOS cross-compilation targets.
+        # On macOS: build Win64 only to skip the 32-bit library requirement.
+        # GitHub Actions macos-latest uses Apple Silicon; homebrew is at /opt/homebrew.
         run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
-          export PATH="/usr/local/opt/flex/bin:/usr/local/opt/bison/bin:$PATH"
+          export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
+          export PATH="/opt/homebrew/opt/flex/bin:/opt/homebrew/opt/bison/bin:$PATH"
           ./configure CC="ccache gcc" CXX="ccache g++" \
-            --disable-wsl \
-            --with-darwin
+            --enable-win64
 
       - name: Build
         id: build_step
         run: |
-          export PATH="/usr/local/opt/ccache/libexec:$PATH"
+          export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
           make -j$(sysctl -n hw.ncpu) 2>&1 | tee /tmp/build-macos.log
           exit ${PIPESTATUS[0]}
 
@@ -77,7 +75,7 @@ jobs:
         # Tests may connect to external servers; mark as continue-on-error.
         continue-on-error: true
         run: |
-          export PATH="/usr/local/opt/ccache/libexec:$PATH"
+          export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
           make -j$(sysctl -n hw.ncpu) check 2>&1 | tee /tmp/test-macos.log
           exit ${PIPESTATUS[0]}
 

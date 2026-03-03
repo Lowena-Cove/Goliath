@@ -60,12 +60,10 @@ jobs:
         run: ./autogen.sh
 
       - name: Configure
-        # On Linux: Wine layer is active, macOS (Darling) and iOS (ipasim) layers are disabled.
+        # On Linux: build both Win32 and Win64 (32-bit libs are installed).
         run: |
           export PATH="/usr/lib/ccache:$PATH"
-          ./configure CC="ccache gcc" CXX="ccache g++" \
-            --disable-darling \
-            --disable-ipasim
+          ./configure CC="ccache gcc" CXX="ccache g++"
 
       - name: Build
         id: build_step
