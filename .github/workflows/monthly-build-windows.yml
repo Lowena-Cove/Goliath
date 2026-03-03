@@ -36,6 +36,7 @@ jobs:
             mingw-w64-x86_64-pkg-config
             mingw-w64-x86_64-python
             mingw-w64-x86_64-libxml2
+            mingw-w64-x86_64-freetype
             flex
             bison
 

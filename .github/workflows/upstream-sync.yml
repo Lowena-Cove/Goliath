@@ -1,5 +1,9 @@
 name: Sync Upstream Dependencies
 
+# Agentic workflow definition: upstream-sync.md (same directory)
+# Install gh-aw locally:  gh extension install github/gh-aw
+# Docs: https://github.github.com/gh-aw/setup/quick-start/
+
 on:
   schedule:
     # Run monthly on the 1st at 01:00 UTC
@@ -8,10 +12,12 @@ on:
     branches: [ "dev" ]
     paths:
       - '.github/workflows/upstream-sync.yml'
+      - '.github/workflows/upstream-sync.md'
   pull_request:
     branches: [ "dev" ]
     paths:
       - '.github/workflows/upstream-sync.yml'
+      - '.github/workflows/upstream-sync.md'
   workflow_dispatch:
     inputs:
       project:
@@ -254,7 +260,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push origin "${BRANCH_NAME}"
+          # Force-push to handle branches that already exist from a previous run
+          # (non-fast-forward rejection). The branch is ephemeral — only used to
+          # back the sync PR — so force-pushing is safe.
+          git push --force origin "${BRANCH_NAME}"
 
           GITLAB_URL=""
           if [ "${{ matrix.is_gitlab }}" = "true" ] && [ "${{ matrix.gitlab_host }}" = "gitlab.winehq.org" ]; then
