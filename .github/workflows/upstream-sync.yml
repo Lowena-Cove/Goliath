@@ -168,6 +168,13 @@ jobs:
       - name: Update version tracking file
         if: steps.should_sync.outputs.sync == 'true' && steps.compare.outputs.needs_update == 'true'
         run: |
+          # Some upstream paths may be orphaned submodule entries (mode 160000 in
+          # the index, but no .gitmodules URL). Regular files can't be git-added
+          # over a submodule entry, so remove the stale entry first.
+          if git ls-files --stage "${{ matrix.path }}" | grep -q '^160000 '; then
+            git rm --cached "${{ matrix.path }}" || true
+          fi
+
           mkdir -p "${{ matrix.path }}"
           echo "${{ steps.upstream_commit.outputs.commit }}" > "${{ matrix.path }}/.upstream_version"
           echo "${{ matrix.repo }}" > "${{ matrix.path }}/.upstream_repo"
@@ -222,10 +229,15 @@ jobs:
           fi
 
       - name: Commit changes
+        id: commit_step
         if: steps.should_sync.outputs.sync == 'true' && steps.compare.outputs.needs_update == 'true'
         run: |
           git add "${{ matrix.path }}"
-          COMMIT_MSG="sync: Update ${{ matrix.name }} to upstream ${{ steps.upstream_commit.outputs.short_commit }}
+          if git diff --staged --quiet; then
+            echo "committed=false" >> $GITHUB_OUTPUT
+            echo "Nothing changed after staging – skipping commit"
+          else
+            COMMIT_MSG="sync: Update ${{ matrix.name }} to upstream ${{ steps.upstream_commit.outputs.short_commit }}
           
           Upstream: ${{ matrix.repo }}
           Commit: ${{ steps.upstream_commit.outputs.commit }}
@@ -233,10 +245,12 @@ jobs:
           
           Automated monthly sync from the upstream repository.
           See ${{ matrix.path }}/UPSTREAM_SYNC.md for details."
-          git commit -m "${COMMIT_MSG}"
+            git commit -m "${COMMIT_MSG}"
+            echo "committed=true" >> $GITHUB_OUTPUT
+          fi
 
       - name: Push changes and create PR
-        if: steps.should_sync.outputs.sync == 'true' && steps.compare.outputs.needs_update == 'true'
+        if: steps.should_sync.outputs.sync == 'true' && steps.compare.outputs.needs_update == 'true' && steps.commit_step.outputs.committed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

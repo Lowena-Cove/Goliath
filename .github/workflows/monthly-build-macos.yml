@@ -59,6 +59,7 @@ jobs:
         id: build_step
         run: |
           export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
+          export PATH="/opt/homebrew/opt/bison/bin:/opt/homebrew/opt/flex/bin:$PATH"
           make -j$(sysctl -n hw.ncpu) 2>&1 | tee /tmp/build-macos.log
           exit ${PIPESTATUS[0]}
 
@@ -78,6 +79,7 @@ jobs:
         continue-on-error: true
         run: |
           export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
+          export PATH="/opt/homebrew/opt/bison/bin:/opt/homebrew/opt/flex/bin:$PATH"
           make -j$(sysctl -n hw.ncpu) check 2>&1 | tee /tmp/test-macos.log
           exit ${PIPESTATUS[0]}
 

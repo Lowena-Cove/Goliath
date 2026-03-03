@@ -39,18 +39,16 @@ jobs:
             flex
             bison
 
-      - name: Generate configure script
-        shell: msys2 {0}
-        run: ./autogen.sh
-
       - name: Configure
         shell: msys2 {0}
-        # Use bash explicitly: Wine's configure uses syntax that MSYS2's default /bin/sh
-        # (which may be a minimal POSIX sh) doesn't handle correctly (nested backticks
-        # in autoconf-generated configure scripts).
-        # --enable-archs=x86_64 targets 64-bit Windows PE only, avoiding 32-bit lib requirement.
+        # Skip autogen.sh: the repo already ships a pre-generated configure
+        # (Wine 10.0 / Autoconf 2.71).  Regenerating it with MSYS2's autoconf
+        # produces a script whose nested-backtick syntax triggers bash parse
+        # errors (line 7739: syntax error near unexpected token).
+        # --enable-archs=x86_64 targets 64-bit Windows PE only, avoiding the
+        # 32-bit library requirement.
         run: |
-          bash ./configure \
+          ./configure \
             --enable-archs=x86_64
 
       - name: Build
