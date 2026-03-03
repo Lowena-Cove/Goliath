@@ -91,33 +91,42 @@ jobs:
         run: |
           mkdir -p /tmp/upstream
           for i in 1 2 3; do
-            git clone --depth 50 https://github.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }} && break
+            if git clone --depth 50 https://github.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}; then
+              break
+            fi
             echo "Clone attempt $i failed – retrying in 15s..."
             rm -rf /tmp/upstream/${{ matrix.name }}
-            sleep 15
+            [ "$i" -lt 3 ] && sleep 15
           done
+          test -d /tmp/upstream/${{ matrix.name }}/.git
 
       - name: Clone upstream repository (GitLab – winehq.org)
         if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab && matrix.gitlab_host == 'gitlab.winehq.org'
         run: |
           mkdir -p /tmp/upstream
           for i in 1 2 3; do
-            git clone --depth 50 https://gitlab.winehq.org/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }} && break
+            if git clone --depth 50 https://gitlab.winehq.org/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}; then
+              break
+            fi
             echo "Clone attempt $i failed – retrying in 15s..."
             rm -rf /tmp/upstream/${{ matrix.name }}
-            sleep 15
+            [ "$i" -lt 3 ] && sleep 15
           done
+          test -d /tmp/upstream/${{ matrix.name }}/.git
 
       - name: Clone upstream repository (GitLab – gitlab.com)
         if: steps.should_sync.outputs.sync == 'true' && matrix.is_gitlab && matrix.gitlab_host == 'gitlab.com'
         run: |
           mkdir -p /tmp/upstream
           for i in 1 2 3; do
-            git clone --depth 50 https://gitlab.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }} && break
+            if git clone --depth 50 https://gitlab.com/${{ matrix.repo }}.git /tmp/upstream/${{ matrix.name }}; then
+              break
+            fi
             echo "Clone attempt $i failed – retrying in 15s..."
             rm -rf /tmp/upstream/${{ matrix.name }}
-            sleep 15
+            [ "$i" -lt 3 ] && sleep 15
           done
+          test -d /tmp/upstream/${{ matrix.name }}/.git
 
       - name: Get latest upstream commit
         if: steps.should_sync.outputs.sync == 'true'
