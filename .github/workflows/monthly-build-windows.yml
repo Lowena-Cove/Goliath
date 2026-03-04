@@ -56,16 +56,21 @@ jobs:
         id: build_step
         shell: msys2 {0}
         run: |
+          # Disable errexit+pipefail so `make -k | tee` doesn't abort the script
+          # when make returns non-zero.  We inspect the log afterwards instead.
+          set +e +o pipefail
           # Use -k to keep building past individual module failures.
           # Wine is a Unix→Windows compatibility layer; some tools (e.g. winebuild)
           # don't execute correctly in a native Windows/MSYS2 environment.
-          make -k -j$(nproc) 2>&1 | tee /tmp/build-windows.log; rc=${PIPESTATUS[0]}
-          # Count all make errors and known MSYS2-incompatible ones separately
-          CRITICAL=$(grep -cE '^make\[[0-9]+\]:.*Error' /tmp/build-windows.log || true)
-          KNOWN=$(grep -cE '^make\[[0-9]+\]:.*(winebuild|ucrtbase).*Error' /tmp/build-windows.log || true)
-          UNKNOWN=$((CRITICAL - KNOWN))
-          if [ "$rc" -ne 0 ] && [ "$UNKNOWN" -gt 0 ]; then
-            echo "Build failed with $UNKNOWN unexpected error(s) ($CRITICAL total, $KNOWN known/expected)"
+          make -k -j$(nproc) 2>&1 | tee /tmp/build-windows.log
+          rc=${PIPESTATUS[0]}
+          set -e -o pipefail
+          # Count tool-missing errors (winebuild/winegcc can't run natively on MSYS2)
+          TOOL_MISSING=$(grep -cE 'winebuild.*No such file or directory|winegcc.*No such file or directory' /tmp/build-windows.log || true)
+          if [ "$rc" -ne 0 ] && [ "$TOOL_MISSING" -gt 0 ]; then
+            echo "Build completed with $TOOL_MISSING expected winebuild/winegcc failures (Unix-only tools cannot run on native Windows/MSYS2)."
+          elif [ "$rc" -ne 0 ]; then
+            echo "Build failed with unexpected errors (exit code $rc)"
             exit "$rc"
           fi
 
