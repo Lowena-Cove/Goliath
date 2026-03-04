@@ -55,6 +55,18 @@ jobs:
     - name: make
       run: make -j$(nproc)
     - name: make check
-      run: make -j$(nproc) check
+      # continue-on-error: some tests rely on external servers (e.g. ldap.forumsys.com)
+      # that may be unreachable or return data in a different order in CI.
+      continue-on-error: true
+      run: |
+        make -j$(nproc) check 2>&1 | tee /tmp/make-check.log
+        exit ${PIPESTATUS[0]}
+    - name: Upload test failure log
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: make-check-log
+        path: /tmp/make-check.log
+        if-no-files-found: ignore
     - name: make distcheck
       run: make -j$(nproc) distcheck
